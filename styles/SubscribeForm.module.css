@@ -62,3 +62,24 @@
 .submitBtn:hover {
     background: rgba(224, 191, 116, 0.95);
 }
+
+@media (max-width: 730px) {
+    .title {
+        font-size: 1.8rem;
+    }
+    .subTitle {
+        font-size: 22px;
+    }
+    .input input {
+        width: 250px;
+    }
+}
+
+@media (max-width: 380px) {
+    .title {
+        font-size: 1.5rem;
+    }
+    .subTitle {
+        font-size: 18px;
+    }
+}

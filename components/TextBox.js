@@ -11,17 +11,22 @@ const TextBox = ({
   arrowDirection,
   hero,
   link,
+  meminfo,
+  memdraw,
+  memoravel,
 }) => {
   return (
     <div className={styles.textBox}>
       <div className={styles.supHeading}>{supHeading}</div>
-      <div className={`${styles.heading} ${hero ? styles.headingHero : ""}`}>
+      <div
+        className={`${styles.heading} ${hero && styles.headingHero} ${
+          meminfo && styles.meminfo
+        } ${memdraw && styles.memdraw} ${memoravel && styles.memoravel}`}
+      >
         {heading}
       </div>
       <div
-        className={`${styles.description} ${
-          hero ? styles.descriptionHero : ""
-        }`}
+        className={`${styles.description} ${hero && styles.descriptionHero}`}
       >
         {description}
       </div>
