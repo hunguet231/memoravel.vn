@@ -1,0 +1,56 @@
+.navbar {
+    color: #fff;
+    font-size: 18px;
+    width: 100vw;
+    max-width: 100%;
+    padding: 55px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: all 0.2s ease-in-out;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 21px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.logoText {
+    flex: 1;
+    padding-left: 5px;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navItem {
+    margin: 0 21px;
+    font-family: 'Abhaya Libre', serif;
+    font-weight: 700;
+    line-height: 21.23px;
+}
+
+.navItem::after {
+    content: "";
+    display: block;
+    width: 0%;
+    background-color: #fff;
+    height: 2px;
+    transition: all 0.2s ease-in-out;
+}
+
+.navItem:hover::after {
+    width: 100%;
+}

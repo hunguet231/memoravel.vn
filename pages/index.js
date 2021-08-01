@@ -1,10 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
+import Header from "../components/Header";
+import TextBox from "../components/TextBox";
+import SubscribeForm from "../components/SubscribeForm";
+import memImg1 from "../public/mem-box-1.png";
+import memImg2 from "../public/mem-box-2.png";
+import memImg3 from "../public/mem-box-3.png";
 import styles from "../styles/Home.module.css";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>
           Memoravel.vn | Nền tảng cung cấp sản phẩm, dịch vụ hỗ trợ phát triển
@@ -17,58 +24,60 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <header>
+        <Header />
+      </header>
+
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className="mem-box">
+          <div className="mem-inner">
+            <TextBox
+              supHeading="Get Started"
+              heading="Meminfo"
+              description="Meminfo là sản phẩm cung cấp thông tin Làng nghề Truyền Thống tại Việt Nam, mang lại cái nhìn tổng quan nhất về lịch sử hình thành, phát triển, cũng như sản phẩm nổi bật, con người Làng nghề."
+              linkTo="read more"
+              link="/meminfo"
+              arrowDirection="right"
+            />
+            <Image src={memImg1} alt="Meminfo" />
+          </div>
         </div>
+
+        <div className="mem-box">
+          <div className="mem-inner">
+            <Image src={memImg2} alt="Memdraw" />
+            <TextBox
+              supHeading="Hiking Essentials"
+              heading="Memdraw"
+              description="Memdraw cung cấp các sản phẩm làng nghề truyền thống nổi bật như gốm Bát Tràng, tranh Đông Hồ, lụa Vạn Phúc, nón lá Làng Chuôm,...Đặc biệt khi mua hàng tại Memdraw khách hàng sẽ có trải nghiệm một cách chân thực các sản phẩm thông qua mô hình 3D kết hợp với công nghệ Thực tế ảo tăng cường (AR).
+              Một điểm thú vị khác của dự án đó là khách hàng có thể thiết kế sản phẩm theo sở thích cá nhân."
+              linkTo="read more"
+              link="/memdraw"
+              arrowDirection="right"
+            />
+          </div>
+        </div>
+
+        <div className="mem-box">
+          <div className="mem-inner">
+            <TextBox
+              supHeading="where you go is the key"
+              heading="Memoravel"
+              description="Memoravel cung cấp các tour du lịch trải nghiệm thực tế và thực tế ảo (VR) tại các làng nghề truyền thống.
+              Khách hàng sẽ có những trải nghiệm sống cùng, làm cùng các nghệ nhân tại làng nghề truyền thống, trải nghiệm các giai đoạn hình thành của sản phẩm."
+              linkTo="read more"
+              link="/memoravel"
+              arrowDirection="right"
+            />
+            <Image src={memImg3} alt="Memoravel" />
+          </div>
+        </div>
+
+        <SubscribeForm />
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+      <footer>
+        <Footer />
       </footer>
     </div>
   );
