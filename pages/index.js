@@ -38,13 +38,14 @@ export default function Home() {
               linkTo="read more"
               link="/meminfo"
               arrowDirection="right"
+              meminfo
             />
             <Image src={memImg1} alt="Meminfo" />
           </div>
         </div>
 
         <div className="mem-box">
-          <div className="mem-inner">
+          <div className="mem-inner memdraw">
             <Image src={memImg2} alt="Memdraw" />
             <TextBox
               supHeading="Hiking Essentials"
@@ -54,6 +55,7 @@ export default function Home() {
               linkTo="read more"
               link="/memdraw"
               arrowDirection="right"
+              memdraw
             />
           </div>
         </div>
@@ -68,6 +70,7 @@ export default function Home() {
               linkTo="read more"
               link="/memoravel"
               arrowDirection="right"
+              memoravel
             />
             <Image src={memImg3} alt="Memoravel" />
           </div>

@@ -27,6 +27,35 @@
     width: 72px;
 }
 
+.heading::before {
+    display: inline-block;
+    position: absolute;
+    bottom: 20px;
+    left: -15px;
+    font-family: 'Abhaya Libre', serif;
+    font-weight: bold;
+    font-size: 200px;
+    line-height: 200px;
+    color: #fff;
+    opacity: 0.1;
+}
+
+.heading.meminfo::before {
+    content: "01";
+}
+
+.heading.memdraw::before {
+    content: "02";
+}
+
+.heading.memoravel::before {
+    content: "03";
+}
+
+.heading.headingHero::before {
+    display: none;
+}
+
 .heading,
 .description {
     margin-bottom: 10px;
@@ -35,6 +64,7 @@
 .heading {
     font-family: 'Times New Roman', Times, serif;
     font-size: 3.5rem;
+    position: relative;
 }
 
 .headingHero {
@@ -103,5 +133,45 @@
     }
     100% {
         transform: translateX(0px);
+    }
+}
+
+@media (max-width: 1080px) {
+    .headingHero {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 467px) {
+    .heading::before {
+        bottom: 55px;
+        left: -5px;
+        font-size: 100px;
+        line-height: 100px;
+    }
+}
+
+@media (max-width: 380px) {
+    .heading {
+        font-size: 2.5rem;
+    }
+    .headingHero {
+        font-size: 1.8rem;
+    }
+    .description {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    .linkTo {
+        font-size: 14px;
+    }
+    .supHeading {
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 5px;
+    }
+    .supHeading::before {
+        width: 40px;
+        margin-right: 15px;
     }
 }

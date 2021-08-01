@@ -6,8 +6,9 @@ const style = {
   height: 40,
   width: 40,
   position: "fixed",
-  bottom: 10,
-  right: 60,
+  bottom: 35,
+  right: 15,
+  // 10 60
   lineHeight: "40px",
   color: "#fff",
   fontSize: 30,

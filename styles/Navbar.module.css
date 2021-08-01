@@ -54,3 +54,61 @@
 .navItem:hover::after {
     width: 100%;
 }
+
+.userBox {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+}
+
+.signUpBtn,
+.loginBtn {
+    border: 2px solid #E0BF74;
+    border-radius: 8px;
+    padding: 6px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.loginBtn {
+    background: #E0BF74;
+}
+
+.loginBtn:hover {
+    background: #ebc56c;
+}
+
+.signUpBtn {
+    background: transparent;
+    color: #E0BF74;
+    margin-right: 10px;
+}
+
+.signUpBtn:hover {
+    color: #ebc56c;
+}
+
+@media (max-width: 1190px) {
+    .navLinks,
+    .userBox {
+        display: none;
+    }
+}
+
+@media (max-width: 1080px) {
+    .navbar {
+        padding: 20px 15px;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 380px) {
+    .navbar {
+        grid-template-columns: 2fr 1fr;
+    }
+}

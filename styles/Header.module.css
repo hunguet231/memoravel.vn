@@ -63,7 +63,7 @@
     z-index: 1;
     position: fixed;
     top: 50%;
-    left: 0;
+    left: -18px;
 }
 
 .heroLeft svg {
@@ -97,5 +97,23 @@
     100% {
         opacity: 1;
         top: 250px;
+    }
+}
+
+@media (max-width: 1275px) {
+    .heroLeft,
+    .heroRight {
+        display: none;
+    }
+}
+
+@media (max-width: 1080px) {
+    .heroBox {
+        width: 100vw;
+        padding: 20px 15px;
+        top: 200px;
+    }
+    .header {
+        padding: 20px 15px;
     }
 }
