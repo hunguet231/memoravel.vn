@@ -45,6 +45,7 @@ const Header = () => {
         <p>02</p>
         <p>03</p>
       </div>
+
       <div className={styles.heroBox}>
         <TextBox
           hero

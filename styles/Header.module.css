@@ -45,6 +45,7 @@
     margin: 0 auto;
     z-index: 1;
     position: absolute;
+    animation: fadeInUp 2s 1;
     top: 250px;
     left: 50%;
     transform: translateX(-50%);
@@ -86,4 +87,15 @@
 
 .heroRight p {
     margin: 20px 0 !important;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        top: 300px;
+    }
+    100% {
+        opacity: 1;
+        top: 250px;
+    }
 }

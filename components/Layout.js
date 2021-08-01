@@ -7,7 +7,7 @@ const style = {
   width: 40,
   position: "fixed",
   bottom: 10,
-  right: 20,
+  right: 60,
   lineHeight: "40px",
   color: "#fff",
   fontSize: 30,
