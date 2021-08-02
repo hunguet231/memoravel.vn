@@ -1,7 +1,7 @@
 import connectDB from "../../../utils/connectDB";
 import Users from "../../../models/User";
 import bcrypt from "bcrypt";
-import validate from "../../../utils/validate";
+import validateRegister from "../../../utils/validateRegister";
 
 connectDB();
 
@@ -19,7 +19,13 @@ const register = async (req, res) => {
   try {
     const { fullname, address, username, password, cf_password } = req.body;
 
-    const errMsg = validate(fullname, address, username, password, cf_password);
+    const errMsg = validateRegister(
+      fullname,
+      address,
+      username,
+      password,
+      cf_password
+    );
 
     if (errMsg) return res.status(400).json({ err: errMsg });
 

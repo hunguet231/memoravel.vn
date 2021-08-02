@@ -8,9 +8,14 @@ import styles from "../styles/Form.module.css";
 import validateRegister from "../utils/validateRegister";
 import { postData } from "../utils/fetchData";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { DataContext } from "../store/GlobalState";
+import { useEffect } from "react";
 
 export default function login() {
   const router = useRouter();
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
 
   const initalState = {
     fullname: "",
@@ -54,6 +59,10 @@ export default function login() {
       message.error(errMsg);
     }
   };
+
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push("/");
+  }, [auth]);
 
   return (
     <>

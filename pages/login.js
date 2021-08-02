@@ -12,6 +12,7 @@ import styles from "../styles/Form.module.css";
 import Cookie from "js-cookie";
 import { useContext } from "react";
 import { DataContext } from "../store/GlobalState";
+import { useEffect } from "react";
 
 export default function login() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function login() {
   const [loading, setLoading] = useState(false);
   const { username, password } = userData;
   const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,6 +64,10 @@ export default function login() {
       message.error(errMsg);
     }
   };
+
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push("/");
+  }, [auth]);
 
   return (
     <>
