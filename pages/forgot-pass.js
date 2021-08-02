@@ -34,8 +34,8 @@ export default function forgotPass() {
               LẤY LẠI MẬT KHẨU
             </button>
             <div className={styles.footerLinks}>
-              <Link href="/register">Đăng kí tài khoản</Link>
-              <Link href="/forget-pass">Đăng nhập</Link>
+              <Link href="/register">Đăng ký tài khoản</Link>
+              <Link href="/login">Đăng nhập</Link>
             </div>
           </form>
         </div>

@@ -1,27 +1,79 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { message, Spin } from "antd";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import SubscribeForm from "../components/SubscribeForm";
 import styles from "../styles/Form.module.css";
+import validateRegister from "../utils/validateRegister";
+import { postData } from "../utils/fetchData";
+import { useRouter } from "next/router";
 
 export default function login() {
+  const router = useRouter();
+
+  const initalState = {
+    fullname: "",
+    address: "",
+    username: "",
+    password: "",
+    cf_password: "",
+  };
+  const [userData, setUserData] = useState(initalState);
+  const [loading, setLoading] = useState(false);
+  const { fullname, address, username, password, cf_password } = userData;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const errMsg = validateRegister(
+      fullname,
+      address,
+      username,
+      password,
+      cf_password
+    );
+    if (!errMsg) {
+      setLoading(true);
+
+      const res = await postData("auth/register", userData);
+
+      if (res.err) {
+        message.error(res.err);
+        setLoading(false);
+      } else {
+        message.success(res.msg);
+        setLoading(false);
+        router.push("/login");
+      }
+    } else {
+      message.error(errMsg);
+    }
+  };
+
   return (
     <>
       <div className={styles.container}>
         <div className="overlay"></div>
         <div className="overlay-bottom"></div>
         <div className={styles.inner}>
-          <h1 className={styles.title}>ĐĂNG KÍ</h1>
+          <h1 className={styles.title}>ĐĂNG KÝ</h1>
           <p className={styles.subTitle}>
             Đừng lo, Memoravel sẽ bảo vệ thông tin của bạn
           </p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <input
                 type="text"
                 name="fullname"
                 placeholder="Họ & tên"
                 className={styles.inputField}
+                value={fullname}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -30,6 +82,8 @@ export default function login() {
                 name="address"
                 placeholder="Địa chỉ"
                 className={styles.inputField}
+                value={address}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -38,6 +92,8 @@ export default function login() {
                 name="username"
                 placeholder="Tài khoản: Nhập email hoặc SĐT"
                 className={styles.inputField}
+                value={username}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -46,6 +102,8 @@ export default function login() {
                 name="password"
                 placeholder="Mật khẩu"
                 className={styles.inputField}
+                value={password}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -53,6 +111,9 @@ export default function login() {
                 type="password"
                 placeholder="Nhập lại mật khẩu"
                 className={styles.inputField}
+                name="cf_password"
+                value={cf_password}
+                onChange={handleInputChange}
               />
             </div>
             <div className={styles.policy}>
@@ -61,7 +122,7 @@ export default function login() {
               của MEMORAVEL.
             </div>
             <button type="submit" className={styles.submitBtn}>
-              ĐĂNG KÝ
+              {loading && <Spin />} ĐĂNG KÝ
             </button>
             <div className={styles.footerLinks}>
               <Link href="/login">Đăng nhập</Link>

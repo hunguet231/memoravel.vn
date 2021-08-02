@@ -13,6 +13,10 @@
     transition: all 0.2s ease-in-out;
 }
 
+.navbar p {
+    margin: auto;
+}
+
 .logo {
     display: flex;
     align-items: center;

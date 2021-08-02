@@ -1,15 +1,22 @@
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Dropdown, Menu, message } from "antd";
+import Cookie from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import logo from "../public/logo-small.png";
-import useWindowSize from "../utils/useWindowSize";
+import { DataContext } from "../store/GlobalState";
 import styles from "../styles/Navbar.module.css";
-import { useState } from "react";
+import useWindowSize from "../utils/useWindowSize";
 
 const Navbar = () => {
   const navRef = useRef(null);
   const size = useWindowSize();
   const [padding, setPadding] = useState("");
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
+  const router = useRouter();
 
   useEffect(() => {
     if (size.width <= 1080) {
@@ -30,7 +37,31 @@ const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [padding]);
+
+  const handleLogout = () => {
+    Cookie.remove("refreshToken", { path: "api/auth/accessToken" });
+
+    localStorage.removeItem("firstLogin");
+
+    dispatch({ type: "AUTH", payload: {} });
+
+    message.success("Đã đăng xuất thành công");
+
+    router.push("/");
+  };
+
+  const userMenu = () => {
+    return (
+      <Menu>
+        <Menu.Item>{auth.user.fullname}</Menu.Item>
+        <Menu.Item danger onClick={handleLogout} icon={<LogoutOutlined />}>
+          Đăng xuất
+        </Menu.Item>
+      </Menu>
+    );
+  };
 
   return (
     <div className={styles.navbar} ref={navRef}>
@@ -63,12 +94,29 @@ const Navbar = () => {
       </div>
 
       <div className={styles.userBox}>
-        <Link href="/register" passHref>
-          <div className={styles.signUpBtn}>Đăng kí</div>
-        </Link>
-        <Link href="/login" passHref>
-          <div className={styles.loginBtn}>Đăng nhập</div>
-        </Link>
+        {Object.keys(auth).length === 0 ? (
+          <>
+            <Link href="/register" passHref>
+              <div className={styles.signUpBtn}>Đăng ký</div>
+            </Link>
+            <Link href="/login" passHref>
+              <div className={styles.loginBtn}>Đăng nhập</div>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Dropdown overlay={userMenu()}>
+              <UserOutlined
+                style={{
+                  cursor: "pointer",
+                  padding: "5px",
+                  border: "2px solid #fff",
+                  borderRadius: "50%",
+                }}
+              />
+            </Dropdown>
+          </>
+        )}
       </div>
     </div>
   );
