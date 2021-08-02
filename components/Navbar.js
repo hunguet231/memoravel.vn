@@ -101,12 +101,16 @@ const Navbar = () => {
             <div style={{ textAlign: "center", marginTop: "10px" }}>
               {Object.keys(auth).length === 0 ? (
                 <div style={{ padding: "0 16px" }}>
-                  <div className={styles.signUpBtn} onClick={onClose}>
-                    <Link href="/register">Đăng ký</Link>
-                  </div>
-                  <div className={styles.loginBtn} onClick={onClose}>
-                    <Link href="/login">Đăng nhập</Link>
-                  </div>
+                  <Link href="/register" passHref>
+                    <div className={styles.signUpBtn} onClick={onClose}>
+                      Đăng ký
+                    </div>
+                  </Link>
+                  <Link href="/login" passHref>
+                    <div className={styles.loginBtn} onClick={onClose}>
+                      Đăng nhập
+                    </div>
+                  </Link>
                 </div>
               ) : (
                 <>
