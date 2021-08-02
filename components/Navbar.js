@@ -6,6 +6,7 @@ import {
   CodeSandboxOutlined,
   ShopOutlined,
   FormOutlined,
+  ShoppingOutlined,
 } from "@ant-design/icons";
 import { Dropdown, Menu, message, Drawer, Button, Divider } from "antd";
 import Cookie from "js-cookie";
@@ -132,6 +133,9 @@ const Navbar = () => {
               )}
             </div>
             <Divider />
+            <Menu.Item onClick={onClose} icon={<ShoppingOutlined />}>
+              <Link href="/cart">Giỏ hàng</Link>
+            </Menu.Item>
             <Menu.Item onClick={onClose} icon={<HomeOutlined />}>
               <Link href="/">Home</Link>
             </Menu.Item>
@@ -196,6 +200,11 @@ const Navbar = () => {
       </div>
 
       <div className={styles.userBox}>
+        <p>
+          <Link href="/cart" passHref>
+            <ShoppingOutlined style={{ cursor: "pointer" }} />
+          </Link>
+        </p>
         {Object.keys(auth).length === 0 ? (
           <>
             <Link href="/register" passHref>
@@ -211,9 +220,7 @@ const Navbar = () => {
               <UserOutlined
                 style={{
                   cursor: "pointer",
-                  padding: "5px",
-                  border: "2px solid #fff",
-                  borderRadius: "50%",
+                  marginLeft: "20px",
                 }}
               />
             </Dropdown>

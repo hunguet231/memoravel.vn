@@ -33,6 +33,10 @@ a:hover {
     padding: 20px 15px;
 }
 
+.mem-box.details {
+    background-color: transparent;
+}
+
 .mem-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;

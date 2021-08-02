@@ -1,0 +1,19 @@
+.container {
+    background-color: #0e1212;
+    background-image: url('../public/bg-hero.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    height: 120vh;
+    position: relative;
+}
+
+.inner {
+    z-index: 1;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    padding: 300px 15px 10px;
+    transform: translateY(-30vh);
+}

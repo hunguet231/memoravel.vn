@@ -67,6 +67,10 @@
     justify-self: end;
 }
 
+.userBox svg {
+    font-size: 22px !important;
+}
+
 .signUpBtn,
 .loginBtn {
     border: 2px solid #E0BF74;
@@ -93,6 +97,7 @@
     background: transparent;
     color: #E0BF74;
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 .signUpBtn:hover {
@@ -106,6 +111,7 @@
     }
     .signUpBtn {
         margin-right: 0;
+        margin-left: 0;
         margin-bottom: 10px;
     }
 }
