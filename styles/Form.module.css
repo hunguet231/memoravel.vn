@@ -1,0 +1,104 @@
+.container {
+    background-color: #0e1212;
+    background-image: url('../public/bg-hero.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    height: 120vh;
+    position: relative;
+}
+
+.inner {
+    z-index: 1;
+    height: auto;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 300px 15px 10px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    transform: translateY(-20vh);
+}
+
+.title {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 5px;
+    font-size: 38px;
+    color: #fff;
+}
+
+.subTitle {
+    color: #BEBEBE;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.inputField {
+    margin-bottom: 20px;
+    height: 42px;
+    width: 100%;
+    background-color: rgba(196, 196, 196, 0.3);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+}
+
+.inputField::placeholder {
+    color: #fff;
+    font-size: 14px;
+}
+
+.submitBtn {
+    height: 50px;
+    width: 100%;
+    background-color: #e0bf74;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.footerLinks {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.policy {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.takeCode {
+    position: relative;
+}
+
+.insideBtn {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    background: rgba(224, 191, 116, 0.7);
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.insideBtn:hover {
+    background: rgba(224, 191, 116, 0.95);
+}
+
+@media (max-width: 380px) {
+    .title {
+        font-size: 30px;
+    }
+}

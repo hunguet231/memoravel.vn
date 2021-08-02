@@ -1,28 +1,52 @@
-import React from "react";
 import Link from "next/link";
-import SubscribeForm from "../components/SubscribeForm";
-import Navbar from "../components/Navbar";
+import React from "react";
 import Footer from "../components/Footer";
-import styles from "../styles/Login.module.css";
+import SubscribeForm from "../components/SubscribeForm";
+import styles from "../styles/Form.module.css";
 
 export default function login() {
   return (
     <>
       <div className={styles.container}>
-        <h1>Navbar</h1>
-        <div>
+        <div className="overlay"></div>
+        <div className="overlay-bottom"></div>
+        <div className={styles.inner}>
           <h1 className={styles.title}>ĐĂNG KÍ</h1>
-          <small>Đừng lo, Memoravel sẽ bảo vệ thông tin của bạn</small>
-          <form style={{ marginTop: "12px" }}>
+          <p className={styles.subTitle}>
+            Đừng lo, Memoravel sẽ bảo vệ thông tin của bạn
+          </p>
+          <form>
             <div>
               <input
-                type="email"
+                type="text"
+                name="fullname"
+                placeholder="Họ & tên"
+                className={styles.inputField}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="address"
+                placeholder="Địa chỉ"
+                className={styles.inputField}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="username"
                 placeholder="Tài khoản: Nhập email hoặc SĐT"
                 className={styles.inputField}
               />
             </div>
             <div>
-              <input type="password" placeholder="Mật khẩu" className={styles.inputField} />
+              <input
+                type="password"
+                name="password"
+                placeholder="Mật khẩu"
+                className={styles.inputField}
+              />
             </div>
             <div>
               <input
@@ -31,17 +55,17 @@ export default function login() {
                 className={styles.inputField}
               />
             </div>
-            <br />
-            <button type="submit" className={styles.loginBtn}>
+            <div className={styles.policy}>
+              (*) Khi bấm vào đăng ký tài khoản, bạn chắc chắn đã đọc và đồng ý
+              với Chính sách bảo mật, Điều khoản dịch vụ và chính sách tư vấn
+              của MEMORAVEL.
+            </div>
+            <button type="submit" className={styles.submitBtn}>
               ĐĂNG KÝ
             </button>
-            <div>
-              <Link href="/register">
-                <a style={{ marginRight: "120px" }}>Đăng nhập</a>
-              </Link>
-              <Link href="/forget-pass">
-                <a style={{ marginLeft: "120px" }}>Quên mật khẩu?</a>
-              </Link>
+            <div className={styles.footerLinks}>
+              <Link href="/login">Đăng nhập</Link>
+              <Link href="/forgot-pass">Quên mật khẩu?</Link>
             </div>
           </form>
         </div>

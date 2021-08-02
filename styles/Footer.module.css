@@ -10,8 +10,9 @@
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 100px;
 }
 
 .title {
@@ -25,8 +26,8 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 32px;
-    word-spacing: 2px;
-    letter-spacing: 1px;
+    word-spacing: 1.5px;
+    letter-spacing: 0.5px;
 }
 
 .copyright {
@@ -61,13 +62,17 @@
     justify-content: space-between;
 }
 
-.col {
-    margin-left: 50px;
+@media (max-width: 1000px) {
+    .inner {
+        grid-template-columns: 1fr 1.8fr;
+    }
 }
 
 @media (max-width: 730px) {
     .inner {
+        display: flex;
         flex-direction: column-reverse;
+        grid-gap: 0;
     }
     .col {
         margin-left: 0;
