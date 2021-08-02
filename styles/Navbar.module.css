@@ -104,6 +104,10 @@
     .userBox {
         display: none;
     }
+    .signUpBtn {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 }
 
 @media (max-width: 1080px) {

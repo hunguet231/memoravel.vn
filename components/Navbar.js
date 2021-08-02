@@ -1,5 +1,13 @@
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Dropdown, Menu, message } from "antd";
+import {
+  UserOutlined,
+  LogoutOutlined,
+  MenuOutlined,
+  HomeOutlined,
+  CodeSandboxOutlined,
+  ShopOutlined,
+  FormOutlined,
+} from "@ant-design/icons";
+import { Dropdown, Menu, message, Drawer, Button, Divider } from "antd";
 import Cookie from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +25,7 @@ const Navbar = () => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const router = useRouter();
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (size.width <= 1080) {
@@ -41,6 +50,7 @@ const Navbar = () => {
   }, [padding]);
 
   const handleLogout = () => {
+    setVisible(false);
     Cookie.remove("refreshToken", { path: "api/auth/accessToken" });
 
     localStorage.removeItem("firstLogin");
@@ -60,6 +70,94 @@ const Navbar = () => {
           Đăng xuất
         </Menu.Item>
       </Menu>
+    );
+  };
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const mobileMenu = () => {
+    return (
+      <>
+        <Button
+          type="text"
+          onClick={showDrawer}
+          icon={<MenuOutlined />}
+          style={{ color: "#fff", alignSelf: "center", justifySelf: "end" }}
+        ></Button>
+        <Drawer
+          title="Menu"
+          placement="right"
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+        >
+          <Menu>
+            <div style={{ textAlign: "center", marginTop: "10px" }}>
+              {Object.keys(auth).length === 0 ? (
+                <div style={{ padding: "0 16px" }}>
+                  <Link href="/register" passHref onClick={onClose}>
+                    <div className={styles.signUpBtn}>Đăng ký</div>
+                  </Link>
+                  <Link href="/login" passHref onClick={onClose}>
+                    <div className={styles.loginBtn}>Đăng nhập</div>
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <p>
+                    <UserOutlined
+                      style={{
+                        cursor: "pointer",
+                        padding: "5px",
+                        border: "1px solid #e0bf74",
+                        borderRadius: "50%",
+                        color: "#e0bf74",
+                      }}
+                    />
+                  </p>
+                  <p style={{ fontWeight: "500", color: "#e0bf74" }}>
+                    {auth.user.fullname}
+                  </p>
+                </>
+              )}
+            </div>
+            <Divider />
+            <Menu.Item onClick={onClose} icon={<HomeOutlined />}>
+              <Link href="/">Home</Link>
+            </Menu.Item>
+            <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
+              <Link href="/meminfo">Meminfo</Link>
+            </Menu.Item>
+            <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
+              <Link href="/memdraw">Memdraw</Link>
+            </Menu.Item>
+            <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
+              <Link href="/memoravel">Memoravel</Link>
+            </Menu.Item>
+            <Menu.Item onClick={onClose} icon={<ShopOutlined />}>
+              <Link href="/shop">Shop</Link>
+            </Menu.Item>
+            <Menu.Item onClick={onClose} icon={<FormOutlined />}>
+              <Link href="/blog">Blog</Link>
+            </Menu.Item>
+            {Object.keys(auth).length !== 0 && (
+              <Menu.Item
+                danger
+                onClick={handleLogout}
+                icon={<LogoutOutlined />}
+              >
+                Đăng xuất
+              </Menu.Item>
+            )}
+          </Menu>
+        </Drawer>
+      </>
     );
   };
 
@@ -118,6 +216,8 @@ const Navbar = () => {
           </>
         )}
       </div>
+
+      {size.width <= 1190 && mobileMenu()}
     </div>
   );
 };

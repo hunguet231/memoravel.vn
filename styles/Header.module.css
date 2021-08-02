@@ -78,6 +78,17 @@
     }
 }
 
+@keyframes fadeInUpSmallScreen {
+    0% {
+        opacity: 0;
+        top: 285px;
+    }
+    100% {
+        opacity: 1;
+        top: 200px;
+    }
+}
+
 @media (max-width: 1275px) {
     .heroLeft,
     .heroRight {
@@ -90,6 +101,7 @@
         width: 100vw;
         padding: 20px 15px;
         top: 200px;
+        animation: fadeInUpSmallScreen 2s 1;
     }
     .header {
         padding: 20px 15px;
