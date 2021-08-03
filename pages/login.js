@@ -98,7 +98,7 @@ export default function login() {
               />
             </div>
             <button type="submit" className={styles.submitBtn}>
-              {loading && <Spin />} ĐĂNG NHẬP
+              {loading && <Spin className={styles.spin}/>} ĐĂNG NHẬP
             </button>
             <div className={styles.footerLinks}>
               <Link href="/register">Đăng ký tài khoản</Link>

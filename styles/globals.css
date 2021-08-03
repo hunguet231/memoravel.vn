@@ -90,6 +90,10 @@ a:hover {
     padding-left: 15px !important;
 }
 
+.ant-spin-dot-item {
+    background-color: #fff;
+}
+
 @media (max-width: 730px) {
     .mem-inner {
         display: flex;
