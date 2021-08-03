@@ -7,8 +7,8 @@ import styles from "../styles/MemDetails.module.css";
 
 export default function meminfo() {
   return (
-    <div>
-      <main className={styles.container}>
+    <>
+      <div className={styles.container}>
         <div className="overlay"></div>
         <div className="overlay-bottom"></div>
         <div className={styles.inner}>
@@ -24,12 +24,11 @@ export default function meminfo() {
             </div>
           </div>
         </div>
-      </main>
-      <SubscribeForm />
-
-      <footer>
-        <Footer />
-      </footer>
-    </div>
+        <div>
+          <SubscribeForm />
+          <Footer />
+        </div>
+      </div>
+    </>
   );
 }

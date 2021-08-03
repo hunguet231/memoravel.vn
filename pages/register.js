@@ -74,7 +74,7 @@ export default function login() {
           <p className={styles.subTitle}>
             Đừng lo, Memoravel sẽ bảo vệ thông tin của bạn
           </p>
-          <form onSubmit={handleSubmit}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <div>
               <input
                 type="text"
@@ -139,9 +139,11 @@ export default function login() {
             </div>
           </form>
         </div>
+        <div>
+          <SubscribeForm />
+          <Footer />
+        </div>
       </div>
-      <SubscribeForm />
-      <Footer />
     </>
   );
 }
