@@ -12,8 +12,8 @@ import TextBox from "./TextBox";
 const Header = () => {
   return (
     <div className={styles.header}>
-      <div className={styles.overlay}></div>
-      <div className={styles.overlayBottom}></div>
+      <div className="overlay home-overlay"></div>
+      <div className="overlay-bottom"></div>
       <Navbar />
       <div className={styles.heroLeft}>
         <p>Follow us</p>

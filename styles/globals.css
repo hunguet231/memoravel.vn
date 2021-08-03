@@ -1,11 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Roboto:wght@300;400;500;700;900&family=Basic&family=Inter:wght@300;400;500;600;700&display=swap");
-@import "~antd/dist/antd.css";
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Roboto:wght@300;400;500;700;900&family=Basic&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* @import '~antd/dist/antd.css'; */
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: #0e1212;
 }
 
 a {
@@ -24,29 +26,81 @@ a:hover {
 /* Mem Box */
 
 .mem-box {
-  background-color: #0e1212;
-  min-height: 100vh;
-  width: 100vw;
-  max-width: 100%;
-  padding: 20px 15px;
+    background-color: #0e1212;
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    padding: 20px 15px;
+}
+
+.mem-box.details {
+    background-color: transparent;
 }
 
 .mem-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 30px;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+/* Over lay */
+
+.overlay.home-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(335.21deg, rgba(48, 40, 14, 0) 27.36%, #36210A 111.76%);
+    z-index: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(304.89deg, rgba(2, 4, 5, 0) -23.67%, rgba(9, 24, 32, 0.795338) 104.02%, #0B1D26 111.02%);
+    z-index: 0;
+}
+
+.overlay-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(48, 40, 14, 0) 27.36%, #0E1212 85.14%);
+    z-index: 0;
+}
+
+.ant-drawer-body {
+    padding: 0 !important;
+}
+
+.ant-drawer-header {
+    padding-left: 15px !important;
+}
+
+.ant-spin-dot-item {
+    background-color: #fff;
 }
 
 @media (max-width: 730px) {
-  .mem-inner {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 65px;
-  }
-  .mem-inner.memdraw {
-    flex-direction: column-reverse;
-  }
+    .mem-inner {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 65px;
+    }
+    .mem-inner.memdraw {
+        flex-direction: column-reverse;
+    }
 }

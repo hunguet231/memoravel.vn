@@ -31,13 +31,13 @@ const TextBox = ({
         {description}
       </div>
       <div className={`${styles.linkTo} ${hero ? styles.linkToHero : ""}`}>
-        <p>
-          <Link href={link ? link : "/"}>{linkTo}</Link>
-        </p>
-        <p>
-          {arrowDirection === "down" && <ArrowDownOutlined />}
-          {arrowDirection === "right" && <ArrowRightOutlined />}
-        </p>
+        <p>{linkTo && <Link href={link ? link : "/"}>{linkTo}</Link>}</p>
+        {arrowDirection && (
+          <p>
+            {arrowDirection === "down" && <ArrowDownOutlined />}
+            {arrowDirection === "right" && <ArrowRightOutlined />}
+          </p>
+        )}
       </div>
     </div>
   );
