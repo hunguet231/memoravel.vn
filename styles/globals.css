@@ -11,7 +11,7 @@ body {
 }
 
 a {
-    color: #fff !important;
+    color: inherit;
     text-decoration: none;
 }
 
