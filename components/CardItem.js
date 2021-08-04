@@ -1,6 +1,6 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { Space, Card, Row, Col, Rate } from "antd";
+import { Space, Card, Row, Col, Rate, Image } from "antd";
 import styles from "../styles/CardItem.module.css";
 
 export default function CardItem() {
@@ -11,7 +11,9 @@ export default function CardItem() {
           className={styles.card}
           hoverable
           bordered={false}
-          cover={<img alt="items" className={styles.cardImg} src="/bg-hero.jpg" />}
+          cover={
+            <Image alt="items" className={styles.cardImg} src="/bg-hero.jpg" />
+          }
         >
           <div className={styles.cardBody}>
             <p className={styles.cardTitle}>Bình gốm Bát Tràng</p>

@@ -8,6 +8,7 @@ import memImg2 from "../public/mem-box-2.png";
 import memImg3 from "../public/mem-box-3.png";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
+import Youtube from "../components/Youtube";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
       </header>
 
       <main className={styles.main}>
+        <Youtube />
         <div className="mem-box">
           <div className="mem-inner">
             <TextBox

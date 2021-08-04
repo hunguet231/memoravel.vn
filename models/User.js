@@ -6,6 +6,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    avatar: {
+      type: String,
+    },
     address: String,
     username: {
       type: String,
@@ -15,6 +18,10 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+    },
+    badge: {
+      type: String,
+      default: "normal",
     },
     role: {
       type: String,
