@@ -21,7 +21,15 @@ export default function memdraw() {
               Một điểm thú vị khác của dự án đó là khách hàng có thể thiết kế sản phẩm theo sở thích cá nhân."
                 memdraw
               />
-              <Image src={memImg2} alt="Memdraw" />
+              {/* <Image src={memImg2} alt="Memdraw" /> */}
+              <iframe
+                className={styles.vectaryBox}
+                id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
+                src="https://www.vectary.com/viewer/v1/?model=4af2ad3b-80bd-45ab-9eb2-d0e10e00565e&env=studio3&turntable=-12"
+                frameBorder="1"
+                width="100%"
+                height="480"
+              ></iframe>
             </div>
           </div>
         </div>

@@ -1,35 +1,37 @@
 .card {
-  background-color: #0f1530;
-  color: #fff;
-  max-width: 270px;
-  height: auto;
-  border-radius: 10px;
+    background-color: #0f1530;
+    color: #fff;
+    max-width: 270px;
+    height: auto;
+    border-radius: 10px;
 }
+
 .cardImg {
-  width: 98%;
-  position: relative;
-  left: 3px;
-  top: 3px;
-  border-radius: 10px 10px 0 0 !important;
+    width: 98%;
+    position: relative;
+    left: 3px;
+    top: 3px;
+    border-radius: 10px 10px 0 0 !important;
 }
 
 .cardBody {
-  margin: -14px;
+    margin: -14px;
 }
+
 .cardTitle {
-  font-size: 25px;
-  margin-bottom: 0px;
+    font-size: 25px;
+    margin-bottom: 0px;
 }
 
 @media (max-width: 1175px) {
-  .card {
-    max-width: 290px;
-  }
+    .card {
+        max-width: 290px;
+    }
 }
 
 @media (max-width: 745px) {
-  .card {
-    max-width: 250px;
-    width: 100%;
-  }
+    .card {
+        max-width: 250px;
+        width: 100%;
+    }
 }

@@ -30,7 +30,7 @@ export default function Home() {
       </header>
 
       <main className={styles.main}>
-        <Youtube />
+        {/* <Youtube /> */}
         <div className="mem-box">
           <div className="mem-inner">
             <TextBox

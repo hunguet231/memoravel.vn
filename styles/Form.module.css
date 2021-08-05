@@ -96,6 +96,10 @@
     background: rgba(224, 191, 116, 0.95);
 }
 
+.vectaryBox {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 @media (max-width: 380px) {
     .title {
         font-size: 30px;

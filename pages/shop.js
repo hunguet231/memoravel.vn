@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import CardItem from "../components/CardItem";
 import styles from "../styles/Shop.module.css";
 import { Row, Col, List, Collapse } from "antd";
+import Link from "next/link";
 
 export default function shop() {
   const data = ["Top bán chạy", "Gốm Bát Tràng", "Vải", "Chiếu cói", "Nón"];
@@ -29,8 +30,14 @@ export default function shop() {
                   size="large"
                   dataSource={data}
                   renderItem={(item) => (
-                    <List.Item style={{ border: "none", padding: "16px 0" }}>
-                      <a href="*">{item}</a>
+                    <List.Item
+                      style={{
+                        border: "none",
+                        padding: "16px 0",
+                        color: "#fff",
+                      }}
+                    >
+                      <Link href="*">{item}</Link>
                     </List.Item>
                   )}
                 />

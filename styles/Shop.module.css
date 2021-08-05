@@ -1,68 +1,71 @@
 .container {
-  margin: 0 8%;
-  background-color: #2c2c2c;
+    margin: 0 8%;
+    background-color: #2c2c2c;
 }
+
 .brandName,
 .shopTitle {
-  font-family: Times New Roman;
+    font-family: "Times New Roman";
 }
 
 .brandName {
-  color: #e0bf74;
-  font-size: 250%;
+    color: #e0bf74;
+    font-size: 250%;
 }
 
 .shopTitle {
-  font-size: 100px;
-  color: #fff;
-  margin-top: -50px;
-  margin-bottom: -30px;
+    font-size: 100px;
+    color: #fff;
+    margin-top: -50px;
+    margin-bottom: -30px;
 }
 
 .subTitle {
-  color: #fff;
-  font-weight: 200;
-  font-size: 27px;
+    color: #fff;
+    font-weight: 200;
+    font-size: 27px;
 }
 
 .item {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .headerList {
-  color: #fff;
-  font-size: 150%;
+    color: #fff !important;
+    font-size: 150%;
 }
 
 @media (max-width: 1000px) {
-  .container {
-    margin: 5%;
-  }
+    .container {
+        margin: 5%;
+    }
 }
 
 @media (max-width: 890px) {
-  .container {
-    margin: 2%;
-  }
-  .headerList {
-    font-size: 100%;
-  }
+    .container {
+        margin: 2%;
+    }
+    .headerList {
+        font-size: 100%;
+    }
 }
 
 @media (max-width: 780px) {
-  .container {
-    margin: 0;
-  }
+    .container {
+        margin: 0;
+    }
 }
+
 @media (max-width: 560px) {
-  .brandName,
-  .shopTitle,
-  .subTitle {
-    margin-left: 12%;
-  }
+    .brandName,
+    .shopTitle,
+    .subTitle {
+        margin-left: 12%;
+    }
 }
+
 @media (max-width: 500px) {
-  .cardContainer {
-    margin: 0 15%;
-  }
+    .cardContainer {
+        margin: 0 15%;
+    }
 }

@@ -42,6 +42,7 @@
 }
 
 .navItem {
+    color: #fff !important;
     margin: 0 21px;
     font-family: 'Abhaya Libre', serif;
     font-weight: 700;
