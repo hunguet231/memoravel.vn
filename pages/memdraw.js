@@ -24,9 +24,14 @@ export default function memdraw() {
               {/* <Image src={memImg2} alt="Memdraw" /> */}
               <iframe
                 className={styles.vectaryBox}
+                style={{ background: "#f2f2f2" }}
                 id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
                 src="https://www.vectary.com/viewer/v1/?model=4af2ad3b-80bd-45ab-9eb2-d0e10e00565e&env=studio3&turntable=-12"
                 frameBorder="1"
+                allowtransparency
+                webkitallowfullscreen
+                mozallowfullscreen
+                allowFullScreen
                 width="100%"
                 height="480"
               ></iframe>

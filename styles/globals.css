@@ -15,9 +15,10 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+
+/* a:hover {
     color: #fff !important;
-}
+} */
 
 * {
     box-sizing: border-box;

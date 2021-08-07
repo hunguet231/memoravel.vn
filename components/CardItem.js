@@ -1,41 +1,43 @@
+import { Card, Col, Image, Rate, Row } from "antd";
 import React from "react";
-import "antd/dist/antd.css";
-import { Space, Card, Row, Col, Rate, Image } from "antd";
 import styles from "../styles/CardItem.module.css";
 
 export default function CardItem() {
   return (
     <div>
-      <Space direction="vertical">
-        <Card
-          className={styles.card}
-          hoverable
-          bordered={false}
-          cover={
-            <Image alt="items" className={styles.cardImg} src="/bg-hero.jpg" />
-          }
-        >
-          <div className={styles.cardBody}>
-            <p className={styles.cardTitle}>Bình gốm Bát Tràng</p>
-            <Row>
-              <Col span={18}>
-                <Rate disabled defaultValue={5} style={{ fontSize: "80%" }} />
-              </Col>
-              <Col span={6} sm={24}>
-                <small className={styles.sold}>Đã bán: 500</small>
-              </Col>
-            </Row>
+      <Card
+        className={styles.card}
+        hoverable
+        bordered={false}
+        cover={
+          <>
+            <div className={styles.cardImg}>
+              <Image preview={false} alt="items" src="/bg-hero.jpg" />
+              <div className={styles.ar}>AR</div>
+            </div>
+          </>
+        }
+      >
+        <div className={styles.cardBody}>
+          <p className={styles.cardTitle}>Bình gốm Bát Tràng</p>
+          <Row justify="space-between">
+            <Col>
+              <Rate disabled defaultValue={5} style={{ fontSize: "95%" }} />
+            </Col>
+            <Col>
+              <small className={styles.sold}>Đã bán: 500</small>
+            </Col>
+          </Row>
+          <div className={styles.summary}>
             <small>Chất liệu: Gốm cao cấp</small>
             <br />
             <small>Mệnh phù hơp: Kim, thủy</small>
-            <Row justify="end">
-              <Col xl={9} lg={11} className={styles.price}>
-                Giá: 1.500.000
-              </Col>
-            </Row>
           </div>
-        </Card>
-      </Space>
+          <Row justify="end">
+            <Col className={styles.price}>Giá: 1.500.000</Col>
+          </Row>
+        </div>
+      </Card>
     </div>
   );
 }

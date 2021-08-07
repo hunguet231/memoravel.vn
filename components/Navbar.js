@@ -7,6 +7,7 @@ import {
   ShopOutlined,
   FormOutlined,
   ShoppingOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Dropdown, Menu, message, Drawer, Button, Divider } from "antd";
 import Cookie from "js-cookie";
@@ -148,8 +149,11 @@ const Navbar = () => {
             <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
               <Link href="/memoravel">Memoravel</Link>
             </Menu.Item>
-            <Menu.Item onClick={onClose} icon={<ShopOutlined />}>
+            <Menu.Item onClick={onClose} icon={<ShoppingCartOutlined />}>
               <Link href="/shop">Shop</Link>
+            </Menu.Item>
+            <Menu.Item onClick={onClose} icon={<ShopOutlined />}>
+              <Link href="/sell">Kênh bán</Link>
             </Menu.Item>
             <Menu.Item onClick={onClose} icon={<FormOutlined />}>
               <Link href="/blog">Blog</Link>
@@ -193,6 +197,9 @@ const Navbar = () => {
         </div>
         <div className={styles.navItem}>
           <Link href="/shop">Shop</Link>
+        </div>
+        <div className={styles.navItem}>
+          <Link href="/sell">Kênh bán</Link>
         </div>
         <div className={styles.navItem}>
           <Link href="/blog">Blog</Link>

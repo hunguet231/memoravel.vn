@@ -1,37 +1,53 @@
 .card {
-    background-color: #0f1530;
-    color: #fff;
-    max-width: 270px;
+    background-color: #fff;
+    width: 100%;
     height: auto;
     border-radius: 10px;
-}
-
-.cardImg {
-    width: 98%;
-    position: relative;
-    left: 3px;
-    top: 3px;
-    border-radius: 10px 10px 0 0 !important;
-}
-
-.cardBody {
-    margin: -14px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .cardTitle {
     font-size: 25px;
+    font-weight: 500;
     margin-bottom: 0px;
 }
 
-@media (max-width: 1175px) {
-    .card {
-        max-width: 290px;
-    }
+.sold {
+    color: rgba(23, 15, 5, 0.5);
+    font-weight: 500;
 }
 
-@media (max-width: 745px) {
-    .card {
-        max-width: 250px;
-        width: 100%;
-    }
+.summary {
+    color: #170F05;
+    font-size: 16px;
+}
+
+.price {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.cardImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.cardImg {
+    padding: 2px;
+    position: relative;
+}
+
+.ar {
+    position: absolute;
+    background: #1AB001;
+    padding: 3px 5px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    right: 8px;
+    bottom: 15px !important;
 }

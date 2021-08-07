@@ -5,7 +5,7 @@
     max-width: 100%;
     padding: 55px 80px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     position: fixed;
     top: 0;
     left: 0;
@@ -115,9 +115,6 @@
         margin-left: 0;
         margin-bottom: 10px;
     }
-}
-
-@media (max-width: 1080px) {
     .navbar {
         padding: 20px 15px;
         grid-template-columns: 1fr 1fr;

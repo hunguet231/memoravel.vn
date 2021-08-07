@@ -34,9 +34,15 @@ const Header = () => {
           </a>
         </p>
         <p>
-          <Tooltip placement="right" title="Youtube">
-            <YoutubeOutlined />
-          </Tooltip>
+          <a
+            href="https://www.youtube.com/channel/UC8Tl2Owjeap9XWiHHq5ssHA"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Tooltip placement="right" title="Youtube">
+              <YoutubeOutlined />
+            </Tooltip>
+          </a>
         </p>
       </div>
       <div className={styles.heroRight}>

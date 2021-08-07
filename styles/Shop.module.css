@@ -1,6 +1,22 @@
 .container {
-    margin: 0 8%;
-    background-color: #2c2c2c;
+    background-color: #0e1212;
+    background-image: url('../public/bg-hero.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    height: 120vh;
+    position: relative;
+}
+
+.inner {
+    z-index: 1;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    padding: 285px 80px 10px;
+    transform: translateY(-20vh);
+    font-family: 'Roboto', sans-serif;
 }
 
 .brandName,
@@ -10,20 +26,21 @@
 
 .brandName {
     color: #e0bf74;
-    font-size: 250%;
+    font-size: 25px;
 }
 
 .shopTitle {
-    font-size: 100px;
+    font-size: 65px;
     color: #fff;
-    margin-top: -50px;
-    margin-bottom: -30px;
+    display: block;
+    margin-top: -25px;
 }
 
 .subTitle {
     color: #fff;
     font-weight: 200;
-    font-size: 27px;
+    font-size: 25px;
+    margin-top: -30px;
 }
 
 .item {
@@ -31,41 +48,15 @@
 }
 
 .headerList {
-    color: #fff !important;
-    font-size: 150%;
+    color: #fff;
+    font-size: 20px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
-@media (max-width: 1000px) {
-    .container {
-        margin: 5%;
-    }
-}
-
-@media (max-width: 890px) {
-    .container {
-        margin: 2%;
-    }
-    .headerList {
-        font-size: 100%;
-    }
-}
-
-@media (max-width: 780px) {
-    .container {
-        margin: 0;
-    }
-}
-
-@media (max-width: 560px) {
-    .brandName,
-    .shopTitle,
-    .subTitle {
-        margin-left: 12%;
-    }
-}
-
-@media (max-width: 500px) {
-    .cardContainer {
-        margin: 0 15%;
+@media (max-width: 380px) {
+    .inner {
+        padding: 210px 15px 10px;
     }
 }
