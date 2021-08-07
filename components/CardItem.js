@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.css";
 import { Space, Card, Row, Col, Rate, Image } from "antd";
 import styles from "../styles/CardItem.module.css";
 
@@ -11,17 +10,15 @@ export default function CardItem() {
           className={styles.card}
           hoverable
           bordered={false}
-          cover={
-            <Image alt="items" className={styles.cardImg} src="/bg-hero.jpg" />
-          }
+          cover={<Image alt="items" className={styles.cardImg} src="/bg-hero.jpg" />}
         >
           <div className={styles.cardBody}>
             <p className={styles.cardTitle}>Bình gốm Bát Tràng</p>
             <Row>
-              <Col span={18}>
+              <Col span={24} sm={16} md={18}>
                 <Rate disabled defaultValue={5} style={{ fontSize: "80%" }} />
               </Col>
-              <Col span={6} sm={24}>
+              <Col span={24} sm={8} md={6}>
                 <small className={styles.sold}>Đã bán: 500</small>
               </Col>
             </Row>
@@ -29,7 +26,7 @@ export default function CardItem() {
             <br />
             <small>Mệnh phù hơp: Kim, thủy</small>
             <Row justify="end">
-              <Col xl={9} lg={11} className={styles.price}>
+              <Col sm={11} md={8} lg={9} className={styles.price}>
                 Giá: 1.500.000
               </Col>
             </Row>
