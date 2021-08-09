@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const getImgUrl = async (dataImag) => {
+const getImgUrl = async (dataImag, preset) => {
   const url = "https://api.cloudinary.com/v1_1/dcsvjbc6c/image/upload";
 
   const formData = new FormData();
   formData.append("file", dataImag);
-  formData.append("upload_preset", "tnd-web");
+  formData.append("upload_preset", preset);
 
   const res = await axios.post(url, formData, {
     headers: {

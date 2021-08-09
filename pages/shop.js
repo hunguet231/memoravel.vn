@@ -7,6 +7,7 @@ import styles from "../styles/Shop.module.css";
 import categories from "../utils/categories";
 import Footer from "../components/Footer";
 import SubscribeForm from "../components/SubscribeForm";
+import { getData } from "../utils/fetchData";
 
 const { Panel } = Collapse;
 
@@ -18,7 +19,7 @@ const customExpandIcon = (props) => {
   }
 };
 
-export default function shop() {
+export default function shop({ products }) {
   return (
     <div>
       <div className={styles.container}>
@@ -109,4 +110,13 @@ export default function shop() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await getData("products");
+  return {
+    props: {
+      products: res.products,
+    },
+  };
 }

@@ -25,6 +25,9 @@ const productSchema = new mongoose.Schema(
     summary: {
       type: String,
     },
+    story: {
+      type: String,
+    },
     details: {
       type: String,
       required: true,
@@ -38,11 +41,12 @@ const productSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-
+    vectary_link: {
+      type: String,
+    },
     slug: {
       type: String,
     },
-
     category: {
       type: String,
       required: true,
@@ -61,6 +65,10 @@ const productSchema = new mongoose.Schema(
     },
     reviews: [reviewSchema],
     likes: {
+      type: Number,
+      default: 0,
+    },
+    viewers: {
       type: Number,
       default: 0,
     },
