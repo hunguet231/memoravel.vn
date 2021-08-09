@@ -10,7 +10,7 @@ module.exports = withLess({
       `${content}\n\n@import '${pathToLessFileWithVariables}';`,
   },
   env: {
-    BASE_URL: "https://memoravel-vn.vercel.app",
+    BASE_URL: "https://memoravel.vn",
     // BASE_URL: "http://localhost:3000",
     MONGODB_URL:
       "mongodb+srv://hunguet231:huet231@cluster0.nmy5u.mongodb.net/memoravel-vn?retryWrites=true&w=majority",
