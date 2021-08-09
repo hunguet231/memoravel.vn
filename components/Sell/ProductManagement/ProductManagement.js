@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Image, message, Popconfirm, Spin, Table, Form } from "antd";
 import Text from "antd/lib/typography/Text";
+import { useRouter } from "next/router";
 import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../../store/GlobalState";
 import stylesBasic from "../../../styles/BasicContainer.module.css";
@@ -37,12 +38,19 @@ export default function ProductManagement() {
   const [loadingTable, setLoadingTable] = useState(false);
   const [products, setProducts] = useState(null);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (Object.keys(auth).length === 0) router.push("/login");
+    return;
+  }, [auth]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoadingTable(true);
       const res = await getData(`products/user/${auth.user.id}`);
 
-      if (res) {
+      if (res.products) {
         res.products.forEach((product) => (product.key = product._id));
 
         setProducts(res.products);
@@ -50,10 +58,12 @@ export default function ProductManagement() {
       }
     };
 
-    if (auth.user) {
+    if (!auth.user) {
+      return null;
+    } else {
       fetchProducts();
     }
-  }, [updateTable, auth.user]);
+  }, [updateTable, auth]);
 
   const onCreate = async (values) => {
     setVisibleCreate(false);

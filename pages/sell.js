@@ -17,6 +17,11 @@ const Sell = () => {
   const { auth } = state;
   const [menu, setMenu] = useState("-1");
 
+  useEffect(() => {
+    if (Object.keys(auth).length === 0) router.push("/login");
+    return;
+  }, [auth]);
+
   const getClickedMenu = (e) => {
     setMenu(e);
   };

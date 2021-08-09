@@ -48,7 +48,8 @@
     font-size: small;
 }
 
-.viewAR {
+.viewAR,
+.viewAR:focus {
     background-color: #1ab001;
     border-color: #1ab001;
 }
@@ -67,14 +68,16 @@
     background-color: #20d400;
 }
 
-.addToCart {
+.addToCart,
+.addToCart:focus,
+.addToCart:hover {
     border: 2px solid #16a8fa;
     color: #16a8fa;
     background-color: #fff;
 }
 
 .buyNow,
-.addToCart:hover {
+.buyNow:active .buyNow:focus .addToCart:hover {
     background-color: #16a8fa;
     border-color: #16a8fa;
 }

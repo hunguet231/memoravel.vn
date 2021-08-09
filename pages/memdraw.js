@@ -2,6 +2,7 @@ import Image from "next/image";
 import Footer from "../components/Footer";
 import SubscribeForm from "../components/SubscribeForm";
 import TextBox from "../components/TextBox";
+import VectaryIframe from "../components/VectaryIframe";
 import memImg2 from "../public/mem-box-2.png";
 import styles from "../styles/MemDetails.module.css";
 
@@ -22,19 +23,10 @@ export default function memdraw() {
                 memdraw
               />
               {/* <Image src={memImg2} alt="Memdraw" /> */}
-              <iframe
-                className={styles.vectaryBox}
-                style={{ background: "#f2f2f2" }}
+              <VectaryIframe
                 id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
                 src="https://www.vectary.com/viewer/v1/?model=4af2ad3b-80bd-45ab-9eb2-d0e10e00565e&env=studio3&turntable=-12"
-                frameBorder="1"
-                allowtransparency
-                webkitallowfullscreen
-                mozallowfullscreen
-                allowFullScreen
-                width="100%"
-                height="480"
-              ></iframe>
+              />
             </div>
           </div>
         </div>

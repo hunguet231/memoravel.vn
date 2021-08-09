@@ -2,8 +2,15 @@ import React from "react";
 import { Row, Col, Button, Rate, Card } from "antd";
 import ReactHtmlParser from "react-html-parser";
 import styles from "../styles/ShopDetails.module.css";
+import { useState } from "react";
 
-export default function CardProduct({ product }) {
+export default function CardProduct({ product, toggleViewAR }) {
+  const [viewAR, setViewAR] = useState(true);
+
+  const toggleAR = () => {
+    setViewAR(!viewAR);
+    toggleViewAR(viewAR);
+  };
   return (
     <>
       <Card className={styles.productCard}>
@@ -17,6 +24,7 @@ export default function CardProduct({ product }) {
         <Row gutter={6}>
           <Col span={24} sm={8}>
             <Button
+              onClick={toggleAR}
               block={true}
               size="large"
               type="primary"

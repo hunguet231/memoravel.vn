@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { getData } from "../../utils/fetchData";
 import Image from "next/image";
@@ -9,8 +10,14 @@ import Footer from "../../components/Footer";
 import CardItem from "../../components/CardItem";
 import CardProduct from "../../components/CardProduct";
 import ReactHtmlParser from "react-html-parser";
+import { useState } from "react";
+import VectaryIframe from "../../components/VectaryIframe";
 
 const product = ({ product }) => {
+  const [viewAR, setViewAR] = useState(false);
+  const toggleViewAR = (viewAR) => {
+    setViewAR(viewAR);
+  };
   return (
     <>
       <div className={styles.container}>
@@ -26,16 +33,23 @@ const product = ({ product }) => {
                 lg={12}
                 className={styles.parentProductImg}
               >
-                <Image
-                  src={product.images[0]}
-                  alt="product-details"
-                  layout="fill"
-                  objectFit="cover"
-                  className={styles.productImg}
-                />
+                {viewAR ? (
+                  <VectaryIframe
+                    id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
+                    src="https://www.vectary.com/viewer/v1/?model=4af2ad3b-80bd-45ab-9eb2-d0e10e00565e&env=studio3&turntable=-12"
+                  />
+                ) : (
+                  <Image
+                    src={product.images[0]}
+                    alt="product-details"
+                    layout="fill"
+                    objectFit="cover"
+                    className={styles.productImg}
+                  />
+                )}
               </Col>
               <Col span={24} lg={12}>
-                <CardProduct product={product} />
+                <CardProduct product={product} toggleViewAR={toggleViewAR} />
               </Col>
             </Row>
             <Card className={styles.cardShopInfo}>
@@ -48,7 +62,7 @@ const product = ({ product }) => {
                 </Col>
                 <Col span={16} sm={18} md={9}>
                   <Card bordered={false} className={styles.cardUserInfo}>
-                    <h2 style={{ marginBottom: "-5px" }}>TRẦN THANH LÂM</h2>
+                    <h2 style={{ marginBottom: "-5px" }}>MEMORAVEL</h2>
                     <small style={{ color: "#00000099" }}>
                       online 5 phút trước
                     </small>
