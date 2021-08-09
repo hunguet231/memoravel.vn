@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { message, Spin } from "antd";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import UploadImg from "../../components/UploadImg";
 import { DataContext } from "../../store/GlobalState";
 import styles from "../../styles/Form.module.css";
@@ -13,9 +13,14 @@ export default function UpdateShop() {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
 
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push("/login");
+    return;
+  }, [auth]);
+
   const initalState = {
-    shop_name: auth.user.shop_name,
-    shop_description: auth.user.shop_description,
+    shop_name: auth.user && auth.user.shop_name,
+    shop_description: auth.user && auth.user.shop_description,
   };
   const [userData, setUserData] = useState(initalState);
   const [loading, setLoading] = useState(false);
