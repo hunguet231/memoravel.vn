@@ -53,7 +53,7 @@ const updateProfile = async (req, res) => {
     await user.save();
 
     res.json({
-      msg: "Update Success!",
+      msg: "Cập nhật thành công!",
       user: {
         fullname: user.fullname,
         avatar: user.avatar,

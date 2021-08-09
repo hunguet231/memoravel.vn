@@ -2,6 +2,7 @@ import connectDB from "../../../utils/connectDB";
 import Products from "../../../models/Product";
 import slugify from "slugify";
 import short from "short-uuid";
+import auth from "../../../middlewares/auth";
 
 connectDB();
 
@@ -62,12 +63,7 @@ class APIfeatures {
 // @access  Private
 const getProducts = async (req, res) => {
   try {
-    const features = new APIfeatures(Products.find(), req.query)
-      .filtering()
-      .sorting()
-      .paginating();
-
-    const products = await features.query;
+    const products = await Products.find();
 
     res.json({
       success: true,
@@ -94,9 +90,10 @@ const createProduct = async (req, res) => {
       vectary_link,
       category,
       in_stock,
+      user,
     } = req.body;
 
-    if (!title || !details || !price || !images || !category || !in_stock) {
+    if (!title || !details || !price || !images || !category) {
       return res
         .status(400)
         .json({ err: "Hãy nhập tất cả các trường bắt buộc!" });
@@ -110,7 +107,7 @@ const createProduct = async (req, res) => {
       "-" +
       short.generate();
 
-    const newPost = new Posts({
+    const newPost = new Products({
       title,
       summary,
       story,
@@ -121,6 +118,7 @@ const createProduct = async (req, res) => {
       category,
       in_stock,
       slug,
+      user,
     });
 
     await newPost.save();

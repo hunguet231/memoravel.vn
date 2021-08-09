@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Col, Collapse, List, Pagination, Row } from "antd";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import categories from "../utils/categories";
 import Footer from "../components/Footer";
 import SubscribeForm from "../components/SubscribeForm";
 import { getData } from "../utils/fetchData";
+import { useState } from "react";
 
 const { Panel } = Collapse;
 
@@ -72,30 +74,22 @@ export default function shop({ products }) {
             </Col>
             <Col xs={24} sm={24} md={20}>
               <Row gutter={16}>
-                <Col xs={24} sm={12} lg={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
-                <Col xs={24} sm={12} lg={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
-                <Col xs={24} sm={12} lg={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
-                <Col xs={24} sm={12} lg={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
-                <Col xs={24} sm={12} lg={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
-                <Col xs={24} sm={12} md={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
-                <Col xs={24} sm={12} md={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
-                <Col xs={24} sm={12} md={8} xl={6} className={styles.item}>
-                  <CardItem />
-                </Col>
+                {products && products.length > 0 ? (
+                  products.map((product) => (
+                    <Col
+                      xs={24}
+                      sm={12}
+                      lg={8}
+                      xl={6}
+                      className={styles.item}
+                      key={product._id}
+                    >
+                      <CardItem product={product} />
+                    </Col>
+                  ))
+                ) : (
+                  <p>Không có sản phẩm nào!</p>
+                )}
               </Row>
               <Row justify="end" style={{ marginTop: "20px" }}>
                 <Pagination defaultCurrent={1} total={50} />

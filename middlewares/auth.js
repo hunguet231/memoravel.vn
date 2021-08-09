@@ -8,7 +8,8 @@ const auth = async (req, res) => {
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
   if (!decoded) return res.status(400).json({ err: "Invalid Authentication." });
 
-  const user = await Users.findOne({ _id: decoded.id });
+  const user = await Users.findOne({ _id: decoded.id }).select("-password");
+  req.user = user;
 
   return {
     id: user._id,

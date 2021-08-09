@@ -17,15 +17,7 @@ export default async (req, res) => {
 // @access  Private
 const getProducts = async (req, res) => {
   try {
-    const features = new APIfeatures(
-      Products.find({ user: req.query.userId }),
-      req.query
-    )
-      .filtering()
-      .sorting()
-      .paginating();
-
-    const products = await features.query;
+    const products = await Products.find({ user: `${req.query.userId}` });
 
     res.json({
       success: true,

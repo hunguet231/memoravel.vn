@@ -1,151 +1,80 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { message, Spin } from "antd";
+import { Col, Image, Row } from "antd";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
+import Menu from "../components/Sell/Menu";
+import ProductManagement from "../components/Sell/ProductManagement/ProductManagement";
+import UpdateShop from "../components/Sell/UpdateShop";
 import SubscribeForm from "../components/SubscribeForm";
-import UploadImg from "../components/UploadImg";
 import { DataContext } from "../store/GlobalState";
 import styles from "../styles/Form.module.css";
-import { patchData } from "../utils/fetchData";
-import getImgUrl from "../utils/getImgUrl";
 
-export default function sell() {
+const Sell = () => {
   const router = useRouter();
-  const initalState = { shop_name: "", shop_description: "" };
-  const [userData, setUserData] = useState(initalState);
-  const [loading, setLoading] = useState(false);
-  const { shop_name, shop_description } = userData;
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-  const [picture, setPicture] = useState("");
+  const [menu, setMenu] = useState("-1");
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+  const getClickedMenu = (e) => {
+    setMenu(e);
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const errMsg =
-      !auth.user.shop_name &&
-      !auth.user.shop_description &&
-      (!shop_name || !shop_description)
-        ? true
-        : false;
-
-    if (!errMsg) {
-      setLoading(true);
-      let picture_url = "";
-
-      if (picture) {
-        picture_url = await getImgUrl(picture, "memoravel_shop-avatar");
-      }
-      const res = await patchData(
-        "users",
-        {
-          ...userData,
-          shop_avatar: picture_url,
-        },
-        auth.token
-      );
-
-      if (res.err) {
-        message.error(res.err);
-        setLoading(false);
-      } else {
-        message.success(res.msg);
-        setLoading(false);
-
-        dispatch({
-          type: "AUTH",
-          payload: {
-            token: auth.token,
-            user: res.user,
-          },
-        });
-
-        router.push(`/shop-profile/${auth.user.id}`);
-      }
-    } else {
-      message.error("Hãy nhập tất cả các trường!");
-    }
-  };
-
-  useEffect(() => {
-    if (Object.keys(auth).length === 0) router.push("/");
-    if (!auth.user.is_first_create_shop)
-      router.push(`/shop-profile/${auth.user.id}`);
-  }, [auth]);
-
-  const getImage = (image, type) => {
-    setPicture(image);
-  };
-
-  if (!auth.user) return null;
 
   return (
     <>
       <div className={styles.container}>
         <div className="overlay"></div>
         <div className="overlay-bottom"></div>
-        <div className={styles.inner}>
-          <h1 className={styles.title}>Cập nhật thông tin shop</h1>
-          {auth.user.is_first_create_shop ? (
-            <h2 className={styles.subTitle}>
-              Chào mừng bạn đến với Kênh bán hàng của MEMORAVEL. Hãy hoàn thành
-              một số thiết lập để bắt đầu!
-            </h2>
-          ) : (
-            ""
-          )}
-          <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                name="shop_name"
-                placeholder={auth.user.shop_name || "Tên shop của bạn"}
-                className={styles.inputField}
-                value={shop_name}
-                defaultValue={auth.user.shop_name}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <textarea
-                rows="4"
-                name="shop_description"
-                placeholder={auth.user.shop_description || "Mô tả về shop"}
-                className={styles.inputFieldArea}
-                value={shop_description}
-                defaultValue={auth.user.shop_description}
-                onChange={handleInputChange}
-              ></textarea>
-            </div>
-            <div>
-              <div>
-                <div>Chọn ảnh đại diện shop</div>
-                <small>(Kích thước tối đa 2MB, định dạng PNG/JPG)</small>
-              </div>
-              <UploadImg
-                getImageUrl={getImage}
-                type="shop_avatar"
-                defaultData={auth.user.shop_avatar}
-              />
-            </div>
-            <br />
-            <button type="submit" className={styles.submitBtn}>
-              {loading && <Spin className={styles.spin} />} GHI NHẬN
-            </button>
-          </form>
+        <div
+          className={styles.inner}
+          style={{
+            width: "100%",
+            maxWidth: "1200px",
+            padding: "300px 15px 10px",
+          }}
+        >
+          <Row gutter={16}>
+            <Col
+              xs={24}
+              md={4}
+              style={{ background: "#0e1212", color: "#fff" }}
+            >
+              <Menu getClickedMenu={getClickedMenu} />
+            </Col>
+            <Col
+              xs={24}
+              md={20}
+              style={{
+                background: "#0e1212",
+                minHeight: "100vh",
+              }}
+            >
+              <br />
+              {menu == "-1" && (
+                <div>
+                  <h1 className="title">Tuỳ chỉnh shop của bạn</h1>
+                  <h2 className="sub-title">Chọn danh mục menu để bắt đầu</h2>
+                  <Image
+                    preview={false}
+                    src="/empty-menu.svg"
+                    alt="Empty menu"
+                    style={{ width: "65%", margin: "20px auto" }}
+                  />
+                </div>
+              )}
+              {menu == "0" && <UpdateShop />}
+              {menu == "1" && <ProductManagement />}
+            </Col>
+          </Row>
         </div>
-      </div>
-      <div>
-        <SubscribeForm />
-        <Footer />
+        <div>
+          <SubscribeForm />
+          <Footer />
+        </div>
       </div>
     </>
   );
-}
+};
+
+export default Sell;

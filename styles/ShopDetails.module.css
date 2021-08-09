@@ -1,0 +1,178 @@
+.container {
+    background-color: #0e1212;
+    background-image: url("../public/bg-hero.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    height: 120vh;
+    position: relative;
+}
+
+.inner {
+    z-index: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 280px 15px 10px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    transform: translateY(-20vh);
+}
+
+.productImg {
+    border-radius: 12px;
+}
+
+
+/*For components/CardProduct.js*/
+
+.productCard {
+    text-align: start;
+    border-radius: 12px;
+}
+
+.rateStar {
+    margin: -5px 0 5px 0;
+}
+
+.productPrice {
+    text-align: end;
+    margin-bottom: 10px;
+}
+
+.viewAR,
+.addToCart,
+.buyNow {
+    border-radius: 8px;
+    font-size: small;
+}
+
+.viewAR {
+    background-color: #1ab001;
+    border-color: #1ab001;
+}
+
+.ARtext {
+    font-size: larger;
+    font-weight: 500;
+    padding: 0 7px 0 5px;
+    background-color: #fff;
+    color: #1ab001;
+    margin-left: 5%;
+    border-radius: 5px;
+}
+
+.viewAR:hover {
+    background-color: #20d400;
+}
+
+.addToCart {
+    border: 2px solid #16a8fa;
+    color: #16a8fa;
+    background-color: #fff;
+}
+
+.buyNow,
+.addToCart:hover {
+    background-color: #16a8fa;
+    border-color: #16a8fa;
+}
+
+.buyNow:hover {
+    background-color: #0089d8;
+}
+
+
+/*-----end--------*/
+
+
+/*For UserInfor*/
+
+.cardShopInfo {
+    margin-top: 12px;
+    border-radius: 10px;
+}
+
+.cardUserInfo {
+    text-align: start;
+    margin: -24px 0 0 -15px;
+}
+
+.chatShop {
+    background-color: #fff;
+    color: #16a8fa;
+    border-radius: 8px;
+    border: 2px solid #16a8fa;
+}
+
+.watchShop,
+.chatShop:hover {
+    background-color: #16a8fa;
+    border-radius: 8px;
+    border: 2px solid #16a8fa;
+}
+
+.watchShop:hover {
+    background-color: #0089d8;
+    border: 2px solid #0089d8;
+}
+
+.statisticShop {
+    margin: 10px 0 45px 0;
+}
+
+.cardProductDescription {
+    text-align: start;
+    margin-top: 12px;
+}
+
+@media (max-width: 1024px) {
+    .subContainer {
+        margin: 0 5%;
+    }
+    .viewAR,
+    .addToCart {
+        padding-left: 3%;
+    }
+}
+
+@media (max-width: 995px) {
+    .parentProductImg {
+        height: 450px;
+        width: auto;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 760px) {
+    .parentProductImg {
+        height: 350px;
+    }
+    .statisticWrap {
+        margin: 0 5%;
+    }
+}
+
+@media (max-width: 545px) {
+    .subContainer {
+        margin: 0;
+    }
+    .parentProductImg {
+        height: 300px;
+    }
+    .viewAR,
+    .addToCart,
+    .buyNow {
+        margin-bottom: 8px;
+    }
+    .chatShop {
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 375px) {
+    .parentProductImg {
+        height: 250px;
+    }
+}
