@@ -8,10 +8,12 @@ import styles from "../../styles/Form.module.css";
 import stylesBasic from "../../styles/BasicContainer.module.css";
 import { patchData } from "../../utils/fetchData";
 import getImgUrl from "../../utils/getImgUrl";
+import { useRouter } from "next/router";
 
 export default function UpdateShop() {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  const router = useRouter();
 
   useEffect(() => {
     if (Object.keys(auth).length !== 0) router.push("/login");
