@@ -1,11 +1,15 @@
 import React from "react";
-import { Row, Col, Button, Rate, Card } from "antd";
+import { Row, Col, Button, Rate, Card, message } from "antd";
 import ReactHtmlParser from "react-html-parser";
 import styles from "../styles/ShopDetails.module.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { DataContext } from "../store/GlobalState";
+import { addToCart } from "../store/Actions";
 
 export default function CardProduct({ product, toggleViewAR }) {
   const [viewAR, setViewAR] = useState(true);
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
 
   const toggleAR = () => {
     setViewAR(!viewAR);
@@ -40,17 +44,14 @@ export default function CardProduct({ product, toggleViewAR }) {
               size="large"
               type="primary"
               className={styles.addToCart}
+              disabled={product.inStock === 0 ? true : false}
+              onClick={() => dispatch(addToCart(product, cart))}
             >
               Thêm vào giỏ hàng
             </Button>
           </Col>
           <Col span={24} sm={8}>
-            <Button
-              block={true}
-              size="large"
-              type="primary"
-              className={styles.buyNow}
-            >
+            <Button block={true} size="large" type="primary" className={styles.buyNow}>
               Mua ngay
             </Button>
           </Col>
