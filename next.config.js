@@ -6,8 +6,7 @@ const pathToLessFileWithVariables = path.resolve("./styles/antd-custom.less");
 module.exports = withLess({
   lessLoaderOptions: {
     /* ... */
-    additionalData: (content) =>
-      `${content}\n\n@import '${pathToLessFileWithVariables}';`,
+    additionalData: (content) => `${content}\n\n@import '${pathToLessFileWithVariables}';`,
   },
   env: {
     BASE_URL: "https://memoravel.vn",
