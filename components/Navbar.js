@@ -140,7 +140,7 @@ const Navbar = () => {
             <Menu.Item onClick={onClose} icon={<HomeOutlined />}>
               <Link href="/">Home</Link>
             </Menu.Item>
-            <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
+            {/* <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
               <Link href="/meminfo">Meminfo</Link>
             </Menu.Item>
             <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
@@ -148,7 +148,7 @@ const Navbar = () => {
             </Menu.Item>
             <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
               <Link href="/memoravel">Memoravel</Link>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item onClick={onClose} icon={<ShoppingCartOutlined />}>
               <Link href="/shop">Shop</Link>
             </Menu.Item>
@@ -186,7 +186,7 @@ const Navbar = () => {
         <div className={styles.navItem}>
           <Link href="/">Home</Link>
         </div>
-        <div className={styles.navItem}>
+        {/* <div className={styles.navItem}>
           <Link href="/meminfo">Meminfo</Link>
         </div>
         <div className={styles.navItem}>
@@ -194,7 +194,7 @@ const Navbar = () => {
         </div>
         <div className={styles.navItem}>
           <Link href="/memoravel">Memoravel</Link>
-        </div>
+        </div> */}
         <div className={styles.navItem}>
           <Link href="/shop">Shop</Link>
         </div>

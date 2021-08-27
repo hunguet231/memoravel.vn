@@ -18,6 +18,7 @@ import {
   putData,
 } from "../../../utils/fetchData";
 import { getImgUrls } from "../../../utils/getImgUrls";
+import Link from "next/link";
 import CreateForm from "./CreateForm";
 import UpdateForm from "./UpdateForm";
 
@@ -225,8 +226,29 @@ export default function ProductManagement() {
       ),
     },
     {
-      title: "Tên SP",
+      title: "Sản Phẩm",
       dataIndex: "title",
+      // eslint-disable-next-line react/display-name
+      render: (text, record) => (
+        <>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`/products/${record._id}`}
+            title={record.title}
+          >
+            {record.title}
+          </a>
+        </>
+      ),
+    },
+    {
+      title: "Đã bán",
+      dataIndex: "sold",
+    },
+    {
+      title: "Còn trong kho",
+      dataIndex: "in_stock",
     },
   ];
 

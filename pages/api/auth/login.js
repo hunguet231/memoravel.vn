@@ -36,9 +36,16 @@ const login = async (req, res) => {
       access_token,
       refresh_token,
       user: {
+        id: user._id,
         fullname: user.fullname,
+        avatar: user.avatar,
         address: user.address,
         username: user.username,
+        badge: user.badge,
+        shop_name: user.shop_name,
+        shop_description: user.shop_description,
+        shop_avatar: user.shop_avatar,
+        is_first_create_shop: user.is_first_create_shop,
         role: user.role,
       },
     });

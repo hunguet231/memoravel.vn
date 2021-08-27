@@ -22,11 +22,12 @@ const Menu = ({ getClickedMenu }) => {
     <div>
       <AntdMenu
         style={{
-          background: "#0e1212",
+          background: "#e0bf74",
           color: "#fff",
           width: "100%",
           overflowX: "hidden",
-          height: size.width <= 380 ? "auto" : "100vh",
+          // height: size.width <= 380 ? "auto" : "100vh",
+          height: "auto",
           position: "sticky",
           top: 0,
           left: 0,
@@ -44,7 +45,7 @@ const Menu = ({ getClickedMenu }) => {
           }}
         >
           <h3 style={{ margin: "10px auto 20px", color: "#fff" }}>
-            Menu người bán
+            Cài đặt Shop
           </h3>
           {/* <Link href="/" passHref>
               <Image src={logo} alt="TnD Group" />

@@ -9,6 +9,8 @@ import memImg3 from "../public/mem-box-3.png";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
 import Youtube from "../components/Youtube";
+import VectaryIframe from "../components/VectaryIframe";
+import CustomChat from "../components/CustomChat";
 
 export default function Home() {
   return (
@@ -48,7 +50,11 @@ export default function Home() {
 
         <div className="mem-box">
           <div className="mem-inner memdraw">
-            <Image src={memImg2} alt="Memdraw" />
+            {/* <Image src={memImg2} alt="Memdraw" /> */}
+            <VectaryIframe
+              id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
+              src="https://www.vectary.com/viewer/v1/?model=4af2ad3b-80bd-45ab-9eb2-d0e10e00565e&env=studio3&turntable=-12"
+            />
             <TextBox
               supHeading="Hiking Essentials"
               heading="Memdraw"
@@ -79,6 +85,7 @@ export default function Home() {
         </div>
 
         <SubscribeForm />
+        <CustomChat />
       </main>
 
       <footer>

@@ -9,6 +9,10 @@ import stylesBasic from "../../styles/BasicContainer.module.css";
 import { patchData } from "../../utils/fetchData";
 import getImgUrl from "../../utils/getImgUrl";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("../../components/Editor"), {
+  ssr: false,
+});
 
 export default function UpdateShop() {
   const { state, dispatch } = useContext(DataContext);
@@ -22,12 +26,12 @@ export default function UpdateShop() {
 
   const initalState = {
     shop_name: auth.user && auth.user.shop_name,
-    shop_description: auth.user && auth.user.shop_description,
   };
   const [userData, setUserData] = useState(initalState);
   const [loading, setLoading] = useState(false);
   const { shop_name, shop_description } = userData;
   const [picture, setPicture] = useState("");
+  const [shopDescription, setShopDescription] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +59,7 @@ export default function UpdateShop() {
         "users",
         {
           ...userData,
+          shop_description: shopDescription,
           shop_avatar: picture_url,
         },
         auth.token
@@ -104,18 +109,18 @@ export default function UpdateShop() {
           </div>
           <div>
             <div>Mô tả shop</div>
-            <textarea
-              rows="4"
-              name="shop_description"
-              className={styles.inputFieldArea}
+            <Editor
               defaultValue={auth.user.shop_description}
-              value={shop_description}
-              onChange={handleInputChange}
-            ></textarea>
+              value={shopDescription}
+              onChange={(data) => {
+                setShopDescription(data);
+              }}
+            />
           </div>
+          <br />
           <div>
             <div>
-              <div>Chọn ảnh đại diện shop</div>
+              <div>Ảnh đại diện shop</div>
               <small>(Kích thước tối đa 2MB, định dạng PNG/JPG)</small>
             </div>
             <UploadImg

@@ -24,6 +24,7 @@ export default function memdraw() {
               />
               {/* <Image src={memImg2} alt="Memdraw" /> */}
               <VectaryIframe
+                styles={{ zIndex: "999 !important" }}
                 id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
                 src="https://www.vectary.com/viewer/v1/?model=4af2ad3b-80bd-45ab-9eb2-d0e10e00565e&env=studio3&turntable=-12"
               />

@@ -48,6 +48,10 @@ a {
     margin: 0 auto;
 }
 
+.mem-inner.memdraw iframe {
+    height: 80vh;
+}
+
 
 /* Over lay */
 
@@ -184,6 +188,10 @@ a {
     position: relative;
 }
 
+.ck-content {
+    color: #000;
+}
+
 ul {
     padding-left: 5px !important;
     list-style-position: inside !important;
@@ -197,6 +205,23 @@ ul {
     }
     .mem-inner.memdraw {
         flex-direction: column-reverse;
+    }
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+    border-right: 0 !important;
+}
+
+.ant-menu-item:hover {
+    background-color: #fff !important;
+    color: #e0bf74 !important;
+}
+
+@media (max-width: 510px) {
+    .mem-inner.memdraw iframe {
+        height: 70vh;
     }
 }
 

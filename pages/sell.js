@@ -9,13 +9,15 @@ import ProductManagement from "../components/Sell/ProductManagement/ProductManag
 import UpdateShop from "../components/Sell/UpdateShop";
 import SubscribeForm from "../components/SubscribeForm";
 import { DataContext } from "../store/GlobalState";
-import styles from "../styles/Form.module.css";
+import styles from "../styles/Sell.module.css";
+import useWindowSize from "../utils/useWindowSize";
 
 const Sell = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const [menu, setMenu] = useState("-1");
+  const size = useWindowSize();
 
   useEffect(() => {
     if (Object.keys(auth).length === 0) router.push("/login");
@@ -43,7 +45,11 @@ const Sell = () => {
             <Col
               xs={24}
               md={4}
-              style={{ background: "#0e1212", color: "#fff" }}
+              style={{
+                background: "#e0bf74",
+                color: "#fff",
+                padding: "0 !important",
+              }}
             >
               <Menu getClickedMenu={getClickedMenu} />
             </Col>
@@ -58,13 +64,19 @@ const Sell = () => {
               <br />
               {menu == "-1" && (
                 <div>
-                  <h1 className="title">Tuỳ chỉnh shop của bạn</h1>
-                  <h2 className="sub-title">Chọn danh mục menu để bắt đầu</h2>
+                  <h1 className="title">MEMORAVEL - Kênh người bán</h1>
+                  <h2 className="sub-title">
+                    Quản lý gian hàng của bạn một cách dễ dàng! <br /> Chọn danh
+                    mục menu để tuỳ chỉnh cài đặt shop.
+                  </h2>
                   <Image
                     preview={false}
                     src="/empty-menu.svg"
                     alt="Empty menu"
-                    style={{ width: "65%", margin: "20px auto" }}
+                    style={{
+                      width: size.width <= 380 ? "85%" : "50%",
+                      margin: "20px auto",
+                    }}
                   />
                 </div>
               )}
