@@ -9,7 +9,7 @@ import {
   ShoppingOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Dropdown, Menu, message, Drawer, Button, Divider } from "antd";
+import { Dropdown, Menu, message, Drawer, Button, Divider, Badge } from "antd";
 import Cookie from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +25,7 @@ const Navbar = () => {
   const size = useWindowSize();
   const [padding, setPadding] = useState("");
   const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
+  const { auth, cart } = state;
   const router = useRouter();
   const [visible, setVisible] = useState(false);
 
@@ -92,13 +92,7 @@ const Navbar = () => {
           icon={<MenuOutlined />}
           style={{ color: "#fff", alignSelf: "center", justifySelf: "end" }}
         ></Button>
-        <Drawer
-          title="Menu"
-          placement="right"
-          closable={false}
-          onClose={onClose}
-          visible={visible}
-        >
+        <Drawer title="Menu" placement="right" closable={false} onClose={onClose} visible={visible}>
           <Menu>
             <div style={{ textAlign: "center", marginTop: "10px" }}>
               {Object.keys(auth).length === 0 ? (
@@ -127,15 +121,19 @@ const Navbar = () => {
                       }}
                     />
                   </p>
-                  <p style={{ fontWeight: "500", color: "#e0bf74" }}>
-                    {auth.user.fullname}
-                  </p>
+                  <p style={{ fontWeight: "500", color: "#e0bf74" }}>{auth.user.fullname}</p>
                 </>
               )}
             </div>
             <Divider />
             <Menu.Item onClick={onClose} icon={<ShoppingOutlined />}>
-              <Link href="/cart">Giỏ hàng</Link>
+              <Link href="/cart">
+                <>
+                  <Badge count={cart.length} offset={[15, 6]} showZero>
+                    Giỏ hàng
+                  </Badge>
+                </>
+              </Link>
             </Menu.Item>
             <Menu.Item onClick={onClose} icon={<HomeOutlined />}>
               <Link href="/">Home</Link>
@@ -159,11 +157,7 @@ const Navbar = () => {
               <Link href="/blog">Blog</Link>
             </Menu.Item>
             {Object.keys(auth).length !== 0 && (
-              <Menu.Item
-                danger
-                onClick={handleLogout}
-                icon={<LogoutOutlined />}
-              >
+              <Menu.Item danger onClick={handleLogout} icon={<LogoutOutlined />}>
                 Đăng xuất
               </Menu.Item>
             )}
@@ -207,11 +201,13 @@ const Navbar = () => {
       </div>
 
       <div className={styles.userBox}>
-        <p>
+        <a>
           <Link href="/cart" passHref>
-            <ShoppingOutlined style={{ cursor: "pointer" }} />
+            <Badge count={cart.length} size="small" showZero style={{ cursor: "pointer" }}>
+              <ShoppingOutlined style={{ color: "#fff" }} />
+            </Badge>
           </Link>
-        </p>
+        </a>
         {Object.keys(auth).length === 0 ? (
           <>
             <Link href="/register" passHref>
