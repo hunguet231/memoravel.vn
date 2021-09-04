@@ -18,7 +18,7 @@ export default function CardItem({ product }) {
                 <Image
                   preview={false}
                   alt="items"
-                  src={product && product.images[0]}
+                  src={product && product.images && product.images[0]}
                 />
                 <div className={styles.ar}>AR</div>
               </div>

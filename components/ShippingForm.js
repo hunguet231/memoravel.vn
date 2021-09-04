@@ -1,7 +1,9 @@
+import { Button } from "antd";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../store/GlobalState";
-import Link from "next/link";
-import { Button } from "antd";
+import addCommas from "../utils/addCommas";
+import removeNonNumeric from "../utils/removeNonNumeric";
 
 export default function ShippingForm() {
   const { state } = useContext(DataContext);
@@ -11,32 +13,31 @@ export default function ShippingForm() {
 
   useEffect(() => {
     const getTotal = () => {
-      const res = cart.reduce((prev, item) => {
-        return prev + item.quantity * item.price;
+      const res = cart.reduce((acc, cur) => {
+        return acc + cur.quantity * parseInt(removeNonNumeric(cur.price));
       }, 0);
-      setTotal(res);
+      setTotal(addCommas(res));
     };
     getTotal();
   }, [cart]);
 
   return (
     <>
+      <h3 style={{ color: "#fff" }}>Tổng thanh toán: {total} ₫</h3>
       <form>
         <div>
-          <label>Dia chi</label>
+          <label>Địa chỉ</label>
           <input type="text" />
         </div>
         <div>
-          <label>So dien thoai</label>
+          <label>Số điện thoại</label>
           <input type="text" />
         </div>
       </form>
-      <h3 style={{ color: "#fff" }}>Tong tien: {total}</h3>
-      <Link href={auth.user ? "#" : "/login"}>
+
+      <Link passHref href={auth.user ? "/payment" : "/login"}>
         <Button type="primary">Thanh toán</Button>
       </Link>
-      <br />
-      <Button type="primary">Thanh toán không đăng nhập</Button>
     </>
   );
 }
