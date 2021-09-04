@@ -1,56 +1,65 @@
+.borderCard {
+  height: 100%;
+}
+
 .card {
-    background-color: #fff;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+.cardBody {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .cardTitle {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 0px;
-    margin-top: -20px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 0px;
 }
 
 .sold {
-    color: rgba(23, 15, 5, 0.5);
-    font-weight: 500;
+  color: rgba(23, 15, 5, 0.5);
+  font-weight: 500;
 }
 
 .summary {
-    color: #170F05;
-    font-size: 16px;
+  color: #170f05;
+  font-size: 16px;
 }
 
 .price {
-    font-weight: 500;
-    font-size: 16px;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .cardImg img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  width: 100%;
+  height: 300px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .cardImg {
-    height: 300px;
-    width: 100%;
-    padding: 2px;
-    position: relative;
+  height: 300px;
+  width: 100%;
+  padding: 2px;
+  position: relative;
 }
 
 .ar {
-    position: absolute;
-    background: #1AB001;
-    padding: 3px 5px;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    right: 8px;
-    bottom: 15px !important;
+  position: absolute;
+  background: #1ab001;
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  right: 8px;
+  bottom: 15px !important;
 }
