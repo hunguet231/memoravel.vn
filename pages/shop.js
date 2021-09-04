@@ -91,7 +91,7 @@ export default function shop({ products }) {
                   <p>Không có sản phẩm nào!</p>
                 )}
               </Row>
-              <Row justify="end" style={{ marginTop: "20px" }}>
+              <Row justify="center" style={{ marginTop: "40px" }}>
                 <Pagination defaultCurrent={1} total={50} />
               </Row>
             </Col>
