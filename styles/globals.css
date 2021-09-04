@@ -219,6 +219,13 @@ ul {
     color: #e0bf74 !important;
 }
 
+.table {
+    margin: 0 auto;
+    width: 100vw !important;
+    max-width: 100% !important;
+    white-space: nowrap;
+}
+
 @media (max-width: 510px) {
     .mem-inner.memdraw iframe {
         height: 70vh;

@@ -15,6 +15,7 @@ export default function CardProduct({ product, toggleViewAR }) {
     setViewAR(!viewAR);
     toggleViewAR(viewAR);
   };
+
   return (
     <>
       <Card className={styles.productCard}>
@@ -23,7 +24,7 @@ export default function CardProduct({ product, toggleViewAR }) {
         <p>{ReactHtmlParser(product.details)}</p>
         <div className={styles.productPrice}>
           <h1 style={{ marginBottom: "-10px" }}>Giá: {product.price}</h1>
-          <small>Đã bao gồm phí vat</small>
+          <small>Đã bao gồm phí VAT</small>
         </div>
         <Row gutter={6}>
           <Col span={24} sm={8}>
@@ -44,14 +45,19 @@ export default function CardProduct({ product, toggleViewAR }) {
               size="large"
               type="primary"
               className={styles.addToCart}
-              disabled={product.inStock === 0 ? true : false}
+              disabled={product.in_stock === 0 ? true : false}
               onClick={() => dispatch(addToCart(product, cart))}
             >
               Thêm vào giỏ hàng
             </Button>
           </Col>
           <Col span={24} sm={8}>
-            <Button block={true} size="large" type="primary" className={styles.buyNow}>
+            <Button
+              block={true}
+              size="large"
+              type="primary"
+              className={styles.buyNow}
+            >
               Mua ngay
             </Button>
           </Col>

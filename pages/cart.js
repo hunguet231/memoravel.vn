@@ -1,14 +1,21 @@
-import Head from "next/head";
+/* eslint-disable react-hooks/rules-of-hooks */
+import {
+  CaretDownFilled,
+  CaretUpFilled,
+  DeleteOutlined,
+} from "@ant-design/icons";
+import { Avatar, Button, Col, InputNumber, List, Row } from "antd";
+import Image from "next/image";
 import { useContext, useEffect } from "react";
-import { DataContext } from "../store/GlobalState";
-import { increase, decrease } from "../store/Actions";
-import { List, Avatar, Button, InputNumber, Row, Col } from "antd";
-import { CaretUpFilled, CaretDownFilled, DeleteOutlined } from "@ant-design/icons";
 import ShippingForm from "../components/ShippingForm";
+import { decrease, increase } from "../store/Actions";
+import { DataContext } from "../store/GlobalState";
 import styles from "../styles/Cart.module.css";
+import addCommas from "../utils/addCommas";
 import { getData } from "../utils/fetchData";
+import removeNonNumeric from "../utils/removeNonNumeric";
 
-const cart = () => {
+const Cart = () => {
   const { state, dispatch } = useContext(DataContext);
   const { cart } = state;
 
@@ -37,6 +44,7 @@ const cart = () => {
               title,
               images,
               price,
+              in_stock,
               quantity: item.quantity > in_stock ? 1 : item.quantity,
             });
           }
@@ -54,7 +62,9 @@ const cart = () => {
         <div className="overlay"></div>
         <div className="overlay-bottom"></div>
         <div className={styles.inner}>
-          <h1 style={{ color: "#fff" }}>Giỏ hàng trống</h1>
+          <h1 style={{ fontSize: "18px", margin: "5px 5px 0" }}>
+            Giỏ hàng của bạn trống!
+          </h1>
         </div>
       </div>
     </>
@@ -66,39 +76,84 @@ const cart = () => {
         <div className={styles.inner}>
           <Row gutter={8}>
             <Col span={12} style={{ backgroundColor: "#fff" }}>
-              <h1>Cart, giỏ hàng</h1>
+              <h1 style={{ fontSize: "18px", margin: "5px 5px 0" }}>
+                Giỏ hàng của bạn
+              </h1>
               <List
                 itemLayout="horizontal"
                 dataSource={data}
                 renderItem={(item) => (
                   <List.Item>
                     <List.Item.Meta
-                      avatar={<Avatar src={item.images} />}
-                      title={<a href={`/products/${item._id}`}>{item.title}</a>}
+                      avatar={
+                        <Image
+                          src={item.images}
+                          alt={item.title}
+                          width="100"
+                          height="100"
+                          objectFit="cover"
+                        />
+                      }
+                      title={
+                        <a
+                          href={`/products/${item._id}`}
+                          style={{ fontSize: "16px" }}
+                        >
+                          {item.title}
+                        </a>
+                      }
                       description={
-                        <>
-                          <h3>Số lượng hàng trên kệ: {item.in_stock}</h3>
-                          <h3>Thành tiền: {item.quantity * item.price}</h3>
-                          <div>
-                            Số lượng hàng trong giỏ:
+                        <div className={styles.description}>
+                          <p>Còn lại: {item.in_stock} sản phẩm</p>
+                          <p>
+                            Thành tiền:{" "}
+                            <span style={{ color: "#000" }}>
+                              {addCommas(
+                                item.quantity *
+                                  parseInt(removeNonNumeric(item.price))
+                              )}{" "}
+                              ₫
+                            </span>
+                          </p>
+                          <div className={styles.quantity}>
+                            <p style={{ marginRight: "5px" }}>
+                              Chọn số lượng mua:
+                            </p>
+                            <div className={styles.quantityBtn}>
+                              <Button
+                                disabled={item.quantity === 1 ? true : false}
+                                type="primary"
+                                size="small"
+                                icon={<CaretDownFilled />}
+                                onClick={() =>
+                                  dispatch(decrease(cart, item._id))
+                                }
+                              />
+                              <InputNumber
+                                value={item.quantity}
+                                readOnly
+                                height="24"
+                                size="small"
+                              />
+                              <Button
+                                disabled={
+                                  item.quantity === item.in_stock ? true : false
+                                }
+                                type="primary"
+                                size="small"
+                                icon={<CaretUpFilled />}
+                                onClick={() =>
+                                  dispatch(increase(cart, item._id))
+                                }
+                              />
+                            </div>
                             <Button
-                              disabled={item.quantity === 1 ? true : false}
                               type="primary"
                               size="small"
-                              icon={<CaretDownFilled />}
-                              onClick={() => dispatch(decrease(cart, item._id))}
+                              icon={<DeleteOutlined />}
                             />
-                            <InputNumber value={item.quantity} readOnly size="small" />
-                            <Button
-                              disabled={item.quantity === item.in_stock ? true : false}
-                              type="primary"
-                              size="small"
-                              icon={<CaretUpFilled />}
-                              onClick={() => dispatch(increase(cart, item._id))}
-                            />{" "}
-                            <Button type="primary" size="small" icon={<DeleteOutlined />} />
                           </div>
-                        </>
+                        </div>
                       }
                     />
                   </List.Item>
@@ -115,4 +170,4 @@ const cart = () => {
   );
 };
 
-export default cart;
+export default Cart;
