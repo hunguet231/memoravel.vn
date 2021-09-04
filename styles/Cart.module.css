@@ -1,20 +1,36 @@
 .container {
-  background-color: #0e1212;
-  background-image: url("../public/bg-hero.jpg");
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #fff;
-  height: 120vh;
-  position: relative;
+    background-color: #0e1212;
+    background-image: url("../public/bg-hero.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    height: 120vh;
+    position: relative;
 }
 
 .inner {
-  z-index: 1;
-  height: auto;
-  width: 100%;
-  margin: 0 auto;
-  padding: 285px 80px 10px;
-  transform: translateY(-20vh);
-  font-family: "Roboto", sans-serif;
+    z-index: 1;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    padding: 285px 80px 10px;
+    transform: translateY(-20vh);
+    font-family: "Roboto", sans-serif;
+}
+
+.description p {
+    margin-bottom: 1px !important;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.quantityBtn {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
 }

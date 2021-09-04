@@ -5,10 +5,10 @@ import {
   EditOutlined,
   FileAddOutlined,
 } from "@ant-design/icons";
-import { Button, Image, message, Popconfirm, Spin, Table, Form } from "antd";
+import { Button, Form, Image, message, Popconfirm, Spin, Table } from "antd";
 import Text from "antd/lib/typography/Text";
 import { useRouter } from "next/router";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../../store/GlobalState";
 import stylesBasic from "../../../styles/BasicContainer.module.css";
 import {
@@ -18,7 +18,6 @@ import {
   putData,
 } from "../../../utils/fetchData";
 import { getImgUrls } from "../../../utils/getImgUrls";
-import Link from "next/link";
 import CreateForm from "./CreateForm";
 import UpdateForm from "./UpdateForm";
 
@@ -195,6 +194,7 @@ export default function ProductManagement() {
     {
       title: "Sửa",
       dataIndex: "",
+      // fixed: "left",
       // eslint-disable-next-line react/display-name
       render: (text, record) => (
         <Button
@@ -217,7 +217,7 @@ export default function ProductManagement() {
             <Image
               src={record.images[0]}
               alt="Ảnh SP"
-              style={{ maxHeight: "150px", width: "auto" }}
+              style={{ maxHeight: "200px", width: "200px", objectFit: "cover" }}
             />
           ) : (
             <p>No Image</p>
@@ -260,7 +260,7 @@ export default function ProductManagement() {
         <h1 className="title">Quản lý sản phẩm</h1>
         <>
           {!loadingTable ? (
-            <>
+            <div className="table">
               <div style={{ marginBottom: 16 }} className="table-header">
                 <div
                   className="left"
@@ -315,6 +315,7 @@ export default function ProductManagement() {
                 columns={columns}
                 dataSource={products}
                 showSorterTooltip={true}
+                scroll={{ x: "max-content" }}
               />
               <CreateForm
                 visible={visibleCreate}
@@ -333,7 +334,7 @@ export default function ProductManagement() {
                 updateItem={updateItem}
                 loading={loadingUpdate}
               />
-            </>
+            </div>
           ) : (
             <Spin />
           )}

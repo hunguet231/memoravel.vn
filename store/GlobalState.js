@@ -1,4 +1,4 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { getData } from "../utils/fetchData";
 import reducers from "./Reducers";
 
@@ -30,8 +30,14 @@ export const DataProvider = ({ children }) => {
     const cart_item = JSON.parse(localStorage.getItem("cart_item"));
     if (cart_item) dispatch({ type: "ADD_CART", payload: cart_item });
   }, []);
+
   useEffect(() => {
     localStorage.setItem("cart_item", JSON.stringify(cart));
   }, [cart]);
-  return <DataContext.Provider value={{ state, dispatch }}>{children}</DataContext.Provider>;
+
+  return (
+    <DataContext.Provider value={{ state, dispatch }}>
+      {children}
+    </DataContext.Provider>
+  );
 };
