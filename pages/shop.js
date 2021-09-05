@@ -3,6 +3,7 @@ import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Col, Collapse, List, Pagination, Row } from "antd";
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/router";
 import CardItem from "../components/CardItem";
 import styles from "../styles/Shop.module.css";
 import categories from "../utils/categories";
@@ -21,7 +22,18 @@ const customExpandIcon = (props) => {
   }
 };
 
-export default function shop({ products }) {
+const SIZE = 12;
+
+export default function shop({ page, total, products }) {
+  const router = useRouter();
+
+  const onChangePage = (page, pageSize) => {
+    router.push({
+      pathname: "/shop",
+      query: { p: page },
+    });
+  };
+
   return (
     <div>
       <div className={styles.container}>
@@ -92,7 +104,14 @@ export default function shop({ products }) {
                 )}
               </Row>
               <Row justify="center" style={{ marginTop: "40px" }}>
-                <Pagination defaultCurrent={1} total={50} />
+                {total > SIZE && (
+                  <Pagination
+                    onChange={onChangePage}
+                    pageSize={SIZE}
+                    current={page}
+                    total={total}
+                  />
+                )}
               </Row>
             </Col>
           </Row>
@@ -106,11 +125,32 @@ export default function shop({ products }) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await getData("products");
+export async function getServerSideProps(ctx) {
+  const { query } = ctx;
+  let pagination = {
+    page: parseInt(query.p) || 1,
+    size: SIZE,
+  };
+
+  const res = await getData("products", pagination);
+
+  let isNotValid = !Boolean(query.p);
+
+  if (isNotValid) {
+    let redirectPath = `/shop?p=${pagination.page}`;
+    return {
+      redirect: {
+        destination: redirectPath,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      products: res.products,
+      page: pagination.page,
+      total: res.total,
+      products: res.data,
     },
   };
 }

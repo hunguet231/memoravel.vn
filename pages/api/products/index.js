@@ -63,12 +63,16 @@ class APIfeatures {
 // @access  Private
 const getProducts = async (req, res) => {
   try {
-    const products = await Products.find();
+    const { page, size } = req.query;
+    const count = await Products.count();
+    const products = await Products.find()
+      .limit(parseInt(size))
+      .skip((parseInt(page) - 1) * parseInt(size));
 
     res.json({
       success: true,
-      count: products.length,
-      products,
+      total: count,
+      data: products,
     });
   } catch (err) {
     return res.status(500).json({ err: err.message });
