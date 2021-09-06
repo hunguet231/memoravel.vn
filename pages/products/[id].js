@@ -2,8 +2,14 @@
 import React from "react";
 import { getData } from "../../utils/fetchData";
 import Image from "next/image";
-import { Row, Col, Card, Avatar, Button } from "antd";
-import { UserOutlined, MessageFilled, ShoppingFilled } from "@ant-design/icons";
+import { Row, Col, Card, Avatar, Button, Carousel } from "antd";
+import {
+  UserOutlined,
+  MessageFilled,
+  ShoppingFilled,
+  RightCircleOutlined,
+  LeftCircleOutlined,
+} from "@ant-design/icons";
 import styles from "../../styles/ShopDetails.module.css";
 import SubscribeForm from "../../components/SubscribeForm";
 import Footer from "../../components/Footer";
@@ -25,30 +31,57 @@ const product = ({ product }) => {
         <div className="overlay-bottom"></div>
         <div className={styles.inner}>
           <div className={styles.subContainer}>
-            <Row gutter={16} justify="center">
-              <Col
-                span={24}
-                sm={18}
-                md={16}
-                lg={12}
-                className={styles.parentProductImg}
-              >
+            <Row justify="center">
+              <Col span={24} sm={18} md={16} lg={10} offset={1}>
                 {viewAR ? (
                   <VectaryIframe
                     id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
                     src="https://www.vectary.com/viewer/v1/?model=4af2ad3b-80bd-45ab-9eb2-d0e10e00565e&env=studio3&turntable=-12"
                   />
                 ) : (
-                  <Image
-                    src={product.images[0]}
-                    alt="product-details"
-                    layout="fill"
-                    objectFit="cover"
-                    className={styles.productImg}
-                  />
+                  <Carousel
+                    autoplay
+                    arrows
+                    prevArrow={<LeftCircleOutlined />}
+                    nextArrow={<RightCircleOutlined />}
+                  >
+                    <div className={styles.wrapProductImg}>
+                      <Image
+                        src={product.images[0]}
+                        alt="product-details"
+                        width={14}
+                        height={10}
+                        layout="responsive"
+                        objectFit="cover"
+                        className={styles.productImg}
+                      />
+                    </div>
+                    <div className={styles.wrapProductImg}>
+                      <Image
+                        src={product.images[0]}
+                        alt="product-details"
+                        width={14}
+                        height={10}
+                        layout="responsive"
+                        objectFit="cover"
+                        className={styles.productImg}
+                      />
+                    </div>
+                    <div className={styles.wrapProductImg}>
+                      <Image
+                        src={product.images[0]}
+                        alt="product-details"
+                        width={14}
+                        height={10}
+                        layout="responsive"
+                        objectFit="cover"
+                        className={styles.productImg}
+                      />
+                    </div>
+                  </Carousel>
                 )}
               </Col>
-              <Col span={24} lg={12}>
+              <Col span={24} lg={12} offset={1}>
                 <CardProduct product={product} toggleViewAR={toggleViewAR} />
               </Col>
             </Row>
@@ -63,26 +96,16 @@ const product = ({ product }) => {
                 <Col span={16} sm={18} md={9}>
                   <Card bordered={false} className={styles.cardUserInfo}>
                     <h2 style={{ marginBottom: "-5px" }}>MEMORAVEL</h2>
-                    <small style={{ color: "#00000099" }}>
-                      online 5 phút trước
-                    </small>
+                    <small style={{ color: "#00000099" }}>online 5 phút trước</small>
                     <Row gutter={10} style={{ margin: "15px 0 0 -10px" }}>
                       <Col span={24} sm={12}>
-                        <Button
-                          block={true}
-                          type="primary"
-                          className={styles.chatShop}
-                        >
+                        <Button block={true} type="primary" className={styles.chatShop}>
                           <MessageFilled />
                           Trò chuyện
                         </Button>
                       </Col>
                       <Col span={24} sm={12}>
-                        <Button
-                          block={true}
-                          type="primary"
-                          className={styles.watchShop}
-                        >
+                        <Button block={true} type="primary" className={styles.watchShop}>
                           <ShoppingFilled />
                           Xem shop
                         </Button>
