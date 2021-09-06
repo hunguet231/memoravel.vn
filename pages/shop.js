@@ -128,11 +128,13 @@ export default function shop({ page, total, products }) {
 export async function getServerSideProps(ctx) {
   const { query } = ctx;
   let pagination = {
-    page: parseInt(query.p) || 1,
+    page: query.p ? parseInt(query.p) : 1,
     size: SIZE,
   };
 
-  const res = await getData("products", pagination);
+  const res = await getData(
+    `products?page=${pagination.page}&size=${pagination.size}`
+  );
 
   let isNotValid = !Boolean(query.p);
 

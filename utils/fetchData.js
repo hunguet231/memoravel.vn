@@ -1,7 +1,7 @@
 const baseUrl = process.env.BASE_URL;
 
-export const getData = async (url, { page, size }, token) => {
-  const res = await fetch(`${baseUrl}/api/${url}?page=${page}&size=${size}`, {
+export const getData = async (url, token) => {
+  const res = await fetch(`${baseUrl}/api/${url}`, {
     method: "GET",
     headers: {
       Authorization: token,
