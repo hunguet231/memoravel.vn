@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { getData } from "../../utils/fetchData";
-import Image from "next/image";
-import { Row, Col, Card, Avatar, Button, Carousel } from "antd";
+import { Row, Col, Card, Avatar, Button, Carousel, Image } from "antd";
 import {
   UserOutlined,
   MessageFilled,
@@ -24,6 +23,47 @@ const product = ({ product }) => {
   const toggleViewAR = (viewAR) => {
     setViewAR(viewAR);
   };
+
+  const SampleNextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          color: "rgba(225, 225, 225, 0.8)",
+          fontSize: "42px",
+          lineHeight: "1.5715",
+          right: "45px",
+        }}
+        onClick={onClick}
+      ></div>
+    );
+  };
+
+  const SamplePrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          color: "rgba(225, 225, 225, 0.8)",
+          fontSize: "42px",
+          lineHeight: "1.5715",
+          left: "25px",
+          zIndex: 1,
+        }}
+        onClick={onClick}
+      ></div>
+    );
+  };
+
+  const settings = {
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -31,8 +71,8 @@ const product = ({ product }) => {
         <div className="overlay-bottom"></div>
         <div className={styles.inner}>
           <div className={styles.subContainer}>
-            <Row justify="center">
-              <Col span={24} sm={18} md={16} lg={10} offset={1}>
+            <Row justify="center" gutter={10}>
+              <Col sm={24} md={12}>
                 {viewAR ? (
                   <VectaryIframe
                     id="4af2ad3b-80bd-45ab-9eb2-d0e10e00565e"
@@ -42,18 +82,17 @@ const product = ({ product }) => {
                   <Carousel
                     autoplay
                     arrows
-                    prevArrow={<LeftCircleOutlined />}
-                    nextArrow={<RightCircleOutlined />}
+                    // prevArrow={<LeftCircleOutlined />}
+                    // nextArrow={<RightCircleOutlined />}
+                    className={styles.productCarousel}
+                    {...settings}
                   >
                     {product.images.map((url, index) => (
                       <div className={styles.wrapProductImg} key={index}>
                         <Image
+                          preview={true}
                           src={url}
                           alt="product-details"
-                          width={14}
-                          height={10}
-                          layout="responsive"
-                          objectFit="cover"
                           className={styles.productImg}
                         />
                       </div>
@@ -61,7 +100,7 @@ const product = ({ product }) => {
                   </Carousel>
                 )}
               </Col>
-              <Col span={24} lg={12} offset={1}>
+              <Col sm={24} md={12}>
                 <CardProduct product={product} toggleViewAR={toggleViewAR} />
               </Col>
             </Row>
@@ -76,16 +115,26 @@ const product = ({ product }) => {
                 <Col span={16} sm={18} md={9}>
                   <Card bordered={false} className={styles.cardUserInfo}>
                     <h2 style={{ marginBottom: "-5px" }}>MEMORAVEL</h2>
-                    <small style={{ color: "#00000099" }}>online 5 phút trước</small>
+                    <small style={{ color: "#00000099" }}>
+                      online 5 phút trước
+                    </small>
                     <Row gutter={10} style={{ margin: "15px 0 0 -10px" }}>
                       <Col span={24} sm={12}>
-                        <Button block={true} type="primary" className={styles.chatShop}>
+                        <Button
+                          block={true}
+                          type="primary"
+                          className={styles.chatShop}
+                        >
                           <MessageFilled />
                           Trò chuyện
                         </Button>
                       </Col>
                       <Col span={24} sm={12}>
-                        <Button block={true} type="primary" className={styles.watchShop}>
+                        <Button
+                          block={true}
+                          type="primary"
+                          className={styles.watchShop}
+                        >
                           <ShoppingFilled />
                           Xem shop
                         </Button>
@@ -126,6 +175,10 @@ const product = ({ product }) => {
             </Row>
           </div>
         </div>
+      </div>
+      <div>
+        <SubscribeForm />
+        <Footer />
       </div>
     </>
   );

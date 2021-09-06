@@ -1,4 +1,8 @@
-import { InfoCircleOutlined, AppstoreAddOutlined } from "@ant-design/icons";
+import {
+  InfoCircleOutlined,
+  AppstoreAddOutlined,
+  CodeSandboxOutlined,
+} from "@ant-design/icons";
 import { Divider, Menu as AntdMenu } from "antd";
 import { useRouter } from "next/dist/client/router";
 import React, { useContext } from "react";
@@ -56,6 +60,9 @@ const Menu = ({ getClickedMenu }) => {
         </AntdMenu.Item>
         <AntdMenu.Item key="1" icon={<AppstoreAddOutlined />}>
           Quản lý sản phẩm
+        </AntdMenu.Item>
+        <AntdMenu.Item key="2" icon={<CodeSandboxOutlined />}>
+          Quản lý đơn hàng
         </AntdMenu.Item>
       </AntdMenu>
     </div>

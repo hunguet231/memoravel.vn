@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Menu from "../components/Sell/Menu";
+import OrderManagement from "../components/Sell/OrderManagement";
 import ProductManagement from "../components/Sell/ProductManagement/ProductManagement";
 import UpdateShop from "../components/Sell/UpdateShop";
 import SubscribeForm from "../components/SubscribeForm";
@@ -82,6 +83,7 @@ const Sell = () => {
               )}
               {menu == "0" && <UpdateShop />}
               {menu == "1" && <ProductManagement />}
+              {menu == "2" && <OrderManagement />}
             </Col>
           </Row>
         </div>

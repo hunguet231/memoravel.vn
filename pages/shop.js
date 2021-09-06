@@ -22,7 +22,7 @@ const customExpandIcon = (props) => {
   }
 };
 
-const SIZE = 12;
+const SIZE = 8;
 
 export default function shop({ page, total, products }) {
   const router = useRouter();

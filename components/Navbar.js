@@ -7,6 +7,7 @@ import {
   ShoppingCartOutlined,
   ShoppingOutlined,
   UserOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 import { Badge, Button, Divider, Drawer, Dropdown, Menu, message } from "antd";
 import Cookie from "js-cookie";
@@ -67,6 +68,9 @@ const Navbar = () => {
     return (
       <Menu>
         <Menu.Item>{auth.user.fullname}</Menu.Item>
+        <Menu.Item>
+          <Link href="/my-orders">Đơn mua</Link>
+        </Menu.Item>
         <Menu.Item danger onClick={handleLogout} icon={<LogoutOutlined />}>
           Đăng xuất
         </Menu.Item>
@@ -142,6 +146,9 @@ const Navbar = () => {
             </Menu.Item>
             <Menu.Item onClick={onClose} icon={<HomeOutlined />}>
               <Link href="/">Home</Link>
+            </Menu.Item>
+            <Menu.Item onClick={onClose} icon={<FileTextOutlined />}>
+              <Link href="/my-orders">Đơn mua</Link>
             </Menu.Item>
             {/* <Menu.Item onClick={onClose} icon={<CodeSandboxOutlined />}>
               <Link href="/meminfo">Meminfo</Link>

@@ -7,8 +7,10 @@ import {
 import { Avatar, Button, Col, InputNumber, List, Row } from "antd";
 import Image from "next/image";
 import { useContext, useEffect } from "react";
+import Footer from "../components/Footer";
 import ShippingForm from "../components/ShippingForm";
-import { decrease, increase } from "../store/Actions";
+import SubscribeForm from "../components/SubscribeForm";
+import { decrease, deleteItem, increase } from "../store/Actions";
 import { DataContext } from "../store/GlobalState";
 import styles from "../styles/Cart.module.css";
 import addCommas from "../utils/addCommas";
@@ -62,10 +64,14 @@ const Cart = () => {
         <div className="overlay"></div>
         <div className="overlay-bottom"></div>
         <div className={styles.inner}>
-          <h1 style={{ fontSize: "18px", margin: "5px 5px 0" }}>
+          <h1 style={{ fontSize: "18px", margin: "5px 5px 0", color: "#fff" }}>
             Giỏ hàng của bạn trống!
           </h1>
         </div>
+      </div>
+      <div>
+        <SubscribeForm />
+        <Footer />
       </div>
     </>
   ) : (
@@ -74,8 +80,11 @@ const Cart = () => {
         <div className="overlay"></div>
         <div className="overlay-bottom"></div>
         <div className={styles.inner}>
-          <Row gutter={8}>
-            <Col span={12} style={{ backgroundColor: "#fff" }}>
+          <Row gutter={20}>
+            <Col
+              span={14}
+              style={{ backgroundColor: "#fff", borderRadius: "12px" }}
+            >
               <h1 style={{ fontSize: "18px", margin: "5px 5px 0" }}>
                 Giỏ hàng của bạn
               </h1>
@@ -89,8 +98,8 @@ const Cart = () => {
                         <Image
                           src={item.images}
                           alt={item.title}
-                          width="100"
-                          height="100"
+                          width="120"
+                          height="120"
                           objectFit="cover"
                         />
                       }
@@ -105,16 +114,7 @@ const Cart = () => {
                       description={
                         <div className={styles.description}>
                           <p>Còn lại: {item.in_stock} sản phẩm</p>
-                          <p>
-                            Thành tiền:{" "}
-                            <span style={{ color: "#000" }}>
-                              {addCommas(
-                                item.quantity *
-                                  parseInt(removeNonNumeric(item.price))
-                              )}{" "}
-                              ₫
-                            </span>
-                          </p>
+                          <p>Đơn giá: {item.price} ₫</p>
                           <div className={styles.quantity}>
                             <p style={{ marginRight: "5px" }}>
                               Chọn số lượng mua:
@@ -151,8 +151,21 @@ const Cart = () => {
                               type="primary"
                               size="small"
                               icon={<DeleteOutlined />}
+                              onClick={() =>
+                                dispatch(deleteItem(cart, item._id, "ADD_CART"))
+                              }
                             />
                           </div>
+                          <p>
+                            Thành tiền:{" "}
+                            <span style={{ color: "#000" }}>
+                              {addCommas(
+                                item.quantity *
+                                  parseInt(removeNonNumeric(item.price))
+                              )}{" "}
+                              ₫
+                            </span>
+                          </p>
                         </div>
                       }
                     />
@@ -160,11 +173,15 @@ const Cart = () => {
                 )}
               />
             </Col>
-            <Col span={12}>
+            <Col span={10}>
               <ShippingForm />
             </Col>
           </Row>
         </div>
+      </div>
+      <div>
+        <SubscribeForm />
+        <Footer />
       </div>
     </>
   );
