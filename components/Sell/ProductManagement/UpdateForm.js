@@ -32,8 +32,11 @@ const UpdateForm = ({ visible, onUpdate, onCancel, updateItem, loading }) => {
       setData(null);
       const res = await getData(`products/${updateItem && updateItem._id}`);
       setData(res.product);
+      let newFormImage = res.product?.images?.map((link) => ({
+        data_url: link,
+      }));
+      setImages(newFormImage);
     };
-
     fetchData();
   }, [updateItem]);
 
@@ -174,7 +177,7 @@ const UpdateForm = ({ visible, onUpdate, onCancel, updateItem, loading }) => {
                     hoặc kéo thả vào đây
                   </div>
                   <div className="preview">
-                    {images.map((image, index) => (
+                    {images?.map((image, index) => (
                       <div key={index} className="image-item">
                         <div className="img">
                           <Image
