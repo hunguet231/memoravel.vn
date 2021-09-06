@@ -45,39 +45,19 @@ const product = ({ product }) => {
                     prevArrow={<LeftCircleOutlined />}
                     nextArrow={<RightCircleOutlined />}
                   >
-                    <div className={styles.wrapProductImg}>
-                      <Image
-                        src={product.images[0]}
-                        alt="product-details"
-                        width={14}
-                        height={10}
-                        layout="responsive"
-                        objectFit="cover"
-                        className={styles.productImg}
-                      />
-                    </div>
-                    <div className={styles.wrapProductImg}>
-                      <Image
-                        src={product.images[0]}
-                        alt="product-details"
-                        width={14}
-                        height={10}
-                        layout="responsive"
-                        objectFit="cover"
-                        className={styles.productImg}
-                      />
-                    </div>
-                    <div className={styles.wrapProductImg}>
-                      <Image
-                        src={product.images[0]}
-                        alt="product-details"
-                        width={14}
-                        height={10}
-                        layout="responsive"
-                        objectFit="cover"
-                        className={styles.productImg}
-                      />
-                    </div>
+                    {product.images.map((url, index) => (
+                      <div className={styles.wrapProductImg} key={index}>
+                        <Image
+                          src={url}
+                          alt="product-details"
+                          width={14}
+                          height={10}
+                          layout="responsive"
+                          objectFit="cover"
+                          className={styles.productImg}
+                        />
+                      </div>
+                    ))}
                   </Carousel>
                 )}
               </Col>
