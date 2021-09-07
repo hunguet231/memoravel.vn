@@ -9,3 +9,20 @@
     position: relative;
     text-align: left;
 }
+
+.inner {
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 280px 15px 10px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    transform: translateY(-20vh);
+}
+
+@media (max-width: 380px) {
+    .inner {
+        padding: 210px 15px 10px;
+    }
+}

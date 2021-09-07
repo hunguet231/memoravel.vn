@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { DataContext } from "../../store/GlobalState";
-import styles from "../../styles/BasicContainer.module.css";
+import styles from "../../styles/Sell.module.css";
 import SubscribeForm from "../../components/SubscribeForm";
 import Footer from "../../components/Footer";
 
@@ -79,21 +79,36 @@ export default function myOrders() {
   return (
     <>
       <div className={styles.container}>
-        <h1 className="title">Tất cả đơn hàng</h1>
-        {orders && orders.length ? (
-          <div className="table">
-            <Table
-              pagination={{ pageSize: 5 }}
-              bordered
-              columns={columns}
-              dataSource={orders}
-              showSorterTooltip={true}
-              scroll={{ x: "max-content" }}
-            />
-          </div>
-        ) : (
-          <Spin />
-        )}
+        <div className="overlay"></div>
+        <div className="overlay-bottom"></div>
+        <div
+          className={styles.inner}
+          style={{
+            width: "100%",
+            maxWidth: "1200px",
+            padding: "300px 15px 10px",
+          }}
+        >
+          <h1 className="title">Đơn hàng của tôi</h1>
+          {orders && orders.length ? (
+            <div className="table">
+              <Table
+                pagination={{ pageSize: 5 }}
+                bordered
+                columns={columns}
+                dataSource={orders}
+                showSorterTooltip={true}
+                scroll={{ x: "max-content" }}
+              />
+            </div>
+          ) : (
+            <Spin />
+          )}
+        </div>
+      </div>
+      <div>
+        <SubscribeForm />
+        <Footer />
       </div>
     </>
   );

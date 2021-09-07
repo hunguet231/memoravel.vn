@@ -20,10 +20,10 @@ const Sell = () => {
   const [menu, setMenu] = useState("-1");
   const size = useWindowSize();
 
-  useEffect(() => {
-    if (Object.keys(auth).length === 0) router.push("/login");
-    return;
-  }, [auth]);
+  // useEffect(() => {
+  //   if (Object.keys(auth).length === 0) router.push("/login");
+  //   return;
+  // }, [auth]);
 
   const getClickedMenu = (e) => {
     setMenu(e);
