@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 import configFile from "./config.json";
-import { UserModel } from "../models";
+import { UserModel, TopicModel, PostModel } from "../models";
 
 dotenv.config();
 
@@ -26,9 +26,27 @@ const database = {
 };
 
 const Model = {
-  user: UserModel(sequelize, Sequelize),
+  userModel: UserModel(sequelize, Sequelize),
+  topicModel: TopicModel(sequelize, Sequelize),
+  postModel: PostModel(sequelize, Sequelize),
 };
 
 database.Model = Model;
+
+// Join user with post
+Model.userModel.hasOne(Model.postModel, { foreignKey: "user_id" });
+Model.postModel.belongsTo(Model.userModel, { foreignKey: "user_id" });
+
+//Join post with topic
+Model.topicModel.belongsToMany(Model.postModel, {
+  through: "topic_post",
+  foreignKey: "topic_id",
+  otherKey: "post_id",
+});
+Model.postModel.belongsToMany(Model.topicModel, {
+  through: "topic_post",
+  foreignKey: "post_id",
+  otherKey: "topic_id",
+});
 
 export default database;
