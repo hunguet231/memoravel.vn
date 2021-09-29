@@ -17,8 +17,6 @@ const Users = (sequelize, Sequelize) => {
     role: Sequelize.INTEGER,
     status: Sequelize.BOOLEAN,
     details: Sequelize.TEXT,
-    created_at: Sequelize.DATE,
-    modified_at: Sequelize.DATE,
   });
   return Users;
 };

@@ -16,8 +16,6 @@ const Posts = (sequelize, Sequelize) => {
     avatar: Sequelize.STRING,
     status: Sequelize.BOOLEAN,
     details: Sequelize.TEXT,
-    created_at: Sequelize.DATE,
-    modified_at: Sequelize.DATE,
   });
   return Posts;
 };

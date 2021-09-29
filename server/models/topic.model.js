@@ -11,8 +11,6 @@ const Topics = (sequelize, Sequelize) => {
     alias: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     status: Sequelize.BOOLEAN,
     details: Sequelize.TEXT,
-    created_at: Sequelize.DATE,
-    modified_at: Sequelize.DATE,
   });
   return Topics;
 };
