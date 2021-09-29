@@ -10,7 +10,7 @@ const Posts = (sequelize, Sequelize) => {
     description: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     content: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     alias: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
-    number_view: Sequelize.INTERGER,
+    number_view: Sequelize.INTEGER,
     background: Sequelize.STRING,
     phone_number: Sequelize.STRING,
     avatar: Sequelize.STRING,
