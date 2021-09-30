@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import { AppConst } from "./const";
-import database from "./configs/database.config";
+import { database } from "./configs";
 
 dotenv.config({ path: path.resolve("./.env") });
 
