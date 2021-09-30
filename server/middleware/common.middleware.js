@@ -2,15 +2,15 @@ import jwt from "jsonwebtoken";
 import { AppConst } from "../const";
 import { responseFormat } from "../utils";
 
-export const verifyToken = (req, res, next) => {
-  let token = req.headers["authorization"];
+export const verifyToken = async (req, res, next) => {
+  let token = req.headers["authorization"].split(" ")[1];
   if (!token) {
     res
       .status(AppConst.STATUS_UNAUTHORIZED)
       .json(responseFormat({ message: "Unauthorized token invalid!" }));
   }
 
-  jwt.verify(token, AppConst.SECRET_KEY, (error, decoded) => {
+  await jwt.verify(token, AppConst.SECRET_KEY, (error, decoded) => {
     if (error) {
       res
         .status(AppConst.STATUS_FORBIDDEN)

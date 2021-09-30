@@ -11,4 +11,11 @@ commonRoute.post(
   AuthController.login
 );
 
+commonRoute.put(
+  ApiConst.CHANGE_PASSWORD,
+  CommonMiddleware.verifyToken,
+  AuthMiddleware.checkRequestChangePassword,
+  AuthController.changePassword
+);
+
 export default commonRoute;
