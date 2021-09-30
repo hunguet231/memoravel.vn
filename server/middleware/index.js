@@ -1,3 +1,4 @@
-import Auth from "./auth.middleware";
+import * as CommonMiddleware from "./common.middleware";
+import * as AuthMiddleware from "./auth.middleware";
 
-export { Auth };
+export { CommonMiddleware, AuthMiddleware };
