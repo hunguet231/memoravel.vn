@@ -18,7 +18,7 @@ export const login = async (req, res) => {
       }
     );
 
-    res.status(AppConst.STATUS_OK).json(
+    res.status(AppConst.STATUS_CREATED).json(
       responseFormat({
         data: {
           ...req.body,
@@ -46,6 +46,31 @@ export const changePassword = async (req, res) => {
       }
     );
     res.status(AppConst.STATUS_OK).json(responseFormat());
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
+export const getProfile = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.user_id,
+      },
+      attributes: [
+        "id",
+        "username",
+        "full_name",
+        "gender",
+        "date_of_birth",
+        "email",
+        "phone_number",
+        "avatar",
+      ],
+    });
+    res.status(AppConst.STATUS_OK).json(responseFormat({ data: user }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

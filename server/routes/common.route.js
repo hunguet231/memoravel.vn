@@ -18,4 +18,10 @@ commonRoute.put(
   AuthController.changePassword
 );
 
+commonRoute.get(
+  ApiConst.PROFILE,
+  CommonMiddleware.verifyToken,
+  AuthController.getProfile
+);
+
 export default commonRoute;
