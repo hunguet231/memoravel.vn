@@ -7,9 +7,9 @@ export const responseFormat = (data) => ({
 
 export const convertPaging = (data) => ({
   ...data.query,
-  size: parseInt(data.query?.size) || 10,
-  page: parseInt(data.query?.page) || 1,
-  paging: parseInt(data.query?.paging) || 0,
+  size: data.query?.size ? parseInt(data.query.size) : 10,
+  page: data.query?.page ? parseInt(data.query.page) : 1,
+  paging: data.query?.paging ? parseInt(data.query.paging) : 0,
 });
 
 export const validateEmail = (content) => {

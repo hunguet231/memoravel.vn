@@ -7,16 +7,17 @@ const User = database.Model.userModel;
 const Op = database.Sequelize.Op;
 
 export const verifyToken = async (req, res, next) => {
-  let token = req.headers["authorization"].split(" ")[1];
+  let authorization = req.headers["authorization"]?.split(" ");
+  let token = authorization?.length >= 2 ? authorization[1] : "";
   if (!token) {
-    res
+    return res
       .status(AppConst.STATUS_UNAUTHORIZED)
       .json(responseFormat({ message: "Unauthorized token invalid!" }));
   }
 
   await jwt.verify(token, AppConst.SECRET_KEY, (error, decoded) => {
     if (error) {
-      res
+      return res
         .status(AppConst.STATUS_FORBIDDEN)
         .json(responseFormat({ message: "Unauthorized bad token!" }));
     } else {

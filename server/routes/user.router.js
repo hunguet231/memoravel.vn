@@ -25,7 +25,6 @@ userRoute.get(
   ApiConst.ADMIN_USER,
   CommonMiddleware.verifyToken,
   CommonMiddleware.verifyRolesAdmin,
-  UserMiddleware.checkAdminGetListUser,
   UserController.adminGetListUser
 );
 

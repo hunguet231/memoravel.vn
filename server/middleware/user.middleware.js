@@ -230,15 +230,6 @@ export const checkAdminEditUser = async (req, res, next) => {
   }
 };
 
-export const checkAdminGetListUser = async (req, res, next) => {
-  try {
-  } catch (error) {
-    res
-      .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
-  }
-};
-
 export const checkAdminDeleteUser = async (req, res, next) => {
   try {
   } catch (error) {
