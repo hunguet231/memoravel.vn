@@ -17,3 +17,9 @@ export const ROLE = {
   admin: 1,
   manage: 2,
 };
+
+export const GENDER = {
+  male: 1,
+  female: 2,
+  other: 3,
+};

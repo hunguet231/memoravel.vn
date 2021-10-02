@@ -11,3 +11,19 @@ export const convertPaging = (data) => ({
   page: parseInt(data.query?.page) || 1,
   paging: parseInt(data.query?.paging) || 0,
 });
+
+export const validateEmail = (content) => {
+  const regex =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return (
+    content && regex.test(String(content).replace(/\s+/g, "").toLowerCase())
+  );
+};
+
+export const validatePhone = (content) => {
+  const regex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/;
+  const isValid = content && content.length > 8 && content.length <= 16;
+  return (
+    isValid && regex.test(String(content).replace(/\s+/g, "").toLowerCase())
+  );
+};

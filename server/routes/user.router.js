@@ -8,7 +8,7 @@ const userRoute = express.Router();
 userRoute.post(
   ApiConst.ADMIN_USER,
   CommonMiddleware.verifyToken,
-  CommonMiddleware.verifyRoles,
+  CommonMiddleware.verifyRolesAdmin,
   UserMiddleware.checkAdminCreateUser,
   UserController.adminCreateUser
 );
@@ -16,7 +16,7 @@ userRoute.post(
 userRoute.put(
   ApiConst.ADMIN_USER_ID,
   CommonMiddleware.verifyToken,
-  CommonMiddleware.verifyRoles,
+  CommonMiddleware.verifyRolesAdmin,
   UserMiddleware.checkAdminEditUser,
   UserController.adminEditUser
 );
@@ -24,7 +24,7 @@ userRoute.put(
 userRoute.get(
   ApiConst.ADMIN_USER,
   CommonMiddleware.verifyToken,
-  CommonMiddleware.verifyRoles,
+  CommonMiddleware.verifyRolesAdmin,
   UserMiddleware.checkAdminGetListUser,
   UserController.adminGetListUser
 );
@@ -32,7 +32,7 @@ userRoute.get(
 userRoute.delete(
   ApiConst.ADMIN_USER_ID,
   CommonMiddleware.verifyToken,
-  CommonMiddleware.verifyRoles,
+  CommonMiddleware.verifyRolesAdmin,
   UserMiddleware.checkAdminDeleteUser,
   UserController.adminDeleteUser
 );
