@@ -95,3 +95,38 @@ export const checkRequestChangePassword = async (req, res, next) => {
       .json(responseFormat({ error: error, message: "error" }));
   }
 };
+
+export const checkImageUpload = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: "Không có file nào được tải lên!" }));
+    } else {
+      next();
+    }
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
+export const checkGetImage = async (req, res, next) => {
+  try {
+    const imageName = req.params.image_name;
+    if (!imageName) {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(
+          responseFormat({ message: "Không có tên file nào được chỉ định!" })
+        );
+    } else {
+      next();
+    }
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};

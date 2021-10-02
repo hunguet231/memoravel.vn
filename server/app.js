@@ -22,7 +22,9 @@ const runSequelize = async () => {
     if (run) {
       const userModel = database.Model.userModel;
       let user = await userModel.findOne({
-        username: process.env.ADMIN_ACCOUNT,
+        where: {
+          username: process.env.ADMIN_ACCOUNT,
+        },
       });
       if (!user) {
         await userModel.create({

@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { renameSync } from "fs";
+import { basename, resolve } from "path";
 import { database } from "../configs";
 import { AppConst } from "../const";
 import { responseFormat } from "../utils";
@@ -71,6 +73,39 @@ export const getProfile = async (req, res) => {
       ],
     });
     res.status(AppConst.STATUS_OK).json(responseFormat({ data: user }));
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
+export const uploadImage = async (req, res) => {
+  try {
+    const processedFile = req.file || {};
+    let orgName = processedFile.originalname || "";
+    orgName = orgName.trim().replace(/ /g, "-");
+    const fullPathInServ = processedFile.path;
+    const newFullPath = `${fullPathInServ}-${orgName}`;
+
+    renameSync(fullPathInServ, newFullPath);
+
+    let fileString = basename(newFullPath);
+    let imageUri = `/api/image/` + fileString;
+
+    res.status(AppConst.STATUS_OK).json(responseFormat({ data: imageUri }));
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
+export const getImage = (req, res) => {
+  try {
+    res
+      .status(AppConst.STATUS_OK)
+      .sendFile(resolve(`./images/${req.params.image_name}`));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
