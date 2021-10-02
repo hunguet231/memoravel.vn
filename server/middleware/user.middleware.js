@@ -64,7 +64,7 @@ export const checkAdminCreateUser = async (req, res, next) => {
 
     // Check gender
     if (!Object.values(AppConst.GENDER).includes(dataCreateUser.gender)) {
-      messageCreate.gender = "Sai định dạng mật khẩu";
+      messageCreate.gender = "Sai định dạng giới tính";
     }
 
     // Check role

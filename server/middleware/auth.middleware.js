@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { database } from "../configs";
 import { AppConst } from "../const";
-import { responseFormat } from "../utils";
+import { responseFormat, validateEmail, validatePhone } from "../utils";
 const User = database.Model.userModel;
 
 export const checkRequestLogin = async (req, res, next) => {
@@ -98,6 +98,51 @@ export const checkRequestChangePassword = async (req, res, next) => {
 
 export const checkEditProfile = async (req, res, next) => {
   try {
+    const dataEditProfile = {
+      full_name: req.body.full_name || "",
+      gender: req.body.gender || AppConst.GENDER.other,
+      date_of_birth: req.body.date_of_birth || null,
+      email: req.body.email || "",
+      phone_number: req.body.phone_number || "",
+      avatar: req.body.avatar || "",
+    };
+
+    const messageProfile = {
+      gender: "",
+      email: "",
+      phone_number: "",
+    };
+
+    // Check gender
+    if (!Object.values(AppConst.GENDER).includes(dataEditProfile.gender)) {
+      messageProfile.gender = "Sai định dạng giới tính";
+    }
+
+    // Check email
+    if (dataEditProfile.email && !validateEmail(dataEditProfile.email)) {
+      messageProfile.email = "Email không đúng định dạng";
+    }
+
+    // Check phone number
+    if (
+      dataEditProfile.phone_number &&
+      !validatePhone(dataEditProfile.phone_number)
+    ) {
+      messageProfile.phone_number = "Số điện thoại không đúng định dạng";
+    }
+
+    const checkMessageValidate = Object.values(messageProfile).find(
+      (messageItem) => messageItem.length > 0
+    );
+
+    if (checkMessageValidate) {
+      res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: JSON.stringify(messageProfile) }));
+    } else {
+      req.body = dataEditProfile;
+      next();
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

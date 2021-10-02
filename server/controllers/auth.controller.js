@@ -86,6 +86,7 @@ export const getProfile = async (req, res) => {
         "email",
         "phone_number",
         "avatar",
+        "role",
       ],
     });
     res.status(AppConst.STATUS_OK).json(responseFormat({ data: user }));
@@ -96,9 +97,31 @@ export const getProfile = async (req, res) => {
   }
 };
 
-export const updateProfile = async (req, res) => {
+export const editProfile = async (req, res) => {
   try {
-    res.status(AppConst.STATUS_OK).json(responseFormat());
+    await User.update(req.body, {
+      where: {
+        id: req.user_id,
+      },
+    });
+
+    const user = await User.findOne({
+      where: {
+        id: req.user_id,
+      },
+      attributes: [
+        "id",
+        "username",
+        "full_name",
+        "gender",
+        "date_of_birth",
+        "email",
+        "phone_number",
+        "avatar",
+        "role",
+      ],
+    });
+    res.status(AppConst.STATUS_OK).json(responseFormat({ data: user }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

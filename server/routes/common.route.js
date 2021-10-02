@@ -26,6 +26,13 @@ commonRoute.get(
   AuthController.getProfile
 );
 
+commonRoute.put(
+  ApiConst.PROFILE,
+  CommonMiddleware.verifyToken,
+  AuthMiddleware.checkEditProfile,
+  AuthController.editProfile
+);
+
 commonRoute.post(
   ApiConst.UPLOAD,
   [imageUploader.single("file")],
