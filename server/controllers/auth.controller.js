@@ -96,6 +96,16 @@ export const getProfile = async (req, res) => {
   }
 };
 
+export const updateProfile = async (req, res) => {
+  try {
+    res.status(AppConst.STATUS_OK).json(responseFormat());
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
 export const uploadImage = async (req, res) => {
   try {
     const processedFile = req.file || {};

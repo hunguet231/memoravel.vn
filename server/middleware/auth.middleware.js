@@ -96,6 +96,15 @@ export const checkRequestChangePassword = async (req, res, next) => {
   }
 };
 
+export const checkEditProfile = async (req, res, next) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
 export const checkImageUpload = async (req, res, next) => {
   try {
     if (!req.file) {
