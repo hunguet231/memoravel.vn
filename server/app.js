@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 import * as path from "path";
 import { AppConst, ApiConst } from "./const";
 import { database } from "./configs";
-import { CommonRoute } from "./routes";
+import { CommonRoute, UserRoute } from "./routes";
 
 dotenv.config({ path: path.resolve("./.env") });
 
@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use(ApiConst.ROOT, CommonRoute);
+app.use(ApiConst.ROOT, UserRoute);
 
 const runSequelize = async () => {
   try {
