@@ -34,6 +34,30 @@ export const adminCreateUser = async (req, res) => {
 
 export const adminEditUser = async (req, res) => {
   try {
+    if (req.isDisable) {
+      await User.update(
+        {
+          status: req.body.status,
+        },
+        {
+          where: {
+            id: req.params.user_id,
+          },
+        }
+      );
+    } else {
+      await User.update(req.body, {
+        where: {
+          id: req.params.user_id,
+        },
+      });
+    }
+
+    const user = await User.findByPk(req.params.user_id);
+
+    res
+      .status(AppConst.STATUS_CREATED)
+      .json(responseFormat({ data: responseData(user) }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
