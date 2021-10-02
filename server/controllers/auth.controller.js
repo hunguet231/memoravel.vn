@@ -9,6 +9,22 @@ const User = database.Model.userModel;
 
 export const login = async (req, res) => {
   try {
+    const user = await User.findOne({
+      where: {
+        id: req.body.user_id,
+        role: req.body.role,
+        status: AppConst.STATUS.publish,
+      },
+    });
+
+    if (!user) {
+      res.status(AppConst.STATUS_FORBIDDEN).json(
+        responseFormat({
+          message: "Tài khoản của bạn đã bị vô hiệu hóa!",
+        })
+      );
+    }
+
     let token = jwt.sign(
       {
         user_id: req.body.user_id,
