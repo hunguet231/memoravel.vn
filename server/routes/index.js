@@ -1,4 +1,4 @@
 import CommonRoute from "./common.route";
-import UserRoute from "./user.router";
+import UserRoute from "./user.route";
 
 export { CommonRoute, UserRoute };
