@@ -7,7 +7,7 @@ const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
 const Op = database.Sequelize.Op;
 
-export const getPost = async (req, res) => {
+export const mnCreatePost = async (req, res) => {
   try {
   } catch (error) {
     res
@@ -16,7 +16,7 @@ export const getPost = async (req, res) => {
   }
 };
 
-export const getPostByAlias = async (req, res) => {
+export const mnEditPost = async (req, res) => {
   try {
   } catch (error) {
     res
@@ -25,7 +25,25 @@ export const getPostByAlias = async (req, res) => {
   }
 };
 
-export const getPostHot = async (req, res) => {
+export const mnGetListPost = async (req, res) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
+export const mnGetPostById = async (req, res) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: "error" }));
+  }
+};
+
+export const mnDeletePost = async (req, res) => {
   try {
   } catch (error) {
     res
