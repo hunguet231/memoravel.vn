@@ -1,7 +1,7 @@
 import { AppConst } from "../const";
 import { responseFormat } from "../utils";
 
-export const checkGetPost = async (req, res) => {
+export const checkGetPost = async (req, res, next) => {
   try {
   } catch (error) {
     res
@@ -10,7 +10,7 @@ export const checkGetPost = async (req, res) => {
   }
 };
 
-export const checkGetPostByAlias = async (req, res) => {
+export const checkGetPostByAlias = async (req, res, next) => {
   try {
   } catch (error) {
     res
@@ -19,7 +19,7 @@ export const checkGetPostByAlias = async (req, res) => {
   }
 };
 
-export const checkGetPostHot = async (req, res) => {
+export const checkGetPostHot = async (req, res, next) => {
   try {
   } catch (error) {
     res
