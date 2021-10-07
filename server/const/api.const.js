@@ -17,3 +17,9 @@ export const MANAGE_POST_ID = "/api/manage/post/:post_id";
 export const GET_POST = "/api/post";
 export const GET_POST_BY_ALIAS = "/api/post/:alias";
 export const GET_POST_HOT = "/api/post-host";
+
+// topic api
+export const MANAGE_TOPIC = "/api/manage/topic";
+export const MANAGE_TOPIC_ID = "/api/manage/topic/:topic_id";
+export const GET_TOPIC = "/api/topic";
+export const GET_TOPIC_BY_ALIAS = "/api/topic/:alias";
