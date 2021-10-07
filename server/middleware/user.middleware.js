@@ -30,7 +30,9 @@ export const checkAdminCreateUser = async (req, res, next) => {
       phone_number: req.body.phone_number || "",
       avatar: req.body.avatar || "",
       role: req.body.role || AppConst.ROLE.manage,
-      status: parseInt(req.body.status) || AppConst.STATUS.draft,
+      status: req.body.status
+        ? parseInt(req.body.status)
+        : AppConst.STATUS.draft,
     };
 
     const messageCreate = { ...message };

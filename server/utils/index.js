@@ -27,3 +27,27 @@ export const validatePhone = (content) => {
     isValid && regex.test(String(content).replace(/\s+/g, "").toLowerCase())
   );
 };
+
+export const requestObjectMultiLang = (object, isEmpty = false) => {
+  let objectLang = { ...object };
+
+  if (object.vi && !object.en) {
+    objectLang.en = object.vi;
+  } else if (!object.vi && object.en) {
+    objectLang.vi = object.en;
+  } else if (!object.vi && !object.en && isEmpty) {
+    objectLang = "";
+  }
+
+  return JSON.stringify(objectLang);
+};
+
+export const responseObjectMultiLang = (objectString, key) => {
+  const data = JSON.parse(objectString);
+
+  return key ? data[key] : data;
+};
+
+export const convertTitleToAlias = (title) => {
+  return "";
+};
