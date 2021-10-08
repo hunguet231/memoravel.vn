@@ -96,7 +96,7 @@ export const checkAdminCreateUser = async (req, res, next) => {
       (messageItem) => messageItem.length > 0
     );
 
-    if (!checkMessageValidate) {
+    if (checkMessageValidate) {
       return res
         .status(AppConst.STATUS_BAD_REQUEST)
         .json(responseFormat({ message: JSON.stringify(messageCreate) }));
