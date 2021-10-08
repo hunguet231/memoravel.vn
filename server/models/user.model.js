@@ -15,7 +15,7 @@ const Users = (sequelize, Sequelize) => {
     phone_number: Sequelize.STRING,
     avatar: Sequelize.STRING,
     role: Sequelize.INTEGER,
-    status: Sequelize.BOOLEAN,
+    status: Sequelize.INTEGER,
     details: Sequelize.TEXT,
   });
   return Users;

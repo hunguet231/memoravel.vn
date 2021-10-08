@@ -48,6 +48,30 @@ export const responseObjectMultiLang = (objectString, key) => {
   return key ? data[key] : data;
 };
 
-export const convertTitleToAlias = (title) => {
-  return "";
+export const convertTitleToAlias = (str) => {
+  // remove accents
+  let from =
+      "àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ",
+    to =
+      "aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+  for (let i = 0, l = from.length; i < l; i++) {
+    str = str.replace(RegExp(from[i], "gi"), to[i]);
+  }
+
+  str = str
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\-]/g, "-")
+    .replace(/-+/g, "-");
+
+  return str;
+};
+
+export const handleAliasResult = (title, isHtml = true) => {
+  let html = isHtml ? ".html" : "";
+  let aliasRear = "-" + Math.floor(Math.random() * 9999 + 1) + html;
+  return requestObjectMultiLang({
+    vi: convertTitleToAlias(title.vi) + aliasRear,
+    en: convertTitleToAlias(title.en) + aliasRear,
+  });
 };

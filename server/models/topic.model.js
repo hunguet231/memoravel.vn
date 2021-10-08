@@ -9,7 +9,7 @@ const Topics = (sequelize, Sequelize) => {
     title: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     description: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     alias: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
-    status: Sequelize.BOOLEAN,
+    status: Sequelize.INTEGER,
     details: Sequelize.TEXT,
   });
   return Topics;

@@ -1,44 +1,61 @@
 import { database } from "../configs";
 import { AppConst } from "../const";
-import { responseFormat } from "../utils";
+import {
+  responseFormat,
+  requestObjectMultiLang,
+  handleAliasResult,
+} from "../utils";
 
 const Topic = database.Model.topicModel;
 
 const message = {
   title: "",
   description: "",
-  alias: "",
   status: "",
-  details: "",
 };
 
 export const checkCreateTopic = async (req, res, next) => {
   try {
-    const dataCreateTopic = {
-      title: req.body.title || "",
-      description: req.body.description || "",
-      alias: req.body.alias || "",
-      status: parseInt(req.body.status),
-      details: req.body.details || "",
-    };
+    const messageTopic = { ...message };
 
-    const messageCreate = { ...message };
-
-    // Check status
-    if (!Object.values(AppConst.STATUS).includes(dataCreateTopic.status)) {
-      messageCreate.status = "Sai định dạng trạng thái";
+    // Check title is empty
+    if (!requestObjectMultiLang(req.body.title, true)) {
+      messageTopic.title = "Yêu cầu nhập tiêu đề !";
+    } else {
+      const topic = await Topic.findOne({
+        where: {
+          title: requestObjectMultiLang(req.body.title),
+        },
+      });
+      if (topic) {
+        messageTopic.title = "Tiêu đề đã tồn tại!";
+      }
+    }
+    // Check status is not exist in object
+    if (!Object.values(AppConst.STATUS).includes(req.body.status)) {
+      messageTopic.status = "Status không tồn tại!";
     }
 
-    const checkMessageValidate = Object.values(messageCreate).find(
+    const title = requestObjectMultiLang(req.body.title);
+    const refactorTopicData = {
+      title: title,
+      description: requestObjectMultiLang(req.body.description),
+      alias: handleAliasResult(JSON.parse(title), false),
+      status: req.body.status
+        ? parseInt(req.body.status)
+        : AppConst.STATUS.draft,
+    };
+
+    const checkMessageValidate = Object.values(messageTopic).find(
       (messageItem) => messageItem.length > 0
     );
 
-    if (!checkMessageValidate) {
+    if (checkMessageValidate) {
       return res
         .status(AppConst.STATUS_BAD_REQUEST)
-        .json(responseFormat({ message: JSON.stringify(messageCreate) }));
+        .json(responseFormat({ message: JSON.stringify(messageTopic) }));
     } else {
-      req.body = dataCreateTopic;
+      req.body = refactorTopicData;
       next();
     }
   } catch (error) {

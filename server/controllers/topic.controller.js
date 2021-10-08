@@ -1,6 +1,10 @@
 import { database } from "../configs";
 import { AppConst } from "../const";
-import { responseFormat, convertPaging } from "../utils";
+import {
+  responseFormat,
+  convertPaging,
+  responseObjectMultiLang,
+} from "../utils";
 const Topic = database.Model.topicModel;
 const Op = database.Sequelize.Op;
 
@@ -17,6 +21,11 @@ const responseData = (data) => ({
 export const createTopic = async (req, res) => {
   try {
     const newTopic = await Topic.create(req.body);
+
+    // Convert string to object
+    newTopic.title = responseObjectMultiLang(newTopic.title);
+    newTopic.description = responseObjectMultiLang(newTopic.description);
+    newTopic.alias = responseObjectMultiLang(newTopic.alias);
 
     res
       .status(AppConst.STATUS_CREATED)

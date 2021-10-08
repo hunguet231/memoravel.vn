@@ -12,7 +12,7 @@ const Posts = (sequelize, Sequelize) => {
     alias: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     number_view: Sequelize.INTEGER,
     background: Sequelize.STRING,
-    status: Sequelize.BOOLEAN,
+    status: Sequelize.INTEGER,
     details: Sequelize.TEXT,
   });
   return Posts;

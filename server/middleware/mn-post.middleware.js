@@ -3,7 +3,7 @@ import { AppConst } from "../const";
 import {
   responseFormat,
   requestObjectMultiLang,
-  convertTitleToAlias,
+  handleAliasResult,
 } from "../utils";
 
 const Topic = database.Model.topicModel;
@@ -13,8 +13,6 @@ const formatPostData = {
   title: "",
   description: "",
   content: "",
-  alias: "",
-  background: "",
   status: "",
   topic_ids: "",
 };
@@ -25,35 +23,36 @@ export const checkMnCreatePost = async (req, res, next) => {
 
     // Check title is empty
     if (!requestObjectMultiLang(req.body.title, true)) {
-      messagePost.title = "";
+      messagePost.title = "Yêu cầu nhập tiêu đề !";
     } else {
       const post = await Post.findOne({
         where: {
-          username: requestObjectMultiLang(req.body.title),
+          title: requestObjectMultiLang(req.body.title),
         },
       });
       if (post) {
-        messagePost.title = "đã tồn tại";
+        messagePost.title = "Tiêu đề đã tồn tại!";
       }
     }
-
     // Check description is empty
     if (!requestObjectMultiLang(req.body.description, true)) {
-      messagePost.description = "";
+      messagePost.description = "Yêu cầu nhập mô tả!";
     }
-
     // Check content isEmpty
     if (!requestObjectMultiLang(req.body.content, true)) {
-      messagePost.content = "";
+      messagePost.content = "Yêu cầu nhập nội dung!";
+    }
+    // Check status is not exist in object
+    if (!Object.values(AppConst.STATUS).includes(req.body.status)) {
+      messagePost.status = "Status không tồn tại!";
     }
 
-    // Check topic
-
+    const title = requestObjectMultiLang(req.body.title);
     const refactorPostData = {
-      title: requestObjectMultiLang(req.body.title),
+      title: title,
       description: requestObjectMultiLang(req.body.description),
       content: requestObjectMultiLang(req.body.content),
-      alias: convertTitleToAlias(req.body.alias),
+      alias: handleAliasResult(JSON.parse(title)),
       background: req.body.background,
       number_view: 0,
       status: req.body.status
