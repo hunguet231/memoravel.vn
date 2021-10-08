@@ -116,14 +116,13 @@ export const checkAdminEditUser = async (req, res, next) => {
   try {
     if (
       !(
-        req.body.username &&
-        req.body.password &&
-        req.body.full_name &&
-        req.body.gender &&
-        req.body.date_of_birth &&
-        req.body.email &&
-        req.body.phone_number &&
-        req.body.avatar &&
+        req.body.username ||
+        req.body.full_name ||
+        req.body.gender ||
+        req.body.date_of_birth ||
+        req.body.email ||
+        req.body.phone_number ||
+        req.body.avatar ||
         req.body.role
       )
     ) {
@@ -143,7 +142,6 @@ export const checkAdminEditUser = async (req, res, next) => {
     } else {
       const dataCreateUser = {
         username: req.body.username || "",
-        password: req.body.password || "",
         full_name: req.body.full_name || "",
         gender: parseInt(req.body.gender) || AppConst.GENDER.other,
         date_of_birth: req.body.date_of_birth || null,
@@ -174,15 +172,6 @@ export const checkAdminEditUser = async (req, res, next) => {
         }
       }
 
-      // Check password
-      if (!dataCreateUser.password) {
-        messageCreate.password = "Yêu cầu nhập mật khẩu";
-      } else if (dataCreateUser.password.length < 8) {
-        messageCreate.password = "Mật khẩu phải có độ dài >= 8";
-      } else if (dataCreateUser.password.length > 36) {
-        messageCreate.password = "Mật khẩu phải có độ dài <= 36";
-      }
-
       // Check gender
       if (!Object.values(AppConst.GENDER).includes(dataCreateUser.gender)) {
         messageCreate.gender = "Sai định dạng giới tính";
@@ -192,7 +181,6 @@ export const checkAdminEditUser = async (req, res, next) => {
       if (!Object.values(AppConst.ROLE).includes(dataCreateUser.role)) {
         messageCreate.role = "Sai định dạng quyền";
       }
-
       // Check status
       if (!Object.values(AppConst.STATUS).includes(dataCreateUser.status)) {
         messageCreate.status = "Sai định dạng trạng thái";
@@ -220,7 +208,6 @@ export const checkAdminEditUser = async (req, res, next) => {
           .status(AppConst.STATUS_BAD_REQUEST)
           .json(responseFormat({ message: JSON.stringify(messageCreate) }));
       } else {
-        dataCreateUser.password = hashSync(dataCreateUser.password, 10);
         req.body = dataCreateUser;
         next();
       }
