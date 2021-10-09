@@ -47,6 +47,19 @@ export const checkMnCreatePost = async (req, res, next) => {
       messagePost.status = "Status không tồn tại!";
     }
 
+    // Check topic ids
+    const topicIds = req.body.topic_ids?.map(({ id }) => id) || [];
+    const topics = await Topic.findAll();
+    const topicIdsFromDatabase = topics?.map(({ id }) => id) || [];
+
+    const isNotExistTopicId = topicIds.find(
+      (topicId) => !topicIdsFromDatabase.includes(topicId)
+    );
+
+    if (isNotExistTopicId) {
+      messagePost.topic_ids = "Danh mục không tồn tại!";
+    }
+
     const title = requestObjectMultiLang(req.body.title);
     const refactorPostData = {
       title: title,
@@ -58,7 +71,8 @@ export const checkMnCreatePost = async (req, res, next) => {
       status: req.body.status
         ? parseInt(req.body.status)
         : AppConst.STATUS.draft,
-      topic_ids: req.body.topic_ids,
+      topic_ids: topicIds,
+      topics: topics,
     };
 
     const checkMessageValidate = Object.values(messagePost).find(
