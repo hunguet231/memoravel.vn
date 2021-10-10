@@ -128,6 +128,17 @@ export const adminGetListUser = async (req, res) => {
 
 export const adminDeleteUser = async (req, res) => {
   try {
+    await User.update(
+      {
+        status: AppConst.STATUS.delete,
+      },
+      {
+        where: {
+          id: req.params.user_id,
+        },
+      }
+    );
+    res.status(AppConst.STATUS_OK).json(responseFormat());
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

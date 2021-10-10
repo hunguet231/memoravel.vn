@@ -12,6 +12,7 @@ export const STATUS_SERVER_ERROR = 500;
 export const STATUS = {
   publish: 1,
   draft: 2,
+  delete: 3,
 };
 
 export const ROLE = {

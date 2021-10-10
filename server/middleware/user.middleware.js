@@ -221,6 +221,15 @@ export const checkAdminEditUser = async (req, res, next) => {
 
 export const checkAdminDeleteUser = async (req, res, next) => {
   try {
+    // Check User Id id exist
+    const user = await User.findByPk(req.params.user_id);
+    if (user) {
+      next();
+    } else {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: "user_id không tồn tại" }));
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
