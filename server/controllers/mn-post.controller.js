@@ -63,6 +63,53 @@ export const mnCreatePost = async (req, res) => {
 
 export const mnEditPost = async (req, res) => {
   try {
+    const formatData = { ...req.body };
+    delete formatData["topic_ids"];
+    delete formatData["topics"];
+
+    const dataTopics = req.body.topics.filter((topic) =>
+      req.body.topic_ids.includes(topic.id)
+    );
+
+    // Update post data and rejoin with topics
+    const updatePost = await Post.update(req.body, {
+      where: {
+        id: req.params.post_id,
+      },
+    });
+
+    const postData = await Post.findOne({
+      where: {
+        id: req.params.post_id,
+      },
+      include: [
+        {
+          model: Topic,
+          attributes: ["id", "title"],
+        },
+      ],
+    });
+
+    const oldTopicIds = postData.topics?.map((item) => item.id);
+
+    await postData.removeTopics(oldTopicIds);
+    await postData.setTopics(dataTopics);
+
+    const getPost = await Post.findOne({
+      where: {
+        id: req.params.post_id,
+      },
+      include: [
+        {
+          model: Topic,
+          attributes: ["id", "title"],
+        },
+      ],
+    });
+
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatPostData(getPost) }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
@@ -81,6 +128,20 @@ export const mnGetListPost = async (req, res) => {
 
 export const mnGetPostById = async (req, res) => {
   try {
+    const getPost = await Post.findOne({
+      where: {
+        id: req.params.post_id,
+      },
+      include: [
+        {
+          model: Topic,
+          attributes: ["id", "title"],
+        },
+      ],
+    });
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatPostData(getPost) }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
