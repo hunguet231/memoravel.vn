@@ -29,7 +29,6 @@ postRoute.get(
   ApiConst.MANAGE_POST,
   CommonMiddleware.verifyToken,
   CommonMiddleware.verifyRolesManage,
-  MnPostMiddleware.checkMnGetListPost,
   MnPostController.mnGetListPost
 );
 

@@ -175,15 +175,6 @@ export const checkMnEditPost = async (req, res, next) => {
   }
 };
 
-export const checkMnGetListPost = async (req, res, next) => {
-  try {
-  } catch (error) {
-    res
-      .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
-  }
-};
-
 export const checkMnGetPostById = async (req, res, next) => {
   try {
     // Check Post Id id exist

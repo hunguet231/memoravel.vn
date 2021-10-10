@@ -1,6 +1,10 @@
 import { database } from "../configs";
 import { AppConst } from "../const";
-import { responseFormat, responseObjectMultiLang } from "../utils";
+import {
+  responseFormat,
+  convertPaging,
+  responseObjectMultiLang,
+} from "../utils";
 
 const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
@@ -119,6 +123,58 @@ export const mnEditPost = async (req, res) => {
 
 export const mnGetListPost = async (req, res) => {
   try {
+    const dataPage = convertPaging(req);
+    const pagination =
+      dataPage.paging === 0
+        ? {}
+        : {
+            limit: dataPage.size,
+            offset: (dataPage.page - 1) * dataPage.size,
+          };
+
+    const queryDataPost = {};
+    if (dataPage.search) {
+      queryDataPost.title = {
+        [Op.like]: `%${dataPage.search}%`,
+      };
+    }
+
+    const queryDataTopic = {};
+    if (dataPage.topic_id) {
+      queryDataTopic.id = dataPage.topic_id;
+    }
+
+    const { count, rows: data } = await Post.findAndCountAll({
+      ...pagination,
+      where: {
+        ...queryDataPost,
+      },
+      include: [
+        {
+          model: Topic,
+          where: {
+            ...queryDataTopic,
+          },
+          attributes: ["id", "title"],
+        },
+      ],
+      distinct: true,
+    });
+
+    const formatData = data.map((dataMap) => formatPostData(dataMap));
+
+    const response =
+      dataPage.paging === 0
+        ? {
+            data: formatData,
+            total: count,
+          }
+        : {
+            data: formatData,
+            total: count,
+            page: dataPage.page,
+          };
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
