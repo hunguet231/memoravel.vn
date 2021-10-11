@@ -43,17 +43,7 @@ export const mnCreatePost = async (req, res) => {
     const createPost = await Post.create(req.body);
     await createPost.setTopics(dataTopics);
 
-    const getPost = await Post.findOne({
-      where: {
-        id: createPost.id,
-      },
-      include: [
-        {
-          model: Topic,
-          attributes: ["id", "title"],
-        },
-      ],
-    });
+    const getPost = await findPostById(createPost.id);
 
     res
       .status(AppConst.STATUS_CREATED)
@@ -76,40 +66,20 @@ export const mnEditPost = async (req, res) => {
     );
 
     // Update post data and rejoin with topics
-    const updatePost = await Post.update(req.body, {
+    await Post.update(req.body, {
       where: {
         id: req.params.post_id,
       },
     });
 
-    const postData = await Post.findOne({
-      where: {
-        id: req.params.post_id,
-      },
-      include: [
-        {
-          model: Topic,
-          attributes: ["id", "title"],
-        },
-      ],
-    });
+    const postData = await findPostById(req.params.post_id);
 
     const oldTopicIds = postData.topics?.map((item) => item.id);
 
     await postData.removeTopics(oldTopicIds);
     await postData.setTopics(dataTopics);
 
-    const getPost = await Post.findOne({
-      where: {
-        id: req.params.post_id,
-      },
-      include: [
-        {
-          model: Topic,
-          attributes: ["id", "title"],
-        },
-      ],
-    });
+    const getPost = await findPostById(req.params.post_id);
 
     res
       .status(AppConst.STATUS_OK)
@@ -184,17 +154,8 @@ export const mnGetListPost = async (req, res) => {
 
 export const mnGetPostById = async (req, res) => {
   try {
-    const getPost = await Post.findOne({
-      where: {
-        id: req.params.post_id,
-      },
-      include: [
-        {
-          model: Topic,
-          attributes: ["id", "title"],
-        },
-      ],
-    });
+    const getPost = await findPostById(req.params.post_id);
+
     res
       .status(AppConst.STATUS_OK)
       .json(responseFormat({ data: formatPostData(getPost) }));
@@ -207,9 +168,34 @@ export const mnGetPostById = async (req, res) => {
 
 export const mnDeletePost = async (req, res) => {
   try {
+    const postData = await findPostById(req.params.post_id);
+
+    const oldTopicIds = postData.topics?.map((item) => item.id);
+
+    await postData.removeTopics(oldTopicIds);
+    await postData.destroy({
+      where: {
+        id: req.params.post_id,
+      },
+    });
+
+    res.status(AppConst.STATUS_OK).json(responseFormat());
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
       .json(responseFormat({ error: error, message: "error" }));
   }
 };
+
+const findPostById = async (id) =>
+  await Post.findOne({
+    where: {
+      id: id,
+    },
+    include: [
+      {
+        model: Topic,
+        attributes: ["id", "title"],
+      },
+    ],
+  });

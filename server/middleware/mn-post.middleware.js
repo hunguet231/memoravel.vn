@@ -184,7 +184,7 @@ export const checkMnGetPostById = async (req, res, next) => {
     } else {
       return res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: "post_id is not exist" }));
+        .json(responseFormat({ message: "post_id không tồn tại" }));
     }
   } catch (error) {
     res
@@ -202,7 +202,7 @@ export const checkMnDeletePost = async (req, res, next) => {
     } else {
       return res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: "post_id is not exist" }));
+        .json(responseFormat({ message: "post_id không tồn tại" }));
     }
   } catch (error) {
     res
