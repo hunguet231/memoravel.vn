@@ -31,7 +31,7 @@ const formatPostData = (data) => {
 
 export const mnCreatePost = async (req, res) => {
   try {
-    const formatData = { ...req.body, user_id: req.user_id };
+    const formatData = { ...req.body };
     delete formatData["topic_ids"];
     delete formatData["topics"];
 
@@ -40,7 +40,7 @@ export const mnCreatePost = async (req, res) => {
     );
 
     // Create post data and join with topics
-    const createPost = await Post.create(req.body);
+    const createPost = await Post.create({ ...req.body, user_id: req.user_id });
     await createPost.setTopics(dataTopics);
 
     const getPost = await findPostById(createPost.id);

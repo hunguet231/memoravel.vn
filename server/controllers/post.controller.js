@@ -6,7 +6,6 @@ import {
   convertPaging,
 } from "../utils";
 
-const User = database.Model.userModel;
 const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
 const Op = database.Sequelize.Op;
@@ -33,6 +32,67 @@ const formatResponseData = (data) => ({
 
 export const getPost = async (req, res) => {
   try {
+    const dataPage = convertPaging(req);
+    dataPage.size =
+      dataPage.size > AppConst.LIMIT_PAGE_SIZE
+        ? AppConst.LIMIT_PAGE_SIZE
+        : dataPage.size;
+
+    const pagination =
+      dataPage.paging === 0
+        ? {}
+        : {
+            limit: dataPage.size,
+            offset: (dataPage.page - 1) * dataPage.size,
+          };
+
+    const queryDataPost = {
+      status: AppConst.STATUS.publish,
+    };
+    if (dataPage.search) {
+      queryDataPost.title = {
+        [Op.like]: `%${dataPage.search}%`,
+      };
+    }
+
+    const queryDataTopic = {
+      status: AppConst.STATUS.publish,
+    };
+    if (dataPage.topic_id) {
+      queryDataTopic.id = dataPage.topic_id;
+    }
+
+    const { count, rows: data } = await Post.findAndCountAll({
+      ...pagination,
+      where: {
+        ...queryDataPost,
+      },
+      include: [
+        {
+          model: Topic,
+          where: {
+            ...queryDataTopic,
+          },
+          attributes: ["id", "title", "description", "alias"],
+        },
+      ],
+      distinct: true,
+    });
+
+    const formatData = data.map((dataMap) => formatResponseData(dataMap));
+
+    const response =
+      dataPage.paging === 0
+        ? {
+            data: formatData,
+            total: count,
+          }
+        : {
+            data: formatData,
+            total: count,
+            page: dataPage.page,
+          };
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
@@ -51,6 +111,41 @@ export const getPostByAlias = async (req, res) => {
 
 export const getPostHot = async (req, res) => {
   try {
+    const limit =
+      parseInt(req.query.limit) > AppConst.LIMIT_PAGE_SIZE
+        ? AppConst.LIMIT_PAGE_SIZE
+        : parseInt(req.query.limit);
+
+    const pagination = {
+      limit: limit,
+      offset: 0,
+    };
+
+    const { count, rows: data } = await Post.findAndCountAll({
+      ...pagination,
+      where: {
+        status: AppConst.STATUS.publish,
+      },
+      include: [
+        {
+          model: Topic,
+          where: {
+            status: AppConst.STATUS.publish,
+          },
+          attributes: ["id", "title", "description", "alias"],
+        },
+      ],
+      order: [["number_view", "DESC"]],
+      distinct: true,
+    });
+
+    const formatData = data.map((dataMap) => formatResponseData(dataMap));
+
+    const response = {
+      data: formatData,
+      total: count,
+    };
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

@@ -1,5 +1,6 @@
 export const SECRET_KEY = "m8inh8sdv5Tng@hib9am<f2u+4M";
 export const DEFAULT_LANG = "vi";
+export const LIMIT_PAGE_SIZE = 20;
 
 export const STATUS_OK = 200;
 export const STATUS_CREATED = 201;
