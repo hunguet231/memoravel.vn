@@ -9,11 +9,11 @@ const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
 const Op = database.Sequelize.Op;
 
-const responseData = (data) => ({
+const responseData = (data, key) => ({
   id: data.id,
-  title: data.title,
-  description: data.description,
-  alias: data.alias,
+  title: responseObjectMultiLang(data.title, key),
+  description: responseObjectMultiLang(data.description, key),
+  alias: responseObjectMultiLang(data.alias, key),
   status: data.status,
   created: data.createdAt,
   modified: data.updatedAt,
@@ -22,11 +22,6 @@ const responseData = (data) => ({
 export const createTopic = async (req, res) => {
   try {
     const newTopic = await Topic.create(req.body);
-
-    // Convert string to object
-    newTopic.title = responseObjectMultiLang(newTopic.title);
-    newTopic.description = responseObjectMultiLang(newTopic.description);
-    newTopic.alias = responseObjectMultiLang(newTopic.alias);
 
     res
       .status(AppConst.STATUS_CREATED)
@@ -53,11 +48,6 @@ export const editTopic = async (req, res) => {
       },
     });
 
-    // Convert string to object
-    getTopic.title = responseObjectMultiLang(getTopic.title);
-    getTopic.description = responseObjectMultiLang(getTopic.description);
-    getTopic.alias = responseObjectMultiLang(getTopic.alias);
-
     res
       .status(AppConst.STATUS_OK)
       .json(responseFormat({ data: responseData(getTopic) }));
@@ -80,10 +70,14 @@ export const getAllTopic = async (req, res) => {
           };
 
     const queryData = {
-      id: {
-        [Op.ne]: req.topic_id,
-      },
+      status: AppConst.STATUS.publish,
     };
+
+    if (dataPage.topic_id) {
+      queryData.id = {
+        [Op.ne]: dataPage.topic_id,
+      };
+    }
 
     if (dataPage.search) {
       queryData[Op.or] = {
@@ -104,7 +98,9 @@ export const getAllTopic = async (req, res) => {
       },
     });
 
-    const formatData = data.map((dataMap) => responseData(dataMap));
+    const formatData = data.map((dataMap) =>
+      responseData(dataMap, dataPage.paging ? "" : AppConst.DEFAULT_LANG)
+    );
 
     const response =
       dataPage.paging === 0
@@ -138,8 +134,8 @@ export const getTopicByAlias = async (req, res) => {
         alias: {
           [Op.like]: `%${req.params.alias}%`,
         },
+        status: AppConst.STATUS.publish,
       },
-      attributes: ["id", "title", "description", "alias", "createdAt"],
     });
 
     if (!topicData) {
@@ -149,22 +145,7 @@ export const getTopicByAlias = async (req, res) => {
     } else {
       res.status(AppConst.STATUS_OK).json(
         responseFormat({
-          data: {
-            id: topicData.id,
-            title: responseObjectMultiLang(
-              topicData.title,
-              AppConst.DEFAULT_LANG
-            ),
-            description: responseObjectMultiLang(
-              topicData.description,
-              AppConst.DEFAULT_LANG
-            ),
-            alias: responseObjectMultiLang(
-              topicData.alias,
-              AppConst.DEFAULT_LANG
-            ),
-            created: topicData.createdAt,
-          },
+          data: responseData(topicData, AppConst.DEFAULT_LANG),
         })
       );
     }
