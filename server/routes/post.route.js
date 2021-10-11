@@ -1,11 +1,7 @@
 import express from "express";
 import { ApiConst } from "../const";
 import { MnPostController, PostController } from "../controllers";
-import {
-  CommonMiddleware,
-  MnPostMiddleware,
-  PostMiddleware,
-} from "../middleware";
+import { CommonMiddleware, MnPostMiddleware } from "../middleware";
 
 const postRoute = express.Router();
 
@@ -48,22 +44,10 @@ postRoute.delete(
   MnPostController.mnDeletePost
 );
 
-postRoute.get(
-  ApiConst.GET_POST,
-  PostMiddleware.checkGetPost,
-  PostController.getPost
-);
+postRoute.get(ApiConst.GET_POST, PostController.getPost);
 
-postRoute.get(
-  ApiConst.GET_POST_BY_ALIAS,
-  PostMiddleware.checkGetPostByAlias,
-  PostController.getPostByAlias
-);
+postRoute.get(ApiConst.GET_POST_BY_ALIAS, PostController.getPostByAlias);
 
-postRoute.get(
-  ApiConst.GET_POST_HOT,
-  PostMiddleware.checkGetPostHot,
-  PostController.getPostHot
-);
+postRoute.get(ApiConst.GET_POST_HOT, PostController.getPostHot);
 
 export default postRoute;
