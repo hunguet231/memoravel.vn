@@ -99,6 +99,10 @@ export const checkMnEditPost = async (req, res, next) => {
   try {
     const messagePost = { ...formatPostData };
 
+    if (!req.params.post_id) {
+      messagePost.id = "Yêu cầu post_id!";
+    }
+
     // Check title is empty
     if (!requestObjectMultiLang(req.body.title, true)) {
       messagePost.title = "Yêu cầu nhập tiêu đề !";

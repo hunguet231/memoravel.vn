@@ -125,37 +125,49 @@ export const getAllTopic = async (req, res) => {
   }
 };
 
-// export const getListTopic = async (req, res) => {
-//   try {
-//     let listTopic = await Topic.findAll({
-//       where: {
-//         id: req.topic_Id,
-//       },
-//       include: [
-//         {
-//           model: ,
-//         },
-//       ],
-//     });
-//     res.status(200).send({
-//       success: true,
-//       data: listTopic,
-//     });
-//   } catch (error) {
-//     res
-//       .status(AppConst.STATUS_SERVER_ERROR)
-//       .json(responseFormat({ error: error, message: "error" }));
-//   }
-// };
-
 export const getTopicByAlias = async (req, res) => {
   try {
-    let topicAlias = await Topic.findOne({
+    if (!req.params.alias) {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: "Yêu cầu alias!" }));
+    }
+
+    const topicData = await Topic.findOne({
       where: {
-        alias: req.params.alias,
+        alias: {
+          [Op.like]: `%${req.params.alias}%`,
+        },
       },
+      attributes: ["id", "title", "description", "alias", "createdAt"],
     });
-    res.status(AppConst.STATUS_OK).json(responseFormat({ data: topicAlias }));
+
+    if (!topicData) {
+      res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: "Alias không tồn tại!" }));
+    } else {
+      res.status(AppConst.STATUS_OK).json(
+        responseFormat({
+          data: {
+            id: topicData.id,
+            title: responseObjectMultiLang(
+              topicData.title,
+              AppConst.DEFAULT_LANG
+            ),
+            description: responseObjectMultiLang(
+              topicData.description,
+              AppConst.DEFAULT_LANG
+            ),
+            alias: responseObjectMultiLang(
+              topicData.alias,
+              AppConst.DEFAULT_LANG
+            ),
+            created: topicData.createdAt,
+          },
+        })
+      );
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

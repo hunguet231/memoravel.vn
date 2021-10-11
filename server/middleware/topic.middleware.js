@@ -70,8 +70,8 @@ export const checkEditTopic = async (req, res, next) => {
   try {
     const messageTopic = { ...message };
 
-    if (!req.params.post_id) {
-      messageTopic.id = "Yêu cầu post_id!";
+    if (!req.params.topic_id) {
+      messageTopic.id = "Yêu cầu topic_id!";
     }
 
     // Check title is empty
@@ -81,7 +81,7 @@ export const checkEditTopic = async (req, res, next) => {
       const topic = await Topic.findOne({
         where: {
           id: {
-            [Op.ne]: req.params.post_id,
+            [Op.ne]: req.params.topic_id,
           },
           title: requestObjectMultiLang(req.body.title),
         },
@@ -115,27 +115,6 @@ export const checkEditTopic = async (req, res, next) => {
         .json(responseFormat({ message: JSON.stringify(messageTopic) }));
     } else {
       req.body = refactorTopicData;
-      next();
-    }
-  } catch (error) {
-    res
-      .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
-  }
-};
-
-export const checkGetTopicByAlias = async (req, res) => {
-  try {
-    let topicAlias = await Topic.findOne({
-      where: {
-        alias: req.params.alias,
-      },
-    });
-    if (!topicAlias) {
-      return res
-        .status(AppConst.STATUS_BAD_REQUEST)
-        .json(responseFormat({ message: "Topic alias không tồn tại!" }));
-    } else {
       next();
     }
   } catch (error) {

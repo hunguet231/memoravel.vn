@@ -28,16 +28,6 @@ topicRoute.get(
   TopicController.getAllTopic
 );
 
-topicRoute.get(ApiConst.GET_TOPIC, TopicController.getAllTopic);
-
-topicRoute.get(
-  ApiConst.GET_TOPIC_BY_ALIAS,
-  CommonMiddleware.verifyToken,
-  CommonMiddleware.verifyRolesManage,
-  TopicMiddleware.checkGetTopicByAlias,
-  TopicController.getTopicByAlias
-);
-
 topicRoute.delete(
   ApiConst.MANAGE_TOPIC_ID,
   CommonMiddleware.verifyToken,
@@ -45,5 +35,9 @@ topicRoute.delete(
   TopicMiddleware.checkDeleteTopic,
   TopicController.deleteTopic
 );
+
+topicRoute.get(ApiConst.GET_TOPIC, TopicController.getAllTopic);
+
+topicRoute.get(ApiConst.GET_TOPIC_BY_ALIAS, TopicController.getTopicByAlias);
 
 export default topicRoute;
