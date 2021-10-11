@@ -39,30 +39,27 @@ export const createTopic = async (req, res) => {
 
 export const editTopic = async (req, res) => {
   try {
-    if (req.isDisable) {
-      await Topic.update(
-        {
-          status: req.body.status,
-        },
-        {
-          where: {
-            id: req.params.topic_id,
-          },
-        }
-      );
-    } else {
-      await Topic.update(req.body, {
-        where: {
-          id: req.params.topic_id,
-        },
-      });
-    }
+    // Update topic data
+    await Topic.update(req.body, {
+      where: {
+        id: req.params.topic_id,
+      },
+    });
 
-    const topic = await Topic.findByPk(req.params.topic_id);
+    const getTopic = await Topic.findOne({
+      where: {
+        id: req.params.topic_id,
+      },
+    });
+
+    // Convert string to object
+    getTopic.title = responseObjectMultiLang(getTopic.title);
+    getTopic.description = responseObjectMultiLang(getTopic.description);
+    getTopic.alias = responseObjectMultiLang(getTopic.alias);
 
     res
-      .status(AppConst.STATUS_CREATED)
-      .json(responseFormat({ data: responseData(topic) }));
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: responseData(getTopic) }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

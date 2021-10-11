@@ -7,6 +7,7 @@ import {
 } from "../utils";
 
 const Topic = database.Model.topicModel;
+const Op = database.Sequelize.Op;
 
 const message = {
   title: "",
@@ -67,55 +68,50 @@ export const checkCreateTopic = async (req, res, next) => {
 
 export const checkEditTopic = async (req, res, next) => {
   try {
-    if (
-      !(
-        req.body.title &&
-        req.body.description &&
-        req.body.alias &&
-        req.body.details
-      )
-    ) {
-      let message = "";
-      // Check status
-      if (AppConst.STATUS.draft != req.body.status) {
-        message = "Sai định dạng trạng thái";
-      }
-      if (message) {
-        return res
-          .status(AppConst.STATUS_BAD_REQUEST)
-          .json(responseFormat({ message: message }));
-      } else {
-        req.isDisable = true;
-        next();
-      }
+    const messageTopic = { ...message };
+
+    // Check title is empty
+    if (!requestObjectMultiLang(req.body.title, true)) {
+      messageTopic.title = "Yêu cầu nhập tiêu đề !";
     } else {
-      const dataCreateTopic = {
-        title: req.body.title || "",
-        description: req.body.description || "",
-        alias: req.body.alias || "",
-        details: req.body.details || "",
-        status: parseInt(req.body.status) || AppConst.STATUS.draft,
-      };
-
-      const messageCreate = { ...message };
-
-      // Check status
-      if (!Object.values(AppConst.STATUS).includes(dataCreateTopic.status)) {
-        messageCreate.status = "Sai định dạng trạng thái";
+      const topic = await Topic.findOne({
+        where: {
+          id: {
+            [Op.ne]: req.params.post_id,
+          },
+          title: requestObjectMultiLang(req.body.title),
+        },
+      });
+      if (topic) {
+        messageTopic.title = "Tiêu đề đã tồn tại!";
       }
+    }
+    // Check status is not exist in object
+    if (!Object.values(AppConst.STATUS).includes(req.body.status)) {
+      messageTopic.status = "Status không tồn tại!";
+    }
 
-      const checkMessageValidate = Object.values(messageCreate).find(
-        (messageItem) => messageItem.length > 0
-      );
+    const title = requestObjectMultiLang(req.body.title);
+    const refactorTopicData = {
+      title: title,
+      description: requestObjectMultiLang(req.body.description),
+      alias: handleAliasResult(JSON.parse(title), false),
+      status: req.body.status
+        ? parseInt(req.body.status)
+        : AppConst.STATUS.draft,
+    };
 
-      if (!checkMessageValidate) {
-        return res
-          .status(AppConst.STATUS_BAD_REQUEST)
-          .json(responseFormat({ message: JSON.stringify(messageCreate) }));
-      } else {
-        req.body = dataCreateTopic;
-        next();
-      }
+    const checkMessageValidate = Object.values(messageTopic).find(
+      (messageItem) => messageItem.length > 0
+    );
+
+    if (checkMessageValidate) {
+      return res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: JSON.stringify(messageTopic) }));
+    } else {
+      req.body = refactorTopicData;
+      next();
     }
   } catch (error) {
     res
