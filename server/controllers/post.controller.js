@@ -102,6 +102,40 @@ export const getPost = async (req, res) => {
 
 export const getPostByAlias = async (req, res) => {
   try {
+    const postData = await Post.findOne({
+      where: {
+        alias: {
+          [Op.like]: `%${req.params.alias}%`,
+        },
+      },
+      include: [
+        {
+          model: Topic,
+          attributes: ["id", "title", "description", "alias"],
+        },
+      ],
+    });
+    if (!postData) {
+      res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: "alias không tồn tại" }));
+    } else {
+      let numberView = ++postData.number_view;
+      await Post.update(
+        {
+          number_view: numberView,
+        },
+        {
+          where: {
+            id: postData.id,
+          },
+        }
+      );
+      postData.number_view = numberView;
+      res
+        .status(AppConst.STATUS_OK)
+        .json(responseFormat({ data: formatResponseData(postData) }));
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
