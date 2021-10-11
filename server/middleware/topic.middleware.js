@@ -70,6 +70,10 @@ export const checkEditTopic = async (req, res, next) => {
   try {
     const messageTopic = { ...message };
 
+    if (!req.params.post_id) {
+      messageTopic.id = "Yêu cầu post_id!";
+    }
+
     // Check title is empty
     if (!requestObjectMultiLang(req.body.title, true)) {
       messageTopic.title = "Yêu cầu nhập tiêu đề !";
@@ -130,7 +134,7 @@ export const checkGetTopicByAlias = async (req, res) => {
     if (!topicAlias) {
       return res
         .status(AppConst.STATUS_BAD_REQUEST)
-        .json(responseFormat({ message: "Topic alias not found" }));
+        .json(responseFormat({ message: "Topic alias không tồn tại!" }));
     } else {
       next();
     }
@@ -143,15 +147,15 @@ export const checkGetTopicByAlias = async (req, res) => {
 
 export const checkDeleteTopic = async (req, res, next) => {
   try {
-    let topic = await Topic.findOne({
+    const topic = await Topic.findOne({
       where: {
-        id: req.params.id,
+        id: req.params.topic_id,
       },
     });
     if (!topic) {
       return res
         .status(AppConst.STATUS_BAD_REQUEST)
-        .json(responseFormat({ message: "Topic not found" }));
+        .json(responseFormat({ message: "Topic không tồn tại!" }));
     } else {
       next();
     }

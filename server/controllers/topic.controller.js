@@ -6,6 +6,7 @@ import {
   responseObjectMultiLang,
 } from "../utils";
 const Topic = database.Model.topicModel;
+const Post = database.Model.postModel;
 const Op = database.Sequelize.Op;
 
 const responseData = (data) => ({
@@ -164,25 +165,34 @@ export const getTopicByAlias = async (req, res) => {
 
 export const deleteTopic = async (req, res) => {
   try {
-    let topic = await Topic.findOne({
+    const topicData = await findTopicById(req.params.topic_id);
+
+    const oldPostIds = topicData.posts?.map((item) => item.id);
+
+    await topicData.removePosts(oldPostIds);
+    await topicData.destroy({
       where: {
-        id: req.params.id,
+        id: req.params.topic_id,
       },
     });
-    if (!topic) {
-      return res
-        .status(400)
-        .send({ success: false, error: "Topic does not exists!" });
-    }
-    await Topic.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(AppConst.STATUS_OK).json(responseFormat(response));
+
+    res.status(AppConst.STATUS_OK).json(responseFormat());
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
       .json(responseFormat({ error: error, message: "error" }));
   }
 };
+
+const findTopicById = async (id) =>
+  await Topic.findOne({
+    where: {
+      id: id,
+    },
+    include: [
+      {
+        model: Post,
+        attributes: ["id"],
+      },
+    ],
+  });
