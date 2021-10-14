@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { LangConstant } from "const";
 import { MainLayout } from "layouts";
 import { CKEditorComponent } from "components";
+import Header from "components/common/Header";
 
 const Home = () => {
   const { t: getLabel, i18n } = useTranslation();
@@ -13,7 +14,7 @@ const Home = () => {
 
   return (
     <MainLayout>
-      <button onClick={() => onChangeLanguage("vi")}>
+      {/* <button onClick={() => onChangeLanguage("vi")}>
         {getLabel(LangConstant.TXT_VIETNAMESE)}
       </button>
       <button onClick={() => onChangeLanguage("en")}>
@@ -21,7 +22,8 @@ const Home = () => {
       </button>
       <div style={{ width: "50vw" }}>
         <CKEditorComponent />
-      </div>
+      </div> */}
+      <Header />
     </MainLayout>
   );
 };
