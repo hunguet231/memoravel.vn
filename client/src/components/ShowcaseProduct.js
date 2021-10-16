@@ -7,7 +7,9 @@ const ShowcaseProduct = () => {
     <div className="wrapper">
       <div className="container">
         <div className={styles.showcase}>
-          <h1 className="heading text-center">Sản phẩm làng nghề</h1>
+          <h1 className="heading heading-section text-center">
+            Sản phẩm làng nghề
+          </h1>
           <ul className="flex justify-between">
             <li>Tất cả</li>
             <li>Bình</li>
