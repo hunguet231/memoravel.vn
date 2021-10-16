@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import App from "next/app";
 import "antd/dist/antd.css";
 // import "../../public/styles/index.scss";
+import "antd/dist/antd.css";
 import "../styles/_common.scss";
 
 import "language";

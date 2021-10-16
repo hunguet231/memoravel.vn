@@ -6,18 +6,22 @@ body {
 }
 
 body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-y: auto;
+    font-size: 16px;
+}
+
+ul {
+    list-style: none;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-y: auto;
-}
-
-ul {
-    list-style: none;
 }
 
 // style components
@@ -27,7 +31,7 @@ ul {
 }
 
 .container {
-    max-width: 1262px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -36,10 +40,10 @@ ul {
     font-family: $font-merriweather;
     color: $heading-black-color;
     font-weight: 700;
-    font-size: 48px;
+    font-size: 32px;
     letter-spacing: 0.005rem;
     line-height: 120%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .heading.heading-white {
@@ -48,6 +52,34 @@ ul {
 
 .text-center {
     text-align: center;
+}
+
+.align-center {
+    margin: 0 auto;
+}
+
+.button {
+    display: block;
+    width: max-content;
+    min-width: 180px;
+    background: $button-color;
+    margin: 20px auto;
+    padding: 8px 15px;
+    color: #fff;
+    font-family: $font-be;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background: $button-hover-color;
+    }
+}
+
+.button-secondary {
+    background: $button-light-color !important;
+    &:hover {
+        background: $button-light-hover-color !important;
+    }
 }
 
 // flexbox
