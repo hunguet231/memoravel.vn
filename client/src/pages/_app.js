@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import App from "next/app";
 // import "../../public/styles/index.scss";
+import "antd/dist/antd.css";
 import "../styles/_common.scss";
 
 import "language";
