@@ -6,6 +6,7 @@ import { CKEditorComponent } from "components";
 import Header from "components/common/Header";
 import ShowcaseProduct from "components/ShowcaseProduct";
 import TopProduct from "components/TopProduct";
+import Feedback from "components/Feedback";
 
 const Home = () => {
   const { t: getLabel, i18n } = useTranslation();
@@ -28,6 +29,7 @@ const Home = () => {
       <Header />
       <ShowcaseProduct />
       <TopProduct />
+      <Feedback />
     </MainLayout>
   );
 };
