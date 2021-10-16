@@ -5,6 +5,7 @@ import { MainLayout } from "layouts";
 import { CKEditorComponent } from "components";
 import Header from "components/common/Header";
 import ShowcaseProduct from "components/ShowcaseProduct";
+import TopProduct from "components/TopProduct";
 
 const Home = () => {
   const { t: getLabel, i18n } = useTranslation();
@@ -26,6 +27,7 @@ const Home = () => {
       </div> */}
       <Header />
       <ShowcaseProduct />
+      <TopProduct />
     </MainLayout>
   );
 };
