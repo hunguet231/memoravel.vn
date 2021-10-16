@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,100;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import "variables";
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-y: auto;
+}
+
+ul {
+    list-style: none;
+}
+
+// style components
+.wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1262px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.heading {
+    font-family: $font-merriweather;
+    color: $heading-black-color;
+    font-weight: 700;
+    font-size: 48px;
+    letter-spacing: 0.005rem;
+    line-height: 120%;
+    margin-bottom: 40px;
+}
+
+.heading.heading-white {
+    color: $heading-white-color !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+// flexbox
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}

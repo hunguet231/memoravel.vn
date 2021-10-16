@@ -1,0 +1,11 @@
+@import "variables";
+.showcaseItem {
+    font-family: $font-be;
+    font-weight: 700;
+    font-size: 24px;
+    color: $light-gray-color
+}
+
+.showcase ul li:first-child {
+    color: $primary-color
+}

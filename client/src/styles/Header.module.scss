@@ -1,5 +1,5 @@
-$color-primary: #5F1E03;
+@import "variables";
 .headerWrapper {
-    background-color: $color-primary;
+    background-color: $primary-color;
     height: 70px;
 }
