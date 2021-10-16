@@ -1,5 +1,28 @@
 @import "variables";
 .headerWrapper {
-    background-color: $primary-color;
-    height: 70px;
+  background-color: $heading-white-color;
+  padding: 30px 0;
+}
+
+.logo {
+  color: $primary-color;
+}
+
+.logoText {
+  font-size: 22px;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.btnLogin {
+  background-color: $primary-color;
+  color: $white-color;
+  border-color: $primary-color;
+  margin-left: 10px;
+}
+.btnRegister {
+  color: $primary-color;
+  border-color: $primary-color;
 }
