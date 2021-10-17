@@ -11,6 +11,9 @@
         text-align: center;
         letter-spacing: 0.005em;
         color: $light-gray-color;
+        @include media(mobile) {
+            font-size: 13px;
+        }
     }
     .inputContainer {
         width: 100%;
