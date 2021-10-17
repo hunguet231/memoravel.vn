@@ -1,12 +1,14 @@
 import React from "react";
 import { AppHead } from "components";
 import { AppConstant } from "const";
+import Footer from "components/common/Footer";
 
 const MainLayout = ({ children }) => {
   return (
     <>
       <AppHead {...DEFAULT_APP_HEADER} />
       <main>{children}</main>
+      <Footer />
     </>
   );
 };

@@ -5,9 +5,14 @@ import { MainLayout } from "layouts";
 import { CKEditorComponent } from "components";
 import Header from "components/common/Header";
 import CarouselHeader from "components/CarouselHeader";
-import ShowcaseProduct from "components/ShowcaseProduct";
 import Achievements from "components/Achievements";
 import MemoStory from "components/MemoStory";
+import ShowcaseProduct from "components/home/ShowcaseProduct";
+import TopProduct from "components/home/TopProduct";
+import Feedback from "components/home/Feedback";
+import BoxImage from "components/common/BoxImage";
+import News from "components/home/News";
+import ContactForm from "components/common/ContactForm";
 
 const Home = () => {
   const { t: getLabel, i18n } = useTranslation();
@@ -32,6 +37,10 @@ const Home = () => {
       <ShowcaseProduct />
       <Achievements />
       <MemoStory />
+      <TopProduct />
+      <Feedback />
+      <News />
+      <ContactForm />
     </MainLayout>
   );
 };

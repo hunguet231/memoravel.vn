@@ -1,0 +1,49 @@
+@import "variables";
+@import "mixins";
+.footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: auto;
+    background: $primary-color;
+    .infoBox {
+        display: grid;
+        place-items: center;
+        grid-gap: 16px;
+        .socail {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            color: #fff;
+            svg {
+                margin: 5px 10px;
+                cursor: pointer;
+            }
+        }
+    }
+    .divider {
+        height: 1px;
+        background-color: #fff;
+        margin-top: 50px;
+    }
+    .textBottom {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-top: 50px;
+        color: #fff;
+        font-family: $font-be;
+        font-size: 14px;
+        @include media(mobile) {
+            font-size: 12px;
+        }
+        letter-spacing: 00.005em;
+        .links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            li {
+                margin-left: 15px;
+            }
+        }
+    }
+}

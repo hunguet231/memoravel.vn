@@ -1,0 +1,97 @@
+@import "variables";
+@import "mixins";
+.feedback {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: auto;
+    background: #F6F4ED;
+    color: #fff;
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        @include media(tablet) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        grid-gap: 8px;
+        height: auto;
+        .card {
+            background-color: $primary-color;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            .rate {
+                font-size: 15px;
+            }
+            .img {
+                flex: 3;
+                @include media(mobile) {
+                    flex: 1;
+                }
+                border-radius: 8px;
+                height: 216px;
+                @include media(mobile) {
+                    height: 165px;
+                }
+                width: auto;
+                background-size: cover;
+                background-position: center;
+            }
+            .text {
+                flex: 4;
+                @include media(mobile) {
+                    flex: 1;
+                }
+                margin-left: 20px;
+                .title {
+                    font-family: $font-merriweather;
+                    font-weight: bold;
+                    font-size: 20px;
+                    letter-spacing: 0.005em;
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                    @include media(tablet) {
+                        font-size: 16px;
+                    }
+                    @include media(mobile) {
+                        margin-top: 6px;
+                        margin-bottom: 6px;
+                        font-size: 13px;
+                    }
+                }
+                .content {
+                    font-family: $font-dm-sans;
+                    font-size: 15px;
+                    letter-spacing: 00.005em;
+                    @include media(tablet) {
+                        font-size: 14px;
+                    }
+                    @include media(mobile) {
+                        font-size: 11px;
+                    }
+                }
+                .author {
+                    font-family: $font-merriweather;
+                    font-weight: 600;
+                    font-size: 15px;
+                    letter-spacing: 00.005em;
+                    margin-top: 18px;
+                    @include media(tablet) {
+                        font-size: 14px;
+                        margin-top: 10px;
+                    }
+                    @include media(mobile) {
+                        font-size: 11px;
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+    .button {
+        margin-top: 40px;
+        @include media(tablet) {
+            margin-top: 20px;
+        }
+    }
+}
