@@ -1,7 +1,7 @@
 import React from "react";
 import { Rate } from "antd";
-import feedbacks from "../utils/pageFeedbacks";
-import styles from "../styles/Feedback.module.scss";
+import feedbacks from "../../utils/pageFeedbacks";
+import styles from "../../styles/Feedback.module.scss";
 
 const Feedback = () => {
   return (

@@ -4,9 +4,11 @@ import { LangConstant } from "const";
 import { MainLayout } from "layouts";
 import { CKEditorComponent } from "components";
 import Header from "components/common/Header";
-import ShowcaseProduct from "components/ShowcaseProduct";
-import TopProduct from "components/TopProduct";
-import Feedback from "components/Feedback";
+import ShowcaseProduct from "components/home/ShowcaseProduct";
+import TopProduct from "components/home/TopProduct";
+import Feedback from "components/home/Feedback";
+import BoxImage from "components/common/BoxImage";
+import News from "components/home/News";
 
 const Home = () => {
   const { t: getLabel, i18n } = useTranslation();
@@ -30,6 +32,7 @@ const Home = () => {
       <ShowcaseProduct />
       <TopProduct />
       <Feedback />
+      <News />
     </MainLayout>
   );
 };

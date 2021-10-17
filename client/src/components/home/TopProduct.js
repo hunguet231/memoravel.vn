@@ -1,6 +1,6 @@
 import { Carousel } from "antd";
 import React from "react";
-import styles from "../styles/TopProduct.module.scss";
+import styles from "../../styles/TopProduct.module.scss";
 
 const TopProduct = () => {
   const settings = {
