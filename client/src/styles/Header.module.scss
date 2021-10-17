@@ -1,28 +1,41 @@
 @import "variables";
 .headerWrapper {
   background-color: $heading-white-color;
-  padding: 30px 0;
+  .logoText {
+    font-size: 22px;
+    font-weight: 700;
+    color: $primary-color;
+  }
+
+  .btnRegister {
+    margin-right: 10px;
+  }
 }
 
-.logo {
-  color: $primary-color;
-}
+.menuWrapper {
+  background: $primary-color;
+  ul {
+    margin: 0;
+    li {
+      padding: 30px 20px;
+      font-family: $font-be;
+      font-weight: 200;
+      color: $white-color;
+      cursor: pointer;
+      white-space: nowrap;
 
-.logoText {
-  font-size: 22px;
-}
-
-.btn {
-  margin-left: 10px;
-}
-
-.btnLogin {
-  background-color: $primary-color;
-  color: $white-color;
-  border-color: $primary-color;
-  margin-left: 10px;
-}
-.btnRegister {
-  color: $primary-color;
-  border-color: $primary-color;
+      .input {
+        border-radius: 10px;
+      }
+      .dropdownButton {
+        color: #fff;
+      }
+      &:first-child {
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+    .active {
+      font-weight: 700;
+    }
+  }
 }

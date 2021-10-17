@@ -1,0 +1,28 @@
+@import "variables";
+.achieveWrapper {
+  margin-top: 120px;
+  height: 80vh;
+  .subHeading {
+    width: 80%;
+    margin-bottom: 40px;
+  }
+  .achieveCard {
+    width: 100%;
+    margin: 0 5px;
+    padding: 20px;
+    background: $lighter-white-color;
+    .achieveImg {
+      width: 70%;
+      margin: auto;
+    }
+    &:hover {
+      cursor: pointer;
+      background: $darken-white-color;
+    }
+  }
+  .achieveName {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}

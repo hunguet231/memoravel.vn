@@ -1,0 +1,18 @@
+@import "variables";
+
+.storyWrapper {
+  height: 100vh;
+  .img {
+    width: 138%;
+  }
+  .storyLink {
+    font-weight: 600;
+    color: $primary-color;
+    &:hover {
+      color: $button-hover-color;
+    }
+  }
+  .storyDescription {
+    margin-bottom: 30px;
+  }
+}

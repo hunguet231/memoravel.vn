@@ -4,7 +4,10 @@ import { LangConstant } from "const";
 import { MainLayout } from "layouts";
 import { CKEditorComponent } from "components";
 import Header from "components/common/Header";
+import CarouselHeader from "components/CarouselHeader";
 import ShowcaseProduct from "components/ShowcaseProduct";
+import Achievements from "components/Achievements";
+import MemoStory from "components/MemoStory";
 
 const Home = () => {
   const { t: getLabel, i18n } = useTranslation();
@@ -25,7 +28,10 @@ const Home = () => {
         <CKEditorComponent />
       </div> */}
       <Header />
+      <CarouselHeader />
       <ShowcaseProduct />
+      <Achievements />
+      <MemoStory />
     </MainLayout>
   );
 };
