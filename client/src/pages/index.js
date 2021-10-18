@@ -13,6 +13,7 @@ import Feedback from "components/home/Feedback";
 import BoxImage from "components/common/BoxImage";
 import News from "components/home/News";
 import ContactForm from "components/common/ContactForm";
+import ProductCard from "components/ProductCard";
 
 const Home = () => {
   const { t: getLabel, i18n } = useTranslation();
@@ -35,6 +36,7 @@ const Home = () => {
       <Header />
       <CarouselHeader />
       <ShowcaseProduct />
+      <ProductCard />
       <Achievements />
       <MemoStory />
       <TopProduct />
