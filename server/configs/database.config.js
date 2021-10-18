@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 import configFile from "./config.json";
-import { UserModel, TopicModel, PostModel } from "../models";
+import { UserModel, TopicModel, PostModel, ShopModel, ProductModel, Shop_addressModel, CartModel } from "../models";
 
 dotenv.config();
 
@@ -29,6 +29,11 @@ const Model = {
   userModel: UserModel(sequelize, Sequelize),
   topicModel: TopicModel(sequelize, Sequelize),
   postModel: PostModel(sequelize, Sequelize),
+  shopModel: ShopModel(sequelize, Sequelize),
+  productModel: ProductModel(sequelize, Sequelize),
+  shop_addressModel: Shop_addressModel(sequelize, Sequelize),
+  cartModel: CartModel(sequelize, Sequelize),
+
 };
 
 database.Model = Model;
@@ -49,4 +54,25 @@ Model.postModel.belongsToMany(Model.topicModel, {
   otherKey: "topic_id",
 });
 
+//Join user with shops
+Model.userModel.hasOne(Model.shopModel, { foreignKey: "user_id" });
+Model.shopModel.belongsTo(Model.userModel, { foreignKey: "user_id" });
+
+//Join shop with products
+Model.shopModel.hasOne(Model.productModel, { foreignKey: "shop_id" });
+Model.productModel.belongsTo(Model.shopModel, { foreignKey: "shop_id" });
+
+// Join shop with shop_address
+Model.shopModel.hasOne(Model.shop_addressModel, { foreignKey: "shop_id" });
+Model.shop_addressModel.belongsTo(Model.shopModel, { foreignKey: "shop_id" });
+
+//Join user with carts
+Model.userModel.hasOne(Model.cartModel, { foreignKey: "user_id" });
+Model.cartModel.belongsTo(Model.userModel, { foreignKey: "user_id" });
+
+//Join products with carts
+Model.productModel.hasOne(Model.cartModel, { foreignKey: "product_id" });
+Model.cartModel.belongsTo(Model.productModel, { foreignKey: "product_id" });
+
 export default database;
+
