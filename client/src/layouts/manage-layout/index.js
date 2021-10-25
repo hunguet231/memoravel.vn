@@ -2,7 +2,7 @@ import React from "react";
 import { NoSsr, CssBaseline, Box } from "@material-ui/core";
 import { AppHead } from "components";
 import { AppConstant } from "const";
-import { Header } from "./components";
+import { Header, Sidebar } from "./components";
 import { useStyles } from "./style";
 
 const MainLayout = ({ children }) => {
@@ -14,6 +14,7 @@ const MainLayout = ({ children }) => {
       <AppHead {...DEFAULT_APP_HEADER} />
       <Header />
       <Box className={defaultClasses.root}>
+        <Sidebar />
         <main className={defaultClasses.main}>{children}</main>
       </Box>
     </NoSsr>
