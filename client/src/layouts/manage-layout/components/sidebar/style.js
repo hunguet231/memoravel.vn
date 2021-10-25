@@ -11,6 +11,8 @@ export const useStyles = makeStyles({
     top: 60,
     overflowY: "auto",
     background: "#3e4045",
+    boxShadow:
+      "4px 3px 4px -1px rgb(0 0 0 / 20%), 4px 4px 4px 4px rgb(0 0 0 / 14%), 2px 1px 10px 4px rgb(0 0 0 / 12%)",
   },
   list: {
     padding: 0,

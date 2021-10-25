@@ -14,6 +14,7 @@ export const useStyles = makeStyles({
     width: 40,
     height: 40,
     maxHeight: "100%",
+    backgroundColor: "#64b5f6",
   },
   profileAction: {
     position: "absolute",

@@ -19,8 +19,6 @@ const Header = () => {
 
   const [isShow, setIsShow] = useState(false);
 
-  const onLogout = () => {};
-
   return (
     <AppBar color="inherit" position="sticky">
       <Box className={defaultClasses.root}>
@@ -40,10 +38,18 @@ const Header = () => {
                   <ListItemText
                     primary={
                       <Typography variant="body2" color="inherit">
+                        Tài khoản
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <ListItem button className={defaultClasses.actionItem}>
+                  <ListItemText
+                    primary={
+                      <Typography variant="body2" color="inherit">
                         Đăng xuất
                       </Typography>
                     }
-                    onClick={onLogout}
                   />
                 </ListItem>
               </List>
