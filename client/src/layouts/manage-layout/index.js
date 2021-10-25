@@ -1,15 +1,21 @@
 import React from "react";
+import { NoSsr, CssBaseline, Box } from "@material-ui/core";
 import { AppHead } from "components";
 import { AppConstant } from "const";
-import { NoSsr } from "@material-ui/core";
-import Footer from "components/common/Footer";
+import { Header } from "./components";
+import { useStyles } from "./style";
 
 const MainLayout = ({ children }) => {
+  const defaultClasses = useStyles();
+
   return (
     <NoSsr>
+      <CssBaseline />
       <AppHead {...DEFAULT_APP_HEADER} />
-      <main>{children}</main>
-      <Footer />
+      <Header />
+      <Box className={defaultClasses.root}>
+        <main className={defaultClasses.main}>{children}</main>
+      </Box>
     </NoSsr>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import NextHead from "next/head";
 import { getAbsolutePath } from "utils";
 
@@ -33,3 +34,10 @@ const AppHead = (props) => {
 const ICON_PATH = "/images/favicon.ico";
 
 export default AppHead;
+
+AppHead.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  url: PropTypes.string,
+  ogImage: PropTypes.string,
+};
