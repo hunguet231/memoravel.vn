@@ -8,7 +8,7 @@ import {
   Link,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
-import { useStyles } from "./style";
+import { useStyles } from "./styles";
 
 const SidebarItem = ({ item }) => {
   const classes = useStyles();

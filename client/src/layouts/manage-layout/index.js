@@ -3,7 +3,7 @@ import { NoSsr, CssBaseline, Box } from "@material-ui/core";
 import { AppHead } from "components";
 import { AppConstant } from "const";
 import { Header, Sidebar } from "./components";
-import { useStyles } from "./style";
+import { useStyles } from "./styles";
 
 const MainLayout = ({ children }) => {
   const defaultClasses = useStyles();

@@ -3,7 +3,7 @@ import { List, Box } from "@material-ui/core";
 import { ClassOutlined, ListAltOutlined } from "@material-ui/icons";
 import { PathConstant } from "const";
 import SidebarItem from "./sidebar-item";
-import { useStyles } from "./style";
+import { useStyles } from "./styles";
 
 const Sidebar = () => {
   const defaultClasses = useStyles();

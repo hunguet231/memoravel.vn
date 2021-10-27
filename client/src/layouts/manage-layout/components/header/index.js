@@ -12,7 +12,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import { useStyles } from "./style";
+import { useStyles } from "./styles";
 
 const Header = () => {
   const defaultClasses = useStyles();
