@@ -1,8 +1,12 @@
 import React from "react";
-import { ManageLayout } from "layouts";
+import { ManageLayout, HeaderLayout } from "layouts";
 
 const Post = () => {
-  return <ManageLayout></ManageLayout>;
+  return (
+    <ManageLayout>
+      <HeaderLayout title="Quản lý bài viết" />
+    </ManageLayout>
+  );
 };
 
 export default Post;

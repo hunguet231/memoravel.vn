@@ -1,8 +1,12 @@
 import React from "react";
-import { ManageLayout } from "layouts";
+import { ManageLayout, HeaderLayout } from "layouts";
 
 const User = () => {
-  return <ManageLayout></ManageLayout>;
+  return (
+    <ManageLayout>
+      <HeaderLayout title="Quản lý User" />
+    </ManageLayout>
+  );
 };
 
 export default User;
