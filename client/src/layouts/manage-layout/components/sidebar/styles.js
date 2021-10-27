@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const DRAWER_WIDTH_OPEN = 210;
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
   root: {
     position: "sticky",
     width: DRAWER_WIDTH_OPEN,
@@ -17,4 +17,16 @@ export const useStyles = makeStyles({
   list: {
     padding: 0,
   },
-});
+  listItem: {
+    display: "flex",
+    justifyContent: "flex-end",
+    minHeight: 56,
+    padding: 8,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginRight: 8,
+    color: theme.palette.common.white,
+  },
+}));

@@ -1,25 +1,33 @@
 import React from "react";
-import { List, Box } from "@material-ui/core";
+import { List, ListItem, Box } from "@material-ui/core";
 import {
   ClassOutlined,
   ListAltOutlined,
   AccountCircleOutlined,
+  Menu,
 } from "@material-ui/icons";
 import { AppConstant, PathConstant } from "const";
+import { useManageLayout } from "hooks";
 import SidebarItem from "./sidebar-item";
 import { useStyles } from "./styles";
 
 const Sidebar = () => {
   const defaultClasses = useStyles();
+  const { isOpenSidebar } = useManageLayout();
 
   return (
-    <Box className={defaultClasses.root}>
-      <List className={defaultClasses.list}>
-        {SIDEBAR_DATA.map((item, index) => (
-          <SidebarItem key={index} item={item} />
-        ))}
-      </List>
-    </Box>
+    isOpenSidebar && (
+      <Box className={defaultClasses.root}>
+        <List className={defaultClasses.list}>
+          <ListItem className={defaultClasses.listItem}>
+            <Menu className={defaultClasses.icon} />
+          </ListItem>
+          {SIDEBAR_DATA.map((item, index) => (
+            <SidebarItem key={index} item={item} />
+          ))}
+        </List>
+      </Box>
+    )
   );
 };
 
@@ -39,7 +47,7 @@ const SIDEBAR_DATA = [
     path: PathConstant.MANAGE_POST,
   },
   {
-    text: "Quản lý Account",
+    text: "Quản lý User",
     icon: <AccountCircleOutlined color="inherit" />,
     path: PathConstant.MANAGE_USER,
     role: AppConstant.ROLE.admin,

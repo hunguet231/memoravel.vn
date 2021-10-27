@@ -1,14 +1,16 @@
 import { makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     height: 60,
-    paddingLeft: 30,
-    paddingRight: 30,
+    padding: "0 48px",
+    [theme.breakpoints.down(900)]: {
+      padding: "0 12px",
+    },
   },
   logo: {
     width: 40,
@@ -19,11 +21,11 @@ export const useStyles = makeStyles({
   profileAction: {
     position: "absolute",
     top: 60,
-    right: 42,
+    right: 30,
   },
   actionItem: {
     minWidth: 190,
     paddingTop: 3,
     paddingBottom: 3,
   },
-});
+}));

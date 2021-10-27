@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppBar,
   Avatar,
   Box,
-  CardMedia,
   ClickAwayListener,
   IconButton,
   List,
@@ -12,26 +11,36 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+import { Menu } from "@material-ui/icons";
+import { useManageLayout } from "hooks";
 import { useStyles } from "./styles";
 
 const Header = () => {
   const defaultClasses = useStyles();
-
-  const [isShow, setIsShow] = useState(false);
+  const {
+    isCloseWithMobile,
+    setIsOpenSidebar,
+    isShowSelectHeader,
+    setIsShowHeader,
+  } = useManageLayout();
 
   return (
     <AppBar color="inherit" position="sticky">
       <Box className={defaultClasses.root}>
-        <CardMedia
-          component="img"
-          src="/images/logo-1.png"
-          className={defaultClasses.logo}
-        />
-        <IconButton onClick={() => setIsShow(true)}>
+        {isCloseWithMobile ? (
+          <IconButton
+            onClick={() => setIsOpenSidebar((currentData) => !currentData)}
+          >
+            <Menu />
+          </IconButton>
+        ) : (
+          <Box></Box>
+        )}
+        <IconButton onClick={() => setIsShowHeader(true)}>
           <Avatar alt={""} src={""} />
         </IconButton>
-        {isShow && (
-          <ClickAwayListener onClickAway={() => setIsShow(false)}>
+        {isShowSelectHeader && (
+          <ClickAwayListener onClickAway={() => setIsShowHeader(false)}>
             <Paper className={defaultClasses.profileAction}>
               <List component="div">
                 <ListItem button className={defaultClasses.actionItem}>

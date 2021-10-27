@@ -1,5 +1,6 @@
 {
   "name": "client-memoravel.vn",
+  "license": "",
   "scripts": {
     "dev": "node src/server.js",
     "build": "next build",

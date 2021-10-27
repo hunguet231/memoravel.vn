@@ -4,6 +4,7 @@ export const useStyles = makeStyles({
   root: {
     display: "flex",
     alignItems: "stretch",
+    marginTop: 8,
   },
   main: {
     flexGrow: 1,
