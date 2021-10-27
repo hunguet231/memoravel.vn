@@ -1,7 +1,11 @@
 import React from "react";
 import { List, Box } from "@material-ui/core";
-import { ClassOutlined, ListAltOutlined } from "@material-ui/icons";
-import { PathConstant } from "const";
+import {
+  ClassOutlined,
+  ListAltOutlined,
+  AccountCircleOutlined,
+} from "@material-ui/icons";
+import { AppConstant, PathConstant } from "const";
 import SidebarItem from "./sidebar-item";
 import { useStyles } from "./styles";
 
@@ -33,5 +37,11 @@ const SIDEBAR_DATA = [
     text: "Bài viết",
     icon: <ClassOutlined color="inherit" />,
     path: PathConstant.MANAGE_POST,
+  },
+  {
+    text: "Quản lý Account",
+    icon: <AccountCircleOutlined color="inherit" />,
+    path: PathConstant.MANAGE_USER,
+    role: AppConstant.ROLE.admin,
   },
 ];

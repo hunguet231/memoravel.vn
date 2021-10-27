@@ -5,9 +5,9 @@ import {
   ListItem,
   Typography,
   ListItemIcon,
-  Link,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
+import { AppLink } from "components/admin";
 import { useStyles } from "./styles";
 
 const SidebarItem = ({ item }) => {
@@ -15,7 +15,7 @@ const SidebarItem = ({ item }) => {
   const router = useRouter();
 
   return (
-    <Link to={item.path}>
+    <AppLink to={item.path}>
       <ListItem
         button
         classes={{ root: classes.item, selected: classes.selectedItem }}
@@ -30,7 +30,7 @@ const SidebarItem = ({ item }) => {
           }
         />
       </ListItem>
-    </Link>
+    </AppLink>
   );
 };
 
