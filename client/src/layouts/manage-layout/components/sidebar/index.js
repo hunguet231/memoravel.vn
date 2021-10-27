@@ -7,27 +7,23 @@ import {
   Menu,
 } from "@material-ui/icons";
 import { AppConstant, PathConstant } from "const";
-import { useManageLayout } from "hooks";
 import SidebarItem from "./sidebar-item";
 import { useStyles } from "./styles";
 
 const Sidebar = () => {
   const defaultClasses = useStyles();
-  const { isOpenSidebar } = useManageLayout();
 
   return (
-    isOpenSidebar && (
-      <Box className={defaultClasses.root}>
-        <List className={defaultClasses.list}>
-          <ListItem className={defaultClasses.listItem}>
-            <Menu className={defaultClasses.icon} />
-          </ListItem>
-          {SIDEBAR_DATA.map((item, index) => (
-            <SidebarItem key={index} item={item} />
-          ))}
-        </List>
-      </Box>
-    )
+    <Box className={defaultClasses.root}>
+      <List className={defaultClasses.list}>
+        <ListItem className={defaultClasses.listItem}>
+          <Menu className={defaultClasses.icon} />
+        </ListItem>
+        {SIDEBAR_DATA.map((item, index) => (
+          <SidebarItem key={index} item={item} />
+        ))}
+      </List>
+    </Box>
   );
 };
 

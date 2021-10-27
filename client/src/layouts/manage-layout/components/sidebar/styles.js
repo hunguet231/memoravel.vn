@@ -6,9 +6,9 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     position: "sticky",
     width: DRAWER_WIDTH_OPEN,
-    height: "calc(100vh - 60px)",
+    height: "calc(100vh - 68px)",
     minWidth: DRAWER_WIDTH_OPEN,
-    top: 60,
+    top: 68,
     overflowY: "auto",
     background: "#3e4045",
     boxShadow:

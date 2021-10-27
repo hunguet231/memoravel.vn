@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   AppBar,
   Avatar,
@@ -12,25 +13,17 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
-import { useManageLayout } from "hooks";
 import { useStyles } from "./styles";
 
-const Header = () => {
+const Header = ({ isCloseWithMobile, onOpenSidebar }) => {
   const defaultClasses = useStyles();
-  const {
-    isCloseWithMobile,
-    setIsOpenSidebar,
-    isShowSelectHeader,
-    setIsShowHeader,
-  } = useManageLayout();
+  const [isShowSelectHeader, setIsShowHeader] = useState(false);
 
   return (
     <AppBar color="inherit" position="sticky">
       <Box className={defaultClasses.root}>
         {isCloseWithMobile ? (
-          <IconButton
-            onClick={() => setIsOpenSidebar((currentData) => !currentData)}
-          >
+          <IconButton onClick={onOpenSidebar}>
             <Menu />
           </IconButton>
         ) : (
@@ -69,5 +62,11 @@ const Header = () => {
     </AppBar>
   );
 };
+
+Header.propTypes = {
+  isCloseWithMobile: PropTypes.bool,
+  onOpenSidebar: PropTypes.func,
+};
+Header.defaultProps = {};
 
 export default Header;

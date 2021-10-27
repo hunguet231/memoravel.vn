@@ -8,7 +8,7 @@ export const useStyles = makeStyles({
   },
   main: {
     flexGrow: 1,
-    minHeight: "calc(100vh - 60px)",
+    minHeight: "calc(100vh - 68px)",
     backgroundColor: "#fafafb",
   },
 });
