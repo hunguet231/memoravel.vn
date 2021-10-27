@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     alignItems: "stretch",
@@ -9,6 +9,7 @@ export const useStyles = makeStyles({
   main: {
     flexGrow: 1,
     minHeight: "calc(100vh - 68px)",
-    backgroundColor: "#fafafb",
+    backgroundColor: theme.palette.grey[200],
+    margin: "0 16px",
   },
-});
+}));
