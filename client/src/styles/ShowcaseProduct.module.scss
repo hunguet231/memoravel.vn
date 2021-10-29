@@ -20,7 +20,9 @@
                 margin-right: 15px;
                 font-weight: 600;
             }
-            &:first-child {
+            transition: all 0.2s ease-in-out;
+            &:first-child,
+            &:hover {
                 color: $primary-color
             }
         }

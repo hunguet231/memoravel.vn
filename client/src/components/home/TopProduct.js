@@ -1,16 +1,12 @@
-import { Carousel } from "antd";
 import React from "react";
+import Flickity from "react-flickity-component";
+import "flickity/css/flickity.css";
 import styles from "../../styles/TopProduct.module.scss";
 
 const TopProduct = () => {
-  const settings = {
-    dots: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+  const flickityOptions = {
+    wrapAround: true,
+    autoPlay: true,
   };
 
   return (
@@ -22,20 +18,48 @@ const TopProduct = () => {
             Những sản phẩm ở memoravel luôn được đảm bảo <br /> chất lượng, giá
             cả, hình thức tốt nhất
           </div>
-          <Carousel {...settings}>
-            <div>
-              <h3 style={{ height: "436px", background: "#7a0b1b" }}>1</h3>
+          <Flickity options={flickityOptions}>
+            <div
+              style={{
+                height: "436px",
+                width: "100%",
+                marginRight: "10px",
+                background: "#7a0b1b",
+              }}
+            >
+              <h3>1</h3>
             </div>
-            <div>
-              <h3 style={{ height: "436px", background: "#7a0b1b" }}>2</h3>
+            <div
+              style={{
+                height: "436px",
+                width: "100%",
+                marginRight: "10px",
+                background: "#7a0b1b",
+              }}
+            >
+              <h3>2</h3>
             </div>
-            <div>
-              <h3 style={{ height: "436px", background: "#7a0b1b" }}>3</h3>
+            <div
+              style={{
+                height: "436px",
+                width: "100%",
+                marginRight: "10px",
+                background: "#7a0b1b",
+              }}
+            >
+              <h3>3</h3>
             </div>
-            <div>
-              <h3 style={{ height: "436px", background: "#7a0b1b" }}>4</h3>
+            <div
+              style={{
+                height: "436px",
+                width: "100%",
+                marginRight: "10px",
+                background: "#7a0b1b",
+              }}
+            >
+              <h3>4</h3>
             </div>
-          </Carousel>
+          </Flickity>
         </div>
       </div>
     </div>

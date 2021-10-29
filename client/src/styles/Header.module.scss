@@ -1,41 +1,59 @@
 @import "variables";
+@import "mixins";
 .headerWrapper {
-  background-color: $heading-white-color;
-  .logoText {
-    font-size: 22px;
-    font-weight: 700;
-    color: $primary-color;
-  }
-
-  .btnRegister {
-    margin-right: 10px;
-  }
+    height: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, .3);
+    background-color: $heading-white-color;
+    .logoText {
+        font-family: $font-be;
+        font-size: 18px;
+        font-weight: 700;
+        color: $primary-color;
+        margin-left: 8px;
+    }
+    .btn {
+        margin: 10px 0 10px 10px;
+    }
 }
 
 .menuWrapper {
-  background: $primary-color;
-  ul {
-    margin: 0;
-    li {
-      padding: 30px 20px;
-      font-family: $font-be;
-      font-weight: 200;
-      color: $white-color;
-      cursor: pointer;
-      white-space: nowrap;
-
-      .input {
-        border-radius: 10px;
-      }
-      .dropdownButton {
-        color: #fff;
-      }
-      &:first-child {
-        background: rgba(0, 0, 0, 0.5);
-      }
+    background: $primary-color;
+    ul {
+        margin: 0;
+        li {
+            padding: 14px;
+            font-family: $font-be;
+            font-weight: 300;
+            color: $white-color;
+            cursor: pointer;
+            white-space: nowrap;
+            .dropdownButton {
+                color: #fff;
+            }
+            &:first-child {
+                background: rgba(0, 0, 0, 0.5);
+            }
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+        // .active {
+        //     font-weight: 700;
+        // }
+        .navLink {
+            font-weight: 300;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+        .searchBox {
+            border-radius: 5px;
+        }
     }
-    .active {
-      font-weight: 700;
-    }
-  }
 }

@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="container-fluid">
           <div className={styles.infoBox}>
             <div className={styles.logo}>
-              <img src="/images/logo-1.png" alt="Logo Memoravel" />
+              <img src="/images/logo-light.svg" alt="Logo Memoravel" />
             </div>
             <div className={styles.socail}>
               <YoutubeOutlined />

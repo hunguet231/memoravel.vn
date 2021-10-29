@@ -22,7 +22,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 8px;
-    height: 80vh;
+    height: 75vh;
+    @include media(mobile) {
+        height: 350px
+    }
 }
 
 .button {
@@ -30,12 +33,4 @@
     @include media(tablet) {
         margin-top: 20px;
     }
-}
-
-.box1 {
-    background-position: bottom;
-}
-
-.box4 {
-    background-position: 0 -80px;
 }

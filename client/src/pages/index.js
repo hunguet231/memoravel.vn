@@ -4,13 +4,12 @@ import { LangConstant } from "const";
 import { MainLayout } from "layouts";
 import { CKEditorComponent } from "components";
 import Header from "components/common/Header";
-import CarouselHeader from "components/CarouselHeader";
-import Achievements from "components/Achievements";
-import MemoStory from "components/MemoStory";
+import CarouselHeader from "components/home/CarouselHeader";
+import Achievements from "components/home/Achievements";
+import MemoStory from "components/home/MemoStory";
 import ShowcaseProduct from "components/home/ShowcaseProduct";
 import TopProduct from "components/home/TopProduct";
 import Feedback from "components/home/Feedback";
-import BoxImage from "components/common/BoxImage";
 import News from "components/home/News";
 import ContactForm from "components/common/ContactForm";
 
@@ -35,9 +34,9 @@ const Home = () => {
       <Header />
       <CarouselHeader />
       <ShowcaseProduct />
-      <Achievements />
-      <MemoStory />
       <TopProduct />
+      <MemoStory />
+      <Achievements />
       <Feedback />
       <News />
       <ContactForm />

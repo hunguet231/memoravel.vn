@@ -20,6 +20,10 @@
         max-width: 800px;
         height: 64px;
         margin: 20px auto;
+        @include media(mobile) {
+            height: 42px;
+            margin: 20px auto 5px;
+        }
         position: relative;
         input {
             display: block;
@@ -40,6 +44,9 @@
                 font-family: $font-be;
                 font-size: 14px;
                 letter-spacing: 00.005em;
+                @include media(mobile) {
+                    font-size: 12px;
+                }
             }
         }
         .iconBtn {
@@ -51,6 +58,13 @@
             width: 44px;
             height: 44px;
             padding: 6px;
+            @include media(mobile) {
+                right: 7px;
+                top: 7px;
+                width: 28px;
+                height: 28px;
+                padding: 3px;
+            }
             background-color: $button-light-color;
             color: #fff;
             border-radius: 6px;

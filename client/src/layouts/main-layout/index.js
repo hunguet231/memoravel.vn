@@ -2,12 +2,14 @@ import React from "react";
 import { AppHead } from "components";
 import { AppConstant } from "const";
 import Footer from "components/common/Footer";
+import { BackTop } from "antd";
 
 const MainLayout = ({ children }) => {
   return (
     <>
       <AppHead {...DEFAULT_APP_HEADER} />
       <main>{children}</main>
+      <BackTop />
       <Footer />
     </>
   );
