@@ -1,21 +1,8 @@
 import { DownOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
-import { Dropdown, Input, Menu } from "antd";
+import { Dropdown, Input } from "antd";
+import HomeFilter from "components/HomeFilter";
 import React from "react";
 import styles from "../../styles/Header.module.scss";
-
-const categoriesList = (
-  <Menu style={{ padding: "20px" }}>
-    <Menu.Item>
-      <a style={{ fontSize: "22px" }}>1st menu item</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a style={{ fontSize: "22px" }}>2nd menu item</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a style={{ fontSize: "22px" }}>3rd menu item</a>
-    </Menu.Item>
-  </Menu>
-);
 
 const Header = () => {
   return (
@@ -42,22 +29,16 @@ const Header = () => {
         <div className={styles.menuWrapper}>
           <div className="container">
             <ul className="flex justify-between">
-              <li className={styles.navLink}>
-                <Dropdown overlay={categoriesList}>
-                  <a
-                    className={styles.dropdownButton}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Danh mục sản phẩm &nbsp;&nbsp;
-                    <DownOutlined />
-                  </a>
-                </Dropdown>
+              <li>
+                Danh mục sản phẩm &nbsp;
+                <DownOutlined />
+                <div className={styles.filter}>{<HomeFilter />}</div>
               </li>
-              <li className={styles.navLink}>Trang chủ</li>
-              <li className={styles.navLink}>Cửa hàng</li>
-              <li className={styles.navLink}>Tin tức</li>
-              <li className={styles.navLink}>Liên hệ</li>
-              <li className={styles.navLink}>
+              <li>Trang chủ</li>
+              <li>Cửa hàng</li>
+              <li>Tin tức</li>
+              <li>Liên hệ</li>
+              <li>
                 <Input
                   className={styles.searchBox}
                   placeholder="Tìm kiếm sản phẩm"
