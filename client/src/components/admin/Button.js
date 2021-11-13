@@ -9,6 +9,7 @@ const ButtonAdmin = ({ children, ...otherProps }) => {
     <Button
       size="medium"
       variant="contained"
+      color="primary"
       className={defaultClasses.root}
       {...otherProps}
     >
@@ -24,13 +25,8 @@ ButtonAdmin.defaultProps = {};
 
 export default ButtonAdmin;
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles({
   root: {
-    backgroundColor: "#5f1e03",
-    color: theme.palette.common.white,
     textTransform: "capitalize",
-    "&:hover": {
-      backgroundColor: "#913006",
-    },
   },
-}));
+});

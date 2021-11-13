@@ -7,8 +7,15 @@ const Topic = () => {
 
   return (
     <ManageLayout>
-      <HeaderLayout title="Quản lý chủ đề bài viết" />
-      <DialogTopic isShow />
+      <HeaderLayout
+        title="Quản lý chủ đề bài viết"
+        onCreateNew={() => setIsOpen(true)}
+      />
+      <DialogTopic
+        isShow={isOpen}
+        onClose={() => setIsOpen(false)}
+        onSubmit={(data) => console.log(data)}
+      />
     </ManageLayout>
   );
 };

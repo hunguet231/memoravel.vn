@@ -18,7 +18,9 @@ const MyApp = ({ Component, pageProps }) => {
 
   useEffect(() => {
     let selectedLang =
-      router.query.lang || Cookies.get(AppConstant.KEY_LANG) || LangConstant.DEFAULT_LANG;
+      router.query.lang ||
+      Cookies.get(AppConstant.KEY_LANG) ||
+      LangConstant.DEFAULT_LANG;
     i18n.changeLanguage(selectedLang);
     Cookies.set(AppConstant.KEY_LANG, selectedLang);
   }, []);

@@ -1,16 +1,16 @@
 import { makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   item: {
     minHeight: 36,
     color: "white",
     "&:hover": {
-      background: "#913006",
+      background: theme.palette.primary.dark,
     },
     "&$selectedItem": {
-      background: "#5f1e03",
+      background: theme.palette.primary.dark,
       "&:hover": {
-        background: "#913006",
+        background: theme.palette.primary.main,
       },
     },
     "& svg": {

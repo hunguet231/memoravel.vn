@@ -21,3 +21,20 @@ export const GENDER = {
   female: 2,
   other: 3,
 };
+
+export const STATUS = {
+  publish: 1,
+  draft: 2,
+  delete: 3,
+};
+
+export const ARRAY_USER = [
+  {
+    value: STATUS.publish,
+    name: "Hiển thị",
+  },
+  {
+    value: STATUS.draft,
+    name: "Bản nháp",
+  },
+];

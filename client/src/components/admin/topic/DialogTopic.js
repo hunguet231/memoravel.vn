@@ -11,9 +11,10 @@ import {
   OutlinedInput,
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import { Button } from "components/admin";
+import { AppConstant } from "const";
+import { Button, SelectItem } from "components/admin";
 
-const DialogTopic = ({ isShow, onClose, onChange, onSubmit, data }) => {
+const DialogTopic = ({ isShow, onClose, onSubmit, data }) => {
   const classes = useStyles();
 
   const [dataInput, setDataInput] = useState();
@@ -27,6 +28,12 @@ const DialogTopic = ({ isShow, onClose, onChange, onSubmit, data }) => {
     });
   };
 
+  useEffect(() => {
+    if (!!data) {
+      setDataInput(data);
+    }
+  }, [!!data]);
+
   return (
     <Dialog
       open={isShow}
@@ -34,7 +41,9 @@ const DialogTopic = ({ isShow, onClose, onChange, onSubmit, data }) => {
     >
       <DialogTitle className={classes.dialogTitle}>
         <Typography classes={{ body1: classes.textDialogTitle }}>
-          {data?.email ? "Chỉnh sửa tài khoản" : "Tạo mới tài khoản"}
+          {data?.title
+            ? "Chỉnh sửa chủ đề bài viết"
+            : "Tạo mới chủ đề bài viết"}
         </Typography>
         <IconButton
           className={classes.closeButton}
@@ -44,9 +53,9 @@ const DialogTopic = ({ isShow, onClose, onChange, onSubmit, data }) => {
         </IconButton>
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <Typography className={classes.typographyContent}>Title *</Typography>
+        <Typography className={classes.typographyContent}>Tiêu đề *</Typography>
         <OutlinedInput
-          placeholder="Nhập Title"
+          placeholder="Nhập tiêu đề"
           classes={{
             root: classes.contentLineEdit,
             input: classes.inputEdit,
@@ -56,12 +65,12 @@ const DialogTopic = ({ isShow, onClose, onChange, onSubmit, data }) => {
           inputProps={{
             name: "title",
           }}
-          value={dataInput?.title?.vi || ""}
+          value={dataInput?.title || ""}
           onChange={onTypingData}
         />
-        <Typography className={classes.typographyContent}>Title *</Typography>
+        <Typography className={classes.typographyContent}>Mô tả</Typography>
         <OutlinedInput
-          placeholder="Nhập Title"
+          placeholder="Nhập mô tả"
           classes={{
             root: classes.contentLineEdit,
             input: classes.inputEdit,
@@ -69,14 +78,26 @@ const DialogTopic = ({ isShow, onClose, onChange, onSubmit, data }) => {
           }}
           required
           inputProps={{
-            name: "title",
+            name: "description",
           }}
-          value={dataInput?.title?.vi || ""}
+          value={dataInput?.description || ""}
           onChange={onTypingData}
+        />
+        <Typography className={classes.typographyContent}>
+          Trạng thái
+        </Typography>
+        <SelectItem
+          value={dataInput?.status || AppConstant.STATUS.draft}
+          data={AppConstant.ARRAY_USER}
+          onChangeInput={(e) =>
+            setDataInput({ ...dataInput, status: e.target.value })
+          }
         />
       </DialogContent>
       <DialogActions className={classes.dialogActions}>
-        <Button onClick={() => onClose(dataInput)}>Hủy</Button>
+        <Button variant="outlined" onClick={() => onClose(dataInput)}>
+          Hủy
+        </Button>
         <Button onClick={() => onSubmit(dataInput)}>Tạo mới</Button>
       </DialogActions>
     </Dialog>
@@ -86,9 +107,13 @@ const DialogTopic = ({ isShow, onClose, onChange, onSubmit, data }) => {
 DialogTopic.propTypes = {
   isShow: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  onChange: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    desciption: PropTypes.string,
+    status: PropTypes.number,
+  }),
 };
 DialogTopic.defaultProps = {};
 
@@ -99,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
     width: 450,
     objectFit: "contain",
     boxShadow: "0 1px 6px 0 rgba(0, 0, 0, 0.1)",
-    backgroundColor: theme.palette.white,
+    backgroundColor: theme.palette.common.white,
     borderRadius: 5,
     "@media only screen and (max-width: 515px)": {
       width: "100%",
@@ -119,8 +144,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "left",
-    background: "#65b39d",
-    color: theme.palette.white,
+    background: theme.palette.primary.main,
+    color: theme.palette.common.white,
     height: 40,
     padding: "8px 10px 8px 24px",
     zIndex: 100,
@@ -129,9 +154,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   textDialogTitle: {
-    color: theme.palette.white,
-    fontSize: 16,
-    lineHeight: 1.5,
+    color: theme.palette.common.white,
+    fontSize: 18,
+    lineHeight: 1.6,
     fontWeight: 600,
   },
   closeButton: {
@@ -145,7 +170,7 @@ const useStyles = makeStyles((theme) => ({
   },
   closeIcon: {
     fontSize: 24,
-    color: theme.palette.white,
+    color: theme.palette.common.white,
   },
   dialogContent: {
     marginTop: 40,
@@ -161,8 +186,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   typographyContent: {
-    marginBottom: 8,
-    fontSize: 13,
+    marginBottom: 4,
+    fontSize: 15,
     fontWeight: 600,
     color: "#3e4045",
     lineHeight: "22px",
