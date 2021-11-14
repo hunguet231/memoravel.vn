@@ -27,6 +27,6 @@ export default ButtonAdmin;
 
 export const useStyles = makeStyles({
   root: {
-    textTransform: "capitalize",
+    textTransform: "initial",
   },
 });

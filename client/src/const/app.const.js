@@ -1,5 +1,7 @@
 // KEY CONSTANTS
 export const KEY_LANG = "lang";
+export const APP_TOKEN = "token_memoravel";
+export const USER_DATA = "user_data";
 
 export const LANDING_URL = "http://localhost:3000";
 

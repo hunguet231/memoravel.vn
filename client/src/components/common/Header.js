@@ -4,6 +4,8 @@ import { Menu, Dropdown, Input } from "antd";
 import { UserOutlined, DownOutlined, SearchOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { PathConstant } from "const";
 
 const productList = (
   <Menu style={{ padding: "20px" }}>
@@ -20,6 +22,7 @@ const productList = (
 );
 
 const Header = () => {
+  const router = useRouter();
   return (
     <>
       <div className="wrapper">
@@ -37,7 +40,10 @@ const Header = () => {
                   </div>
                 </div>
 
-                <div className="button text-center">
+                <div
+                  className="button text-center"
+                  onClick={() => router.push(PathConstant.MANAGE_LOGIN)}
+                >
                   <UserOutlined /> Đăng nhập
                 </div>
               </div>
@@ -48,7 +54,10 @@ const Header = () => {
               <ul className="flex justify-between">
                 <li>
                   <Dropdown overlay={productList}>
-                    <a className={styles.dropdownButton} onClick={(e) => e.preventDefault()}>
+                    <a
+                      className={styles.dropdownButton}
+                      onClick={(e) => e.preventDefault()}
+                    >
                       Danh mục sản phẩm &nbsp;&nbsp;
                       <DownOutlined />
                     </a>
