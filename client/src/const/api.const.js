@@ -30,3 +30,8 @@ export const STT_INTERNAL_SERVER = 500;
 export const STT_NO_TOKEN = 600;
 
 export const LOGIN = "/login";
+
+export const PROFILE = "/profile";
+
+// topic
+export const MN_TOPIC = "/manage/topic";

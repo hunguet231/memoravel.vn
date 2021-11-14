@@ -88,7 +88,7 @@ const DialogTopic = ({ isShow, onClose, onSubmit, data }) => {
         </Typography>
         <SelectItem
           value={dataInput?.status || AppConstant.STATUS.draft}
-          data={AppConstant.ARRAY_USER}
+          data={AppConstant.ARRAY_STATUS}
           onChangeInput={(e) =>
             setDataInput({ ...dataInput, status: e.target.value })
           }

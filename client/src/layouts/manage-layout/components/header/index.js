@@ -15,7 +15,7 @@ import {
 import { Menu } from "@material-ui/icons";
 import { useStyles } from "./styles";
 
-const Header = ({ isCloseWithMobile, onOpenSidebar }) => {
+const Header = ({ profile, isCloseWithMobile, onOpenSidebar }) => {
   const defaultClasses = useStyles();
   const [isShowSelectHeader, setIsShowHeader] = useState(false);
 
@@ -30,9 +30,12 @@ const Header = ({ isCloseWithMobile, onOpenSidebar }) => {
           <Box></Box>
         )}
         <IconButton onClick={() => setIsShowHeader(true)}>
-          <Avatar alt={""} src={""} />
+          <Avatar
+            alt={profile?.full_name}
+            src={profile?.avatar || profile?.full_name}
+          />
         </IconButton>
-        {isShowSelectHeader && (
+        {isShowSelectHeader && profile && (
           <ClickAwayListener onClickAway={() => setIsShowHeader(false)}>
             <Paper className={defaultClasses.profileAction}>
               <List component="div">
@@ -64,6 +67,7 @@ const Header = ({ isCloseWithMobile, onOpenSidebar }) => {
 };
 
 Header.propTypes = {
+  profile: PropTypes.object,
   isCloseWithMobile: PropTypes.bool,
   onOpenSidebar: PropTypes.func,
 };

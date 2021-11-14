@@ -30,7 +30,7 @@ export const STATUS = {
   delete: 3,
 };
 
-export const ARRAY_USER = [
+export const ARRAY_STATUS = [
   {
     value: STATUS.publish,
     name: "Hiển thị",

@@ -29,7 +29,11 @@ export const fetchData = async (
   isFormData = false
 ) => {
   const { token, overrideHeader } = getTokenAndHeader(isFormData);
-
+  const bodyData = [ApiConstant.METHOD.put, ApiConstant.METHOD.post].includes(
+    method
+  )
+    ? { body: JSON.stringify(body) }
+    : {};
   const response = await fetch(ApiConstant.BASE_URL + url, {
     method: method,
     ...defaultFormRequest,
@@ -37,8 +41,11 @@ export const fetchData = async (
       ...overrideHeader,
       Authorization: token,
     },
-    body: JSON.stringify(body),
+    ...bodyData,
   });
-
-  return response.json();
+  const responseData = await response.json();
+  return {
+    ...responseData,
+    status: response.status,
+  };
 };
