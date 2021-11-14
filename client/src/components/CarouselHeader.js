@@ -60,20 +60,22 @@ export default function CarouselHeader() {
             </div>
           </div>
         </div>
-        <Carousel autoplay arrows {...settings}>
-          <div className={styles.imgOverlay}>
-            <Image preview={false} src="/images/carousel.png" alt="carousel-header" />
-          </div>
-          <div>
-            <Image preview={false} src="/images/carousel.png" alt="carousel-header" />
-          </div>
-          <div>
-            <Image preview={false} src="/images/carousel.png" alt="carousel-header" />
-          </div>
-          <div>
-            <Image preview={false} src="/images/carousel.png" alt="carousel-header" />
-          </div>
-        </Carousel>
+        <div>
+          <Carousel autoplay arrows {...settings}>
+            <div className={styles.imgOverlay}>
+              <img src="/images/carousel.png" alt="carousel-header" />
+            </div>
+            <div>
+              <img src="/images/carousel.png" alt="carousel-header" className={styles.img} />
+            </div>
+            <div>
+              <img src="/images/carousel.png" alt="carousel-header" className={styles.img} />
+            </div>
+            <div>
+              <img src="/images/carousel.png" alt="carousel-header" className={styles.img} />
+            </div>
+          </Carousel>
+        </div>
       </div>
     </>
   );

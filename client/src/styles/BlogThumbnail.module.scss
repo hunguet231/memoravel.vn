@@ -1,0 +1,32 @@
+@import "variables.scss";
+
+.container {
+  padding: 0 15px;
+  padding-bottom: 30px;
+  .imgThumb {
+    width: 100%;
+    height: auto;
+  }
+  .btnTags {
+    background: $button-light-color;
+    margin: 15px auto;
+    padding: 3px 20px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    &:hover {
+      background: $button-light-hover-color;
+    }
+  }
+  .titleThumb {
+    font-family: $font-merriweather;
+    font-weight: bolder;
+  }
+  .description {
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-blog-color;
+  }
+}

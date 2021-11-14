@@ -116,6 +116,19 @@ ul {
     background: $button-light-hover-color !important;
   }
 }
+.button-tag {
+  background: $button-light-color;
+  margin: 15px auto;
+  padding: 3px 20px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  &:hover {
+    background: $button-light-hover-color;
+  }
+}
 
 // flexbox
 .flex {
