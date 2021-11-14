@@ -45,9 +45,7 @@ const DialogTopic = ({ isShow, onClose, onSubmit, data }) => {
     >
       <DialogTitle className={classes.dialogTitle}>
         <Typography classes={{ body1: classes.textDialogTitle }}>
-          {data?.title
-            ? "Chỉnh sửa chủ đề bài viết"
-            : "Tạo mới chủ đề bài viết"}
+          {data?.id ? "Cập nhật chủ đề bài viết" : "Tạo mới chủ đề bài viết"}
         </Typography>
         <IconButton
           className={classes.closeButton}
@@ -102,7 +100,9 @@ const DialogTopic = ({ isShow, onClose, onSubmit, data }) => {
         <Button variant="outlined" onClick={() => onClose(dataInput)}>
           Hủy
         </Button>
-        <Button onClick={() => onSubmit(dataInput)}>Tạo mới</Button>
+        <Button onClick={() => onSubmit(dataInput)}>
+          {dataInput?.id ? "Cập nhật" : "Tạo mới"}
+        </Button>
       </DialogActions>
     </Dialog>
   );

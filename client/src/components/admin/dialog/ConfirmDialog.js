@@ -25,7 +25,9 @@ const ConfirmDialog = ({ isShow, title, message, onSubmit, onClose }) => {
         </Typography>
       </DialogContent>
       <DialogActions className={classes.dialogAction}>
-        <Button onClick={onClose}>Hủy</Button>
+        <Button variant="outlined" onClick={onClose}>
+          Hủy
+        </Button>
         <Button onClick={onSubmit}>Xác nhận</Button>
       </DialogActions>
     </Dialog>

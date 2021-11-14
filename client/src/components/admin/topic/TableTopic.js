@@ -10,11 +10,14 @@ import {
   TableCell,
   Paper,
   Chip,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
+import { EditOutlined, DeleteOutlined } from "@material-ui/icons";
 import { AppConstant } from "const";
 
 const TableTopic = (props) => {
-  const { topicData } = props;
+  const { topicData, onEdit, onDelete } = props;
   const classes = useStyles();
 
   return (
@@ -44,9 +47,9 @@ const TableTopic = (props) => {
               <TableCell align="center">
                 {(topicData.page - 1) * 10 + index + 1}
               </TableCell>
-              <TableCell>{row.title?.vi || ""}</TableCell>
-              <TableCell>{row.description?.vi || ""}</TableCell>
-              <TableCell align="center">{row.alias?.vi || ""}</TableCell>
+              <TableCell>{row.title || ""}</TableCell>
+              <TableCell>{row.description || ""}</TableCell>
+              <TableCell align="center">{row.alias || ""}</TableCell>
               <TableCell align="center">
                 <Chip
                   size="small"
@@ -58,7 +61,26 @@ const TableTopic = (props) => {
                   label={AppConstant.ARRAY_STATUS[row.status - 1].name}
                 />
               </TableCell>
-              <TableCell align="right">status</TableCell>
+              <TableCell align="right">
+                <Tooltip title="Sửa">
+                  <IconButton
+                    component="div"
+                    onClick={() => onEdit(row)}
+                    className={classes.buttonIconEdit}
+                  >
+                    <EditOutlined className={classes.iconEdit} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Xóa">
+                  <IconButton
+                    component="div"
+                    onClick={() => onDelete(row)}
+                    className={classes.buttonIconDelete}
+                  >
+                    <DeleteOutlined className={classes.iconDelete} />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -73,11 +95,13 @@ TableTopic.propTypes = {
     page: PropTypes.number,
     total: PropTypes.number,
   }),
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default TableTopic;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: "24px 0",
   },
@@ -89,4 +113,40 @@ const useStyles = makeStyles({
     fontSize: 18,
     fontWeight: "bold",
   },
-});
+  buttonIconEdit: {
+    width: 24,
+    height: 24,
+    padding: 0,
+    borderRadius: 0,
+    border: "1px solid " + theme.palette.grey[200],
+    "&:hover": {
+      border: "1px solid #feba40",
+    },
+  },
+  iconEdit: {
+    width: 19,
+    height: 19,
+    color: theme.palette.grey[500],
+    "&:hover": {
+      color: "#feba40",
+    },
+  },
+  buttonIconDelete: {
+    width: 24,
+    height: 24,
+    padding: 0,
+    borderRadius: 0,
+    border: "1px solid " + theme.palette.grey[200],
+    "&:hover": {
+      border: "1px solid " + theme.palette.secondary.main,
+    },
+  },
+  iconDelete: {
+    width: 19,
+    height: 19,
+    color: theme.palette.grey[500],
+    "&:hover": {
+      color: theme.palette.secondary.main,
+    },
+  },
+}));

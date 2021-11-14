@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@material-ui/lab";
 import { ManageLayout, HeaderLayout } from "layouts";
-import { DialogTopic, TableTopic, AppAlert } from "components/admin";
+import {
+  DialogTopic,
+  TableTopic,
+  AppAlert,
+  ConfirmDialog,
+} from "components/admin";
 import { fetchData } from "api";
 import { ApiConstant, AppConstant } from "const";
 
@@ -12,7 +17,15 @@ const Topic = () => {
     page: 1,
     total: 0,
   });
-  const [message, setMessage] = useState("");
+  const [data, setData] = useState();
+  const [messageData, setMessageData] = useState({
+    type: "error",
+    message: "",
+  });
+  const [deleteDialog, setDeleteDialog] = useState({
+    isOpen: false,
+    data: null,
+  });
 
   const submitTopic = async (data) => {
     let url = ApiConstant.MN_TOPIC;
@@ -43,12 +56,39 @@ const Topic = () => {
       )
     ) {
       await fetchDataTopic(dataTopic.page);
-      setMessage(response.message);
+      setMessageData({
+        type: "success",
+        message: response.message,
+      });
       setIsOpen(false);
     } else {
-      setMessage(
-        response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!"
-      );
+      setMessageData({
+        type: "error",
+        message:
+          response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!",
+      });
+    }
+  };
+
+  const deleteTopic = async () => {
+    let url = ApiConstant.MN_TOPIC + `/${deleteDialog.data.id}`;
+    const response = await fetchData(url, ApiConstant.METHOD.delete);
+    if (response.status && response.status === AppConstant.STATUS_OK) {
+      await fetchDataTopic(dataTopic.page);
+      setMessageData({
+        type: "success",
+        message: `Xóa thành công!`,
+      });
+      setDeleteDialog({
+        isOpen: false,
+        data: null,
+      });
+    } else {
+      setMessageData({
+        type: "error",
+        message:
+          response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!",
+      });
     }
   };
 
@@ -61,7 +101,15 @@ const Topic = () => {
     }
     const response = await fetchData(url, ApiConstant.METHOD.get);
     if (response?.status === AppConstant.STATUS_OK) {
-      setDataTopic(response);
+      setDataTopic({
+        ...response,
+        data: response.data.map((item) => ({
+          ...item,
+          title: item.title.vi,
+          description: item.description.vi,
+          alias: item.alias.vi,
+        })),
+      });
     }
   };
 
@@ -79,10 +127,22 @@ const Topic = () => {
         title="Quản lý chủ đề bài viết"
         onCreateNew={() => setIsOpen(true)}
       />
-      <TableTopic topicData={dataTopic} />
+      <TableTopic
+        topicData={dataTopic}
+        onEdit={(data) => {
+          setData(data);
+          setIsOpen(true);
+        }}
+        onDelete={(data) => {
+          setDeleteDialog({
+            isOpen: true,
+            data: data,
+          });
+        }}
+      />
       <Pagination
         page={dataTopic.page}
-        count={parseInt(dataTopic.total / 10) + 1}
+        count={parseInt((dataTopic.total - 1) / 10) + 1}
         onChange={(_, page) => onChangePage(page)}
         color="primary"
         variant="outlined"
@@ -91,17 +151,35 @@ const Topic = () => {
       {isOpen && (
         <DialogTopic
           isShow={isOpen}
-          onClose={() => setIsOpen(false)}
+          data={data}
+          onClose={() => {
+            setIsOpen(false);
+            setData();
+          }}
           onSubmit={(data) => submitTopic(data)}
         />
       )}
-      {message && (
+      {deleteDialog.isOpen && (
+        <ConfirmDialog
+          isShow={deleteDialog.isOpen}
+          title={`Xóa chủ đề "${deleteDialog.data.title}"`}
+          message={`Bạn có chắc chắn muốn xóa "${deleteDialog.data.title}" không?`}
+          onClose={() => setDeleteDialog({ isOpen: false, data: null })}
+          onSubmit={deleteTopic}
+        />
+      )}
+      {!!messageData?.message && (
         <AppAlert
-          isOpen={!!message}
-          onClose={() => setMessage("")}
-          severity="error"
+          isOpen={!!messageData.message}
+          onClose={() =>
+            setMessageData({
+              type: "error",
+              message: "",
+            })
+          }
+          severity={messageData.type}
         >
-          {message}
+          {messageData.message}
         </AppAlert>
       )}
     </ManageLayout>
