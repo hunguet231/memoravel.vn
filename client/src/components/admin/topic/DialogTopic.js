@@ -17,7 +17,11 @@ import { Button, SelectItem } from "components/admin";
 const DialogTopic = ({ isShow, onClose, onSubmit, data }) => {
   const classes = useStyles();
 
-  const [dataInput, setDataInput] = useState();
+  const [dataInput, setDataInput] = useState({
+    title: "",
+    description: "",
+    status: AppConstant.STATUS.draft,
+  });
 
   const onTypingData = (e) => {
     let name = e.target.name;
