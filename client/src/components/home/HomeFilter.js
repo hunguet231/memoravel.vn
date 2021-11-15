@@ -1,6 +1,6 @@
+import { Checkbox, Form } from "antd";
 import React from "react";
-import { Button, Checkbox, Form } from "antd";
-import styles from "../styles/HomeFilter.module.scss";
+import styles from "../../styles/HomeFilter.module.scss";
 
 const HomeFilter = () => {
   const onFinish = (values) => {

@@ -1,66 +1,69 @@
 @import "variables";
 @import "mixins";
 .headerWrapper {
-    height: 120px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, .3);
-    background-color: $heading-white-color;
-    .logoText {
-        font-family: $font-be;
-        font-size: 18px;
-        font-weight: 700;
-        color: $primary-color;
-        margin-left: 8px;
-    }
-    .btn {
-        margin: 10px 0 10px 10px;
-    }
+  height: 120px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: $heading-white-color;
+  .logoText {
+    font-family: $font-be;
+    font-size: 18px;
+    font-weight: 700;
+    color: $primary-color;
+    margin-left: 8px;
+  }
+  .btn {
+    margin: 10px 0 10px 10px;
+  }
 }
 
 .menuWrapper {
-    background: $primary-color;
-    ul {
-        margin: 0;
-        li {
-            padding: 14px;
-            font-family: $font-be;
-            font-weight: 300;
-            color: $white-color;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s ease-in-out;
-            position: relative;
-            &:hover {
-                color: rgba(255, 255, 255, 0.7);
-            }
-            .dropdownButton {
-                color: #fff;
-            }
-            &:first-child {
-                background: rgba(0, 0, 0, 0.5);
-                &:hover .filter {
-                    display: block;
-                }
-            }
-            &:last-child {
-                padding-right: 0;
-            }
+  background: $primary-color;
+  ul {
+    margin: 0;
+    li {
+      padding: 14px;
+      font-family: $font-be;
+      font-weight: 300;
+      color: $white-color;
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      a {
+        transition: all 0.2s ease-in-out;
+        color: #fff;
+        &:hover {
+          color: rgba(255, 255, 255, 0.7);
         }
-        // .active {
-        //     font-weight: 700;
-        // }
-        .searchBox {
-            border-radius: 5px;
+      }
+      .dropdownButton {
+        color: #fff;
+      }
+      &:first-child {
+        background: rgba(0, 0, 0, 0.5);
+        &:hover .filter {
+          display: block;
         }
+      }
+      &:last-child {
+        padding-right: 0;
+      }
     }
-    .filter {
-        display: none;
-        position: absolute;
-        left: 0;
-        top: 55px;
+    // .active {
+    //     font-weight: 700;
+    // }
+    .searchBox {
+      border-radius: 5px;
     }
+  }
+  .filter {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 55px;
+  }
 }

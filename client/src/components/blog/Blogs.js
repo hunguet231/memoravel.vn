@@ -1,8 +1,8 @@
-import React from "react";
-import { Image, Input, Col, Row } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import BlogThumbnail from "./BlogThumbnail";
+import { Col, Input, Row } from "antd";
+import React from "react";
 import styles from "../../styles/Blogs.module.scss";
+import BlogThumbnail from "./BlogThumbnail";
 
 export default function Blogs() {
   return (
@@ -14,8 +14,8 @@ export default function Blogs() {
             <Row justify="space-between">
               <Col sm={24} md={10}>
                 <p className={styles.subTitle}>
-                  Cập nhật những thông tin mới nhất về du lịch hỏi đáp và chia sẻ những kiến thức về
-                  làng nghề
+                  Cập nhật những thông tin mới nhất về du lịch hỏi đáp và chia
+                  sẻ những kiến thức về làng nghề
                 </p>
               </Col>
 

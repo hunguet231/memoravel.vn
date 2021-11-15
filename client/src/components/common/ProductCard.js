@@ -1,14 +1,11 @@
-import React from "react";
-import { Card, Image, Row, Col, Rate } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Card, Image, Rate } from "antd";
+import React from "react";
 import styles from "../styles/ProductCard.module.scss";
 
 export default function ProductCard() {
   return (
     <>
-      {/* <Row gutter={8}>
-        <Col span={6} />
-        <Col span={6}> */}
       <Card
         className={styles.cardWrapper}
         cover={
@@ -38,10 +35,6 @@ export default function ProductCard() {
           <h1 className={styles.price}>300.000đ</h1>
         </div>
       </Card>
-      {/* </Col>
-        <Col span={6} />
-        <Col span={6} />
-      </Row> */}
     </>
   );
 }

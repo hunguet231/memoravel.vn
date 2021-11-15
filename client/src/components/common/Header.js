@@ -1,6 +1,7 @@
 import { DownOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
-import { Dropdown, Input } from "antd";
-import HomeFilter from "components/HomeFilter";
+import { Input } from "antd";
+import Link from "next/link";
+import HomeFilter from "components/home/HomeFilter";
 import React from "react";
 import styles from "../../styles/Header.module.scss";
 
@@ -34,10 +35,18 @@ const Header = () => {
                 <DownOutlined />
                 <div className={styles.filter}>{<HomeFilter />}</div>
               </li>
-              <li>Trang chủ</li>
-              <li>Cửa hàng</li>
-              <li>Tin tức</li>
-              <li>Liên hệ</li>
+              <li>
+                <Link href="/">Trang chủ</Link>
+              </li>
+              <li>
+                <Link href="/shop">Cửa hàng</Link>
+              </li>
+              <li>
+                <Link href="/blog">Tin tức</Link>
+              </li>
+              <li>
+                <Link href="/contact">Liên hệ</Link>
+              </li>
               <li>
                 <Input
                   className={styles.searchBox}
