@@ -11,10 +11,12 @@ const Header = () => {
       <div className={styles.headerWrapper}>
         <div className="container">
           <div className="flex justify-between">
-            <div className="flex items-center">
-              <img src="/images/logo-dark.svg" width={40} height={40} />
-              <span className={styles.logoText}>MEMORAVEL</span>
-            </div>
+            <Link href="/">
+              <div className="flex items-center cursor-pointer">
+                <img src="/images/logo-dark.svg" width={40} height={40} />
+                <span className={styles.logoText}>MEMORAVEL</span>
+              </div>
+            </Link>
             <div className="flex items-center">
               <div
                 className={`${styles.btn} button button-outline text-center`}

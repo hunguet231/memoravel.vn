@@ -2,13 +2,18 @@ import React from "react";
 import Flickity from "react-flickity-component";
 import "flickity/css/flickity.css";
 import styles from "../../styles/TopProduct.module.scss";
+import ProductCard from "components/common/ProductCard";
 
 const TopProduct = () => {
   const flickityOptions = {
+    imagesLoaded: true,
+    percentPosition: false,
+    cellAlign: "center",
+    contain: true,
+    groupCells: 4,
     wrapAround: true,
     autoPlay: true,
   };
-
   return (
     <div className="wrapper">
       <div className={styles.top}>
@@ -19,7 +24,7 @@ const TopProduct = () => {
             cả, hình thức tốt nhất
           </div>
           <Flickity options={flickityOptions}>
-            <div
+            {/* <div
               style={{
                 height: "436px",
                 width: "100%",
@@ -28,37 +33,14 @@ const TopProduct = () => {
               }}
             >
               <h3>1</h3>
-            </div>
-            <div
-              style={{
-                height: "436px",
-                width: "100%",
-                marginRight: "10px",
-                background: "#7a0b1b",
-              }}
-            >
-              <h3>2</h3>
-            </div>
-            <div
-              style={{
-                height: "436px",
-                width: "100%",
-                marginRight: "10px",
-                background: "#7a0b1b",
-              }}
-            >
-              <h3>3</h3>
-            </div>
-            <div
-              style={{
-                height: "436px",
-                width: "100%",
-                marginRight: "10px",
-                background: "#7a0b1b",
-              }}
-            >
-              <h3>4</h3>
-            </div>
+            </div> */}
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
           </Flickity>
         </div>
       </div>

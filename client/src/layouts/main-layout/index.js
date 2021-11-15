@@ -1,8 +1,7 @@
-import React from "react";
+import { BackTop } from "antd";
 import { AppHead } from "components";
 import { AppConstant } from "const";
-import Footer from "components/common/Footer";
-import { BackTop } from "antd";
+import React from "react";
 
 const MainLayout = ({ children }) => {
   return (
@@ -10,7 +9,6 @@ const MainLayout = ({ children }) => {
       <AppHead {...DEFAULT_APP_HEADER} />
       <main>{children}</main>
       <BackTop />
-      <Footer />
     </>
   );
 };

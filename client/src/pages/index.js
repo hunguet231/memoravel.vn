@@ -1,4 +1,5 @@
 import ContactForm from "components/common/ContactForm";
+import Footer from "components/common/Footer";
 import Header from "components/common/Header";
 import Achievements from "components/home/Achievements";
 import CarouselHeader from "components/home/CarouselHeader";
@@ -22,6 +23,7 @@ const Home = () => {
       <Feedback />
       <News />
       <ContactForm />
+      <Footer />
     </MainLayout>
   );
 };

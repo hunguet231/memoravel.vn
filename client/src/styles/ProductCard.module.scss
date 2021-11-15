@@ -1,19 +1,28 @@
 @import "variables";
 
 .cardWrapper {
-  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 10px 10px;
+  border-radius: 6px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardImg {
+  height: 200px;
+  object-fit: cover;
 }
 
 .productName {
   color: $primary-color;
   font-family: $font-merriweather;
   font-weight: 600;
+  font-size: 18px;
   margin: 0;
 }
 
 .description {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .rate {
@@ -26,7 +35,7 @@
 }
 
 .cartButton {
-  font-size: 30px;
+  font-size: 26px;
   color: $button-color;
   &:hover {
     color: $button-hover-color;
@@ -38,6 +47,8 @@
   font-family: $font-merriweather;
   color: $primary-color;
   font-weight: 600;
+  font-size: 20px;
+  margin-top: 6px;
 }
 
 .overlayAR {
