@@ -8,20 +8,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { PathConstant } from "const";
 
-const productList = (
-  <Menu style={{ padding: "20px" }}>
-    <Menu.Item>
-      <a style={{ fontSize: "22px" }}>1st menu item</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a style={{ fontSize: "22px" }}>2nd menu item</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a style={{ fontSize: "22px" }}>3rd menu item</a>
-    </Menu.Item>
-  </Menu>
-);
-
 const Header = () => {
   const router = useRouter();
   return (
@@ -29,20 +15,21 @@ const Header = () => {
       <div className={styles.headerWrapper}>
         <div className="container">
           <div className="flex justify-between">
-            <Link href="/" />
-            <div className="flex items-center cursor-pointer">
-              <img src="/images/logo-dark.svg" width={40} height={40} />
-              <span className={styles.logoText}>MEMORAVEL</span>
-            </div>
-            <div className="flex">
-              <div className={styles.btnRegister}>
-                <div className="button button-transparent text-center">
-                  <UserOutlined /> Đăng ký
-                </div>
+            <Link href="/">
+              <div className="flex items-center cursor-pointer">
+                <img src="/images/logo-dark.svg" width={40} height={40} />
+                <span className={styles.logoText}>MEMORAVEL</span>
+              </div>
+            </Link>
+            <div className="flex items-center">
+              <div
+                className={`${styles.btn} button button-outline text-center`}
+              >
+                <UserOutlined /> Đăng ký
               </div>
 
               <div
-                className="button text-center"
+                className={`${styles.btn} button text-center`}
                 onClick={() => router.push(PathConstant.MANAGE_LOGIN)}
               >
                 <UserOutlined /> Đăng nhập
@@ -54,23 +41,25 @@ const Header = () => {
           <div className="container">
             <ul className="flex justify-between">
               <li>
-                <Dropdown overlay={productList}>
-                  <a
-                    className={styles.dropdownButton}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Danh mục sản phẩm &nbsp;&nbsp;
-                    <DownOutlined />
-                  </a>
-                </Dropdown>
+                Danh mục sản phẩm &nbsp;
+                <DownOutlined />
+                <div className={styles.filter}>{<HomeFilter />}</div>
               </li>
-              <li className={styles.active}>Trang chủ</li>
-              <li>Cửa hàng</li>
-              <li>Tin tức</li>
-              <li>Liên hệ</li>
+              <li>
+                <Link href="/">Trang chủ</Link>
+              </li>
+              <li>
+                <Link href="/shop">Cửa hàng</Link>
+              </li>
+              <li>
+                <Link href="/blog">Tin tức</Link>
+              </li>
+              <li>
+                <Link href="/contact">Liên hệ</Link>
+              </li>
               <li>
                 <Input
-                  className={styles.input}
+                  className={styles.searchBox}
                   placeholder="Tìm kiếm sản phẩm"
                   suffix={<SearchOutlined />}
                 />
