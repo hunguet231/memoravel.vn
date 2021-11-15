@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import App from "next/app";
-import "antd/dist/antd.css";
 // import "../../public/styles/index.scss";
-import "antd/dist/antd.css";
 import "../styles/_common.scss";
+import "../styles/variables.less";
 
 import "language";
 import { useRouter } from "next/router";
@@ -18,7 +17,9 @@ const MyApp = ({ Component, pageProps }) => {
 
   useEffect(() => {
     let selectedLang =
-      router.query.lang || Cookies.get(AppConstant.KEY_LANG) || LangConstant.DEFAULT_LANG;
+      router.query.lang ||
+      Cookies.get(AppConstant.KEY_LANG) ||
+      LangConstant.DEFAULT_LANG;
     i18n.changeLanguage(selectedLang);
     Cookies.set(AppConstant.KEY_LANG, selectedLang);
   }, []);

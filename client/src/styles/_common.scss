@@ -81,6 +81,8 @@ ul {
 
 .button {
     display: block;
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
     min-width: 150px;
     background: $button-color;
