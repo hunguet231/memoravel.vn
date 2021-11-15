@@ -4,6 +4,8 @@ import App from "next/app";
 // import "../../public/styles/index.scss";
 import "../styles/_common.scss";
 import "../styles/variables.less";
+import { ThemeProvider, CssBaseline } from "@material-ui/core";
+import theme from "../../public/material";
 
 import "language";
 import { useRouter } from "next/router";
@@ -24,7 +26,13 @@ const MyApp = ({ Component, pageProps }) => {
     Cookies.set(AppConstant.KEY_LANG, selectedLang);
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 };
 
 MyApp.getInitialProps = async (appContext) => {

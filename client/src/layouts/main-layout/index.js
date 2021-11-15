@@ -2,14 +2,17 @@ import { BackTop } from "antd";
 import { AppHead } from "components";
 import { AppConstant } from "const";
 import React from "react";
+import { NoSsr } from "@material-ui/core";
+import Footer from "components/common/Footer";
 
 const MainLayout = ({ children }) => {
   return (
-    <>
+    <NoSsr>
       <AppHead {...DEFAULT_APP_HEADER} />
       <main>{children}</main>
       <BackTop />
-    </>
+      <Footer />
+    </NoSsr>
   );
 };
 
