@@ -1,10 +1,10 @@
-import { database } from "../configs";
-import { AppConst } from "../const";
+import { database } from '../configs';
+import { AppConst } from '../const';
 import {
   responseFormat,
   responseObjectMultiLang,
   convertPaging,
-} from "../utils";
+} from '../utils';
 
 const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
@@ -73,7 +73,7 @@ export const getPost = async (req, res) => {
           where: {
             ...queryDataTopic,
           },
-          attributes: ["id", "title", "description", "alias"],
+          attributes: ['id', 'title', 'description', 'alias'],
         },
       ],
       distinct: true,
@@ -96,7 +96,7 @@ export const getPost = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -111,14 +111,14 @@ export const getPostByAlias = async (req, res) => {
       include: [
         {
           model: Topic,
-          attributes: ["id", "title", "description", "alias"],
+          attributes: ['id', 'title', 'description', 'alias'],
         },
       ],
     });
     if (!postData) {
       res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: "alias không tồn tại" }));
+        .json(responseFormat({ message: 'alias không tồn tại' }));
     } else {
       let numberView = ++postData.number_view;
       await Post.update(
@@ -139,16 +139,17 @@ export const getPostByAlias = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
 export const getPostHot = async (req, res) => {
   try {
+    const limitPerPage = req.query?.limit || 5;
     const limit =
-      parseInt(req.query.limit) > AppConst.LIMIT_PAGE_SIZE
+      parseInt(limitPerPage) > AppConst.LIMIT_PAGE_SIZE
         ? AppConst.LIMIT_PAGE_SIZE
-        : parseInt(req.query.limit);
+        : parseInt(limitPerPage);
 
     const pagination = {
       limit: limit,
@@ -166,10 +167,10 @@ export const getPostHot = async (req, res) => {
           where: {
             status: AppConst.STATUS.publish,
           },
-          attributes: ["id", "title", "description", "alias"],
+          attributes: ['id', 'title', 'description', 'alias'],
         },
       ],
-      order: [["number_view", "DESC"]],
+      order: [['number_view', 'DESC']],
       distinct: true,
     });
 
@@ -183,6 +184,6 @@ export const getPostHot = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
