@@ -24,16 +24,6 @@ const TopProduct = () => {
             cả, hình thức tốt nhất
           </div>
           <Flickity options={flickityOptions}>
-            {/* <div
-              style={{
-                height: "436px",
-                width: "100%",
-                marginRight: "10px",
-                background: "#7a0b1b",
-              }}
-            >
-              <h3>1</h3>
-            </div> */}
             <ProductCard />
             <ProductCard />
             <ProductCard />
