@@ -1,4 +1,5 @@
 import { Rate } from "antd";
+import Button from "components/common/Button";
 import "flickity/css/flickity.css";
 import React from "react";
 import Flickity from "react-flickity-component";
@@ -73,9 +74,7 @@ const Feedback = () => {
             </Flickity>
           )}
           <div className={styles.button}>
-            <div className="button button-secondary align-center text-center">
-              Xem thêm
-            </div>
+            <Button type="secondary">Xem thêm</Button>
           </div>
         </div>
       </div>

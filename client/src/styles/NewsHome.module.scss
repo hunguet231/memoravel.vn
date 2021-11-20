@@ -1,36 +1,38 @@
 @import "variables";
 @import "mixins";
 .news {
-    margin-top: 30px;
-    height: auto;
-    .more {
-        color: $primary-color !important;
-        font-family: $font-be;
-        font-weight: 700;
-        color: $light-gray-color;
-        cursor: pointer;
-        white-space: nowrap;
-        @include media(mobile) {
-            font-size: 14px;
-            margin-right: 15px;
-            font-weight: 600;
-        }
+  margin-top: 30px;
+  height: auto;
+  .more {
+    color: $primary-color !important;
+    font-family: $font-be;
+    font-weight: 700;
+    color: $light-gray-color;
+    cursor: pointer;
+    white-space: nowrap;
+    @include media(mobile) {
+      font-size: 14px;
+      margin-right: 15px;
+      font-weight: 600;
     }
+  }
 }
 
 .boxes {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 8px;
-    height: 75vh;
-    @include media(mobile) {
-        height: 350px
-    }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 8px;
+  height: 75vh;
+  @include media(mobile) {
+    height: 350px;
+  }
 }
 
 .button {
-    margin-top: 40px;
-    @include media(tablet) {
-        margin-top: 20px;
-    }
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  @include media(tablet) {
+    margin-top: 20px;
+  }
 }

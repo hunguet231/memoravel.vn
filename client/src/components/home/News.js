@@ -1,4 +1,5 @@
 import BoxImage from "components/common/BoxImage";
+import Button from "components/common/Button";
 import Tag from "components/common/Tage";
 import React from "react";
 import styles from "../../styles/NewsHome.module.scss";
@@ -61,9 +62,7 @@ const News = () => {
             />
           </div>
           <div className={styles.button}>
-            <div className="button button-secondary align-center text-center">
-              Xem tất cả
-            </div>
+            <Button type="secondary">Xem tất cả</Button>
           </div>
         </div>
       </div>

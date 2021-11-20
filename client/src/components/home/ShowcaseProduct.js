@@ -1,5 +1,6 @@
-import { ArrowRightOutlined } from "@ant-design/icons";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import BoxImage from "components/common/BoxImage";
+import Button from "components/common/Button";
 import React from "react";
 import styles from "../../styles/ShowcaseProduct.module.scss";
 
@@ -31,14 +32,14 @@ const ShowcaseProduct = () => {
                   Làng mây tre đan <br /> Phú Vinh
                 </>
               }
-              iconMore={<ArrowRightOutlined />}
+              iconMore={<ArrowForwardIcon />}
             />
             <BoxImage
               className={styles.bg2}
               imgUrl={"/images/dam-cuoi-chuot.png"}
               subHeading={"MEMORAVEL.VN"}
               heading={<>Làng tranh Đông Hồ</>}
-              iconMore={<ArrowRightOutlined />}
+              iconMore={<ArrowForwardIcon />}
             />
             <BoxImage
               className={styles.bg3}
@@ -49,7 +50,7 @@ const ShowcaseProduct = () => {
                   Làng lụa <br /> Vạn Phúc
                 </>
               }
-              iconMore={<ArrowRightOutlined />}
+              iconMore={<ArrowForwardIcon />}
             />
             <BoxImage
               className={styles.bg4}
@@ -60,13 +61,11 @@ const ShowcaseProduct = () => {
                   Làng gốm <br /> Bát Tràng
                 </>
               }
-              iconMore={<ArrowRightOutlined />}
+              iconMore={<ArrowForwardIcon />}
             />
           </div>
           <div className={styles.button}>
-            <div className="button button-secondary align-center text-center">
-              Xem tất cả
-            </div>
+            <Button type="secondary">Xem tất cả</Button>
           </div>
         </div>
       </div>

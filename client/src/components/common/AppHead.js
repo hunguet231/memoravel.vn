@@ -16,6 +16,10 @@ const AppHead = (props) => {
       <link rel="icon" sizes="192x192" href={ICON_PATH} />
       <link rel="apple-touch-icon" href={ICON_PATH} />
       <link rel="icon" href={ICON_PATH} />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      />
 
       <meta property="og:url" content={primaryUrl} />
       <meta property="og:title" content={title} />

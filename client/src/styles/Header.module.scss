@@ -2,23 +2,25 @@
 @import "mixins";
 
 .headerWrapper {
-  height: 120px;
+  height: auto;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
   z-index: 999;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
   background-color: $heading-white-color;
+  .headerTop {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .logoText {
     font-family: $font-be;
     font-size: 18px;
     font-weight: 700;
     color: $primary-color;
     margin-left: 8px;
-  }
-  .btn {
-    margin: 10px 0 10px 10px;
   }
 }
 
