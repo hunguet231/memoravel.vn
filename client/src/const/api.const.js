@@ -36,3 +36,4 @@ export const PROFILE = "/profile";
 
 // topic
 export const MN_TOPIC = "/manage/topic";
+export const GET_TOPIC = "/topic";

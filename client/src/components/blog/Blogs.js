@@ -3,8 +3,25 @@ import { Col, Input, Row } from "antd";
 import React from "react";
 import styles from "../../styles/Blogs.module.scss";
 import BlogThumbnail from "./BlogThumbnail";
+import Category from "./Category";
+import { fetchData } from "api";
+import { ApiConstant, AppConstant } from "const";
 
 export default function Blogs() {
+  const [topics, setTopics] = React.useState([]);
+
+  const fetchTopics = async () => {
+    const url = ApiConstant.GET_TOPIC;
+    const response = await fetchData(url, ApiConstant.METHOD.get);
+    if (response?.status === AppConstant.STATUS_OK) {
+      setTopics(response.data);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchTopics();
+  }, []);
+
   return (
     <div className="wrapper">
       <div className={styles.imgOverlay}>
@@ -33,6 +50,7 @@ export default function Blogs() {
       </div>
 
       <br />
+      <Category topics={topics} />
       <div className="container">
         <Row gutter={30}>
           <Col sm={24} md={12}>
