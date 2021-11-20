@@ -1,10 +1,8 @@
 import { LangConstant } from "const";
 
 // Base Api
-export const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "http://54.255.223.32/api"
-    : "http://localhost:5000/api";
+// export const BASE_URL = "http://localhost:5000/api";
+export const BASE_URL = "http://54.255.223.32/api";
 
 export const HEADER_DEFAULT = {
   Accept: "application/json",

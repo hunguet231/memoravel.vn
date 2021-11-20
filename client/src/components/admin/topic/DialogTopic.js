@@ -41,6 +41,7 @@ const DialogTopic = ({ isShow, onClose, onSubmit, data }) => {
   return (
     <Dialog
       open={isShow}
+      onClose={onClose}
       classes={{ paperScrollPaper: classes.dialogContainer }}
     >
       <DialogTitle className={classes.dialogTitle}>

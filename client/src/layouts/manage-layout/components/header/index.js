@@ -21,22 +21,22 @@ const Header = ({ profile, isCloseWithMobile, onOpenSidebar }) => {
 
   return (
     <AppBar color="inherit" position="sticky">
-      <Box className={defaultClasses.root}>
-        {isCloseWithMobile ? (
-          <IconButton onClick={onOpenSidebar}>
-            <Menu />
+      <ClickAwayListener onClickAway={() => setIsShowHeader(false)}>
+        <Box className={defaultClasses.root}>
+          {isCloseWithMobile ? (
+            <IconButton onClick={onOpenSidebar}>
+              <Menu />
+            </IconButton>
+          ) : (
+            <Box></Box>
+          )}
+          <IconButton onClick={() => setIsShowHeader(!isShowSelectHeader)}>
+            <Avatar
+              alt={profile?.full_name}
+              src={profile?.avatar || profile?.full_name}
+            />
           </IconButton>
-        ) : (
-          <Box></Box>
-        )}
-        <IconButton onClick={() => setIsShowHeader(true)}>
-          <Avatar
-            alt={profile?.full_name}
-            src={profile?.avatar || profile?.full_name}
-          />
-        </IconButton>
-        {isShowSelectHeader && profile && (
-          <ClickAwayListener onClickAway={() => setIsShowHeader(false)}>
+          {isShowSelectHeader && profile && (
             <Paper className={defaultClasses.profileAction}>
               <List component="div">
                 <ListItem button className={defaultClasses.actionItem}>
@@ -59,9 +59,9 @@ const Header = ({ profile, isCloseWithMobile, onOpenSidebar }) => {
                 </ListItem>
               </List>
             </Paper>
-          </ClickAwayListener>
-        )}
-      </Box>
+          )}
+        </Box>
+      </ClickAwayListener>
     </AppBar>
   );
 };
