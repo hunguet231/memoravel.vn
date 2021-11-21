@@ -1,21 +1,21 @@
-import { database } from "../configs";
-import { AppConst } from "../const";
+import { database } from '../configs';
+import { AppConst } from '../const';
 import {
   responseFormat,
   requestObjectMultiLang,
   handleAliasResult,
-} from "../utils";
+} from '../utils';
 
 const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
 const Op = database.Sequelize.Op;
 
 const formatPostData = {
-  title: "",
-  description: "",
-  content: "",
-  status: "",
-  topic_ids: "",
+  title: '',
+  description: '',
+  content: '',
+  status: '',
+  topic_ids: '',
 };
 
 export const checkMnCreatePost = async (req, res, next) => {
@@ -24,7 +24,7 @@ export const checkMnCreatePost = async (req, res, next) => {
 
     // Check title is empty
     if (!requestObjectMultiLang(req.body.title, true)) {
-      messagePost.title = "Yêu cầu nhập tiêu đề !";
+      messagePost.title = 'Yêu cầu nhập tiêu đề !';
     } else {
       const post = await Post.findOne({
         where: {
@@ -32,20 +32,20 @@ export const checkMnCreatePost = async (req, res, next) => {
         },
       });
       if (post) {
-        messagePost.title = "Tiêu đề đã tồn tại!";
+        messagePost.title = 'Tiêu đề đã tồn tại!';
       }
     }
     // Check description is empty
     if (!requestObjectMultiLang(req.body.description, true)) {
-      messagePost.description = "Yêu cầu nhập mô tả!";
+      messagePost.description = 'Yêu cầu nhập mô tả!';
     }
     // Check content isEmpty
     if (!requestObjectMultiLang(req.body.content, true)) {
-      messagePost.content = "Yêu cầu nhập nội dung!";
+      messagePost.content = 'Yêu cầu nhập nội dung!';
     }
     // Check status is not exist in object
     if (!Object.values(AppConst.STATUS).includes(req.body.status)) {
-      messagePost.status = "Status không tồn tại!";
+      messagePost.status = 'Status không tồn tại!';
     }
 
     // Check topic ids
@@ -58,7 +58,7 @@ export const checkMnCreatePost = async (req, res, next) => {
     );
 
     if (isNotExistTopicId) {
-      messagePost.topic_ids = "Danh mục không tồn tại!";
+      messagePost.topic_ids = 'Danh mục không tồn tại!';
     }
 
     const title = requestObjectMultiLang(req.body.title);
@@ -67,7 +67,7 @@ export const checkMnCreatePost = async (req, res, next) => {
       description: requestObjectMultiLang(req.body.description),
       content: requestObjectMultiLang(req.body.content),
       alias: handleAliasResult(JSON.parse(title)),
-      link_background: req.body.link_background,
+      background: req.body.background,
       number_view: 0,
       status: req.body.status
         ? parseInt(req.body.status)
@@ -91,7 +91,7 @@ export const checkMnCreatePost = async (req, res, next) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -100,12 +100,12 @@ export const checkMnEditPost = async (req, res, next) => {
     const messagePost = { ...formatPostData };
 
     if (!req.params.post_id) {
-      messagePost.id = "Yêu cầu post_id!";
+      messagePost.id = 'Yêu cầu post_id!';
     }
 
     // Check title is empty
     if (!requestObjectMultiLang(req.body.title, true)) {
-      messagePost.title = "Yêu cầu nhập tiêu đề !";
+      messagePost.title = 'Yêu cầu nhập tiêu đề !';
     } else {
       const post = await Post.findOne({
         where: {
@@ -116,20 +116,20 @@ export const checkMnEditPost = async (req, res, next) => {
         },
       });
       if (post) {
-        messagePost.title = "Tiêu đề đã tồn tại!";
+        messagePost.title = 'Tiêu đề đã tồn tại!';
       }
     }
     // Check description is empty
     if (!requestObjectMultiLang(req.body.description, true)) {
-      messagePost.description = "Yêu cầu nhập mô tả!";
+      messagePost.description = 'Yêu cầu nhập mô tả!';
     }
     // Check content isEmpty
     if (!requestObjectMultiLang(req.body.content, true)) {
-      messagePost.content = "Yêu cầu nhập nội dung!";
+      messagePost.content = 'Yêu cầu nhập nội dung!';
     }
     // Check status is not exist in object
     if (!Object.values(AppConst.STATUS).includes(req.body.status)) {
-      messagePost.status = "Status không tồn tại!";
+      messagePost.status = 'Status không tồn tại!';
     }
 
     // Check topic ids
@@ -142,7 +142,7 @@ export const checkMnEditPost = async (req, res, next) => {
     );
 
     if (isNotExistTopicId) {
-      messagePost.topic_ids = "Danh mục không tồn tại!";
+      messagePost.topic_ids = 'Danh mục không tồn tại!';
     }
 
     const title = requestObjectMultiLang(req.body.title);
@@ -151,7 +151,7 @@ export const checkMnEditPost = async (req, res, next) => {
       description: requestObjectMultiLang(req.body.description),
       content: requestObjectMultiLang(req.body.content),
       alias: handleAliasResult(JSON.parse(title)),
-      link_background: req.body.link_background,
+      background: req.body.background,
       number_view: 0,
       status: req.body.status
         ? parseInt(req.body.status)
@@ -175,7 +175,7 @@ export const checkMnEditPost = async (req, res, next) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -188,12 +188,12 @@ export const checkMnGetPostById = async (req, res, next) => {
     } else {
       return res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: "post_id không tồn tại" }));
+        .json(responseFormat({ message: 'post_id không tồn tại' }));
     }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -206,11 +206,11 @@ export const checkMnDeletePost = async (req, res, next) => {
     } else {
       return res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: "post_id không tồn tại" }));
+        .json(responseFormat({ message: 'post_id không tồn tại' }));
     }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
