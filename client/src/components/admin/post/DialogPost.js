@@ -8,6 +8,7 @@ import {
   makeStyles,
   OutlinedInput,
   Typography,
+  CircularProgress,
 } from "@material-ui/core";
 import { Close, CloudUpload as CloudUploadIcon } from "@material-ui/icons";
 import { CKEditorComponent } from "components";
@@ -194,7 +195,10 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         <Button variant="outlined" onClick={() => onClose(dataInput)}>
           Hủy
         </Button>
-        <Button loading={loading} onClick={() => onSubmit(dataInput)}>
+        <Button onClick={() => onSubmit(dataInput)}>
+          {loading && (
+            <CircularProgress size={20} className={classes.circular} />
+          )}
           {dataInput?.id ? "Cập nhật" : "Tạo mới"}
         </Button>
       </DialogActions>
@@ -225,6 +229,10 @@ DialogPost.defaultProps = {};
 export default DialogPost;
 
 const useStyles = makeStyles((theme) => ({
+  circular: {
+    color: "#fff",
+    marginRight: 5,
+  },
   previewImg: {
     height: "auto",
     objectFit: "contain",
