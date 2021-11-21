@@ -1,10 +1,10 @@
-import { database } from "../configs";
-import { AppConst } from "../const";
+import { database } from '../configs';
+import { AppConst } from '../const';
 import {
   responseFormat,
   convertPaging,
   responseObjectMultiLang,
-} from "../utils";
+} from '../utils';
 
 const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
@@ -18,7 +18,7 @@ const formatPostData = (data) => {
     content: responseObjectMultiLang(data.content),
     alias: responseObjectMultiLang(data.alias),
     number_view: data.number_view,
-    link_background: data.link_background,
+    background: data.background,
     status: data.status,
     created: data.createdAt,
     modified: data.updatedAt,
@@ -32,8 +32,8 @@ const formatPostData = (data) => {
 export const mnCreatePost = async (req, res) => {
   try {
     const formatData = { ...req.body };
-    delete formatData["topic_ids"];
-    delete formatData["topics"];
+    delete formatData['topic_ids'];
+    delete formatData['topics'];
 
     const dataTopics = req.body.topics.filter((topic) =>
       req.body.topic_ids.includes(topic.id)
@@ -51,15 +51,15 @@ export const mnCreatePost = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
 export const mnEditPost = async (req, res) => {
   try {
     const formatData = { ...req.body };
-    delete formatData["topic_ids"];
-    delete formatData["topics"];
+    delete formatData['topic_ids'];
+    delete formatData['topics'];
 
     const dataTopics = req.body.topics.filter((topic) =>
       req.body.topic_ids.includes(topic.id)
@@ -87,7 +87,7 @@ export const mnEditPost = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -125,7 +125,7 @@ export const mnGetListPost = async (req, res) => {
           where: {
             ...queryDataTopic,
           },
-          attributes: ["id", "title"],
+          attributes: ['id', 'title'],
         },
       ],
       distinct: true,
@@ -148,7 +148,7 @@ export const mnGetListPost = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -162,7 +162,7 @@ export const mnGetPostById = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -183,7 +183,7 @@ export const mnDeletePost = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -195,7 +195,7 @@ const findPostById = async (id) =>
     include: [
       {
         model: Topic,
-        attributes: ["id", "title"],
+        attributes: ['id', 'title'],
       },
     ],
   });
