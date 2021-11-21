@@ -118,7 +118,9 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         </IconButton>
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <Typography className={classes.typographyContent}>Tiêu đề *</Typography>
+        <Typography className={classes.typographyContent}>
+          Tiêu đề (*)
+        </Typography>
         <OutlinedInput
           placeholder="Nhập tiêu đề"
           classes={{
@@ -175,7 +177,9 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
           data={dataInput?.content || ""}
         />
         <br />
-        <Typography className={classes.typographyContent}>Chủ đề</Typography>
+        <Typography className={classes.typographyContent}>
+          Chủ đề (*)
+        </Typography>
         <MultiSelect
           options={topics}
           value={selected}
