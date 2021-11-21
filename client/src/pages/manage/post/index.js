@@ -54,7 +54,12 @@ const Post = () => {
     let url = ApiConstant.MN_POST;
 
     // upload image to cloudinary
-    const background_url = await getImgUrl(data.background);
+    let background_url;
+    if (!data.background.startsWith("https://res.cloudinary.com")) {
+      background_url = await getImgUrl(data.background);
+    } else {
+      background_url = data.background;
+    }
     const requestBody = {
       title: {
         vi: data.title,
@@ -68,7 +73,7 @@ const Post = () => {
         vi: data.content,
         en: "",
       },
-      status: data.status,
+      status: parseInt(data.status),
       background: background_url,
       topic_ids: data.topic_ids,
     };

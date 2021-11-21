@@ -9,10 +9,14 @@ import {
   OutlinedInput,
   Typography,
   CircularProgress,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  Radio,
 } from "@material-ui/core";
 import { Close, CloudUpload as CloudUploadIcon } from "@material-ui/icons";
 import { CKEditorComponent } from "components";
-import { Button, SelectItem } from "components/admin";
+import { Button } from "components/admin";
 import { AppConstant } from "const";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
@@ -183,13 +187,26 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         <Typography className={classes.typographyContent}>
           Trạng thái
         </Typography>
-        <SelectItem
-          value={dataInput?.status || AppConstant.STATUS.draft}
-          data={AppConstant.ARRAY_STATUS}
-          onChangeInput={(e) =>
-            setDataInput({ ...dataInput, status: e.target.value })
-          }
-        />
+        <FormControl component="fieldset">
+          <RadioGroup
+            row
+            aria-label="status"
+            name="status1"
+            value={`${dataInput?.status}` || AppConstant.ARRAY_STATUS.draft}
+            onChange={(e) =>
+              setDataInput({ ...dataInput, status: e.target.value })
+            }
+          >
+            {AppConstant.ARRAY_STATUS.map((status) => (
+              <FormControlLabel
+                key={status.value}
+                value={`${status.value}`}
+                control={<Radio />}
+                label={status.name}
+              />
+            ))}
+          </RadioGroup>
+        </FormControl>
       </DialogContent>
       <DialogActions className={classes.dialogActions}>
         <Button variant="outlined" onClick={() => onClose(dataInput)}>
