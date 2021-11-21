@@ -4,19 +4,19 @@ import { fetchData } from "api";
 import { ApiConstant, AppConstant } from "const";
 import BlogContent from "components/blog/BlogContent";
 import ContactForm from "components/common/ContactForm";
-import { MainLayout } from "layouts";
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
+import BlogLayout from "layouts/blog-layout";
 
 const BlogDetails = ({ post }) => {
   return (
     <div>
-      <MainLayout>
+      <BlogLayout>
         <Header />
         <BlogContent post={post} />
         <ContactForm />
         <Footer />
-      </MainLayout>
+      </BlogLayout>
     </div>
   );
 };
