@@ -187,3 +187,15 @@ ul {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.rmsc {
+  --rmsc-main: #5f1e03 !important;
+  --rmsc-hover: #f1f3f5;
+  --rmsc-selected: #e2e6ea;
+  --rmsc-border: #ccc;
+  --rmsc-gray: #aaa;
+  --rmsc-bg: #fff;
+  --rmsc-p: 10px; /* Spacing */
+  --rmsc-radius: 4px; /* Radius */
+  --rmsc-h: 38px; /* Height */
+}

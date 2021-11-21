@@ -1,4 +1,3 @@
-import { Col, Image, Row } from "antd";
 import React from "react";
 import styles from "../../styles/MemoStory.module.scss";
 

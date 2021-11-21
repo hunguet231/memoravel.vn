@@ -1,4 +1,3 @@
-import BlogContent from "components/blog/BlogContent";
 import Blogs from "components/blog/Blogs";
 import ContactForm from "components/common/ContactForm";
 import Footer from "components/common/Footer";

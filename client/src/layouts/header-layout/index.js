@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Typography } from "@material-ui/core";
+import PostAddIcon from "@material-ui/icons/PostAdd";
 import { Button } from "components/admin";
 import { useStyles } from "./styles";
 
@@ -10,7 +11,9 @@ const HeaderLayout = ({ title, onCreateNew }) => {
   return (
     <Box className={defaultClasses.root}>
       <Typography className={defaultClasses.title}>{title || ""}</Typography>
-      <Button onClick={onCreateNew}>Tạo mới</Button>
+      <Button startIcon={<PostAddIcon />} onClick={onCreateNew}>
+        Tạo mới
+      </Button>
     </Box>
   );
 };

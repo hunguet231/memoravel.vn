@@ -2,7 +2,7 @@ import { LangConstant } from "const";
 
 // Base Api
 // export const BASE_URL = "http://localhost:5000/api";
-export const BASE_URL = "http://54.255.223.32/api";
+export const BASE_URL = "http://13.229.198.3/api";
 
 export const HEADER_DEFAULT = {
   Accept: "application/json",
@@ -37,3 +37,7 @@ export const PROFILE = "/profile";
 // topic
 export const MN_TOPIC = "/manage/topic";
 export const GET_TOPIC = "/topic";
+
+// post
+export const MN_POST = "/manage/post";
+export const GET_POST = "/post";
