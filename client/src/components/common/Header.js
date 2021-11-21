@@ -47,7 +47,7 @@ const Header = () => {
   const menuData = [
     { id: "1", text: "Trang chủ", path: "/", icon: "home" },
     { id: "2", text: "Cửa hàng", path: "/shop", icon: "store" },
-    { id: "3", text: "Tin tức", path: "/blog", icon: "description" },
+    { id: "3", text: "Tin tức", path: "/blogs", icon: "description" },
     { id: "4", text: "Liên hệ", path: "/contact", icon: "contact_support" },
   ];
 
@@ -151,7 +151,7 @@ const Header = () => {
                   <Link href="/shop">Cửa hàng</Link>
                 </li>
                 <li>
-                  <Link href="/blog">Tin tức</Link>
+                  <Link href="/blogs">Tin tức</Link>
                 </li>
                 <li>
                   <Link href="/contact">Liên hệ</Link>

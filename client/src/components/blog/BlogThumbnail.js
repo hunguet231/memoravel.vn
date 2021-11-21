@@ -1,23 +1,51 @@
 import React from "react";
+import PropTypes from "prop-types";
+import readingTime from "utils/readingTime";
+import Link from "next/link";
 import styles from "../../styles/BlogThumbnail.module.scss";
 
-export default function BlogThumbnail() {
+export default function BlogThumbnail({
+  post: {
+    alias,
+    topics,
+    title,
+    description,
+    content,
+    background,
+    created,
+    number_view,
+    modified,
+  },
+}) {
   return (
     <div className="wrapper">
       <div className={styles.container}>
-        <img src="/images/blog_thumbnail.png" className={styles.imgThumb} />
-        <button className="button-tag">Du lịch</button>
+        <Link href={`/blogs/${alias}`}>
+          <div
+            className={styles.imgThumb}
+            style={{ backgroundImage: `url(${background})` }}
+          ></div>
+        </Link>
+        <button className="button-tag">{topics[0].title}</button>
+
         <h2 className={styles.titleThumb}>
-          What Traveling Greece For 2 Weeks Taught Me About Life
+          <Link href={`/blogs/${alias}`}>{title}</Link>
         </h2>
+
         <div>
-          <p className={styles.description}>Jun 21, 2021 • 11 min read</p>
           <p className={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam mollis lectus vitae nulla
-            malesuada amet purus sed. A condimentum tempus a egestas sodales diam cras.
+            {modified
+              ? new Date(modified).toLocaleDateString()
+              : new Date(created).toLocaleDateString()}{" "}
+            • {readingTime(content)} phút đọc • {number_view} lượt xem
           </p>
+          <p className={styles.description}>{description}</p>
         </div>
       </div>
     </div>
   );
 }
+
+BlogThumbnail.propTypes = {
+  post: PropTypes.array,
+};

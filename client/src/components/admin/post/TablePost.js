@@ -28,10 +28,10 @@ const TablePost = (props) => {
             <TableCell className={classes.header} align="center">
               STT
             </TableCell>
+            <TableCell className={classes.header}>Hình đại diện</TableCell>
             <TableCell className={classes.header}>Tên bài viết</TableCell>
-            <TableCell className={classes.header}>Mô tả</TableCell>
             <TableCell className={classes.header} align="center">
-              Alias
+              Mô tả
             </TableCell>
             <TableCell className={classes.header} align="center">
               Trạng thái
@@ -47,9 +47,29 @@ const TablePost = (props) => {
               <TableCell align="center">
                 {(postData.page - 1) * 10 + index + 1}
               </TableCell>
-              <TableCell>{row.title || ""}</TableCell>
+              <TableCell>
+                <a
+                  href={`/blogs/${row.alias}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={row.background}
+                    className={classes.img}
+                    alt="Picture"
+                  />
+                </a>
+              </TableCell>
+              <TableCell>
+                <a
+                  href={`/blogs/${row.alias}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {row.title || ""}
+                </a>
+              </TableCell>
               <TableCell>{row.description || ""}</TableCell>
-              <TableCell align="center">{row.alias || ""}</TableCell>
               <TableCell align="center">
                 <Chip
                   size="small"
@@ -102,6 +122,12 @@ TablePost.propTypes = {
 export default TablePost;
 
 const useStyles = makeStyles((theme) => ({
+  img: {
+    height: 100,
+    width: 100,
+    borderRadius: "5px",
+    objectFit: "cover",
+  },
   root: {
     margin: "24px 0",
   },

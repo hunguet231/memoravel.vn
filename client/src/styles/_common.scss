@@ -135,13 +135,21 @@ ul {
 }
 .button-tag {
   background: $button-light-color;
-  margin: 15px auto;
+  font-family: $font-be;
+  font-weight: 400;
+  margin: 10px auto;
+  margin-right: 10px;
   padding: 3px 20px;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   border: none;
+  @include media(tablet) {
+    margin: 10px 10px 6px 0;
+    padding: 3px 8px;
+    font-size: 13px;
+  }
   &:hover {
     background: $button-light-hover-color;
   }

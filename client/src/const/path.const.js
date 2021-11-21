@@ -1,5 +1,5 @@
 export const HOME = "/";
-export const BLOG = "/blogs";
+export const BLOGS = "/blogs";
 export const NOT_FOUND = "/not-found";
 
 // Manage role

@@ -9,6 +9,7 @@ import { ApiConstant, AppConstant } from "const";
 
 export default function Blogs() {
   const [topics, setTopics] = React.useState([]);
+  const [posts, setPosts] = React.useState([]);
 
   const fetchTopics = async () => {
     const url = ApiConstant.GET_TOPIC;
@@ -17,9 +18,17 @@ export default function Blogs() {
       setTopics(response.data);
     }
   };
+  const fetchPosts = async () => {
+    const url = ApiConstant.GET_POST;
+    const response = await fetchData(url, ApiConstant.METHOD.get);
+    if (response?.status === AppConstant.STATUS_OK) {
+      setPosts(response.data);
+    }
+  };
 
   React.useEffect(() => {
     fetchTopics();
+    fetchPosts();
   }, []);
 
   return (
@@ -53,18 +62,11 @@ export default function Blogs() {
       <Category topics={topics} />
       <div className="container">
         <Row gutter={30}>
-          <Col sm={24} md={12}>
-            <BlogThumbnail />
-          </Col>
-          <Col sm={24} md={12}>
-            <BlogThumbnail />
-          </Col>
-          <Col sm={24} md={12}>
-            <BlogThumbnail />
-          </Col>
-          <Col sm={24} md={12}>
-            <BlogThumbnail />
-          </Col>
+          {posts.map((post) => (
+            <Col key={post.id} sm={24} md={12}>
+              <BlogThumbnail post={post} />
+            </Col>
+          ))}
         </Row>
       </div>
     </div>

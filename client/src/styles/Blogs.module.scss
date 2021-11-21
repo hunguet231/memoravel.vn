@@ -38,7 +38,8 @@
     color: $white-color;
     margin: 0;
     @include media(tablet) {
-      font-size: 50px;
+      font-size: 30px;
+      margin-top: 15px;
     }
   }
   .subTitle {

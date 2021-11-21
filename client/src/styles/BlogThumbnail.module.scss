@@ -1,32 +1,51 @@
 @import "variables.scss";
+@import "mixins";
 
 .container {
   padding: 0 15px;
   padding-bottom: 30px;
   .imgThumb {
     width: 100%;
-    height: auto;
-  }
-  .btnTags {
-    background: $button-light-color;
-    margin: 15px auto;
-    padding: 3px 20px;
-    color: #fff;
+    height: 300px;
+    @include media(tablet) {
+      height: 250px;
+    }
+    background-position: center;
+    background-size: cover;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    border: none;
     &:hover {
-      background: $button-light-hover-color;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
   }
   .titleThumb {
     font-family: $font-merriweather;
     font-weight: bolder;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    @include media(tablet) {
+      font-size: 18px;
+    }
+    a {
+      color: #11142d;
+      &:hover {
+        color: $button-light-hover-color;
+      }
+    }
   }
   .description {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 15px;
+    @include media(tablet) {
+      font-size: 13px;
+    }
+    font-family: $font-be;
+    font-weight: 400;
     color: $text-blog-color;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
