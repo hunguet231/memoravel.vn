@@ -4,7 +4,7 @@ import readingTime from "utils/readingTime";
 import styles from "../../styles/BlogContent.module.scss";
 import ReactHtmlParser from "react-html-parser";
 import { AppConstant } from "const";
-import { NextSeo } from "next-seo";
+import { AppHead } from "components";
 
 export default function BlogContent({
   post: {
@@ -21,33 +21,11 @@ export default function BlogContent({
 }) {
   return (
     <>
-      <NextSeo
+      <AppHead
         title={title}
         description={description}
-        canonical={`${AppConstant.LANDING_URL}/${alias}`}
-        openGraph={{
-          url: `${AppConstant.LANDING_URL}/${alias}`,
-          title,
-          description,
-          images: [
-            {
-              url: background,
-              width: 800,
-              height: 600,
-              alt: title,
-              type: "image/jpeg",
-            },
-            {
-              url: background,
-              width: 900,
-              height: 800,
-              alt: title,
-              type: "image/jpeg",
-            },
-            { url: background },
-          ],
-          site_name: "Memoravel",
-        }}
+        url={`${AppConstant.LANDING_URL}/${alias}`}
+        ogImage={background}
       />
       <div className="wrapper ">
         <div className={styles.contentWrapper}>
