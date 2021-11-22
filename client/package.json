@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "node src/server.js",
     "build": "next build",
-    "start": "next start -H 0.0.0.0 -p ${PORT:-8080}",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build",
     "product": "NODE_ENV=production node src/server.js",
     "eslint": "eslint ./src/pages ./src/components --fix"
   },
