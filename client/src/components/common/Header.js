@@ -82,13 +82,15 @@ const Header = () => {
         suffix={<SearchOutlined />}
       />
       <List>
-        {menuData.map(({ id, text, icon }) => (
-          <ListItem button key={id}>
-            <ListItemIcon>
-              <Icon>{icon}</Icon>
-            </ListItemIcon>
-            <ListItemText secondary={text} />
-          </ListItem>
+        {menuData.map(({ id, text, icon, path }) => (
+          <Link href={path} key={id}>
+            <ListItem button>
+              <ListItemIcon>
+                <Icon>{icon}</Icon>
+              </ListItemIcon>
+              <ListItemText secondary={text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>

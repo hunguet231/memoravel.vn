@@ -123,18 +123,24 @@ const useStyles = makeStyles((theme) => ({
     padding: "24px 0px",
   },
   header: {
+    marginTop: "120px",
+    "@media only screen and (max-width: 830px)": {
+      marginTop: "60px",
+      fontSize: 30,
+      fontWeight: 600,
+    },
     fontSize: 46,
     fontWeight: 700,
     color: theme.palette.primary.main,
-    textShadow:
-      "0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15)",
   },
   formInput: {
-    width: 400,
+    width: "100%",
+    maxWidth: "450px",
     marginBottom: 32,
   },
   button: {
-    width: 400,
+    width: "100%",
+    maxWidth: "450px",
     height: 45,
     marginBottom: 32,
     fontSize: 20,

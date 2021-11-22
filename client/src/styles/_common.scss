@@ -207,3 +207,7 @@ ul {
   --rmsc-radius: 4px; /* Radius */
   --rmsc-h: 38px; /* Height */
 }
+
+#nprogress .spinner {
+  display: none !important;
+}
