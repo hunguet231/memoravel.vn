@@ -35,4 +35,5 @@ module.exports = withAntdLess({
   async rewrites() {
     return [];
   },
+  target: "serverless",
 });
