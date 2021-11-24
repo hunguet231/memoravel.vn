@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { List, ListItem, Box } from "@material-ui/core";
 import {
   ClassOutlined,
@@ -10,7 +11,7 @@ import { AppConstant, PathConstant } from "const";
 import SidebarItem from "./sidebar-item";
 import { useStyles } from "./styles";
 
-const Sidebar = () => {
+const Sidebar = ({ profile }) => {
   const defaultClasses = useStyles();
 
   return (
@@ -19,15 +20,21 @@ const Sidebar = () => {
         <ListItem className={defaultClasses.listItem}>
           <Menu className={defaultClasses.icon} />
         </ListItem>
-        {SIDEBAR_DATA.map((item, index) => (
-          <SidebarItem key={index} item={item} />
-        ))}
+        {SIDEBAR_DATA.map(
+          (item, index) =>
+            profile?.role &&
+            profile?.role <= item.role && (
+              <SidebarItem key={index} item={item} />
+            )
+        )}
       </List>
     </Box>
   );
 };
 
-Sidebar.propTypes = {};
+Sidebar.propTypes = {
+  profile: PropTypes.object,
+};
 
 export default Sidebar;
 
@@ -36,11 +43,13 @@ const SIDEBAR_DATA = [
     text: "Chủ đề",
     icon: <ListAltOutlined color="inherit" />,
     path: PathConstant.MANAGE_TOPIC,
+    role: AppConstant.ROLE.manage,
   },
   {
     text: "Bài viết",
     icon: <ClassOutlined color="inherit" />,
     path: PathConstant.MANAGE_POST,
+    role: AppConstant.ROLE.manage,
   },
   {
     text: "Quản lý User",
