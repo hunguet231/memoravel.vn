@@ -61,42 +61,40 @@ const Login = () => {
   return (
     <MainLayout>
       <Header />
-      <div className="container">
-        <div className={classes.border}>
-          <p className={classes.header}>Đăng nhập</p>
-          <FormControl variant="outlined" className={classes.formInput}>
-            <InputLabel>Tài khoản</InputLabel>
-            <OutlinedInput
-              type="text"
-              value={values.username}
-              onChange={onChangeData("username")}
-              labelWidth={75}
-            />
-          </FormControl>
-          <FormControl variant="outlined" className={classes.formInput}>
-            <InputLabel>Mật khẩu</InputLabel>
-            <OutlinedInput
-              type={values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={onChangeData("password")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton onClick={onClickShowPassword} edge="end">
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              labelWidth={70}
-            />
-          </FormControl>
-          <Button
-            disabled={!values.username || !values.password}
-            className={classes.button}
-            onClick={onSubmit}
-          >
-            Đăng nhập
-          </Button>
-        </div>
+      <div className={classes.border}>
+        <p className={classes.header}>Đăng nhập</p>
+        <FormControl variant="outlined" className={classes.formInput}>
+          <InputLabel>Tài khoản</InputLabel>
+          <OutlinedInput
+            type="text"
+            value={values.username}
+            onChange={onChangeData("username")}
+            labelWidth={75}
+          />
+        </FormControl>
+        <FormControl variant="outlined" className={classes.formInput}>
+          <InputLabel>Mật khẩu</InputLabel>
+          <OutlinedInput
+            type={values.showPassword ? "text" : "password"}
+            value={values.password}
+            onChange={onChangeData("password")}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton onClick={onClickShowPassword} edge="end">
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+          />
+        </FormControl>
+        <Button
+          disabled={!values.username || !values.password}
+          className={classes.button}
+          onClick={onSubmit}
+        >
+          Đăng nhập
+        </Button>
       </div>
       <ContactForm />
       {message && (
@@ -121,6 +119,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
     padding: "24px 0px",
+    marginTop: 120,
+    [theme.breakpoints.down(830)]: {
+      marginTop: 60,
+    },
   },
   header: {
     fontSize: 46,
@@ -132,11 +134,19 @@ const useStyles = makeStyles((theme) => ({
   formInput: {
     width: 400,
     marginBottom: 32,
+    [theme.breakpoints.down(830)]: {
+      width: "calc(100% - 32px)",
+      margin: "0px 16px 32px",
+    },
   },
   button: {
     width: 400,
     height: 45,
     marginBottom: 32,
     fontSize: 20,
+    [theme.breakpoints.down(830)]: {
+      width: "calc(100% - 32px)",
+      margin: "0px 16px 32px",
+    },
   },
 }));

@@ -7,6 +7,7 @@ import TableTopic from "./topic/TableTopic";
 import TablePost from "./post/TablePost";
 import SelectItem from "./SelectItem";
 import AppAlert from "./AppAlert";
+import DialogUser from "./user/DialogUser";
 
 export {
   AppLink,
@@ -16,6 +17,7 @@ export {
   TableTopic,
   DialogPost,
   TablePost,
+  DialogUser,
   SelectItem,
   AppAlert,
 };

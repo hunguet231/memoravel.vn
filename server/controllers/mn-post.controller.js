@@ -22,10 +22,11 @@ const formatPostData = (data) => {
     status: data.status,
     created: data.createdAt,
     modified: data.updatedAt,
-    topics: data.topics.map((topic) => ({
-      id: topic.id,
-      title: responseObjectMultiLang(topic.title),
-    })),
+    topics:
+      data?.topics?.map((topic) => ({
+        id: topic.id,
+        title: responseObjectMultiLang(topic.title),
+      })) || [],
   };
 };
 
@@ -109,11 +110,6 @@ export const mnGetListPost = async (req, res) => {
       };
     }
 
-    const queryDataTopic = {};
-    if (dataPage.topic_id) {
-      queryDataTopic.id = dataPage.topic_id;
-    }
-
     const { count, rows: data } = await Post.findAndCountAll({
       ...pagination,
       where: {
@@ -122,9 +118,7 @@ export const mnGetListPost = async (req, res) => {
       include: [
         {
           model: Topic,
-          where: {
-            ...queryDataTopic,
-          },
+
           attributes: ['id', 'title'],
         },
       ],
