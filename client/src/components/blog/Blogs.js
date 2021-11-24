@@ -7,16 +7,16 @@ import styles from "../../styles/Blogs.module.scss";
 import BlogThumbnail from "./BlogThumbnail";
 
 export default function Blogs() {
-  const [topics, setTopics] = React.useState([]);
+  // const [topics, setTopics] = React.useState([]);
   const [posts, setPosts] = React.useState([]);
 
-  const fetchTopics = async () => {
-    const url = ApiConstant.GET_TOPIC;
-    const response = await fetchData(url, ApiConstant.METHOD.get);
-    if (response?.status === AppConstant.STATUS_OK) {
-      setTopics(response.data);
-    }
-  };
+  // const fetchTopics = async () => {
+  //   const url = ApiConstant.GET_TOPIC;
+  //   const response = await fetchData(url, ApiConstant.METHOD.get);
+  //   if (response?.status === AppConstant.STATUS_OK) {
+  //     setTopics(response.data);
+  //   }
+  // };
   const fetchPosts = async () => {
     const url = ApiConstant.GET_POST;
     const response = await fetchData(url, ApiConstant.METHOD.get);
@@ -26,7 +26,7 @@ export default function Blogs() {
   };
 
   React.useEffect(() => {
-    fetchTopics();
+    // fetchTopics();
     fetchPosts();
   }, []);
 
