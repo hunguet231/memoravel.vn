@@ -52,12 +52,25 @@ const Post = () => {
   const submitPost = async (data) => {
     setLoading(true);
     let url = ApiConstant.MN_POST;
+    let size;
 
     // upload image to cloudinary
     let background_url;
     if (data.background) {
-      if (!data.background.startsWith("https://res.cloudinary.com")) {
-        background_url = await getImgUrl(data.background);
+      if (
+        !data.background.toString().startsWith("https://res.cloudinary.com")
+      ) {
+        // check image size <= 3MB
+        const stringLength =
+          data.background.length - "data:image/png;base64,".length;
+
+        const sizeInMB =
+          (4 * Math.ceil(stringLength / 3) * 0.5624896334383812) / 1024 / 1024;
+        if (sizeInMB >= 3) {
+          size = sizeInMB;
+        } else {
+          background_url = await getImgUrl(data.background);
+        }
       } else {
         background_url = data.background;
       }
@@ -83,32 +96,39 @@ const Post = () => {
     if (data.id) {
       url += `/${data.id}`;
     }
-    const response = await fetchData(
-      url,
-      data.id ? ApiConstant.METHOD.put : ApiConstant.METHOD.post,
-      requestBody
-    );
 
-    if (
-      response.status &&
-      [AppConstant.STATUS_OK, AppConstant.STATUS_CREATED].includes(
-        response.status
-      )
-    ) {
-      await fetchDataPost(dataPost.page);
-      setMessageData({
-        type: "success",
-        message: response.message,
-      });
-      setLoading(false);
-      setIsOpen(false);
+    if (size <= 3) {
+      const response = await fetchData(
+        url,
+        data.id ? ApiConstant.METHOD.put : ApiConstant.METHOD.post,
+        requestBody
+      );
+
+      if (
+        response.status &&
+        [AppConstant.STATUS_OK, AppConstant.STATUS_CREATED].includes(
+          response.status
+        )
+      ) {
+        await fetchDataPost(dataPost.page);
+        setMessageData({
+          type: "success",
+          message: response.message,
+        });
+        setLoading(false);
+        setIsOpen(false);
+      } else {
+        setMessageData({
+          type: "error",
+          message:
+            response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!",
+        });
+      }
     } else {
-      setMessageData({
-        type: "error",
-        message:
-          response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!",
-      });
+      alert(`File vượt quá 3MB (phát hiện ${Math.round(size * 100) / 100}MB)`);
+      setLoading(false);
     }
+
     // console.log(data);
   };
 

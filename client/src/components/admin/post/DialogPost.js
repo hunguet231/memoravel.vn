@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import { Close, CloudUpload as CloudUploadIcon } from "@material-ui/icons";
 import { CKEditorComponent } from "components";
-import { Button } from "components/admin";
+import Button from "components/common/Button";
 import { AppConstant } from "const";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
@@ -150,14 +150,15 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
           value={dataInput?.description || ""}
           onChange={onTypingData}
         />
-        <Typography className={classes.typographyContent}>Hình ảnh</Typography>
+        <Typography className={classes.typographyContent}>Ảnh cover</Typography>
 
         <Button
           startIcon={<CloudUploadIcon />}
-          type="primary"
+          type="outline"
           component="label"
         >
-          Chọn ảnh
+          Chọn ảnh{" "}
+          <span style={{ marginLeft: "5px" }}> (Kích cỡ tối đa 3MB)</span>
           <input
             type="file"
             accept="image/*"
@@ -213,10 +214,10 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         </FormControl>
       </DialogContent>
       <DialogActions className={classes.dialogActions}>
-        <Button variant="outlined" onClick={() => onClose(dataInput)}>
+        <Button type="outline" onClick={() => onClose(dataInput)}>
           Hủy
         </Button>
-        <Button onClick={() => onSubmit(dataInput)}>
+        <Button type="primary" onClick={() => onSubmit(dataInput)}>
           {loading && (
             <CircularProgress size={20} className={classes.circular} />
           )}

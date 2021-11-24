@@ -1,11 +1,10 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Col, Input, Row } from "antd";
+import { fetchData } from "api";
+import { ApiConstant, AppConstant } from "const";
 import React from "react";
 import styles from "../../styles/Blogs.module.scss";
 import BlogThumbnail from "./BlogThumbnail";
-import Category from "./Category";
-import { fetchData } from "api";
-import { ApiConstant, AppConstant } from "const";
 
 export default function Blogs() {
   const [topics, setTopics] = React.useState([]);
@@ -59,7 +58,7 @@ export default function Blogs() {
       </div>
 
       <br />
-      <Category topics={topics} />
+      {/* <Category topics={topics} /> */}
       <div className="container">
         <Row gutter={30}>
           {posts.map((post) => (
