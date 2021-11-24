@@ -58,9 +58,9 @@ const Post = () => {
     if (data.background) {
       if (!data.background.startsWith("https://res.cloudinary.com")) {
         background_url = await getImgUrl(data.background);
+      } else {
+        background_url = data.background;
       }
-    } else {
-      background_url = data.background;
     }
     const requestBody = {
       title: {
