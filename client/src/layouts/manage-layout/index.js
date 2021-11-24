@@ -52,7 +52,7 @@ const MainLayout = ({ children }) => {
         onOpenSidebar={() => setIsOpenSidebar((currentData) => !currentData)}
       />
       <Box className={defaultClasses.root}>
-        {isOpenSidebar && <Sidebar />}
+        {isOpenSidebar && <Sidebar profile={profile} />}
         <main className={defaultClasses.main}>{children}</main>
       </Box>
     </NoSsr>

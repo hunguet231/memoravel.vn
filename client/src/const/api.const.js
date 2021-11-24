@@ -41,3 +41,6 @@ export const GET_TOPIC = "/topic";
 // post
 export const MN_POST = "/manage/post";
 export const GET_POST = "/post";
+
+// user
+export const ADMIN_USER = "/admin/user";

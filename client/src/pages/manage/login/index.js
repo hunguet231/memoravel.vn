@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   makeStyles,
   FormControl,
@@ -57,6 +57,16 @@ const Login = () => {
       );
     }
   };
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const response = await fetchData(ApiConstant.PROFILE);
+      if (response?.status === AppConstant.STATUS_OK) {
+        router.push(PathConstant.MANAGE_TOPIC);
+      }
+    };
+    checkToken();
+  }, []);
 
   return (
     <MainLayout>

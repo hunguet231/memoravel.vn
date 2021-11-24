@@ -30,6 +30,43 @@ export const STATUS = {
   delete: 3,
 };
 
+export const ARRAY_ROLE = [
+  {
+    value: ROLE.admin,
+    name: "Admin",
+  },
+  {
+    value: ROLE.manage,
+    name: "Manager",
+  },
+];
+
+export const ARRAY_STATUS_USER = [
+  {
+    value: STATUS.publish,
+    name: "Kích hoạt",
+  },
+  {
+    value: STATUS.draft,
+    name: "Vô hiệu hóa",
+  },
+];
+
+export const ARRAY_GENDER = [
+  {
+    value: GENDER.male,
+    name: "Nam",
+  },
+  {
+    value: GENDER.female,
+    name: "Nữ",
+  },
+  {
+    value: GENDER.other,
+    name: "Khác",
+  },
+];
+
 export const ARRAY_STATUS = [
   {
     value: STATUS.publish,

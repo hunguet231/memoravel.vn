@@ -13,13 +13,20 @@ import {
 import { Close } from "@material-ui/icons";
 import { AppConstant } from "const";
 import { Button, SelectItem } from "components/admin";
+import { format } from "date-fns";
 
 const DialogUser = ({ isShow, onClose, onSubmit, data }) => {
   const classes = useStyles();
 
   const [dataInput, setDataInput] = useState({
-    title: "",
-    description: "",
+    username: "",
+    password: "",
+    full_name: "",
+    email: "",
+    phone_number: "",
+    gender: null,
+    date_of_birth: new Date(),
+    role: null,
     status: AppConstant.STATUS.draft,
   });
 
@@ -68,15 +75,16 @@ const DialogUser = ({ isShow, onClose, onSubmit, data }) => {
           }}
           required
           inputProps={{
-            name: "title",
+            name: "username",
           }}
-          value={dataInput?.title || ""}
+          value={dataInput?.username || ""}
           onChange={onTypingData}
         />
         <Typography className={classes.typographyContent}>
-          Mật khẩu *
+          Mật khẩu {data?.id ? "" : "*"}
         </Typography>
         <OutlinedInput
+          type="password"
           placeholder="Nhập mật khẩu"
           classes={{
             root: classes.contentLineEdit,
@@ -85,9 +93,9 @@ const DialogUser = ({ isShow, onClose, onSubmit, data }) => {
           }}
           required
           inputProps={{
-            name: "description",
+            name: "password",
           }}
-          value={dataInput?.description || ""}
+          value={dataInput?.password || ""}
           onChange={onTypingData}
         />
         <Typography className={classes.typographyContent}>
@@ -102,19 +110,96 @@ const DialogUser = ({ isShow, onClose, onSubmit, data }) => {
           }}
           required
           inputProps={{
-            name: "description",
+            name: "full_name",
           }}
-          value={dataInput?.description || ""}
+          value={dataInput?.full_name || ""}
           onChange={onTypingData}
         />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ width: "48%" }}>
+            <Typography className={classes.typographyContent}>
+              Email *
+            </Typography>
+            <OutlinedInput
+              placeholder="Nhập email"
+              classes={{
+                root: classes.contentLineEdit,
+                input: classes.inputEdit,
+                disabled: classes.disabled,
+              }}
+              required
+              inputProps={{
+                name: "email",
+              }}
+              value={dataInput?.email || ""}
+              onChange={onTypingData}
+            />
+          </div>
+          <div style={{ width: "48%" }}>
+            <Typography className={classes.typographyContent}>
+              Số điện thoại *
+            </Typography>
+            <OutlinedInput
+              placeholder="Nhập số điện thoại"
+              classes={{
+                root: classes.contentLineEdit,
+                input: classes.inputEdit,
+                disabled: classes.disabled,
+              }}
+              required
+              inputProps={{
+                name: "phone_number",
+              }}
+              value={dataInput?.phone_number || ""}
+              onChange={onTypingData}
+            />
+          </div>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ width: "48%" }}>
+            <Typography className={classes.typographyContent}>
+              Giới tính
+            </Typography>
+            <SelectItem
+              value={dataInput?.gender || AppConstant.GENDER.other}
+              data={AppConstant.ARRAY_GENDER}
+              onChangeInput={(e) =>
+                setDataInput({ ...dataInput, gender: e.target.value })
+              }
+            />
+          </div>
+          <div style={{ width: "48%" }}>
+            <Typography className={classes.typographyContent}>
+              Ngày sinh
+            </Typography>
+            <OutlinedInput
+              type="date"
+              value={format(
+                dataInput?.date_of_birth
+                  ? new Date(dataInput.date_of_birth)
+                  : new Date(),
+                "yyyy-MM-dd"
+              )}
+              onChange={onTypingData}
+              inputProps={{
+                name: "date_of_birth",
+              }}
+              classes={{
+                root: classes.contentLineEdit,
+                input: classes.inputEdit,
+                disabled: classes.disabled,
+              }}
+            />
+          </div>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ width: "48%" }}>
             <Typography className={classes.typographyContent}>Role</Typography>
             <SelectItem
-              value={dataInput?.status || AppConstant.STATUS.draft}
-              data={AppConstant.ARRAY_STATUS}
+              value={dataInput?.role || AppConstant.ROLE.manage}
+              data={AppConstant.ARRAY_ROLE}
               onChangeInput={(e) =>
-                setDataInput({ ...dataInput, status: e.target.value })
+                setDataInput({ ...dataInput, role: e.target.value })
               }
             />
           </div>
@@ -124,7 +209,7 @@ const DialogUser = ({ isShow, onClose, onSubmit, data }) => {
             </Typography>
             <SelectItem
               value={dataInput?.status || AppConstant.STATUS.draft}
-              data={AppConstant.ARRAY_STATUS}
+              data={AppConstant.ARRAY_STATUS_USER}
               onChangeInput={(e) =>
                 setDataInput({ ...dataInput, status: e.target.value })
               }
@@ -161,7 +246,7 @@ export default DialogUser;
 
 const useStyles = makeStyles((theme) => ({
   dialogContainer: {
-    width: 450,
+    width: 550,
     objectFit: "contain",
     boxShadow: "0 1px 6px 0 rgba(0, 0, 0, 0.1)",
     backgroundColor: theme.palette.common.white,
@@ -180,7 +265,7 @@ const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     position: "fixed",
-    width: 450,
+    width: 550,
     display: "flex",
     alignItems: "center",
     justifyContent: "left",
