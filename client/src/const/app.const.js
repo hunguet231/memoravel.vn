@@ -3,7 +3,7 @@ export const KEY_LANG = "lang";
 export const APP_TOKEN = "token_memoravel";
 export const USER_DATA = "user_data";
 
-export const LANDING_URL = "https://memoravel.vn";
+export const LANDING_URL = "https://memoravel.vn/";
 
 export const STATUS_OK = 200;
 export const STATUS_CREATED = 201;
