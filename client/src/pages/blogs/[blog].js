@@ -35,6 +35,10 @@ const BlogDetails = ({ post }) => {
             rel: "icon",
             href: "https://memoravel.vn/images/favicon.ico",
           },
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/icon?family=Material+Icons",
+          },
         ]}
       />
       <BlogLayout>
