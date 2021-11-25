@@ -6,7 +6,7 @@ const Products = (sequelize, Sequelize) => {
       defaultValue: Sequelize.UUIDV4,
       allowNull: false,
     },
-    title: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
+    name: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     summary: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     story: Sequelize.TEXT + " CHARSET utf8 COLLATE utf8_general_ci",
     price: Sequelize.STRING,

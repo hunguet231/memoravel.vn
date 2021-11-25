@@ -6,10 +6,7 @@ const Carts = (sequelize, Sequelize) => {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
       },
-      price: Sequelize.INTEGER, 
       quantity:Sequelize.INTEGER,
-      discount: Sequelize.STRING,
-      active: Sequelize.INTEGER,
       status: Sequelize.INTEGER,
       details: Sequelize.TEXT,
     });
