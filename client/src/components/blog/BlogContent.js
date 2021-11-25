@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { AppHead } from "components";
 import React from "react";
 import ReactHtmlParser from "react-html-parser";
 import readingTime from "utils/readingTime";
+import { NextSeo } from "next-seo";
 import styles from "../../styles/BlogContent.module.scss";
 
 export default function BlogContent({
@@ -20,11 +20,21 @@ export default function BlogContent({
 }) {
   return (
     <>
-      <AppHead
-        title={title}
-        description={description}
-        url={alias}
-        ogImage={background}
+      <NextSeo
+        title={`${title} - Memoravel.vn`}
+        description={`${description}`}
+        openGraph={{
+          url: `https://memoravel.vn/blogs/${alias}`,
+          title: `${title} - Memoravel.vn`,
+          description: `${description}`,
+          images: [
+            {
+              url: background,
+              alt: title,
+            },
+          ],
+          site_name: `https://memoravel.vn/blogs/${alias}`,
+        }}
       />
       <div className="wrapper ">
         <div className={styles.contentWrapper}>
