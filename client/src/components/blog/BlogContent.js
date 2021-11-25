@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
+import { AppHead } from "components";
 import React from "react";
+import ReactHtmlParser from "react-html-parser";
 import readingTime from "utils/readingTime";
 import styles from "../../styles/BlogContent.module.scss";
-import ReactHtmlParser from "react-html-parser";
-import { AppConstant } from "const";
-import { AppHead } from "components";
 
 export default function BlogContent({
   post: {
