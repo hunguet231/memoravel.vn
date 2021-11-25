@@ -158,7 +158,6 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
           component="label"
         >
           Chọn ảnh{" "}
-          <span style={{ marginLeft: "5px" }}> (Kích cỡ tối đa 3MB)</span>
           <input
             type="file"
             accept="image/*"
