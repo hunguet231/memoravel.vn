@@ -46,6 +46,10 @@
   @include media(mobile) {
     font-size: 14px;
   }
+  img {
+    height: auto !important;
+    width: 100% !important;
+  }
 }
 
 .credit {

@@ -24,7 +24,7 @@ export default function BlogContent({
       <AppHead
         title={title}
         description={description}
-        url={`${AppConstant.LANDING_URL}/${alias}`}
+        url={alias}
         ogImage={background}
       />
       <div className="wrapper ">
