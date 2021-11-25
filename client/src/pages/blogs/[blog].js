@@ -13,29 +13,31 @@ const BlogDetails = ({ post }) => {
   const { title, description, background, alias } = post;
   return (
     <div>
-      <BlogLayout>
-        <NextSeo
-          title={`${title} - Memoravel.vn`}
-          description={`${description}`}
-          openGraph={{
-            url: `https://memoravel.vn/blogs/${alias}`,
-            title: `${title} - Memoravel.vn`,
-            description: `${description}`,
-            images: [
-              {
-                url: background,
-                alt: title,
-              },
-            ],
-            site_name: `https://memoravel.vn/blogs/${alias}`,
-          }}
-          additionalLinkTags={[
+      <NextSeo
+        title={`${title} - Memoravel.vn`}
+        description={`${description}`}
+        openGraph={{
+          url: `https://memoravel.vn/blogs/${alias}`,
+          title: `${title} - Memoravel.vn`,
+          description: `${description}`,
+          images: [
             {
-              rel: "icon",
-              href: "https://memoravel.vn/images/favicon.ico",
+              url: `${background}`,
+              width: 800,
+              height: 600,
+              alt: `${title}`,
             },
-          ]}
-        />
+          ],
+          site_name: `${title} - Memoravel.vn`,
+        }}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: "https://memoravel.vn/images/favicon.ico",
+          },
+        ]}
+      />
+      <BlogLayout>
         <Header />
         <BlogContent post={post} />
         <ContactForm />
