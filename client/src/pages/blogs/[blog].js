@@ -1,17 +1,41 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { fetchData } from "api";
-import { ApiConstant, AppConstant } from "const";
 import BlogContent from "components/blog/BlogContent";
 import ContactForm from "components/common/ContactForm";
-import Header from "components/common/Header";
 import Footer from "components/common/Footer";
+import Header from "components/common/Header";
+import { ApiConstant, AppConstant } from "const";
 import BlogLayout from "layouts/blog-layout";
+import { NextSeo } from "next-seo";
+import PropTypes from "prop-types";
+import React from "react";
 
 const BlogDetails = ({ post }) => {
+  const { title, description, background, alias } = post;
   return (
     <div>
       <BlogLayout>
+        <NextSeo
+          title={`${title} - Memoravel.vn`}
+          description={`${description}`}
+          openGraph={{
+            url: `https://memoravel.vn/blogs/${alias}`,
+            title: `${title} - Memoravel.vn`,
+            description: `${description}`,
+            images: [
+              {
+                url: background,
+                alt: title,
+              },
+            ],
+            site_name: `https://memoravel.vn/blogs/${alias}`,
+          }}
+          additionalLinkTags={[
+            {
+              rel: "icon",
+              href: "https://memoravel.vn/images/favicon.ico",
+            },
+          ]}
+        />
         <Header />
         <BlogContent post={post} />
         <ContactForm />

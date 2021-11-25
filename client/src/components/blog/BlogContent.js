@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { NextSeo } from "next-seo";
 import React from "react";
 import ReactHtmlParser from "react-html-parser";
 import readingTime from "utils/readingTime";
@@ -15,27 +14,10 @@ export default function BlogContent({
     created,
     modified,
     topics,
-    alias,
   },
 }) {
   return (
     <>
-      <NextSeo
-        title={`${title} - Memoravel.vn`}
-        description={`${description}`}
-        openGraph={{
-          url: `https://memoravel.vn/blogs/${alias}`,
-          title: `${title} - Memoravel.vn`,
-          description: `${description}`,
-          images: [
-            {
-              url: background,
-              alt: title,
-            },
-          ],
-          site_name: `https://memoravel.vn/blogs/${alias}`,
-        }}
-      />
       <div className="wrapper ">
         <div className={styles.contentWrapper}>
           <div
