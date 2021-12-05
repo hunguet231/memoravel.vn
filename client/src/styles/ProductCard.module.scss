@@ -1,0 +1,74 @@
+@import "variables";
+
+.cardWrapper {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 10px 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardImg {
+  height: 200px;
+  object-fit: cover;
+}
+
+.productName {
+  color: $primary-color;
+  font-family: $font-merriweather;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+}
+
+.description {
+  font-size: 14px;
+}
+
+.rate {
+  color: $secondary-color;
+  font-size: 90%;
+}
+
+.sold {
+  color: $light-gray-color;
+}
+
+.cartButton {
+  font-size: 26px;
+  color: $button-color;
+  &:hover {
+    color: $button-hover-color;
+    cursor: pointer;
+  }
+}
+
+.price {
+  font-family: $font-merriweather;
+  color: $primary-color;
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+.overlayAR {
+  color: #fff;
+  position: absolute;
+  z-index: 12;
+  top: 0;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  .buttonAR {
+    margin: 10px;
+    background-color: $darken-white-color;
+    color: $primary-color;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    &:hover {
+      cursor: pointer;
+      background-color: $white-color;
+    }
+  }
+}

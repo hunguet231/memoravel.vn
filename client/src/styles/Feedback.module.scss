@@ -1,0 +1,113 @@
+@import "variables";
+@import "mixins";
+.feedback {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  height: auto;
+  background: #f6f4ed;
+  color: #fff;
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    @include media(tablet) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    grid-gap: 8px;
+    height: auto;
+  }
+  .button {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    @include media(tablet) {
+      margin-top: 30px;
+    }
+  }
+  .card {
+    background-color: $primary-color;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    margin: 0 5px;
+    align-items: flex-start;
+    &.cardSlider {
+      margin-right: 10px;
+      width: 80%;
+      height: auto;
+      display: block;
+      .img {
+        height: 64px;
+        width: 64px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      .text {
+        margin: 0;
+      }
+      .userBox {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+      }
+    }
+    .rate {
+      font-size: 15px;
+    }
+    .img {
+      background-color: $background-image-color;
+      flex: 3;
+      border-radius: 8px;
+      height: 216px;
+      width: auto;
+      background-size: cover;
+      background-position: center;
+    }
+    .text {
+      flex: 4;
+      margin-left: 20px;
+      .title {
+        font-family: $font-merriweather;
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 0.005em;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        @include media(tablet) {
+          font-size: 16px;
+        }
+        @include media(mobile) {
+          margin-top: 6px;
+          margin-bottom: 6px;
+          font-size: 13px;
+        }
+      }
+      .content {
+        font-family: $font-dm-sans;
+        font-size: 15px;
+        letter-spacing: 00.005em;
+        @include media(tablet) {
+          font-size: 14px;
+        }
+        @include media(mobile) {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}
+
+.author {
+  font-family: $font-merriweather;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 00.005em;
+  margin-top: 18px;
+  @include media(tablet) {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  @include media(mobile) {
+    font-size: 11px;
+    margin-top: 10px;
+  }
+}

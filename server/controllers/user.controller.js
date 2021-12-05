@@ -1,6 +1,6 @@
-import { database } from "../configs";
-import { AppConst } from "../const";
-import { responseFormat, convertPaging } from "../utils";
+import { database } from '../configs';
+import { AppConst } from '../const';
+import { responseFormat, convertPaging } from '../utils';
 const User = database.Model.userModel;
 const Op = database.Sequelize.Op;
 
@@ -29,7 +29,7 @@ export const adminCreateUser = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -62,7 +62,7 @@ export const adminEditUser = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -80,6 +80,9 @@ export const adminGetListUser = async (req, res) => {
     const queryData = {
       id: {
         [Op.ne]: req.user_id,
+      },
+      status: {
+        [Op.ne]: AppConst.STATUS.delete,
       },
     };
 
@@ -122,7 +125,7 @@ export const adminGetListUser = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -142,6 +145,6 @@ export const adminDeleteUser = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };

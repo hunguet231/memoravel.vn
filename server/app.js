@@ -1,13 +1,13 @@
-import express from "express";
-import cors from "cors";
-import bcrypt from "bcrypt";
-import * as dotenv from "dotenv";
-import * as path from "path";
-import { AppConst, ApiConst } from "./const";
-import { database } from "./configs";
-import { CommonRoute, UserRoute, TopicRoute, PostRoute } from "./routes";
+import express from 'express';
+import cors from 'cors';
+import bcrypt from 'bcrypt';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+import { AppConst, ApiConst } from './const';
+import { database } from './configs';
+import { CommonRoute, UserRoute, TopicRoute, PostRoute } from './routes';
 
-dotenv.config({ path: path.resolve("./.env") });
+dotenv.config({ path: path.resolve('./.env') });
 
 const app = express();
 app.use(express.json());
@@ -38,7 +38,7 @@ const runSequelize = async () => {
           status: AppConst.STATUS.publish,
         });
       }
-      console.log("Sequelize is Running");
+      console.log('Sequelize is Running');
     }
   } catch (err) {
     console.log(err.message);

@@ -1,10 +1,10 @@
-import { database } from "../configs";
-import { AppConst } from "../const";
+import { database } from '../configs';
+import { AppConst } from '../const';
 import {
   responseFormat,
   convertPaging,
   responseObjectMultiLang,
-} from "../utils";
+} from '../utils';
 const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
 const Op = database.Sequelize.Op;
@@ -29,7 +29,7 @@ export const createTopic = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -54,7 +54,7 @@ export const editTopic = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -69,9 +69,11 @@ export const getAllTopic = async (req, res) => {
             offset: (dataPage.page - 1) * dataPage.size,
           };
 
-    const queryData = {
-      status: AppConst.STATUS.publish,
-    };
+    const queryData = {};
+
+    if (!req.user_id) {
+      queryData.status = AppConst.STATUS.publish;
+    }
 
     if (dataPage.topic_id) {
       queryData.id = {
@@ -99,7 +101,7 @@ export const getAllTopic = async (req, res) => {
     });
 
     const formatData = data.map((dataMap) =>
-      responseData(dataMap, dataPage.paging ? "" : AppConst.DEFAULT_LANG)
+      responseData(dataMap, dataPage.paging ? '' : AppConst.DEFAULT_LANG)
     );
 
     const response =
@@ -117,7 +119,7 @@ export const getAllTopic = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -126,7 +128,7 @@ export const getTopicByAlias = async (req, res) => {
     if (!req.params.alias) {
       return res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: "Yêu cầu alias!" }));
+        .json(responseFormat({ message: 'Yêu cầu alias!' }));
     }
 
     const topicData = await Topic.findOne({
@@ -141,7 +143,7 @@ export const getTopicByAlias = async (req, res) => {
     if (!topicData) {
       res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: "Alias không tồn tại!" }));
+        .json(responseFormat({ message: 'Alias không tồn tại!' }));
     } else {
       res.status(AppConst.STATUS_OK).json(
         responseFormat({
@@ -152,7 +154,7 @@ export const getTopicByAlias = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -173,7 +175,7 @@ export const deleteTopic = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -185,7 +187,7 @@ const findTopicById = async (id) =>
     include: [
       {
         model: Post,
-        attributes: ["id"],
+        attributes: ['id'],
       },
     ],
   });

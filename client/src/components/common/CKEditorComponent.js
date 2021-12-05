@@ -7,7 +7,7 @@ const CKEditorComponent = (props) => {
 
   const onChangeData = (e) => {
     let htmlData = e.editor.getData();
-    onChange(htmlData);
+    onChange && onChange(htmlData);
   };
 
   return (

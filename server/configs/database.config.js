@@ -1,11 +1,11 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-import configFile from "./config.json";
+import configFile from "./config";
 import { UserModel, TopicModel, PostModel, ShopModel, ProductModel, Shop_addressModel, CartModel } from "../models";
 
 dotenv.config();
 
-const env = process.env.NODE_ENV || "development";
+const env = process.env.NODE_ENV || 'development';
 const config = configFile[env];
 
 let sequelize;
@@ -39,19 +39,19 @@ const Model = {
 database.Model = Model;
 
 // Join user with post
-Model.userModel.hasOne(Model.postModel, { foreignKey: "user_id" });
-Model.postModel.belongsTo(Model.userModel, { foreignKey: "user_id" });
+Model.userModel.hasOne(Model.postModel, { foreignKey: 'user_id' });
+Model.postModel.belongsTo(Model.userModel, { foreignKey: 'user_id' });
 
 //Join post with topic
 Model.topicModel.belongsToMany(Model.postModel, {
-  through: "topic_post",
-  foreignKey: "topic_id",
-  otherKey: "post_id",
+  through: 'topic_post',
+  foreignKey: 'topic_id',
+  otherKey: 'post_id',
 });
 Model.postModel.belongsToMany(Model.topicModel, {
-  through: "topic_post",
-  foreignKey: "post_id",
-  otherKey: "topic_id",
+  through: 'topic_post',
+  foreignKey: 'post_id',
+  otherKey: 'topic_id',
 });
 
 //Join user with shops

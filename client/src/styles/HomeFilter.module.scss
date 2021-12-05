@@ -1,0 +1,65 @@
+@import "variables";
+@import "mixins";
+.filter {
+  width: 800px;
+  height: 500px;
+  color: #fff;
+  background-color: #410000;
+  padding: 25px 20px;
+  position: relative;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  .triangle {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    background-color: #410000;
+    left: 50px;
+    top: -6px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100%;
+    position: relative;
+    .col {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      &:not(:first-child) {
+        padding-left: 15px;
+      }
+      &:not(:last-child) {
+        border-right: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      .heading {
+        font-family: $font-merriweather;
+        font-weight: 600;
+        font-size: 16px;
+        color: #fff;
+      }
+      .checkbox {
+        margin: 0;
+        color: #fff;
+        margin-top: 20px;
+      }
+      .listItems {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .button {
+        position: absolute;
+        right: 0;
+        bottom: -200px;
+      }
+    }
+    .divider {
+      height: 1px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
+      position: absolute;
+      top: 35px;
+    }
+  }
+}

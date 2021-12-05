@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import App from "next/app";
-import "../../public/styles/index.scss";
+import NextNprogress from "nextjs-progressbar";
+import "../styles/_common.scss";
+import "../styles/variables.less";
+import { ThemeProvider, CssBaseline } from "@material-ui/core";
+import theme from "../../public/material";
 
 import "language";
 import { useRouter } from "next/router";
@@ -22,7 +26,20 @@ const MyApp = ({ Component, pageProps }) => {
     Cookies.set(AppConstant.KEY_LANG, selectedLang);
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <NextNprogress
+        color="#d35400"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        showOnShallow={true}
+      />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 };
 
 MyApp.getInitialProps = async (appContext) => {
