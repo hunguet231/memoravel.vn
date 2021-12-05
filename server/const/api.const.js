@@ -23,3 +23,9 @@ export const MANAGE_TOPIC = "/api/manage/topic";
 export const MANAGE_TOPIC_ID = "/api/manage/topic/:topic_id";
 export const GET_TOPIC = "/api/topic";
 export const GET_TOPIC_BY_ALIAS = "/api/topic/:alias";
+
+// product api
+export const MANAGE_PRODUCT = "/api/manage/product";
+export const MANAGE_PRODUCT_ID = "/api/manage/product/:product_id";
+
+
