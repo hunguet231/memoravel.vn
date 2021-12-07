@@ -1,7 +1,17 @@
-import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
-import configFile from "./config";
-import { UserModel, TopicModel, PostModel, ShopModel, ProductModel, Shop_addressModel, CartModel } from "../models";
+import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
+import configFile from './config';
+import {
+  UserModel,
+  TopicModel,
+  PostModel,
+  ProductModel,
+  ProductRatingModel,
+  ShopModel,
+  ShopAddressModel,
+  ShopRatingModel,
+  OrderModel,
+} from '../models';
 
 dotenv.config();
 
@@ -29,11 +39,12 @@ const Model = {
   userModel: UserModel(sequelize, Sequelize),
   topicModel: TopicModel(sequelize, Sequelize),
   postModel: PostModel(sequelize, Sequelize),
-  shopModel: ShopModel(sequelize, Sequelize),
   productModel: ProductModel(sequelize, Sequelize),
-  shop_addressModel: Shop_addressModel(sequelize, Sequelize),
-  cartModel: CartModel(sequelize, Sequelize),
-
+  productRatingModel: ProductRatingModel(sequelize, Sequelize),
+  shopModel: ShopModel(sequelize, Sequelize),
+  shopAddressModel: ShopAddressModel(sequelize, Sequelize),
+  shopRatingModel: ShopRatingModel(sequelize, Sequelize),
+  orderModel: OrderModel(sequelize, Sequelize),
 };
 
 database.Model = Model;
@@ -55,24 +66,51 @@ Model.postModel.belongsToMany(Model.topicModel, {
 });
 
 //Join user with shops
-Model.userModel.hasOne(Model.shopModel, { foreignKey: "user_id" });
-Model.shopModel.belongsTo(Model.userModel, { foreignKey: "user_id" });
+Model.userModel.hasOne(Model.shopModel, { foreignKey: 'user_id' });
+Model.shopModel.belongsTo(Model.userModel, { foreignKey: 'user_id' });
 
 //Join shop with products
-Model.shopModel.hasOne(Model.productModel, { foreignKey: "shop_id" });
-Model.productModel.belongsTo(Model.shopModel, { foreignKey: "shop_id" });
+Model.shopModel.hasOne(Model.productModel, { foreignKey: 'shop_id' });
+Model.productModel.belongsTo(Model.shopModel, { foreignKey: 'shop_id' });
 
 // Join shop with shop_address
-Model.shopModel.hasOne(Model.shop_addressModel, { foreignKey: "shop_id" });
-Model.shop_addressModel.belongsTo(Model.shopModel, { foreignKey: "shop_id" });
+Model.shopModel.hasOne(Model.shopAddressModel, { foreignKey: 'shop_id' });
+Model.shopAddressModel.belongsTo(Model.shopModel, { foreignKey: 'shop_id' });
 
-//Join user with carts
-Model.userModel.hasOne(Model.cartModel, { foreignKey: "user_id" });
-Model.cartModel.belongsTo(Model.userModel, { foreignKey: "user_id" });
+// Join shop with rating shop
+Model.shopModel.hasMany(Model.shopRatingModel, { foreignKey: 'shop_id' });
+Model.shopRatingModel.belongsTo(Model.shopModel, { foreignKey: 'shop_id' });
 
-//Join products with carts
-Model.productModel.hasOne(Model.cartModel, { foreignKey: "product_id" });
-Model.cartModel.belongsTo(Model.productModel, { foreignKey: "product_id" });
+// Join user with rating shop
+Model.userModel.hasMany(Model.shopRatingModel, { foreignKey: 'user_id' });
+Model.shopRatingModel.belongsTo(Model.userModel, { foreignKey: 'user_id' });
+
+// Join product with rating product
+Model.productModel.hasMany(Model.productRatingModel, {
+  foreignKey: 'product_id',
+});
+Model.productRatingModel.belongsTo(Model.productModel, {
+  foreignKey: 'product_id',
+});
+
+// Join user with rating product
+Model.userModel.hasMany(Model.productRatingModel, {
+  foreignKey: 'user_id',
+});
+Model.productRatingModel.belongsTo(Model.userModel, {
+  foreignKey: 'user_id',
+});
+
+// join order with product
+Model.orderModel.belongsToMany(Model.productModel, {
+  through: 'order_products',
+  foreignKey: 'order_id',
+  otherKey: 'product_id',
+});
+Model.productModel.belongsToMany(Model.orderModel, {
+  through: 'order_products',
+  foreignKey: 'product_id',
+  otherKey: 'order_id',
+});
 
 export default database;
-
