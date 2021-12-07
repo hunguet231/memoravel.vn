@@ -138,6 +138,7 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         <Typography className={classes.typographyContent}>Mô tả</Typography>
         <OutlinedInput
           placeholder="Nhập mô tả"
+          multiline
           classes={{
             root: classes.contentLineEdit,
             input: classes.inputEdit,
