@@ -19,7 +19,7 @@ export default function CarouselHeader() {
           <div className={styles.heroWrapper}>
             <Flickity options={flickityOptions}>
               <div className={styles.banner}>
-                <img src="/images/carousel.png" alt="Banner" />
+                <img src="/images/carousel-min.png" alt="Banner" />
                 <div className={styles.text}>
                   <h1 className={styles.heading}>MEMORAVEL</h1>
                   <h2 className={styles.subHeading}>
@@ -34,7 +34,7 @@ export default function CarouselHeader() {
                 </div>
               </div>
               <div className={styles.banner}>
-                <img src="/images/carousel.png" alt="Banner" />
+                <img src="/images/carousel-min.png" alt="Banner" />
                 <div className={styles.text}>
                   <h1 className={styles.heading}>MEMORAVEL</h1>
                   <h2 className={styles.subHeading}>
