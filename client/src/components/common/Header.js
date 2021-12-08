@@ -96,6 +96,10 @@ const Header = () => {
     </div>
   );
 
+  const active = (path) => {
+    return path === router.pathname;
+  };
+
   return (
     <div className="wrapper">
       <div className={styles.headerWrapper}>
@@ -147,16 +151,37 @@ const Header = () => {
                   <div className={styles.filter}>{<HomeFilter />}</div>
                 </li>
                 <li>
-                  <Link href="/">Trang chủ</Link>
+                  <Link href="/">
+                    <span className={active("/") ? styles.currentMenu : ""}>
+                      Trang chủ
+                    </span>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/shop">Cửa hàng</Link>
+                  <Link href="/shop">
+                    <span className={active("/shop") ? styles.currentMenu : ""}>
+                      Cửa hàng
+                    </span>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/blogs">Tin tức</Link>
+                  <Link href="/blogs">
+                    <span
+                      className={active("/blogs") ? styles.currentMenu : ""}
+                    >
+                      Tin tức
+                    </span>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/contact">Liên hệ</Link>
+                  <Link href="/contact">
+                    <span
+                      className={active("/contact") ? styles.currentMenu : ""}
+                    >
+                      {" "}
+                      Liên hệ
+                    </span>
+                  </Link>
                 </li>
                 <li>
                   <Input
