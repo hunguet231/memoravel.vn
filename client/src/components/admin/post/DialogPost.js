@@ -187,14 +187,20 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         <Alert severity="warning">
           <AlertTitle>Chú ý</AlertTitle>
           Chèn link ảnh từ <mark>Google Drive:</mark>
-          <br /> Với link ảnh &quot;https://drive.google.com/file/d/
-          <mark>1DYHYl8mPcA_C_EONLG3sAXBOUJhM-xyg</mark>/...&quot; thì FILE_ID
-          sẽ là <mark>1DYHYl8mPcA_C_EONLG3sAXBOUJhM-xyg</mark>
-          <br /> Thay FILE_ID trên vào
-          &quot;https://drive.google.com/uc?id=FILE_ID&quot; sẽ được link ảnh
-          đúng
-          <br /> &quot;https://drive.google.com/uc?id=
-          <mark>1DYHYl8mPcA_C_EONLG3sAXBOUJhM-xyg</mark>&quot;
+          <br /> Copy link ảnh đơn từ Google Drive
+          &quot;https://drive.google.com/file/d/1DYHYl8mPcA_C_EONLG3sAXBOUJhM-xyg/...&quot;
+          dán vào
+          <a
+            href="https://sites.google.com/site/gdocs2direct/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "red", fontWeight: "bold" }}
+          >
+            {" "}
+            ĐÂY
+          </a>
+          , sau đó chọn &quot;Create Direct Link&quot; và lấy link output mà
+          dùng thoả thích.
         </Alert>
         <CKEditorComponent
           name="content"
