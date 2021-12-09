@@ -5,7 +5,14 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 import { AppConst, ApiConst } from './const';
 import { database } from './configs';
-import { CommonRoute, UserRoute, TopicRoute, PostRoute } from './routes';
+import {
+  CommonRoute,
+  UserRoute,
+  TopicRoute,
+  PostRoute,
+  ProductRoute,
+  ShopRoute,
+} from './routes';
 
 dotenv.config({ path: path.resolve('./.env') });
 
@@ -18,6 +25,8 @@ app.use(ApiConst.ROOT, CommonRoute);
 app.use(ApiConst.ROOT, UserRoute);
 app.use(ApiConst.ROOT, TopicRoute);
 app.use(ApiConst.ROOT, PostRoute);
+app.use(ApiConst.ROOT, ProductRoute);
+app.use(ApiConst.ROOT, ShopRoute);
 
 const runSequelize = async () => {
   try {
