@@ -29,5 +29,5 @@ export const MANAGE_PRODUCT = '/api/manage/product';
 export const MANAGE_PRODUCT_ID = '/api/manage/product/:product_id';
 
 // shop api
-export const MANAGE_SHOP = '/api/manage/shop';
-export const MANAGE_SHOP_ID = '/api/manage/shop/:shop_id';
+export const ADMIN_SHOP = '/api/admin/shop';
+export const ADMIN_SHOP_ID = '/api/admin/shop/:shop_id';

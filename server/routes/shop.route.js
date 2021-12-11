@@ -6,9 +6,9 @@ import { CommonMiddleware, ShopMiddleware } from '../middleware';
 const shopRoute = express.Router();
 
 shopRoute.post(
-  ApiConst.MANAGE_SHOP,
+  ApiConst.ADMIN_SHOP,
   CommonMiddleware.verifyToken,
-  CommonMiddleware.verifyRolesManage,
+  CommonMiddleware.verifyRolesAdmin,
   ShopMiddleware.checkCreateShop,
   ShopController.createShop
 );
