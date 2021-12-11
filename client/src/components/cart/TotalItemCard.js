@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import styles from "styles/TotalItemCard.module.scss";
 import { Checkbox } from "@material-ui/core";

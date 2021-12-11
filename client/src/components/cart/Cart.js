@@ -1,6 +1,6 @@
-import { useState } from "react";
+/* eslint-disable react/react-in-jsx-scope */
+import { Checkbox, Col, Row } from "antd";
 import styles from "styles/Cart.module.scss";
-import { Checkbox, Row, Col } from "antd";
 import CartItem from "./CartItem";
 import TotalItemCard from "./TotalItemCard";
 
@@ -31,7 +31,11 @@ export default function Cart() {
             <Col xs={24} lg={7}>
               <div className={styles.cardCode}>
                 <h3 className={styles.headingCard}>Bạn có phiếu giảm giá ?</h3>
-                <input type="text" placeholder="Nhập email" className={styles.input} />
+                <input
+                  type="text"
+                  placeholder="Nhập email"
+                  className={styles.input}
+                />
                 <div className="flex justify-between">
                   <div>
                     <div className="text-start">Giảm</div>
