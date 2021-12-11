@@ -1,7 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "styles/TotalItemCard.module.scss";
-import { Checkbox } from "@material-ui/core";
+import Button from "components/common/Button";
+import Link from "next/link";
+import { Checkbox } from "antd";
 
 export default function TotalItemCard({ order }) {
   return (
@@ -15,28 +17,28 @@ export default function TotalItemCard({ order }) {
                 <span className={styles.label}>X2 &nbsp; &nbsp;</span>
                 Bình sứ Vạn Phúc
               </p>
-              <Checkbox checked={true} />
+              <Checkbox defaultChecked={true} />
             </div>
             <div className="flex justify-between">
               <p className={styles.itemCheck}>
                 <span className={styles.label}>X2 &nbsp; &nbsp;</span>
                 Nón lá
               </p>
-              <Checkbox checked={true} />
+              <Checkbox defaultChecked={true} />
             </div>
             <div className="flex justify-between">
               <p className={styles.itemCheck}>
                 <span className={styles.label}>X2 &nbsp; &nbsp;</span>
                 Vải
               </p>
-              <Checkbox checked={true} />
+              <Checkbox defaultChecked={true} />
             </div>
             <div className="flex justify-between">
               <p className={styles.itemCheck}>
                 <span className={styles.label}>X2 &nbsp; &nbsp;</span>
                 Chén
               </p>
-              <Checkbox checked={true} />
+              <Checkbox defaultChecked={true} />
             </div>
             <br />
             <div className={styles.hr} />
@@ -59,13 +61,21 @@ export default function TotalItemCard({ order }) {
           <p className={styles.label}>Tổng:</p>
           <p className={styles.label}>8.999.000.000 vnđ</p>
         </div>
-        <button className="button" style={{ width: "100%" }}>
+        <Button type="primary" style={{ width: "100%" }}>
           THANH TOÁN
-        </button>
+        </Button>
         <div style={{ textAlign: "center" }}>
-          <a href="*">Quay lại mua sắm</a>
+          <Link href="/shop">Quay lại mua sắm</Link>
         </div>
       </div>
     </div>
   );
 }
+
+TotalItemCard.propTypes = {
+  order: PropTypes.object,
+};
+
+TotalItemCard.defaultProps = {
+  order: {},
+};

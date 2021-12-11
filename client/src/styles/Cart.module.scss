@@ -2,46 +2,22 @@
 @import "mixins";
 
 .container {
-  margin: 180px 0;
+  margin: 160px 0;
+  font-family: $font-be;
   .wrapperCheckbox {
-    border: 1px solid $darken-white-color;
-    border-radius: 10px;
+    border: 1px solid #d5d5d5;
+    font-family: $font-be;
+    font-weight: 600;
+    color: #11142d;
+    border-radius: 8px;
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
   }
-  .card {
-    border-radius: 10px;
-    border-bottom: 3px solid $darken-white-color;
-    margin-bottom: 20px;
-  }
-  .cardCode {
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: $primary-color;
-    color: $lighter-white-color;
-    .headingCard {
-      color: $lighter-white-color;
-      font-family: $font-merriweather;
-      font-size: 20px;
-    }
-    .input {
-      padding: 14px 10px;
-      width: 100%;
-      border: 1px solid $light-gray-color;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      color: $primary-color;
-    }
-    .priceSale {
-      font-family: $font-be;
-      font-size: 18px;
-      font-weight: 600;
-      text-align: start;
-      @include media(mobile) {
-        font-size: 15px;
-      }
-    }
+}
+
+@media (max-width: 830px) {
+  .container {
+    margin: 80px 0;
   }
 }

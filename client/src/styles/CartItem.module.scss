@@ -2,64 +2,96 @@
 @import "mixins";
 
 .wrapInfo {
-  display: flex;
-  align-items: center;
-  gap: 20px;
   margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
   @include media(mobile) {
-    gap: 10px;
+    padding: 5px 10px;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .content {
+    margin-left: 20px;
+    @include media(tablet) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+    @include media(mobile) {
+      margin-left: 15px;
+    }
   }
   .img {
-    width: 100%;
-    height: auto;
-    max-width: 100px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
     border-radius: 10px;
+    margin-left: 15px;
+    @include media(mobile) {
+      margin-left: 10px;
+    }
   }
   .nameProduct,
   .price {
     font-family: $font-be;
-    position: relative;
-    top: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
     @include media(mobile) {
-      font-size: 18px !important;
+      font-size: 13px;
+      font-weight: 600;
     }
   }
   .nameProduct {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    @include media(desktop) {
-      font-size: 24px;
-      position: relative;
-      top: -15px;
+    max-width: 280px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: $font-merriweather;
+    color: #11142d;
+    margin-bottom: 5px;
+    @include media(mobile) {
+      font-size: 14px;
     }
   }
-  .price {
-    font-size: 20px;
-    font-weight: 700;
-  }
-  p {
-    margin: 0;
-  }
   .wrapAmount {
-    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    @include media(tablet) {
+      margin: 0;
+    }
   }
-  .changeAmountBtn,
-  .deleteItem {
+  .changeAmountBtn {
     background-color: $white-color;
     padding: 4px 11px;
     border: 1px solid $light-gray-color;
     border-radius: 5px;
     font-weight: 600;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
     &:hover {
-      background-color: $light-gray-color;
+      background-color: #f2f2f2;
+    }
+    &:active {
+      background-color: #d0d0d0;
     }
     @include media(mobile) {
       padding: 2px 7px;
     }
   }
   .inputAmount {
+    outline: none;
     margin: 0 5px;
     padding: 5px 0;
     max-width: 80px;
@@ -70,20 +102,6 @@
       max-width: 50px;
       padding: 2px;
       margin: 0 2px;
-    }
-  }
-  .deleteItem {
-    color: $gray-color;
-    font-size: 20px;
-    border: none;
-    border-radius: 48%;
-    @include media(desktop) {
-      position: relative;
-      top: 25px;
-    }
-    @include media(tablet) {
-      position: relative;
-      top: 10px;
     }
   }
   input::-webkit-outer-spin-button,

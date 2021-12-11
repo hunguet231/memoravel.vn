@@ -1,16 +1,21 @@
 @import "variables";
-
+@import "mixins";
 .card {
   border-radius: 10px;
   background-color: $darken-white-color;
   padding: 15px;
   margin-top: 15px;
   color: $primary-color;
+  font-family: $font-be;
   .title {
     color: $primary-color;
     font-family: $font-merriweather;
     font-weight: 700;
     margin-bottom: 20px;
+    @include media(tablet) {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
   }
   .label {
     font-weight: 700;
@@ -25,6 +30,6 @@
     background: $primary-color;
   }
   .itemCheck {
-    margin: 10px 0;
+    margin-bottom: 10px;
   }
 }
