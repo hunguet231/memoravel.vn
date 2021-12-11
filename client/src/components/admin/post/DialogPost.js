@@ -191,7 +191,7 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
           &quot;https://drive.google.com/file/d/1DYHYl8mPcA_C_EONLG3sAXBOUJhM-xyg/...&quot;
           dán vào
           <a
-            href="https://sites.google.com/site/gdocs2direct/"
+            href="https://memoravel-get-link-drive.surge.sh/"
             target="_blank"
             rel="noreferrer"
             style={{ color: "red", fontWeight: "bold" }}

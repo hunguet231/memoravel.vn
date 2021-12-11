@@ -1,11 +1,16 @@
 @import "variables";
 
 .cardWrapper {
-  width: 100%;
-  max-width: 300px;
-  margin: 0 10px 10px;
+  width: 90%;
+  max-width: 280px;
+  margin: 0 5px 20px;
   border-radius: 6px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.1);
+  transition: 0.2s all ease-in-out;
+  &:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 }
 
 .cardImg {
@@ -23,6 +28,11 @@
 
 .description {
   font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.cardFooter {
+  margin-top: -15px;
 }
 
 .rate {

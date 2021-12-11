@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { Col, Row } from "antd";
 import { fetchData } from "api";
 import ProductCard from "components/common/ProductCard";
 import { ApiConstant, AppConstant } from "const";
 import React from "react";
 import styles from "../../styles/Blogs.module.scss";
+import Filter from "./Filter";
 
 export default function Shop() {
   const [products, setProducts] = React.useState([]);
@@ -43,12 +45,20 @@ export default function Shop() {
 
       <br />
       <div className="container">
-        <Row gutter={30}>
-          {products.map((product) => (
-            <Col key={product.id} sm={24} md={12}>
-              <ProductCard product={product} />
-            </Col>
-          ))}
+        <Row justify="space-between">
+          <Col sm={24} md={5}>
+            <Filter />
+          </Col>
+
+          <Col sm={24} md={18}>
+            <Row justify="space-between">
+              {new Array(9).fill(1).map((product) => (
+                <Col sm={24} md={8} key={product.id}>
+                  <ProductCard product={product} />
+                </Col>
+              ))}
+            </Row>
+          </Col>
         </Row>
       </div>
     </div>

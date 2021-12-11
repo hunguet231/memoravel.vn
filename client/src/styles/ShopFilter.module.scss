@@ -1,0 +1,14 @@
+@import "variables";
+@import "mixins";
+.filter {
+  width: 100%;
+  .heading {
+    font-family: $font-merriweather;
+    font-weight: 500;
+    font-size: 18px;
+    color: #5f1e03;
+  }
+  .icon {
+    color: #5f1e03;
+  }
+}

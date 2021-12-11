@@ -32,7 +32,7 @@ ul {
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -210,4 +210,8 @@ ul {
 
 #nprogress .spinner {
   display: none !important;
+}
+
+.ant-card-body {
+  padding: 0px 15px !important;
 }
