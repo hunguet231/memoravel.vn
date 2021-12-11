@@ -1,0 +1,98 @@
+@import "variables";
+@import "mixins";
+
+.wrapInfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  @include media(mobile) {
+    gap: 10px;
+  }
+  .img {
+    width: 100%;
+    height: auto;
+    max-width: 100px;
+    border-radius: 10px;
+  }
+  .nameProduct,
+  .price {
+    font-family: $font-be;
+    position: relative;
+    top: 5px;
+    @include media(mobile) {
+      font-size: 18px !important;
+    }
+  }
+  .nameProduct {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    @include media(desktop) {
+      font-size: 24px;
+      position: relative;
+      top: -15px;
+    }
+  }
+  .price {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  p {
+    margin: 0;
+  }
+  .wrapAmount {
+    margin-top: 5px;
+  }
+  .changeAmountBtn,
+  .deleteItem {
+    background-color: $white-color;
+    padding: 4px 11px;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    &:hover {
+      background-color: $light-gray-color;
+    }
+    @include media(mobile) {
+      padding: 2px 7px;
+    }
+  }
+  .inputAmount {
+    margin: 0 5px;
+    padding: 5px 0;
+    max-width: 80px;
+    text-align: center;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    @include media(mobile) {
+      max-width: 50px;
+      padding: 2px;
+      margin: 0 2px;
+    }
+  }
+  .deleteItem {
+    color: $gray-color;
+    font-size: 20px;
+    border: none;
+    border-radius: 48%;
+    @include media(desktop) {
+      position: relative;
+      top: 25px;
+    }
+    @include media(tablet) {
+      position: relative;
+      top: 10px;
+    }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
