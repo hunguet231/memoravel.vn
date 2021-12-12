@@ -5,6 +5,7 @@ import { CommonMiddleware, ShopMiddleware } from '../middleware';
 
 const shopRoute = express.Router();
 
+// ADMIN API
 shopRoute.post(
   ApiConst.ADMIN_SHOP,
   CommonMiddleware.verifyToken,
@@ -42,4 +43,7 @@ shopRoute.delete(
   ShopMiddleware.checkDeleteShop,
   ShopController.deleteShop
 );
+
+// USER API
+
 export default shopRoute;

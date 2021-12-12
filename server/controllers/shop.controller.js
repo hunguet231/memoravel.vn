@@ -6,6 +6,7 @@ const Shop = database.Model.shopModel;
 const ShopAddress = database.Model.shopAddressModel;
 const Op = database.Sequelize.Op;
 
+// API ADMIN
 const createDataFormat = (newShop, newAddress) => ({
   id: newShop.id,
   name: newShop.name,
@@ -212,3 +213,24 @@ export const findOneShop = async (shopId) =>
       },
     ],
   });
+// API ADMIN
+
+// API USER
+export const getShopByAlias = async (req, res, next) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const createRatingShop = async (req, res, next) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+// API USER

@@ -10,6 +10,7 @@ import { ShopController } from '../controllers';
 const Shop = database.Model.shopModel;
 const Op = database.Sequelize.Op;
 
+// MIDDLEWARE ADMIN
 export const checkCreateShop = async (req, res, next) => {
   try {
     const reqData = req.body;
@@ -157,7 +158,9 @@ export const checkDeleteShop = async (req, res, next) => {
       .json(responseFormat({ error: error, message: 'error' }));
   }
 };
+// MIDDLEWARE ADMIN
 
+// MIDDLEWARE USER
 export const checkCreateRatingShop = async (req, res, next) => {
   try {
   } catch (error) {
@@ -166,3 +169,4 @@ export const checkCreateRatingShop = async (req, res, next) => {
       .json(responseFormat({ error: error, message: 'error' }));
   }
 };
+// MIDDLEWARE USER

@@ -31,3 +31,6 @@ export const MANAGE_PRODUCT_ID = '/api/manage/product/:product_id';
 // shop api
 export const ADMIN_SHOP = '/api/admin/shop';
 export const ADMIN_SHOP_ID = '/api/admin/shop/:shop_id';
+export const SHOP_ALIAS = '/api/shop/:alias';
+export const SHOP_HOT = '/api/shop-hot';
+export const SHOP_RATING = '/api/shop/rating';
