@@ -26,14 +26,17 @@ const createDataFormat = (newShop, newAddress) => ({
 
 export const createShop = async (req, res) => {
   try {
-    const ShopData = { ...req.body, user_id: req.user_id };
+    const ShopData = {
+      ...req.body,
+      total_star: 0.0,
+      total_amount: 0,
+      user_id: req.user_id,
+    };
     delete ShopData['address'];
     const newShop = await Shop.create(ShopData);
 
     const ShopAddressData = {
       ...req.body.address,
-      total_rating: 0.0,
-      total_comment: 0,
       shop_id: newShop.dataValues.id,
     };
     const newShopAddress = await ShopAddress.create(ShopAddressData);
