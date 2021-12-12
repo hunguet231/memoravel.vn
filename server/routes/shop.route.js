@@ -28,6 +28,13 @@ shopRoute.get(
   ShopController.getShopDetail
 );
 
+shopRoute.get(
+  ApiConst.ADMIN_SHOP,
+  CommonMiddleware.verifyToken,
+  CommonMiddleware.verifyRolesAdmin,
+  ShopController.getListShop
+);
+
 shopRoute.delete(
   ApiConst.ADMIN_SHOP_ID,
   CommonMiddleware.verifyToken,

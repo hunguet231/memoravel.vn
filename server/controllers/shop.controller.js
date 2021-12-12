@@ -116,6 +116,63 @@ export const getShopDetail = async (req, res) => {
   }
 };
 
+export const getListShop = async (req, res) => {
+  try {
+    const dataPage = convertPaging(req);
+    const pagination =
+      dataPage.paging === 0
+        ? {}
+        : {
+            limit: dataPage.size,
+            offset: (dataPage.page - 1) * dataPage.size,
+          };
+
+    const queryDataShop = {};
+    if (dataPage.search) {
+      queryDataShop.name = {
+        [Op.like]: `%${dataPage.search}%`,
+      };
+    }
+    if (dataPage.user_id) {
+      queryDataShop.user_id = dataPage.user_id;
+    }
+
+    const { count, rows: data } = await Shop.findAndCountAll({
+      ...pagination,
+      where: {
+        ...queryDataShop,
+      },
+      include: [
+        {
+          model: ShopAddress,
+        },
+      ],
+      distinct: true,
+    });
+
+    const formatData = data.map((shopDetail) =>
+      createDataFormat(shopDetail, shopDetail.shop_address)
+    );
+
+    const response =
+      dataPage.paging === 0
+        ? {
+            data: formatData,
+            total: count,
+          }
+        : {
+            data: formatData,
+            total: count,
+            page: dataPage.page,
+          };
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
 export const deleteShop = async (req, res) => {
   try {
     const shopId = req.params.shop_id;
