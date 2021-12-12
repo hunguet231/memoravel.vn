@@ -33,7 +33,7 @@ export const checkCreateShop = async (req, res, next) => {
     } else if (!reqData.address?.country) {
       arrayError.push('Country is required');
     }
-    if (!reqData?.address?.city) {
+    if (!reqData.address?.city) {
       arrayError.push('City is required');
     }
     const StringResponseError = await mappingArrayErrorToString(arrayError);
@@ -69,6 +69,61 @@ export const checkCreateShop = async (req, res, next) => {
 
 export const checkUpdateShop = async (req, res, next) => {
   try {
+    const shopId = req.params.shop_id;
+    if (!shopId) {
+      return res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: 'Required shop_id' }));
+    }
+
+    const reqData = req.body;
+    const arrayError = [];
+
+    if (reqData.name === '') {
+      arrayError.push('Name shop is required');
+    } else if (reqData.name) {
+      const alias = convertTitleToAlias(reqData.name) + '.html';
+      const shop = await Shop.findOne({
+        where: {
+          id: {
+            [Op.ne]: shopId,
+          },
+          alias: alias,
+        },
+      });
+
+      if (shop) {
+        arrayError.push('Name shop is exist');
+      } else {
+        req.body.alias = alias;
+      }
+    }
+
+    if (
+      reqData.status &&
+      !Object.values(AppConst.STATUS).includes(reqData.status)
+    ) {
+      arrayError.push('Status is invalid');
+    }
+    if (reqData.address) {
+      if (!reqData.address.country) {
+        arrayError.push('Country is required');
+      }
+      if (!reqData.address.city) {
+        arrayError.push('City is required');
+      }
+    }
+
+    const StringResponseError = await mappingArrayErrorToString(arrayError);
+    if (StringResponseError || arrayError.length > 0) {
+      return res.status(AppConst.STATUS_BAD_REQUEST).json(
+        responseFormat({
+          message: StringResponseError || 'Request has error',
+        })
+      );
+    } else {
+      next();
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

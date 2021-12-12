@@ -7,20 +7,20 @@ const ShopAddress = database.Model.shopAddressModel;
 const Op = database.Sequelize.Op;
 
 const createDataFormat = (newShop, newAddress) => ({
-  id: newShop.dataValues.id,
-  name: newShop.dataValues.name,
-  avatar: newShop.dataValues.avatar,
-  cover: newShop.dataValues.cover,
-  description: newShop.dataValues.description,
-  alias: newShop.dataValues.alias,
-  details: newShop.dataValues.details,
-  created: newShop.dataValues.createdAt,
-  modified: newShop.dataValues.updatedAt,
+  id: newShop.id,
+  name: newShop.name,
+  avatar: newShop.avatar,
+  cover: newShop.cover,
+  description: newShop.description,
+  alias: newShop.alias,
+  details: newShop.details,
+  created: newShop.createdAt,
+  modified: newShop.updatedAt,
   address: {
-    country: newAddress.dataValues.country,
-    city: newAddress.dataValues.city,
-    district: newAddress.dataValues.district,
-    address_details: newAddress.dataValues.address_details,
+    country: newAddress.country,
+    city: newAddress.city,
+    district: newAddress.district,
+    address_details: newAddress.address_details,
   },
 });
 
@@ -37,14 +37,63 @@ export const createShop = async (req, res) => {
     const newShopAddress = await ShopAddress.create(ShopAddressData);
     newShop.address = newShopAddress;
 
-    res
-      .status(AppConst.STATUS_CREATED)
-      .json(
-        responseFormat({ data: createDataFormat(newShop, newShopAddress) })
-      );
+    res.status(AppConst.STATUS_CREATED).json(
+      responseFormat({
+        data: createDataFormat(newShop.dataValues, newShopAddress.dataValues),
+      })
+    );
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
       .json(responseFormat({ error: error, message: 'error' }));
   }
 };
+
+export const updateShop = async (req, res) => {
+  try {
+    const shopId = req.params.shop_id;
+    const ShopData = { ...req.body };
+
+    if (req.body.address) {
+      delete ShopData['address'];
+    }
+
+    await Shop.update(ShopData, {
+      where: {
+        id: shopId,
+      },
+    });
+
+    if (req.body.address) {
+      await ShopAddress.update(req.body.address, {
+        where: {
+          shop_id: shopId,
+        },
+      });
+    }
+
+    const shopDetails = await findOneShop(shopId);
+
+    res.status(AppConst.STATUS_OK).json(
+      responseFormat({
+        data: createDataFormat(shopDetails, shopDetails.shop_address),
+      })
+    );
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const findOneShop = async (shopId) =>
+  await Shop.findOne({
+    where: {
+      id: shopId,
+    },
+    include: [
+      {
+        model: ShopAddress,
+      },
+    ],
+  });
