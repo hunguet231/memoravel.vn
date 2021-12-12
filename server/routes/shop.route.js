@@ -21,4 +21,11 @@ shopRoute.put(
   ShopController.updateShop
 );
 
+shopRoute.get(
+  ApiConst.ADMIN_SHOP_ID,
+  CommonMiddleware.verifyToken,
+  CommonMiddleware.verifyRolesAdmin,
+  ShopController.getShopDetail
+);
+
 export default shopRoute;

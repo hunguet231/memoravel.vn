@@ -86,6 +86,36 @@ export const updateShop = async (req, res) => {
   }
 };
 
+export const getShopDetail = async (req, res) => {
+  try {
+    const shopId = req.params.shop_id;
+
+    if (!shopId) {
+      return res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: 'Required shop_id' }));
+    }
+
+    const shopDetails = await findOneShop(shopId);
+
+    if (shopDetails) {
+      res.status(AppConst.STATUS_OK).json(
+        responseFormat({
+          data: createDataFormat(shopDetails, shopDetails.shop_address),
+        })
+      );
+    } else {
+      res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Shop is not exist' }));
+    }
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
 export const findOneShop = async (shopId) =>
   await Shop.findOne({
     where: {
