@@ -32,6 +32,8 @@ export const createShop = async (req, res) => {
 
     const ShopAddressData = {
       ...req.body.address,
+      total_rating: 0.0,
+      total_comment: 0,
       shop_id: newShop.dataValues.id,
     };
     const newShopAddress = await ShopAddress.create(ShopAddressData);

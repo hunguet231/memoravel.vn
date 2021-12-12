@@ -7,7 +7,7 @@ const ShopRating = (sequelize, Sequelize) => {
       allowNull: false,
     },
     comment: Sequelize.TEXT + ' CHARSET utf8 COLLATE utf8_general_ci',
-    star: Sequelize.STRING,
+    star: Sequelize.FLOAT,
     images: Sequelize.TEXT,
     status: Sequelize.INTEGER,
     details: Sequelize.TEXT,
