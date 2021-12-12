@@ -5,6 +5,7 @@ import {
   convertTitleToAlias,
   mappingArrayErrorToString,
 } from '../utils';
+import { ShopController } from '../controllers';
 
 const Shop = database.Model.shopModel;
 const Op = database.Sequelize.Op;
@@ -133,6 +134,23 @@ export const checkUpdateShop = async (req, res, next) => {
 
 export const checkDeleteShop = async (req, res, next) => {
   try {
+    const shopId = req.params.shop_id;
+
+    if (!shopId) {
+      return res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: 'Required shop_id' }));
+    }
+
+    const shopDetails = await ShopController.findOneShop(shopId);
+
+    if (shopDetails) {
+      next();
+    } else {
+      res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Shop is not exist' }));
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

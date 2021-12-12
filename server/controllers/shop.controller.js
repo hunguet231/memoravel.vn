@@ -116,6 +116,29 @@ export const getShopDetail = async (req, res) => {
   }
 };
 
+export const deleteShop = async (req, res) => {
+  try {
+    const shopId = req.params.shop_id;
+
+    await ShopAddress.destroy({
+      where: {
+        shop_id: shopId,
+      },
+    });
+    await Shop.destroy({
+      where: {
+        id: shopId,
+      },
+    });
+
+    res.status(AppConst.STATUS_OK).json(responseFormat());
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
 export const findOneShop = async (shopId) =>
   await Shop.findOne({
     where: {

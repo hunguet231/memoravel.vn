@@ -28,4 +28,11 @@ shopRoute.get(
   ShopController.getShopDetail
 );
 
+shopRoute.delete(
+  ApiConst.ADMIN_SHOP_ID,
+  CommonMiddleware.verifyToken,
+  CommonMiddleware.verifyRolesAdmin,
+  ShopMiddleware.checkDeleteShop,
+  ShopController.deleteShop
+);
 export default shopRoute;
