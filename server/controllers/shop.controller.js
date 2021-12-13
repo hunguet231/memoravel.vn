@@ -16,6 +16,7 @@ const createDataFormat = (newShop, newAddress) => ({
   cover: newShop.cover,
   description: newShop.description,
   alias: newShop.alias,
+  status: newShop.status,
   details: newShop.details,
   created: newShop.createdAt,
   modified: newShop.updatedAt,
@@ -219,8 +220,64 @@ export const findOneShop = async (shopId) =>
 // API ADMIN
 
 // API USER
+
+const formatResposeShopUserCall = (data) => ({
+  id: data.id,
+  name: data.name,
+  avatar: data.avatar,
+  cover: data.cover,
+  description: data.description,
+  alias: data.alias,
+  average_star:
+    Math.round((data.total_star / data.total_amount + Number.EPSILON) * 100) /
+    100,
+  status: data.status,
+  details: data.details,
+  created: data.createdAt,
+  address: data.shop_address,
+  rating: data.shop_ratings,
+});
 export const getShopByAlias = async (req, res) => {
   try {
+    const Alias = req.params.alias;
+
+    const shop = await Shop.findOne({
+      where: {
+        alias: Alias,
+      },
+      include: [
+        {
+          model: ShopAddress,
+          attributes: [
+            'country',
+            'city',
+            'district',
+            'ward',
+            'address_details',
+          ],
+        },
+        {
+          model: ShopRating,
+          attributes: ['comment', 'star'],
+          include: [
+            {
+              model: User,
+              attributes: ['full_name', 'avatar'],
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!shop) {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Shop is not exist' }));
+    }
+
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatResposeShopUserCall(shop) }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
