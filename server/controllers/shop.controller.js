@@ -244,6 +244,7 @@ export const getShopByAlias = async (req, res) => {
     const shop = await Shop.findOne({
       where: {
         alias: Alias,
+        status: AppConst.STATUS.publish,
       },
       include: [
         {
@@ -287,6 +288,58 @@ export const getShopByAlias = async (req, res) => {
 
 export const getShopHot = async (req, res) => {
   try {
+    const limitPerPage = req.query?.limit || 5;
+    const limit =
+      parseInt(limitPerPage) > AppConst.LIMIT_PAGE_SIZE
+        ? AppConst.LIMIT_PAGE_SIZE
+        : parseInt(limitPerPage);
+
+    const pagination = {
+      limit: limit,
+      offset: 0,
+    };
+
+    const { count, rows: data } = await Shop.findAndCountAll({
+      ...pagination,
+      where: {
+        status: AppConst.STATUS.publish,
+      },
+      include: [
+        {
+          model: ShopAddress,
+          attributes: [
+            'country',
+            'city',
+            'district',
+            'ward',
+            'address_details',
+          ],
+        },
+        {
+          model: ShopRating,
+          attributes: ['comment', 'star'],
+          include: [
+            {
+              model: User,
+              attributes: ['full_name', 'avatar'],
+            },
+          ],
+        },
+      ],
+      order: [['total_amount', 'DESC']],
+      distinct: true,
+    });
+
+    const formatData = data.map((dataMap) =>
+      formatResposeShopUserCall(dataMap)
+    );
+
+    const response = {
+      data: formatData,
+      total: count,
+    };
+
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
