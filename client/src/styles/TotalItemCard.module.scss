@@ -31,5 +31,8 @@
   }
   .itemCheck {
     margin-bottom: 10px;
+    @include media(tablet) {
+      font-size: 13px;
+    }
   }
 }

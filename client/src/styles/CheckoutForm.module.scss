@@ -1,0 +1,53 @@
+@import "variables";
+@import "mixins";
+
+.container {
+  margin-top: 30px;
+  @include media(mobile) {
+    margin-top: 15px;
+  }
+  .wrapField {
+    width: 100%;
+    margin-bottom: 20px;
+    @include media(mobile) {
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+    font-size: 15px;
+    p {
+      font-family: $font-be;
+      margin-bottom: 3px;
+      font-weight: 500;
+      position: relative;
+      width: max-content;
+      &::after {
+        content: "*";
+        display: block;
+        color: red;
+        position: absolute;
+        top: 0;
+        right: -10px;
+      }
+    }
+  }
+  .input,
+  .inputTextarea {
+    width: 100%;
+    padding: 12px 10px;
+    @include media(mobile) {
+      padding: 8px 10px;
+    }
+    border: 1px solid $border-darken-white-color;
+    border-radius: 10px;
+    &:focus {
+      outline: 1px solid #da4c10;
+    }
+  }
+  .inputTextarea {
+    resize: none;
+    height: 120px !important;
+    @include media(mobile) {
+      height: 70px !important;
+    }
+  }
+}
