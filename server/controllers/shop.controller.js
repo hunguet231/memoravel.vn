@@ -4,6 +4,8 @@ import { responseFormat, convertPaging } from '../utils';
 
 const Shop = database.Model.shopModel;
 const ShopAddress = database.Model.shopAddressModel;
+const ShopRating = database.Model.shopRatingModel;
+const User = database.Model.userModel;
 const Op = database.Sequelize.Op;
 
 // API ADMIN
@@ -21,6 +23,7 @@ const createDataFormat = (newShop, newAddress) => ({
     country: newAddress.country,
     city: newAddress.city,
     district: newAddress.district,
+    ward: newAddress.ward,
     address_details: newAddress.address_details,
   },
 });
@@ -216,7 +219,7 @@ export const findOneShop = async (shopId) =>
 // API ADMIN
 
 // API USER
-export const getShopByAlias = async (req, res, next) => {
+export const getShopByAlias = async (req, res) => {
   try {
   } catch (error) {
     res
@@ -225,8 +228,69 @@ export const getShopByAlias = async (req, res, next) => {
   }
 };
 
-export const createRatingShop = async (req, res, next) => {
+export const getShopHot = async (req, res) => {
   try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const createRatingShop = async (req, res) => {
+  try {
+    const reqData = req.body;
+    const arrayImages = Array.isArray(reqData.images) ? reqData.images : [];
+    const stringImages = JSON.stringify(arrayImages);
+    const createData = {
+      shop_id: reqData.shop_id,
+      comment: reqData.comment,
+      star: reqData.star,
+      images: stringImages,
+      user_id: req.user_id,
+    };
+
+    const totalStar = reqData.shop.total_star + reqData.star;
+    const totalAmount = reqData.shop.total_amount + 1;
+
+    const newShopRating = await ShopRating.create(createData);
+    await Shop.update(
+      {
+        total_star: totalStar,
+        total_amount: totalAmount,
+      },
+      {
+        where: {
+          id: reqData.shop_id,
+        },
+      }
+    );
+
+    const dataShopRating = await ShopRating.findOne({
+      where: {
+        id: newShopRating.dataValues.id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['full_name', 'avatar'],
+        },
+      ],
+    });
+
+    const formatDataResponse = {
+      id: dataShopRating.id,
+      shop_id: dataShopRating.shop_id,
+      comment: dataShopRating.comment,
+      star: dataShopRating.star,
+      image: JSON.parse(dataShopRating.images),
+      created: dataShopRating.createdAt,
+      rating_user: dataShopRating.user,
+    };
+
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatDataResponse }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

@@ -57,6 +57,7 @@ export const checkCreateShop = async (req, res, next) => {
           country: reqData.address.country,
           city: reqData.address.city || '',
           district: reqData.address.district || '',
+          ward: reqData.address.ward || '',
           address_details: reqData.address.address_details || '',
         },
       };
@@ -163,6 +164,35 @@ export const checkDeleteShop = async (req, res, next) => {
 // MIDDLEWARE USER
 export const checkCreateRatingShop = async (req, res, next) => {
   try {
+    const reqData = req.body;
+    const arrayError = [];
+    if (!reqData.shop_id) {
+      arrayError.push('shop_id is required');
+    } else {
+      const shopDetails = await ShopController.findOneShop(reqData.shop_id);
+      if (!shopDetails) {
+        return res
+          .status(AppConst.STATUS_NOT_FOUND)
+          .json(responseFormat({ message: 'Shop is not exist' }));
+      }
+      req.body.shop = shopDetails;
+    }
+    if (!reqData.comment) {
+      arrayError.push('comment is required');
+    }
+    if (!reqData.star) {
+      arrayError.push('star is required');
+    }
+    const StringResponseError = await mappingArrayErrorToString(arrayError);
+    if (StringResponseError || arrayError.length > 0) {
+      return res.status(AppConst.STATUS_BAD_REQUEST).json(
+        responseFormat({
+          message: StringResponseError || 'Request has error',
+        })
+      );
+    } else {
+      next();
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

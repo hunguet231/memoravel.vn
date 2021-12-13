@@ -9,6 +9,7 @@ const ShopAddress = (sequelize, Sequelize) => {
     country: Sequelize.TEXT + ' CHARSET utf8 COLLATE utf8_general_ci',
     city: Sequelize.TEXT + ' CHARSET utf8 COLLATE utf8_general_ci',
     district: Sequelize.TEXT + ' CHARSET utf8 COLLATE utf8_general_ci',
+    ward: Sequelize.TEXT + ' CHARSET utf8 COLLATE utf8_general_ci',
     address_details: Sequelize.TEXT + ' CHARSET utf8 COLLATE utf8_general_ci',
     status: Sequelize.INTEGER,
     details: Sequelize.TEXT,

@@ -45,5 +45,15 @@ shopRoute.delete(
 );
 
 // USER API
+shopRoute.post(
+  ApiConst.SHOP_RATING,
+  CommonMiddleware.verifyToken,
+  ShopMiddleware.checkCreateRatingShop,
+  ShopController.createRatingShop
+);
+
+shopRoute.get(ApiConst.SHOP_ALIAS, ShopController.getShopByAlias);
+
+shopRoute.get(ApiConst.SHOP_HOT, ShopController.getShopHot);
 
 export default shopRoute;
