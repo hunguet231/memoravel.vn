@@ -13,6 +13,8 @@ const Products = (sequelize, Sequelize) => {
     images: Sequelize.TEXT,
     alias: Sequelize.STRING,
     price: Sequelize.STRING,
+    type: Sequelize.STRING,
+    made_in: Sequelize.STRING,
     vectary_link: Sequelize.STRING,
     sold: Sequelize.INTEGER,
     in_stock: Sequelize.INTEGER,
