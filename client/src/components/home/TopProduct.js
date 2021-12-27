@@ -10,9 +10,9 @@ const TopProduct = () => {
     percentPosition: false,
     cellAlign: "center",
     contain: true,
-    groupCells: 4,
-    wrapAround: true,
-    autoPlay: true,
+    groupCells: true,
+    // wrapAround: true,
+    // autoPlay: true,
   };
   return (
     <div className="wrapper">

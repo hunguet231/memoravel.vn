@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { Col, Row } from "antd";
+import { FilterOutlined } from "@ant-design/icons";
+import { Col, Row, Drawer } from "antd";
 import { fetchData } from "api";
 import ProductCard from "components/common/ProductCard";
 import { ApiConstant, AppConstant } from "const";
@@ -9,6 +10,7 @@ import Filter from "./Filter";
 
 export default function Shop() {
   const [products, setProducts] = React.useState([]);
+  const [visible, setVisible] = React.useState(false);
 
   const fetchProducts = async () => {
     const url = ApiConstant.GET_PRODUCT;
@@ -21,6 +23,14 @@ export default function Shop() {
   React.useEffect(() => {
     fetchProducts();
   }, []);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
   return (
     <div className="wrapper">
@@ -46,14 +56,30 @@ export default function Shop() {
       <br />
       <div className="container">
         <Row justify="space-between">
-          <Col sm={24} md={5}>
+          <Col sm={24} md={24} lg={5} className={styles.filter}>
             <Filter />
           </Col>
 
-          <Col sm={24} md={18}>
-            <Row justify="space-between">
+          <Col sm={24} md={24} lg={18}>
+            <div className={styles.filterBtn} onClick={showDrawer}>
+              <FilterOutlined />
+              <p>Bộ lọc</p>
+            </div>
+
+            <Drawer
+              title="Bộ lọc"
+              placement="left"
+              closable={false}
+              onClose={onClose}
+              visible={visible}
+              key="left"
+            >
+              <Filter />
+            </Drawer>
+
+            <Row gutter={10}>
               {new Array(9).fill(1).map((product) => (
-                <Col sm={24} md={8} key={product.id}>
+                <Col xs={12} sm={12} md={8} key={product.id}>
                   <ProductCard product={product} />
                 </Col>
               ))}

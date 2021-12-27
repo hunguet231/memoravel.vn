@@ -32,7 +32,7 @@ export default function ProductCard() {
         <div className={styles.cartButton}>
           <Tooltip title="Thêm vào giỏ hàng">
             <IconButton aria-label="add-to-cart">
-              <ShoppingCartOutlined style={{ color: "#5f1e03" }} />
+              <ShoppingCartOutlined className={styles.cartIcon} />
             </IconButton>
           </Tooltip>
         </div>

@@ -1,11 +1,18 @@
 @import "variables";
+@import "mixins";
 
 .cardWrapper {
-  width: 90%;
+  width: 100%;
   max-width: 280px;
+  @include media(mobile) {
+    max-width: 100%;
+    margin: 0;
+    margin-bottom: 15px;
+  }
   margin: 0 5px 20px;
   border-radius: 6px;
   cursor: pointer;
+  overflow: hidden;
   box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.1);
   transition: 0.2s all ease-in-out;
   &:hover {
@@ -15,7 +22,14 @@
 
 .cardImg {
   height: 200px;
+  @include media(mobile) {
+    height: 150px;
+  }
   object-fit: cover;
+  transition: 0.2s all ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .productName {
@@ -24,11 +38,22 @@
   font-weight: 600;
   font-size: 18px;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // default 1 line
+  -webkit-box-orient: vertical;
+  @include media(mobile) {
+    font-size: 13px;
+  }
 }
 
 .description {
   font-size: 14px;
   margin-bottom: 5px;
+  @include media(mobile) {
+    font-size: 12px;
+  }
 }
 
 .cardFooter {
@@ -38,14 +63,27 @@
 .rate {
   color: $secondary-color;
   font-size: 90%;
+  @include media(mobile) {
+    font-size: 60%;
+  }
 }
 
 .sold {
   color: $light-gray-color;
+  @include media(mobile) {
+    font-size: 11px;
+  }
+}
+
+.cartIcon {
+  color: #5f1e03;
+  font-size: 26px;
+  @include media(mobile) {
+    font-size: 18px;
+  }
 }
 
 .cartButton {
-  font-size: 26px;
   color: $button-color;
   &:hover {
     color: $button-hover-color;
@@ -59,6 +97,9 @@
   font-weight: 600;
   font-size: 20px;
   margin-top: 6px;
+  @include media(mobile) {
+    font-size: 13px;
+  }
 }
 
 .overlayAR {
@@ -70,6 +111,10 @@
   margin: auto;
   width: 100%;
   .buttonAR {
+    @include media(mobile) {
+      font-size: 12px;
+      padding: 2px 6px;
+    }
     margin: 10px;
     background-color: $darken-white-color;
     color: $primary-color;

@@ -252,3 +252,16 @@ ul {
 .ant-card-body {
   padding: 0px 15px !important;
 }
+
+.ant-card-cover {
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .ant-card-body {
+    padding: 0px 5px !important;
+  }
+  .ant-rate-star:not(:last-child) {
+    margin-right: 3px !important;
+  }
+}

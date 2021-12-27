@@ -39,8 +39,10 @@
     }
     border: 1px solid $border-darken-white-color;
     border-radius: 10px;
+    outline: none;
     &:focus {
-      outline: 1px solid #da4c10;
+      border: 1px solid #da4c10;
+      -webkit-appearance: none;
     }
   }
   .inputTextarea {
