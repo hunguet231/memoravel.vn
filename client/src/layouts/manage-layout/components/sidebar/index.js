@@ -55,25 +55,25 @@ const SIDEBAR_DATA = [
     role: AppConstant.ROLE.manage,
   },
   {
-    text: "Sản phẩm",
-    icon: <BallotIcon color="inherit" />,
-    path: PathConstant.MANAGE_PRODUCT,
-    role: AppConstant.ROLE.manage,
-  },
-  {
     text: "Shop",
     icon: <StorefrontIcon color="inherit" />,
     path: PathConstant.MANAGE_SHOP,
     role: AppConstant.ROLE.manage,
   },
   {
-    text: "Đơn hàng",
+    text: "Sản phẩm (!)",
+    icon: <BallotIcon color="inherit" />,
+    path: PathConstant.MANAGE_PRODUCT,
+    role: AppConstant.ROLE.manage,
+  },
+  {
+    text: "Đơn hàng (!)",
     icon: <ReceiptIcon color="inherit" />,
     path: PathConstant.MANAGE_ORDER,
     role: AppConstant.ROLE.manage,
   },
   {
-    text: "Quản lý User",
+    text: "Quản lý User (!)",
     icon: <AccountCircleOutlined color="inherit" />,
     path: PathConstant.MANAGE_USER,
     role: AppConstant.ROLE.admin,
