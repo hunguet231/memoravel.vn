@@ -6,7 +6,6 @@ import {
   convertPaging,
 } from '../utils';
 
-const Topic = database.Model.topicModel;
 const Post = database.Model.postModel;
 const Op = database.Sequelize.Op;
 
