@@ -3,23 +3,22 @@ import { fetchData } from "api";
 import {
   AppAlert,
   ConfirmDialog,
-  DialogPost,
-  TablePost,
+  DialogShop,
+  TableShop,
 } from "components/admin";
 import { ApiConstant, AppConstant } from "const";
 import { HeaderLayout, ManageLayout } from "layouts";
 import React, { useEffect, useState } from "react";
 import getImgUrl from "utils/getImgUrl";
 
-const Post = () => {
+const Shop = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dataPost, setDataPost] = useState({
+  const [dataShop, setDataShop] = useState({
     data: [],
     page: 1,
     total: 0,
   });
   const [data, setData] = useState();
-  const [topics, setTopics] = useState();
   const [messageData, setMessageData] = useState({
     type: "error",
     message: "",
@@ -30,56 +29,34 @@ const Post = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const fetchDataTopic = async () => {
-    let url = ApiConstant.MN_TOPIC;
-    const response = await fetchData(url, ApiConstant.METHOD.get);
-    if (response?.status === AppConstant.STATUS_OK) {
-      setTopics({
-        ...response,
-        data: response.data.map(({ id, title }) => ({
-          id,
-          label: title,
-          value: title,
-        })),
-      });
-    }
-  };
-
-  useEffect(() => {
-    fetchDataTopic();
-  }, []);
-
-  const submitPost = async (data) => {
+  const submitShop = async (data) => {
     setLoading(true);
-    let url = ApiConstant.MN_POST;
+    let url = ApiConstant.MN_SHOP;
 
     // upload image to cloudinary
-    let background_url;
-    if (data.background) {
-      if (
-        !data.background.toString().startsWith("https://res.cloudinary.com")
-      ) {
-        background_url = await getImgUrl(data.background);
+    let avatar_url, cover_url;
+    if (data.avatar) {
+      if (!data.avatar.toString().startsWith("https://res.cloudinary.com")) {
+        avatar_url = await getImgUrl(data.avatar);
       } else {
-        background_url = data.background;
+        avatar_url = data.avatar;
       }
     }
+    if (data.cover) {
+      if (!data.cover.toString().startsWith("https://res.cloudinary.com")) {
+        cover_url = await getImgUrl(data.cover);
+      } else {
+        cover_url = data.cover;
+      }
+    }
+
     const requestBody = {
-      title: {
-        vi: data.title,
-        en: "",
-      },
-      description: {
-        vi: data.description,
-        en: "",
-      },
-      content: {
-        vi: data.content,
-        en: "",
-      },
+      name: data.name,
+      description: data.description,
+      address: data.address,
       status: parseInt(data.status),
-      background: background_url,
-      topic_ids: data.topic_ids,
+      avatar: avatar_url,
+      cover: cover_url,
     };
 
     if (data.id) {
@@ -98,7 +75,7 @@ const Post = () => {
         response.status
       )
     ) {
-      await fetchDataPost(dataPost.page);
+      await fetchDataShop(dataShop.page);
       setMessageData({
         type: "success",
         message: response.message,
@@ -114,11 +91,11 @@ const Post = () => {
     }
   };
 
-  const deletePost = async () => {
-    let url = ApiConstant.MN_POST + `/${deleteDialog.data.id}`;
+  const deleteShop = async () => {
+    let url = ApiConstant.MN_SHOP + `/${deleteDialog.data.id}`;
     const response = await fetchData(url, ApiConstant.METHOD.delete);
     if (response.status && response.status === AppConstant.STATUS_OK) {
-      await fetchDataPost(dataPost.page);
+      await fetchDataShop(dataShop.page);
       setMessageData({
         type: "success",
         message: `Xóa thành công!`,
@@ -136,44 +113,35 @@ const Post = () => {
     }
   };
 
-  const fetchDataPost = async (page, search = "", topic_id = null) => {
+  const fetchDataShop = async (page, search = "", shop_id = null) => {
     let url =
-      ApiConstant.MN_POST +
+      ApiConstant.MN_SHOP +
       `?paging=${1}&page=${page}&size=${10}&search=${search}`;
-    if (topic_id) {
-      url += `&topic_id=${topic_id}`;
+    if (shop_id) {
+      url += `&shop_id=${shop_id}`;
     }
     const response = await fetchData(url, ApiConstant.METHOD.get);
     if (response?.status === AppConstant.STATUS_OK) {
-      setDataPost({
+      setDataShop({
         ...response,
-        data: response.data.map((item) => ({
-          ...item,
-          title: item.title.vi,
-          description: item.description.vi,
-          content: item.content.vi,
-          alias: item.alias.vi,
-        })),
+        data: response.data,
       });
     }
   };
 
   const onChangePage = (page) => {
-    fetchDataPost(page);
+    fetchDataShop(page);
   };
 
   useEffect(() => {
-    fetchDataPost(dataPost.page);
+    fetchDataShop(dataShop.page);
   }, []);
 
   return (
     <ManageLayout>
-      <HeaderLayout
-        title="Quản lý bài viết"
-        onCreateNew={() => setIsOpen(true)}
-      />
-      <TablePost
-        postData={dataPost}
+      <HeaderLayout title="Quản lý shop" onCreateNew={() => setIsOpen(true)} />
+      <TableShop
+        shopData={dataShop}
         onEdit={(data) => {
           setData(data);
           setIsOpen(true);
@@ -186,33 +154,32 @@ const Post = () => {
         }}
       />
       <Pagination
-        page={dataPost.page}
-        count={parseInt((dataPost.total - 1) / 10) + 1}
+        page={dataShop.page}
+        count={parseInt((dataShop.total - 1) / 10) + 1}
         onChange={(_, page) => onChangePage(page)}
         color="primary"
         variant="outlined"
         shape="rounded"
       />
       {isOpen && (
-        <DialogPost
-          topics={topics.data}
+        <DialogShop
           isShow={isOpen}
           data={data}
           onClose={() => {
             setIsOpen(false);
             setData();
           }}
-          onSubmit={(data) => submitPost(data)}
+          onSubmit={(data) => submitShop(data)}
           loading={loading}
         />
       )}
       {deleteDialog.isOpen && (
         <ConfirmDialog
           isShow={deleteDialog.isOpen}
-          title={`Xóa bài viết "${deleteDialog.data.title}"`}
+          title={`Xóa shop "${deleteDialog.data.title}"`}
           message={`Bạn có chắc chắn muốn xóa "${deleteDialog.data.title}" không?`}
           onClose={() => setDeleteDialog({ isOpen: false, data: null })}
-          onSubmit={deletePost}
+          onSubmit={deleteShop}
         />
       )}
       {!!messageData?.message && (
@@ -233,4 +200,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default Shop;

@@ -23,15 +23,17 @@ const TopProduct = () => {
             Những sản phẩm ở memoravel luôn được đảm bảo <br /> chất lượng, giá
             cả, hình thức tốt nhất
           </div>
-          <Flickity options={flickityOptions}>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </Flickity>
+          <div className="top-product">
+            <Flickity options={flickityOptions}>
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+            </Flickity>
+          </div>
         </div>
       </div>
     </div>

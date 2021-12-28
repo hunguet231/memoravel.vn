@@ -257,11 +257,20 @@ ul {
   overflow: hidden;
 }
 
+.top-product .ant-card {
+  max-width: 280px;
+  margin: 0 5px;
+}
+
 @media (max-width: 480px) {
   .ant-card-body {
     padding: 0px 5px !important;
   }
   .ant-rate-star:not(:last-child) {
     margin-right: 3px !important;
+  }
+  .top-product .ant-card {
+    max-width: 180px;
+    margin: 0 5px;
   }
 }
