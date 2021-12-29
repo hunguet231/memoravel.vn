@@ -65,6 +65,54 @@ export const updateOrder = async (req, res) => {
 
 export const getListOrder = async (req, res) => {
   try {
+    const dataPage = convertPaging(req);
+    const pagination =
+      dataPage.paging === 0
+        ? {}
+        : {
+            limit: dataPage.size,
+            offset: (dataPage.page - 1) * dataPage.size,
+          };
+
+    const queryDataOrder = {};
+    if (dataPage.search) {
+      queryDataOrder.name = {
+        [Op.like]: `%${dataPage.search}%`,
+      };
+    }
+
+    const { count, rows: data } = await Order.findAndCountAll({
+      ...pagination,
+      where: {
+        ...queryDataOrder,
+      },
+      include: [
+        {
+          model: OrderProduct,
+          include: [
+            {
+              model: Product,
+            },
+          ],
+        },
+      ],
+      distinct: true,
+    });
+
+    const formatData = data.map((item) => formatResponse(item));
+
+    const response =
+      dataPage.paging === 0
+        ? {
+            data: formatData,
+            total: count,
+          }
+        : {
+            data: formatData,
+            total: count,
+            page: dataPage.page,
+          };
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
@@ -74,6 +122,11 @@ export const getListOrder = async (req, res) => {
 
 export const getOrderById = async (req, res) => {
   try {
+    const dataOrder = await findOneOrder(req.params.order_id);
+
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatResponse(dataOrder) }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

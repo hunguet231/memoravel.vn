@@ -67,6 +67,14 @@ export const checkCreateOrder = async (req, res, next) => {
 
 export const checkUpdateStatusOrder = async (req, res, next) => {
   try {
+    const isExistOrder = await Order.findByPk(req.params.order_id);
+    if (isExistOrder) {
+      next();
+    } else {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Order is invalid' }));
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
@@ -76,6 +84,14 @@ export const checkUpdateStatusOrder = async (req, res, next) => {
 
 export const checkMnGetOrderById = async (req, res, next) => {
   try {
+    const isExistOrder = await Order.findByPk(req.params.order_id);
+    if (isExistOrder) {
+      next();
+    } else {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Order is invalid' }));
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
@@ -85,6 +101,14 @@ export const checkMnGetOrderById = async (req, res, next) => {
 
 export const checkMnDeleteOrder = async (req, res, next) => {
   try {
+    const isExistOrder = await Order.findByPk(req.params.order_id);
+    if (isExistOrder) {
+      next();
+    } else {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Order is invalid' }));
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
