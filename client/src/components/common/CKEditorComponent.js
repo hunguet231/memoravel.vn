@@ -67,4 +67,5 @@ const DEFAULT_CONFIG = {
   contentsCss: [
     "body {font-size: 16px; line-height: 24px; word-wrap: break-word; font-family: Inter,Roboto,Arial,sans-serif;}",
   ],
+  enterMode: 1,
 };

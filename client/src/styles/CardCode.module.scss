@@ -1,0 +1,39 @@
+@import "variables";
+@import "mixins";
+
+.cardCode {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $primary-color;
+  color: $lighter-white-color;
+  .headingCard {
+    color: $lighter-white-color;
+    font-family: $font-merriweather;
+    font-size: 20px;
+    @include media(tablet) {
+      font-size: 14px;
+    }
+  }
+  .input {
+    padding: 14px 10px;
+    @include media(tablet) {
+      padding: 8px 10px;
+    }
+    width: 100%;
+    border: 1px solid $light-gray-color;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    color: $primary-color;
+    outline: none;
+  }
+  .priceSale {
+    font-family: $font-be;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: start;
+    @include media(mobile) {
+      font-size: 15px;
+    }
+  }
+}

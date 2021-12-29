@@ -1,87 +1,202 @@
-import { database } from "../configs";
-import { AppConst } from "../const";
+import { database } from '../configs';
+import { AppConst } from '../const';
 import {
   responseFormat,
-  requestObjectMultiLang,
-  handleAliasResult,
-} from "../utils";
+  convertTitleToAlias,
+  mappingArrayErrorToString,
+} from '../utils';
+import { ShopController } from '../controllers';
 
 const Shop = database.Model.shopModel;
 const Op = database.Sequelize.Op;
 
-const message = {
-  name: "",
-  description: "",
-  avatar: "",
-  status: "",
-};
-
+// MIDDLEWARE ADMIN
 export const checkCreateShop = async (req, res, next) => {
-    try {
-      const messageShop = { ...message };
-  
-      
-      if (!requestObjectMultiLang(req.body.name, true)) {
-        messageShop.title = "Yêu cầu nhập tiêu đề !";
-      } else {
-        const shop = await Shop.findOne({
-          where: {
-            title: requestObjectMultiLang(req.body.name),
-          },
-        });
-      }
-      // Check status is not exist in object
-      if (!Object.values(AppConst.STATUS).includes(req.body.status)) {
-        messageShop.status = "Status không tồn tại!";
-      }
-  
-      const title = requestObjectMultiLang(req.body.title);
-      const refactorTopicData = {
-        title: title,
-        description: requestObjectMultiLang(req.body.description),
-        alias: handleAliasResult(JSON.parse(title), false),
-        status: req.body.status
-          ? parseInt(req.body.status)
-          : AppConst.STATUS.draft,
-      };
-  
-      const checkMessageValidate = Object.values(messageShop).find(
-        (messageItem) => messageItem.length > 0
-      );
-  
-      if (checkMessageValidate) {
-        return res
-          .status(AppConst.STATUS_BAD_REQUEST)
-          .json(responseFormat({ message: JSON.stringify(messageTopic) }));
-      } else {
-        req.body = refactorTopicData;
-        next();
-      }
-    } catch (error) {
-      res
-        .status(AppConst.STATUS_SERVER_ERROR)
-        .json(responseFormat({ error: error, message: "error" }));
-    }
-  };
-
-
-export const checkDeleteShop = async (req, res, next) => {
-    try {
+  try {
+    const reqData = req.body;
+    const arrayError = [];
+    if (!reqData.name) {
+      arrayError.push('Name shop is required');
+    } else {
       const shop = await Shop.findOne({
         where: {
-          id: req.params.shop_id,
+          alias: convertTitleToAlias(reqData.name) + '.html',
         },
       });
-      if (!shop) {
-        return res
-          .status(AppConst.STATUS_BAD_REQUEST)
-          .json(responseFormat({ message: "Shop không tồn tại!" }));
-      } else {
-        next();
+      if (shop) {
+        arrayError.push('Name shop is exist');
       }
-    } catch (error) {
-      res
-        .status(AppConst.STATUS_SERVER_ERROR)
-        .json(responseFormat({ error: error, message: "error" }));
     }
+    if (!Object.values(AppConst.STATUS).includes(reqData.status)) {
+      arrayError.push('Status is invalid');
+    }
+    if (!reqData.address) {
+      arrayError.push('Address is required');
+    } else if (!reqData.address?.country) {
+      arrayError.push('Country is required');
+    }
+    if (!reqData.address?.city) {
+      arrayError.push('City is required');
+    }
+    const StringResponseError = await mappingArrayErrorToString(arrayError);
+    if (StringResponseError || arrayError.length > 0) {
+      return res.status(AppConst.STATUS_BAD_REQUEST).json(
+        responseFormat({
+          message: StringResponseError || 'Request has error',
+        })
+      );
+    } else {
+      req.body = {
+        name: reqData.name,
+        avatar: reqData.avatar || '',
+        cover: reqData.cover || '',
+        alias: convertTitleToAlias(reqData.name) + '.html',
+        description: reqData.description || '',
+        status: reqData.status,
+        address: {
+          country: reqData.address.country,
+          city: reqData.address.city || '',
+          district: reqData.address.district || '',
+          ward: reqData.address.ward || '',
+          address_details: reqData.address.address_details || '',
+        },
+      };
+      next();
+    }
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
 };
+
+export const checkUpdateShop = async (req, res, next) => {
+  try {
+    const shopId = req.params.shop_id;
+    if (!shopId) {
+      return res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: 'Required shop_id' }));
+    }
+
+    const reqData = req.body;
+    const arrayError = [];
+
+    if (reqData.name === '') {
+      arrayError.push('Name shop is required');
+    } else if (reqData.name) {
+      const alias = convertTitleToAlias(reqData.name) + '.html';
+      const shop = await Shop.findOne({
+        where: {
+          id: {
+            [Op.ne]: shopId,
+          },
+          alias: alias,
+        },
+      });
+
+      if (shop) {
+        arrayError.push('Name shop is exist');
+      } else {
+        req.body.alias = alias;
+      }
+    }
+
+    if (
+      reqData.status &&
+      !Object.values(AppConst.STATUS).includes(reqData.status)
+    ) {
+      arrayError.push('Status is invalid');
+    }
+    if (reqData.address) {
+      if (!reqData.address.country) {
+        arrayError.push('Country is required');
+      }
+      if (!reqData.address.city) {
+        arrayError.push('City is required');
+      }
+    }
+
+    const StringResponseError = await mappingArrayErrorToString(arrayError);
+    if (StringResponseError || arrayError.length > 0) {
+      return res.status(AppConst.STATUS_BAD_REQUEST).json(
+        responseFormat({
+          message: StringResponseError || 'Request has error',
+        })
+      );
+    } else {
+      next();
+    }
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const checkDeleteShop = async (req, res, next) => {
+  try {
+    const shopId = req.params.shop_id;
+
+    if (!shopId) {
+      return res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: 'Required shop_id' }));
+    }
+
+    const shopDetails = await ShopController.findOneShop(shopId);
+
+    if (shopDetails) {
+      next();
+    } else {
+      res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Shop is not exist' }));
+    }
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+// MIDDLEWARE ADMIN
+
+// MIDDLEWARE USER
+export const checkCreateRatingShop = async (req, res, next) => {
+  try {
+    const reqData = req.body;
+    const arrayError = [];
+    if (!reqData.shop_id) {
+      arrayError.push('shop_id is required');
+    } else {
+      const shopDetails = await ShopController.findOneShop(reqData.shop_id);
+      if (!shopDetails) {
+        return res
+          .status(AppConst.STATUS_NOT_FOUND)
+          .json(responseFormat({ message: 'Shop is not exist' }));
+      }
+      req.body.shop = shopDetails;
+    }
+    if (!reqData.comment) {
+      arrayError.push('comment is required');
+    }
+    if (!reqData.star) {
+      arrayError.push('star is required');
+    }
+    const StringResponseError = await mappingArrayErrorToString(arrayError);
+    if (StringResponseError || arrayError.length > 0) {
+      return res.status(AppConst.STATUS_BAD_REQUEST).json(
+        responseFormat({
+          message: StringResponseError || 'Request has error',
+        })
+      );
+    } else {
+      next();
+    }
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+// MIDDLEWARE USER

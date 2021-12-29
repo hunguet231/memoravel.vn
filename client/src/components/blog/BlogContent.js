@@ -41,7 +41,7 @@ export default function BlogContent({
               • {readingTime(content)} phút đọc • {number_view} lượt xem
             </p>
             <hr />
-            <i className={styles.description}>{description}</i>
+            <i className={styles.description}>{ReactHtmlParser(description)}</i>
             <div className={styles.content}>{ReactHtmlParser(content)}</div>
             <div className={styles.credit}>MEMORAVEL.VN</div>
           </div>

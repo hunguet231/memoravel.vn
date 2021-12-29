@@ -1,0 +1,117 @@
+@import "variables";
+@import "mixins";
+
+.wrapInfo {
+  margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  @include media(mobile) {
+    padding: 5px 10px;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .content {
+    margin-left: 20px;
+    @include media(tablet) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+    @include media(mobile) {
+      margin-left: 15px;
+    }
+  }
+  .img {
+    width: 100px;
+    height: 100px;
+    background-color: #f2f2f2;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-left: 15px;
+    @include media(mobile) {
+      margin-left: 10px;
+    }
+  }
+  .nameProduct,
+  .price {
+    font-family: $font-be;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    @include media(mobile) {
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+  .nameProduct {
+    max-width: 280px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: $font-merriweather;
+    color: #11142d;
+    margin-bottom: 5px;
+    @include media(mobile) {
+      font-size: 14px;
+    }
+  }
+  .wrapAmount {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    @include media(tablet) {
+      margin: 0;
+    }
+  }
+  .changeAmountBtn {
+    background-color: $white-color;
+    padding: 4px 11px;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-color: #f2f2f2;
+    }
+    &:active {
+      background-color: #d0d0d0;
+    }
+    @include media(mobile) {
+      padding: 2px 7px;
+    }
+  }
+  .inputAmount {
+    outline: none;
+    margin: 0 5px;
+    padding: 5px 0;
+    max-width: 80px;
+    text-align: center;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    @include media(mobile) {
+      max-width: 50px;
+      padding: 2px;
+      margin: 0 2px;
+    }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}

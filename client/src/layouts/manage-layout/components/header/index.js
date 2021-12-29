@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
 import {
   AppBar,
   Avatar,
@@ -13,10 +11,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
-import { useStyles } from "./styles";
 import { AppConstant, PathConstant } from "const";
 import Cookies from "js-cookie";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { useStyles } from "./styles";
 
 const Header = ({ profile, isCloseWithMobile, onOpenSidebar }) => {
   const defaultClasses = useStyles();
@@ -33,6 +34,17 @@ const Header = ({ profile, isCloseWithMobile, onOpenSidebar }) => {
     <AppBar color="inherit" position="sticky">
       <ClickAwayListener onClickAway={() => setIsShowHeader(false)}>
         <Box className={defaultClasses.root}>
+          <Link href="/">
+            <div className="flex items-center cursor-pointer">
+              <img
+                src="/images/logo-dark.svg"
+                width={40}
+                height={40}
+                alt="MEMORAVEL.VN"
+              />
+              <span className={defaultClasses.logoText}>MEMORAVEL</span>
+            </div>
+          </Link>
           {isCloseWithMobile ? (
             <IconButton onClick={onOpenSidebar}>
               <Menu />

@@ -1,4 +1,5 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { IconButton, Tooltip } from "@material-ui/core";
 import { Card, Image, Rate } from "antd";
 import React from "react";
 import styles from "../../styles/ProductCard.module.scss";
@@ -27,9 +28,13 @@ export default function ProductCard() {
         <Rate disabled value={5} className={styles.rate} />
         <p className={styles.sold}>12.4K đã bán</p>
       </div>
-      <div className="flex justify-between items-center">
+      <div className={`flex justify-between items-center ${styles.cardFooter}`}>
         <div className={styles.cartButton}>
-          <ShoppingCartOutlined />
+          <Tooltip title="Thêm vào giỏ hàng">
+            <IconButton aria-label="add-to-cart">
+              <ShoppingCartOutlined className={styles.cartIcon} />
+            </IconButton>
+          </Tooltip>
         </div>
         <h1 className={styles.price}>300.000đ</h1>
       </div>

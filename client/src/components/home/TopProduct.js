@@ -10,9 +10,9 @@ const TopProduct = () => {
     percentPosition: false,
     cellAlign: "center",
     contain: true,
-    groupCells: 4,
-    wrapAround: true,
-    autoPlay: true,
+    groupCells: true,
+    // wrapAround: true,
+    // autoPlay: true,
   };
   return (
     <div className="wrapper">
@@ -23,15 +23,17 @@ const TopProduct = () => {
             Những sản phẩm ở memoravel luôn được đảm bảo <br /> chất lượng, giá
             cả, hình thức tốt nhất
           </div>
-          <Flickity options={flickityOptions}>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </Flickity>
+          <div className="top-product">
+            <Flickity options={flickityOptions}>
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+            </Flickity>
+          </div>
         </div>
       </div>
     </div>

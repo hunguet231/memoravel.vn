@@ -10,7 +10,6 @@ export default function blogs() {
     <MainLayout>
       <Header />
       <Blogs />
-      {/* <BlogContent /> */}
       <ContactForm />
       <Footer />
     </MainLayout>
