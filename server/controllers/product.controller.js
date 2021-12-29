@@ -236,6 +236,50 @@ export const getListProduct = async (req, res) => {
 
 export const getListProductHot = async (req, res) => {
   try {
+    const limitPerPage = req.query?.limit || 5;
+    const limit =
+      parseInt(limitPerPage) > AppConst.LIMIT_PAGE_SIZE
+        ? AppConst.LIMIT_PAGE_SIZE
+        : parseInt(limitPerPage);
+
+    const pagination = {
+      limit: limit,
+      offset: 0,
+    };
+
+    const { count, rows: data } = await Product.findAndCountAll({
+      ...pagination,
+      where: {
+        status: AppConst.STATUS.publish,
+      },
+      include: [
+        {
+          model: Shop,
+          attributes: ['id', 'name', 'alias', 'avatar'],
+        },
+        {
+          model: ProductRating,
+          attributes: ['comment', 'star'],
+          include: [
+            {
+              model: User,
+              attributes: ['full_name', 'avatar'],
+            },
+          ],
+        },
+      ],
+      order: [['sold', 'DESC']],
+      distinct: true,
+    });
+
+    const formatData = data.map((dataMap) => formatResposeProduct(dataMap));
+
+    const response = {
+      data: formatData,
+      total: count,
+    };
+
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
