@@ -47,11 +47,13 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     await Product.update(req.body, {
-      where: { id: req.params.product_id },
+      where: {
+        id: req.params.product_id,
+      },
     });
     const getProduct = await findProductById(req.params.product_id);
     res
-      .status(AppConst.STATUS_CREATED)
+      .status(AppConst.STATUS_OK)
       .json(responseFormat({ data: formatProductData(getProduct) }));
   } catch (error) {
     res
