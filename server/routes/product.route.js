@@ -36,4 +36,12 @@ productRoute.get(
   ProductController.getProductById
 );
 
+productRoute.delete(
+  ApiConst.MANAGE_PRODUCT_ID,
+  CommonMiddleware.verifyToken,
+  CommonMiddleware.verifyRolesManage,
+  ProductMiddleware.checkDeleteProduct,
+  ProductController.deleteProduct
+);
+
 export default productRoute;

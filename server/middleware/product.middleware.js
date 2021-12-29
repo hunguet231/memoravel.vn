@@ -1,5 +1,6 @@
 import { database } from '../configs';
 import { AppConst } from '../const';
+import { ProductController } from '../controllers';
 import {
   responseFormat,
   convertTitleToAlias,
@@ -261,7 +262,7 @@ export const checkGetProductById = async (req, res, next) => {
     } else {
       return res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: 'shop_id không hợp lệ' }));
+        .json(responseFormat({ message: 'product_id không hợp lệ' }));
     }
   } catch (error) {
     res
@@ -272,6 +273,23 @@ export const checkGetProductById = async (req, res, next) => {
 
 export const checkDeleteProduct = async (req, res, next) => {
   try {
+    const productId = req.params.product_id;
+
+    if (!productId) {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Required product_id' }));
+    }
+
+    const productDetails = await ProductController.findProductById(productId);
+
+    if (productDetails) {
+      next();
+    } else {
+      res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Product is not exist' }));
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

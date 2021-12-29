@@ -123,7 +123,7 @@ export const getProductById = async (req, res) => {
   }
 };
 
-const findProductById = async (id) =>
+export const findProductById = async (id) =>
   await Product.findOne({
     where: {
       id: id,
@@ -132,6 +132,36 @@ const findProductById = async (id) =>
       {
         model: Shop,
         attributes: ['id', 'name'],
+      },
+    ],
+  });
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.product_id;
+
+    await Product.destroy({
+      where: {
+        id: productId,
+      },
+    });
+
+    res.status(AppConst.STATUS_OK).json(responseFormat());
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const findOneShop = async (shopId) =>
+  await Shop.findOne({
+    where: {
+      id: shopId,
+    },
+    include: [
+      {
+        model: ShopAddress,
       },
     ],
   });
