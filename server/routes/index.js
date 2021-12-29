@@ -4,6 +4,7 @@ import PostRoute from './post.route';
 import TopicRoute from './topic.route';
 import ProductRoute from './product.route';
 import ShopRoute from './shop.route';
+import OrderRoute from './order.route';
 
 export {
   CommonRoute,
@@ -12,4 +13,5 @@ export {
   PostRoute,
   ProductRoute,
   ShopRoute,
+  OrderRoute,
 };

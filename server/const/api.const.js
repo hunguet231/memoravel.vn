@@ -38,3 +38,8 @@ export const ADMIN_SHOP_ID = '/api/admin/shop/:shop_id';
 export const SHOP_ALIAS = '/api/shop/:alias';
 export const SHOP_HOT = '/api/shop-hot';
 export const SHOP_RATING = '/api/shop/rating';
+
+// order api
+export const ORDER = '/api/order';
+export const MANAGE_ORDER = '/api/manage/order';
+export const MANAGE_ORDER_ID = '/api/manage/order/:order_id';

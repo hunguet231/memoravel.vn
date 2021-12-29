@@ -5,6 +5,7 @@ import * as MnPostMiddleware from './mn-post.middleware';
 import * as TopicMiddleware from './topic.middleware';
 import * as ProductMiddleware from './product.middleware';
 import * as ShopMiddleware from './shop.middleware';
+import * as OrderMiddleware from './order.middleware';
 
 export {
   CommonMiddleware,
@@ -14,4 +15,5 @@ export {
   MnPostMiddleware,
   ProductMiddleware,
   ShopMiddleware,
+  OrderMiddleware,
 };

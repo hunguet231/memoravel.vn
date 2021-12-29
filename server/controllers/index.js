@@ -5,6 +5,7 @@ import * as MnPostController from './mn-post.controller';
 import * as PostController from './post.controller';
 import * as ProductController from './product.controller';
 import * as ShopController from './shop.controller';
+import * as OrderController from './order.controller';
 
 export {
   AuthController,
@@ -14,4 +15,5 @@ export {
   PostController,
   ProductController,
   ShopController,
+  OrderController,
 };
