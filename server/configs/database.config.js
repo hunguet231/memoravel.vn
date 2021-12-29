@@ -11,6 +11,7 @@ import {
   ShopAddressModel,
   ShopRatingModel,
   OrderModel,
+  OrderProductModel,
 } from '../models';
 
 dotenv.config();
@@ -45,6 +46,7 @@ const Model = {
   shopAddressModel: ShopAddressModel(sequelize, Sequelize),
   shopRatingModel: ShopRatingModel(sequelize, Sequelize),
   orderModel: OrderModel(sequelize, Sequelize),
+  orderProductModel: OrderProductModel(sequelize, Sequelize),
 };
 
 database.Model = Model;
@@ -102,15 +104,18 @@ Model.productRatingModel.belongsTo(Model.userModel, {
 });
 
 // join order with product
-Model.orderModel.belongsToMany(Model.productModel, {
-  through: 'order_products',
+Model.orderModel.hasMany(Model.orderProductModel, {
   foreignKey: 'order_id',
-  otherKey: 'product_id',
 });
-Model.productModel.belongsToMany(Model.orderModel, {
-  through: 'order_products',
+Model.orderProductModel.belongsTo(Model.orderModel, {
+  foreignKey: 'order_id',
+});
+
+Model.productModel.hasMany(Model.orderProductModel, {
   foreignKey: 'product_id',
-  otherKey: 'order_id',
+});
+Model.orderProductModel.belongsTo(Model.productModel, {
+  foreignKey: 'product_id',
 });
 
 export default database;

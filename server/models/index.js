@@ -7,6 +7,7 @@ import ShopRatingModel from './shop_rating.model';
 import ProductModel from './product.model';
 import ProductRatingModel from './product_rating.model';
 import OrderModel from './order.model';
+import OrderProductModel from './order_product.model';
 
 export {
   UserModel,
@@ -18,4 +19,5 @@ export {
   ShopRatingModel,
   ProductRatingModel,
   OrderModel,
+  OrderProductModel,
 };
