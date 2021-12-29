@@ -56,6 +56,21 @@ export const createOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
   try {
+    await Order.update(
+      {
+        status: req.body.status,
+      },
+      {
+        where: {
+          id: req.params.order_id,
+        },
+      }
+    );
+
+    const dataOrder = await findOneOrder(req.params.order_id);
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatResponse(dataOrder) }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

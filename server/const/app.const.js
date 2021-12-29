@@ -1,5 +1,5 @@
-export const SECRET_KEY = "m8inh8sdv5Tng@hib9am<f2u+4M";
-export const DEFAULT_LANG = "vi";
+export const SECRET_KEY = 'm8inh8sdv5Tng@hib9am<f2u+4M';
+export const DEFAULT_LANG = 'vi';
 export const LIMIT_PAGE_SIZE = 20;
 
 export const STATUS_OK = 200;
@@ -25,4 +25,12 @@ export const GENDER = {
   male: 1,
   female: 2,
   other: 3,
+};
+
+export const STATUS_DELIVERY = {
+  waitingConfirm: 1,
+  waitingGet: 2,
+  delivering: 3,
+  delivered: 4,
+  cancel: 5,
 };

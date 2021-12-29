@@ -47,6 +47,7 @@ export const checkCreateOrder = async (req, res, next) => {
       });
       if (total_paid !== 0) {
         req.body.total_paid = total_paid;
+        req.body.status = AppConst.STATUS_DELIVERY.waitingConfirm;
       }
     }
 
@@ -67,13 +68,18 @@ export const checkCreateOrder = async (req, res, next) => {
 
 export const checkUpdateStatusOrder = async (req, res, next) => {
   try {
+    if (!Object.values(AppConst.STATUS_DELIVERY).includes(req.body.status)) {
+      return res
+        .status(AppConst.STATUS_BAD_REQUEST)
+        .json(responseFormat({ message: 'Status is invalid' }));
+    }
     const isExistOrder = await Order.findByPk(req.params.order_id);
     if (isExistOrder) {
       next();
     } else {
       return res
         .status(AppConst.STATUS_NOT_FOUND)
-        .json(responseFormat({ message: 'Order is invalid' }));
+        .json(responseFormat({ message: 'Order is not exist' }));
     }
   } catch (error) {
     res
