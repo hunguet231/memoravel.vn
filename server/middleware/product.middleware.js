@@ -299,6 +299,37 @@ export const checkDeleteProduct = async (req, res, next) => {
 
 export const checkCreateRatingProduct = async (req, res, next) => {
   try {
+    const reqData = req.body;
+    const arrayError = [];
+    if (!reqData.product_id) {
+      arrayError.push('product_id is required');
+    } else {
+      const productDetails = await ProductController.findProductById(
+        reqData.product_id
+      );
+      if (!productDetails) {
+        return res
+          .status(AppConst.STATUS_NOT_FOUND)
+          .json(responseFormat({ message: 'Product is not exist' }));
+      }
+      req.body.product = productDetails;
+    }
+    if (!reqData.comment) {
+      arrayError.push('comment is required');
+    }
+    if (!reqData.star) {
+      arrayError.push('star is required');
+    }
+    const StringResponseError = await mappingArrayErrorToString(arrayError);
+    if (StringResponseError || arrayError.length > 0) {
+      return res.status(AppConst.STATUS_BAD_REQUEST).json(
+        responseFormat({
+          message: StringResponseError || 'Request has error',
+        })
+      );
+    } else {
+      next();
+    }
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)

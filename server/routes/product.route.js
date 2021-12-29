@@ -50,4 +50,11 @@ productRoute.get(ApiConst.PRODUCT, ProductController.getListProduct);
 
 productRoute.get(ApiConst.PRODUCT_HOT, ProductController.getListProductHot);
 
+productRoute.post(
+  ApiConst.PRODUCT_RATING,
+  CommonMiddleware.verifyToken,
+  ProductMiddleware.checkCreateRatingProduct,
+  ProductController.productRating
+);
+
 export default productRoute;

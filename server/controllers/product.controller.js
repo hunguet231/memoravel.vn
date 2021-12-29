@@ -344,6 +344,58 @@ export const getListProductHot = async (req, res) => {
 
 export const productRating = async (req, res) => {
   try {
+    const reqData = req.body;
+    const arrayImages = Array.isArray(reqData.images) ? reqData.images : [];
+    const stringImages = JSON.stringify(arrayImages);
+    const createData = {
+      product_id: reqData.product_id,
+      comment: reqData.comment,
+      star: reqData.star,
+      images: stringImages,
+      user_id: req.user_id,
+    };
+
+    const totalStar = reqData.product.total_star + reqData.star;
+    const totalAmount = reqData.product.total_amount + 1;
+
+    const newProductRating = await ProductRating.create(createData);
+    await Product.update(
+      {
+        total_star: totalStar,
+        total_amount: totalAmount,
+      },
+      {
+        where: {
+          id: reqData.product_id,
+        },
+      }
+    );
+
+    const dataProductRating = await ProductRating.findOne({
+      where: {
+        id: newProductRating.dataValues.id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['full_name', 'avatar'],
+        },
+      ],
+    });
+
+    const formatDataResponse = {
+      id: dataProductRating.id,
+      product_id: dataProductRating.product_id,
+      comment: dataProductRating.comment,
+      star: dataProductRating.star,
+      image: JSON.parse(dataProductRating.images),
+      created: dataProductRating.createdAt,
+      rating_user: dataProductRating.user,
+    };
+
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatDataResponse }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
