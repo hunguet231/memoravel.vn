@@ -27,6 +27,10 @@ export const GET_TOPIC_BY_ALIAS = '/api/topic/:alias';
 // product api
 export const MANAGE_PRODUCT = '/api/manage/product';
 export const MANAGE_PRODUCT_ID = '/api/manage/product/:product_id';
+export const PRODUCT_ALIAS = '/api/product/:alias';
+export const PRODUCT = '/api/product';
+export const PRODUCT_HOT = '/api/product-hot';
+export const PRODUCT_RATING = '/api/product/rating';
 
 // shop api
 export const ADMIN_SHOP = '/api/admin/shop';

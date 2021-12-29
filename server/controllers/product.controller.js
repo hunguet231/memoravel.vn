@@ -4,6 +4,8 @@ import { responseFormat, convertPaging } from '../utils';
 
 const Product = database.Model.productModel;
 const Shop = database.Model.shopModel;
+const ProductRating = database.Model.productRatingModel;
+const User = database.Model.userModel;
 const Op = database.Sequelize.Op;
 
 const formatProductData = (data) => {
@@ -154,14 +156,100 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-export const findOneShop = async (shopId) =>
-  await Shop.findOne({
-    where: {
-      id: shopId,
-    },
-    include: [
-      {
-        model: ShopAddress,
+// USER API
+const formatResposeProduct = (data) => ({
+  id: data.id,
+  name: data.name,
+  summary: data.summary,
+  description: data.description,
+  story: data.story,
+  images: JSON.parse(data.images),
+  alias: data.alias,
+  price: data.price,
+  type: data.type,
+  made_in: data.made_in,
+  vectary_link: data.vectary_link,
+  sold: data.sold,
+  in_stock: data.in_stock,
+  number_view: data.number_view,
+  average_star:
+    Math.round((data.total_star / data.total_amount + Number.EPSILON) * 100) /
+      100 || 0,
+  status: data.status,
+  details: data.details,
+  created: data.createdAt,
+  shop: data.shop,
+  rating: data.product_ratings,
+});
+
+export const getProductByAlias = async (req, res) => {
+  try {
+    const Alias = req.params.alias;
+
+    const product = await Product.findOne({
+      where: {
+        alias: Alias,
+        status: AppConst.STATUS.publish,
       },
-    ],
-  });
+      include: [
+        {
+          model: Shop,
+          attributes: ['id', 'name', 'alias', 'avatar'],
+        },
+        {
+          model: ProductRating,
+          attributes: ['comment', 'star'],
+          include: [
+            {
+              model: User,
+              attributes: ['full_name', 'avatar'],
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!product) {
+      return res
+        .status(AppConst.STATUS_NOT_FOUND)
+        .json(responseFormat({ message: 'Shop is not exist' }));
+    }
+
+    res
+      .status(AppConst.STATUS_OK)
+      .json(responseFormat({ data: formatResposeProduct(product) }));
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const getListProduct = async (req, res) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const getListProductHot = async (req, res) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+export const productRating = async (req, res) => {
+  try {
+  } catch (error) {
+    res
+      .status(AppConst.STATUS_SERVER_ERROR)
+      .json(responseFormat({ error: error, message: 'error' }));
+  }
+};
+
+// USER API

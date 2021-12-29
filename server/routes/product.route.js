@@ -44,4 +44,6 @@ productRoute.delete(
   ProductController.deleteProduct
 );
 
+productRoute.get(ApiConst.PRODUCT_ALIAS, ProductController.getProductByAlias);
+
 export default productRoute;
