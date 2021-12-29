@@ -151,6 +151,25 @@ export const getOrderById = async (req, res) => {
 
 export const deleteOrder = async (req, res) => {
   try {
+    const dataOrder = await findOneOrder(req.params.order_id);
+    const arrayId = dataOrder.order_products.map(({ id }) => id);
+
+    const deleteChild = arrayId.map(
+      async (id) =>
+        await OrderProduct.destroy({
+          where: {
+            id: id,
+          },
+        })
+    );
+    Promise.all(deleteChild);
+    await Order.destroy({
+      where: {
+        id: req.params.order_id,
+      },
+    });
+
+    res.status(AppConst.STATUS_OK).json(responseFormat());
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
