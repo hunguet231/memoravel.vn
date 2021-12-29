@@ -1,24 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
-  makeStyles,
-  TableContainer,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  Paper,
   Chip,
   IconButton,
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Tooltip,
 } from "@material-ui/core";
-import { EditOutlined, DeleteOutlined } from "@material-ui/icons";
+import { DeleteOutlined, EditOutlined } from "@material-ui/icons";
 import { AppConstant } from "const";
+import PropTypes from "prop-types";
+import React from "react";
 
 const TablePost = (props) => {
   const { postData, onEdit, onDelete } = props;
   const classes = useStyles();
+
+  const getDateTime = (time) => {
+    const timeDate = new Date(time);
+    return `${timeDate.toLocaleDateString()}, ${timeDate.toLocaleTimeString()}`;
+  };
 
   return (
     <TableContainer component={Paper} className={classes.root}>
@@ -31,7 +36,10 @@ const TablePost = (props) => {
             <TableCell className={classes.header}>Hình đại diện</TableCell>
             <TableCell className={classes.header}>Tên bài viết</TableCell>
             <TableCell className={classes.header} align="center">
-              Mô tả
+              Lượt xem
+            </TableCell>
+            <TableCell className={classes.header} align="center">
+              Thời gian tạo
             </TableCell>
             <TableCell className={classes.header} align="center">
               Trạng thái
@@ -69,7 +77,8 @@ const TablePost = (props) => {
                   {row.title || ""}
                 </a>
               </TableCell>
-              <TableCell>{row.description || ""}</TableCell>
+              <TableCell>{row.number_view || ""}</TableCell>
+              <TableCell>{getDateTime(row.created) || ""}</TableCell>
               <TableCell align="center">
                 <Chip
                   size="small"

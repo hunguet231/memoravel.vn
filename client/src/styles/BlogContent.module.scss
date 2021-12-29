@@ -7,7 +7,7 @@
 }
 
 .img {
-  height: 65vh;
+  height: 75vh;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -27,6 +27,7 @@
 }
 
 .description {
+  white-space: pre-line;
   display: block;
   margin-top: 10px;
   font-size: 16px;

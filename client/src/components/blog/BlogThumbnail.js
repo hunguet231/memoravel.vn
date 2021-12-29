@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import readingTime from "utils/readingTime";
 import Link from "next/link";
+import ReactHtmlParser from "react-html-parser";
 import styles from "../../styles/BlogThumbnail.module.scss";
 
 export default function BlogThumbnail({
@@ -39,7 +40,7 @@ export default function BlogThumbnail({
               : new Date(created).toLocaleDateString()}{" "}
             • {readingTime(content)} phút đọc • {number_view} lượt xem
           </p>
-          <p className={styles.description}>{description}</p>
+          <p className={styles.description}>{ReactHtmlParser(description)}</p>
         </div>
       </div>
     </div>

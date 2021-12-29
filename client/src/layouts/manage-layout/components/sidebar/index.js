@@ -7,6 +7,9 @@ import {
   AccountCircleOutlined,
   Menu,
 } from "@material-ui/icons";
+import StorefrontIcon from "@material-ui/icons/Storefront";
+import BallotIcon from "@material-ui/icons/Ballot";
+import ReceiptIcon from "@material-ui/icons/Receipt";
 import { AppConstant, PathConstant } from "const";
 import SidebarItem from "./sidebar-item";
 import { useStyles } from "./styles";
@@ -52,7 +55,25 @@ const SIDEBAR_DATA = [
     role: AppConstant.ROLE.manage,
   },
   {
-    text: "Quản lý User",
+    text: "Shop",
+    icon: <StorefrontIcon color="inherit" />,
+    path: PathConstant.MANAGE_SHOP,
+    role: AppConstant.ROLE.manage,
+  },
+  {
+    text: "Sản phẩm (!)",
+    icon: <BallotIcon color="inherit" />,
+    path: PathConstant.MANAGE_PRODUCT,
+    role: AppConstant.ROLE.manage,
+  },
+  {
+    text: "Đơn hàng (!)",
+    icon: <ReceiptIcon color="inherit" />,
+    path: PathConstant.MANAGE_ORDER,
+    role: AppConstant.ROLE.manage,
+  },
+  {
+    text: "Quản lý User (!)",
     icon: <AccountCircleOutlined color="inherit" />,
     path: PathConstant.MANAGE_USER,
     role: AppConstant.ROLE.admin,

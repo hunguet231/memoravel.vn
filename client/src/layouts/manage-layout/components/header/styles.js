@@ -28,4 +28,11 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: 3,
     paddingBottom: 3,
   },
+  logoText: {
+    fontFamily: '"Be Vietnam", sans-serif',
+    fontSize: "18px",
+    fontWeight: 700,
+    color: "#5f1e03",
+    marginLeft: "8px",
+  },
 }));

@@ -1,19 +1,20 @@
 /* eslint-disable react/prop-types */
 import {
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControl,
+  FormControlLabel,
   IconButton,
   makeStyles,
   OutlinedInput,
-  Typography,
-  CircularProgress,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
   Radio,
+  RadioGroup,
+  Typography,
 } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import { Close, CloudUpload as CloudUploadIcon } from "@material-ui/icons";
 import { CKEditorComponent } from "components";
 import Button from "components/common/Button";
@@ -79,6 +80,13 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
     });
   };
 
+  const onDescChange = (data) => {
+    setDataInput({
+      ...dataInput,
+      description: data,
+    });
+  };
+
   useEffect(() => {
     if (!!data) {
       setDataInput(data);
@@ -136,11 +144,16 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
           onChange={onTypingData}
         />
         <Typography className={classes.typographyContent}>Mô tả</Typography>
-        <OutlinedInput
+        <CKEditorComponent
+          name="content"
+          onChange={onDescChange}
+          data={dataInput?.description || ""}
+        />
+        {/* <OutlinedInput
           placeholder="Nhập mô tả"
+          multiline
           classes={{
-            root: classes.contentLineEdit,
-            input: classes.inputEdit,
+            root: classes.textAreaInput,
             disabled: classes.disabled,
           }}
           required
@@ -149,7 +162,7 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
           }}
           value={dataInput?.description || ""}
           onChange={onTypingData}
-        />
+        /> */}
         <Typography className={classes.typographyContent}>Ảnh cover</Typography>
 
         <Button
@@ -171,6 +184,24 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         )}
 
         <Typography className={classes.typographyContent}>Nội dung</Typography>
+        <Alert severity="warning">
+          <AlertTitle>Chú ý</AlertTitle>
+          Chèn link ảnh từ <mark>Google Drive:</mark>
+          <br /> Copy link ảnh đơn từ Google Drive
+          &quot;https://drive.google.com/file/d/1DYHYl8mPcA_C_EONLG3sAXBOUJhM-xyg/...&quot;
+          dán vào
+          <a
+            href="https://memoravel-get-link-drive.surge.sh/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "red", fontWeight: "bold" }}
+          >
+            {" "}
+            ĐÂY
+          </a>
+          , sau đó chọn &quot;Create Direct Link&quot; và lấy link output mà
+          dùng thoả thích.
+        </Alert>
         <CKEditorComponent
           name="content"
           onChange={onCKChange}
@@ -360,4 +391,16 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "right",
     padding: "16px 24px",
   },
+  // textAreaInput: {
+  //   fontSize: 14,
+  //   padding: "9px 16px",
+  //   marginBottom: 16,
+  //   "&$disabled": {
+  //     backgroundColor: "#d4d5d8",
+  //     opacity: 0.3,
+  //     color: "#565c6a",
+  //     border: "none",
+  //     cursor: "no-drop",
+  //   },
+  // },
 }));

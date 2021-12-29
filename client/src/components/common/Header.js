@@ -8,8 +8,10 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Badge,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { Input } from "antd";
 import clsx from "clsx";
@@ -45,6 +47,12 @@ const Header = () => {
   };
 
   const menuData = [
+    {
+      id: "0",
+      text: "Giỏ hàng",
+      path: "/cart",
+      icon: "shopping_cart_outlined",
+    },
     { id: "1", text: "Trang chủ", path: "/", icon: "home" },
     { id: "2", text: "Cửa hàng", path: "/shop", icon: "store" },
     { id: "3", text: "Tin tức", path: "/blogs", icon: "description" },
@@ -96,6 +104,10 @@ const Header = () => {
     </div>
   );
 
+  const active = (path) => {
+    return path === router.pathname;
+  };
+
   return (
     <div className="wrapper">
       <div className={styles.headerWrapper}>
@@ -109,6 +121,13 @@ const Header = () => {
             </Link>
             {size.width >= 830 && (
               <div className="flex items-center">
+                <Link href="/cart">
+                  <IconButton aria-label="cart">
+                    <Badge badgeContent={5} color="primary">
+                      <ShoppingCartOutlinedIcon style={{ color: "#000" }} />
+                    </Badge>
+                  </IconButton>
+                </Link>
                 <Button type="outline" startIcon={<UserOutlined />}>
                   Đăng ký
                 </Button>
@@ -147,16 +166,37 @@ const Header = () => {
                   <div className={styles.filter}>{<HomeFilter />}</div>
                 </li>
                 <li>
-                  <Link href="/">Trang chủ</Link>
+                  <Link href="/">
+                    <span className={active("/") ? styles.currentMenu : ""}>
+                      Trang chủ
+                    </span>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/shop">Cửa hàng</Link>
+                  <Link href="/shop">
+                    <span className={active("/shop") ? styles.currentMenu : ""}>
+                      Cửa hàng
+                    </span>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/blogs">Tin tức</Link>
+                  <Link href="/blogs">
+                    <span
+                      className={active("/blogs") ? styles.currentMenu : ""}
+                    >
+                      Tin tức
+                    </span>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/contact">Liên hệ</Link>
+                  <Link href="/contact">
+                    <span
+                      className={active("/contact") ? styles.currentMenu : ""}
+                    >
+                      {" "}
+                      Liên hệ
+                    </span>
+                  </Link>
                 </li>
                 <li>
                   <Input

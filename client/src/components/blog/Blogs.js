@@ -54,7 +54,7 @@ export default function Blogs() {
             </Row>
           </div>
         </div>
-        <img src="/images/bg_blogs.png" className={styles.img} />
+        <img src="/images/bg_blogs-min.png" className={styles.img} />
       </div>
 
       <br />

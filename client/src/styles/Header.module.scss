@@ -24,8 +24,13 @@
   }
 }
 
+.currentMenu {
+  font-weight: 700 !important;
+}
+
 .menuWrapper {
   background: $primary-color;
+
   ul {
     margin: 0;
     li {

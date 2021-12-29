@@ -32,7 +32,7 @@ ul {
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -56,14 +56,14 @@ ul {
   }
   @include media(mobile) {
     font-size: 14px;
-    line-height: 1.3;
+    line-height: 1.5;
   }
 }
 
 .heading.heading-section {
   @include media(mobile) {
     font-size: 16px;
-    line-height: 1.3;
+    line-height: 1.5;
   }
 }
 
@@ -73,6 +73,10 @@ ul {
 
 .text-center {
   text-align: center;
+}
+
+.text-start {
+  text-align: start;
 }
 
 .align-center {
@@ -155,9 +159,42 @@ ul {
   }
 }
 
+.button-apply {
+  background-color: $button-light-hover-color;
+  font-family: $font-be;
+  font-weight: 400;
+  border: none;
+  min-width: 100px;
+  margin-top: 5px;
+  @include media(tablet) {
+    min-width: 150px;
+  }
+  @include media(mobile) {
+    min-width: 70px;
+  }
+  &:hover {
+    border: none;
+    background-color: $button-light-color;
+  }
+}
+
 // flexbox
 .flex {
   display: flex;
+}
+
+.gap-1 {
+  gap: 10px;
+  @include media(mobile) {
+    gap: 5px;
+  }
+}
+
+.gap-2 {
+  gap: 20px;
+  @include media(mobile) {
+    gap: 10px;
+  }
 }
 
 .flex-col {
@@ -210,4 +247,30 @@ ul {
 
 #nprogress .spinner {
   display: none !important;
+}
+
+.ant-card-body {
+  padding: 0px 15px !important;
+}
+
+.ant-card-cover {
+  overflow: hidden;
+}
+
+.top-product .ant-card {
+  max-width: 280px;
+  margin: 0 5px;
+}
+
+@media (max-width: 480px) {
+  .ant-card-body {
+    padding: 0px 5px !important;
+  }
+  .ant-rate-star:not(:last-child) {
+    margin-right: 3px !important;
+  }
+  .top-product .ant-card {
+    max-width: 180px;
+    margin: 0 5px;
+  }
 }
