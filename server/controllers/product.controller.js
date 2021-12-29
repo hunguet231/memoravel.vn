@@ -227,6 +227,61 @@ export const getProductByAlias = async (req, res) => {
 
 export const getListProduct = async (req, res) => {
   try {
+    const dataPage = convertPaging(req);
+    const pagination = {
+      limit: dataPage.size,
+      offset: (dataPage.page - 1) * dataPage.size,
+    };
+
+    const queryDataProduct = {};
+    if (dataPage.search) {
+      queryDataProduct.name = {
+        [Op.like]: `%${dataPage.search}%`,
+      };
+    }
+
+    if (dataPage.shop_id) {
+      queryDataProduct.shop_id = req.body.shop_id;
+    }
+
+    const { count, rows: data } = await Product.findAndCountAll({
+      ...pagination,
+      where: {
+        ...queryDataProduct,
+      },
+      include: [
+        {
+          model: Shop,
+          attributes: ['id', 'name', 'alias', 'avatar'],
+        },
+        {
+          model: ProductRating,
+          attributes: ['comment', 'star'],
+          include: [
+            {
+              model: User,
+              attributes: ['full_name', 'avatar'],
+            },
+          ],
+        },
+      ],
+      distinct: true,
+    });
+
+    const formatData = data.map((item) => formatResposeProduct(item));
+
+    const response =
+      dataPage.paging === 0
+        ? {
+            data: formatData,
+            total: count,
+          }
+        : {
+            data: formatData,
+            total: count,
+            page: dataPage.page,
+          };
+    res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
