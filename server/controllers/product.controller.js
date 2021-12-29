@@ -1,11 +1,6 @@
 import { database } from '../configs';
 import { AppConst } from '../const';
-import {
-  responseFormat,
-  convertPaging,
-  requestObjectMultiLang,
-  responseObjectMultiLang,
-} from '../utils';
+import { responseFormat, convertPaging } from '../utils';
 
 const Product = database.Model.productModel;
 const Shop = database.Model.shopModel;
