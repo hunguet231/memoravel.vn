@@ -108,6 +108,7 @@ export const checkCreateProduct = async (req, res, next) => {
         : AppConst.STATUS.draft,
       shop_id: req.body.shop_id,
       number_view: 0,
+      details: req.body.details ? JSON.stringify(req.body.details) : '',
     };
 
     const StringResponseError = await mappingArrayErrorToString(arrayError);
