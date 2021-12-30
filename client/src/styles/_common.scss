@@ -262,6 +262,12 @@ ul {
   margin: 0 5px;
 }
 
+input[type=file], /* FF, IE7+, chrome (except button) */
+input[type=file]::-webkit-file-upload-button {
+  /* chromes and blink button */
+  cursor: pointer;
+}
+
 @media (max-width: 480px) {
   .ant-card-body {
     padding: 0px 5px !important;

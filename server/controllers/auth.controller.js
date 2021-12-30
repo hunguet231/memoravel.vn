@@ -1,10 +1,10 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { renameSync } from "fs";
-import { basename, resolve } from "path";
-import { database } from "../configs";
-import { AppConst } from "../const";
-import { responseFormat } from "../utils";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { renameSync } from 'fs';
+import { basename, resolve } from 'path';
+import { database } from '../configs';
+import { AppConst } from '../const';
+import { responseFormat } from '../utils';
 const User = database.Model.userModel;
 
 export const login = async (req, res) => {
@@ -20,7 +20,7 @@ export const login = async (req, res) => {
     if (!user) {
       res.status(AppConst.STATUS_FORBIDDEN).json(
         responseFormat({
-          message: "Tài khoản của bạn đã bị vô hiệu hóa!",
+          message: 'Tài khoản của bạn đã bị vô hiệu hóa!',
         })
       );
     }
@@ -47,7 +47,7 @@ export const login = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -67,7 +67,7 @@ export const changePassword = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -78,22 +78,22 @@ export const getProfile = async (req, res) => {
         id: req.user_id,
       },
       attributes: [
-        "id",
-        "username",
-        "full_name",
-        "gender",
-        "date_of_birth",
-        "email",
-        "phone_number",
-        "avatar",
-        "role",
+        'id',
+        'username',
+        'full_name',
+        'gender',
+        'date_of_birth',
+        'email',
+        'phone_number',
+        'avatar',
+        'role',
       ],
     });
     res.status(AppConst.STATUS_OK).json(responseFormat({ data: user }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -110,30 +110,30 @@ export const editProfile = async (req, res) => {
         id: req.user_id,
       },
       attributes: [
-        "id",
-        "username",
-        "full_name",
-        "gender",
-        "date_of_birth",
-        "email",
-        "phone_number",
-        "avatar",
-        "role",
+        'id',
+        'username',
+        'full_name',
+        'gender',
+        'date_of_birth',
+        'email',
+        'phone_number',
+        'avatar',
+        'role',
       ],
     });
     res.status(AppConst.STATUS_OK).json(responseFormat({ data: user }));
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
 export const uploadImage = async (req, res) => {
   try {
     const processedFile = req.file || {};
-    let orgName = processedFile.originalname || "";
-    orgName = orgName.trim().replace(/ /g, "-");
+    let orgName = processedFile.originalname || '';
+    orgName = orgName.trim().replace(/ /g, '-');
     const fullPathInServ = processedFile.path;
     const newFullPath = `${fullPathInServ}-${orgName}`;
 
@@ -146,7 +146,7 @@ export const uploadImage = async (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };
 
@@ -158,6 +158,6 @@ export const getImage = (req, res) => {
   } catch (error) {
     res
       .status(AppConst.STATUS_SERVER_ERROR)
-      .json(responseFormat({ error: error, message: "error" }));
+      .json(responseFormat({ error: error, message: 'error' }));
   }
 };

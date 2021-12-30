@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Chip,
   IconButton,
@@ -16,8 +17,8 @@ import { AppConstant } from "const";
 import PropTypes from "prop-types";
 import React from "react";
 
-const TableShop = (props) => {
-  const { shopData, onEdit, onDelete } = props;
+const TableProduct = (props) => {
+  const { productData, onEdit, onDelete } = props;
   const classes = useStyles();
 
   const getDateTime = (time) => {
@@ -33,13 +34,22 @@ const TableShop = (props) => {
             <TableCell className={classes.header} align="center">
               STT
             </TableCell>
-            <TableCell className={classes.header}>Hình đại diện</TableCell>
-            <TableCell className={classes.header}>Tên shop</TableCell>
+            <TableCell className={classes.header}>Ảnh bìa</TableCell>
+            <TableCell className={classes.header}>Tên sản phẩm</TableCell>
             <TableCell className={classes.header} align="center">
-              Địa chỉ
+              Giá bán
+            </TableCell>
+            <TableCell className={classes.header} align="center">
+              Đã bán
+            </TableCell>
+            <TableCell className={classes.header} align="center">
+              Còn lại
             </TableCell>
             <TableCell className={classes.header} align="center">
               Thời gian tạo
+            </TableCell>
+            <TableCell className={classes.header} align="center">
+              Cập nhật
             </TableCell>
             <TableCell className={classes.header} align="center">
               Trạng thái
@@ -50,34 +60,38 @@ const TableShop = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {shopData.data.map((row, index) => (
+          {productData.data.map((row, index) => (
             <TableRow key={index}>
               <TableCell align="center">
-                {(shopData.page - 1) * 10 + index + 1}
+                {(productData.page - 1) * 10 + index + 1}
               </TableCell>
               <TableCell>
                 <a
-                  href={`/shop/${row.alias}`}
+                  href={`/product/${row.alias}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={row.avatar} className={classes.img} alt="Avatar" />
+                  <img
+                    src={row.images[0].image}
+                    className={classes.img}
+                    alt="Picture"
+                  />
                 </a>
               </TableCell>
               <TableCell>
                 <a
-                  href={`/shop/${row.alias}`}
+                  href={`/product/${row.alias}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   {row.name || ""}
                 </a>
               </TableCell>
-              <TableCell>
-                {`${row.address.address_details}, ${row.address.ward}, ${row.address.district}, ${row.address.city}` ||
-                  ""}
-              </TableCell>
+              <TableCell>{`${row.price} ₫` || ""}</TableCell>
+              <TableCell>{row.sold || "0"}</TableCell>
+              <TableCell>{row.in_stock || ""}</TableCell>
               <TableCell>{getDateTime(row.created) || ""}</TableCell>
+              <TableCell>{getDateTime(row.modified) || ""}</TableCell>
               <TableCell align="center">
                 <Chip
                   size="small"
@@ -117,8 +131,8 @@ const TableShop = (props) => {
   );
 };
 
-TableShop.propTypes = {
-  shopData: PropTypes.shape({
+TableProduct.propTypes = {
+  productData: PropTypes.shape({
     data: PropTypes.array,
     page: PropTypes.number,
     total: PropTypes.number,
@@ -127,7 +141,7 @@ TableShop.propTypes = {
   onDelete: PropTypes.func,
 };
 
-export default TableShop;
+export default TableProduct;
 
 const useStyles = makeStyles((theme) => ({
   img: {

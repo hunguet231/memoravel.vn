@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import {
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -14,13 +15,12 @@ import { Close, CloudUpload as CloudUploadIcon } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
 import { Col, Row } from "antd";
 import axios from "axios";
-import { CKEditorComponent } from "components";
 import { Button, SelectItem } from "components/admin";
 import { AppConstant } from "const";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 
-const DialogShop = ({ isShow, onClose, onSubmit, data }) => {
+const DialogShop = ({ isShow, onClose, onSubmit, data, loading }) => {
   const classes = useStyles();
 
   const [avatar, setAvatar] = useState("");
@@ -59,6 +59,8 @@ const DialogShop = ({ isShow, onClose, onSubmit, data }) => {
   };
 
   useEffect(() => {
+    setAvatar(data?.avatar);
+    setCover(data?.cover);
     fetchAddress();
   }, []);
 
@@ -103,13 +105,6 @@ const DialogShop = ({ isShow, onClose, onSubmit, data }) => {
         });
       };
     }
-  };
-
-  const onDescChange = (data) => {
-    setDataInput({
-      ...dataInput,
-      description: data,
-    });
   };
 
   const onCityChange = (event, newValue) => {
@@ -196,11 +191,18 @@ const DialogShop = ({ isShow, onClose, onSubmit, data }) => {
         <Typography className={classes.typographyContent}>
           Mô tả shop
         </Typography>
-        <CKEditorComponent
-          className={classes.ckeditor}
-          name="description"
-          onChange={onDescChange}
-          data={dataInput?.description || ""}
+        <OutlinedInput
+          id="standard-multiline-flexible"
+          multiline
+          rows={10}
+          variant="outlined"
+          style={{ width: "100%" }}
+          required
+          inputProps={{
+            name: "description",
+          }}
+          value={dataInput?.description || ""}
+          onChange={onTypingData}
         />
 
         <Typography className={classes.typographyContent}>
@@ -248,61 +250,72 @@ const DialogShop = ({ isShow, onClose, onSubmit, data }) => {
         <Row gutter={10}>
           <Col xs={24} lg={8}>
             <Autocomplete
+              disableClearable
               onChange={onCityChange}
               id="combo-box-demo"
               options={address.cities}
+              defaultValue={{ value: dataInput?.address?.city }}
               getOptionLabel={(option) => option.value}
               style={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   size="small"
+                  defaultValue={dataInput?.address?.city || ""}
                   value={dataInput?.address?.city || ""}
                   label="Tỉnh/Thành phố"
                   variant="outlined"
+                  style={{ marginBottom: "15px" }}
                 />
               )}
             />
           </Col>
           <Col xs={24} lg={8}>
             <Autocomplete
+              disableClearable
               onChange={onDistrictChange}
               id="combo-box-demo"
               options={address.districts}
+              defaultValue={{ value: dataInput?.address?.district }}
               getOptionLabel={(option) => option.value}
               style={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   size="small"
+                  defaultValue={dataInput?.address?.district || ""}
                   value={dataInput?.address?.district || ""}
                   label="Quận/Huyện"
                   variant="outlined"
+                  style={{ marginBottom: "15px" }}
                 />
               )}
             />
           </Col>
           <Col xs={24} lg={8}>
             <Autocomplete
+              disableClearable
               onChange={onWardChange}
               id="combo-box-demo"
               options={address.wards}
+              defaultValue={{ value: dataInput?.address?.ward }}
               getOptionLabel={(option) => option.value}
               style={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   size="small"
+                  defaultValue={dataInput?.address?.ward || ""}
                   value={dataInput?.address?.ward || ""}
                   label="Phường/Xã"
                   variant="outlined"
+                  style={{ marginBottom: "15px" }}
                 />
               )}
             />
           </Col>
         </Row>
 
-        <br />
         <Typography className={classes.typographyContent}>
           Địa chỉ cụ thể
         </Typography>
@@ -342,6 +355,9 @@ const DialogShop = ({ isShow, onClose, onSubmit, data }) => {
           Hủy
         </Button>
         <Button onClick={() => onSubmit(dataInput)}>
+          {loading && (
+            <CircularProgress size={20} className={classes.circular} />
+          )}
           {dataInput?.id ? "Cập nhật" : "Tạo mới"}
         </Button>
       </DialogActions>
@@ -365,6 +381,10 @@ DialogShop.defaultProps = {};
 export default DialogShop;
 
 const useStyles = makeStyles((theme) => ({
+  circular: {
+    color: "#fff",
+    marginRight: 5,
+  },
   boxImg: {
     display: "flex",
     justifyContent: "center",
@@ -382,7 +402,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "cover",
   },
   dialogContainer: {
-    width: "auto",
+    width: "100%",
     maxWidth: 800,
     height: "auto",
     objectFit: "contain",

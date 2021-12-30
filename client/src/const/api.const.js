@@ -1,8 +1,8 @@
 import { LangConstant } from "const";
 
 // Base Api
-export const BASE_URL = "http://localhost:5000/api";
-// export const BASE_URL = "https://memoravel.online/api";
+// export const BASE_URL = "http://localhost:5000/api";
+export const BASE_URL = "https://memoravel.online/api";
 
 export const HEADER_DEFAULT = {
   Accept: "application/json",
@@ -10,7 +10,8 @@ export const HEADER_DEFAULT = {
   location: LangConstant.DEFAULT_LANG,
 };
 export const HEADER_FORM_DATA = {
-  "Content-Type": "multipart/form-data",
+  "Content-Type":
+    "multipart/form-data; boundary=<calculated when request is sent>",
 };
 export const TIMEOUT = 30000;
 
@@ -52,3 +53,6 @@ export const GET_PRODUCT = "/product";
 
 // user
 export const ADMIN_USER = "/admin/user";
+
+// upload
+export const UPLOAD = "/upload";

@@ -61,7 +61,7 @@ const SIDEBAR_DATA = [
     role: AppConstant.ROLE.manage,
   },
   {
-    text: "Sản phẩm (!)",
+    text: "Sản phẩm",
     icon: <BallotIcon color="inherit" />,
     path: PathConstant.MANAGE_PRODUCT,
     role: AppConstant.ROLE.manage,

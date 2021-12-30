@@ -1,25 +1,22 @@
 import { Pagination } from "@material-ui/lab";
 import { fetchData } from "api";
-import {
-  AppAlert,
-  ConfirmDialog,
-  DialogPost,
-  TablePost,
-} from "components/admin";
+import { AppAlert, ConfirmDialog } from "components/admin";
+import DialogProduct from "components/admin/product/DialogProduct";
+import TableProduct from "components/admin/product/TableProduct";
 import { ApiConstant, AppConstant } from "const";
 import { HeaderLayout, ManageLayout } from "layouts";
 import React, { useEffect, useState } from "react";
 import getImgUrl from "utils/getImgUrl";
 
-const Post = () => {
+const Product = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dataPost, setDataPost] = useState({
+  const [dataProduct, setDataProduct] = useState({
     data: [],
     page: 1,
     total: 0,
   });
   const [data, setData] = useState();
-  const [topics, setTopics] = useState();
+  const [shops, setShops] = useState();
   const [messageData, setMessageData] = useState({
     type: "error",
     message: "",
@@ -30,56 +27,58 @@ const Post = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const fetchDataTopic = async () => {
-    let url = ApiConstant.MN_TOPIC;
+  const fetchDataShop = async () => {
+    let url = ApiConstant.MN_SHOP;
     const response = await fetchData(url, ApiConstant.METHOD.get);
     if (response?.status === AppConstant.STATUS_OK) {
-      setTopics({
+      setShops({
         ...response,
-        data: response.data.map(({ id, title }) => ({
+        data: response.data.map(({ id, name }) => ({
           id,
-          label: title,
-          value: title,
+          name: name,
+          value: id,
         })),
       });
     }
   };
 
   useEffect(() => {
-    fetchDataTopic();
+    fetchDataShop();
   }, []);
 
-  const submitPost = async (data) => {
+  const submitProduct = async (data) => {
     setLoading(true);
-    let url = ApiConstant.MN_POST;
+    let url = ApiConstant.MN_PRODUCT;
 
     // upload image to cloudinary
-    let background_url;
-    if (data.background) {
-      if (
-        !data.background.toString().startsWith("https://res.cloudinary.com")
-      ) {
-        background_url = await getImgUrl(data.background);
-      } else {
-        background_url = data.background;
-      }
-    }
+    let images_url = [];
+    await Promise.all(
+      data.images.map(async (item) => {
+        let image_url;
+        if (!item.image.toString().startsWith("https://res.cloudinary.com")) {
+          image_url = await getImgUrl(item.image);
+        } else {
+          image_url = item.image;
+        }
+        images_url.push({ image: image_url });
+      })
+    );
+
     const requestBody = {
-      title: {
-        vi: data.title,
-        en: "",
-      },
-      description: {
-        vi: data.description,
-        en: "",
-      },
-      content: {
-        vi: data.content,
-        en: "",
-      },
+      name: data.name,
+      summary: data.summary,
+      description: data.description,
+      story: data.story,
+      images: images_url,
+      price: data.price,
+      type: data.type,
+      made_in: data.made_in,
+      details: data.details,
+      vectary_link: data.vectary_link,
+      sold: data.sold,
+      in_stock: data.in_stock,
       status: parseInt(data.status),
-      background: background_url,
-      topic_ids: data.topic_ids,
+      shop_id: data.shop_id,
     };
 
     if (data.id) {
@@ -98,7 +97,7 @@ const Post = () => {
         response.status
       )
     ) {
-      await fetchDataPost(dataPost.page);
+      await fetchDataProduct(dataProduct.page);
       setMessageData({
         type: "success",
         message: response.message,
@@ -114,11 +113,11 @@ const Post = () => {
     }
   };
 
-  const deletePost = async () => {
-    let url = ApiConstant.MN_POST + `/${deleteDialog.data.id}`;
+  const deleteProduct = async () => {
+    let url = ApiConstant.MN_PRODUCT + `/${deleteDialog.data.id}`;
     const response = await fetchData(url, ApiConstant.METHOD.delete);
     if (response.status && response.status === AppConstant.STATUS_OK) {
-      await fetchDataPost(dataPost.page);
+      await fetchDataProduct(dataProduct.page);
       setMessageData({
         type: "success",
         message: `Xóa thành công!`,
@@ -136,44 +135,38 @@ const Post = () => {
     }
   };
 
-  const fetchDataPost = async (page, search = "", topic_id = null) => {
+  const fetchDataProduct = async (page, search = "", shop_id = null) => {
     let url =
-      ApiConstant.MN_POST +
+      ApiConstant.MN_PRODUCT +
       `?paging=${1}&page=${page}&size=${10}&search=${search}`;
-    if (topic_id) {
-      url += `&topic_id=${topic_id}`;
+    if (shop_id) {
+      url += `&shop_id=${shop_id}`;
     }
     const response = await fetchData(url, ApiConstant.METHOD.get);
     if (response?.status === AppConstant.STATUS_OK) {
-      setDataPost({
+      setDataProduct({
         ...response,
-        data: response.data.map((item) => ({
-          ...item,
-          title: item.title.vi,
-          description: item.description.vi,
-          content: item.content.vi,
-          alias: item.alias.vi,
-        })),
+        data: response.data,
       });
     }
   };
 
   const onChangePage = (page) => {
-    fetchDataPost(page);
+    fetchDataProduct(page);
   };
 
   useEffect(() => {
-    fetchDataPost(dataPost.page);
+    fetchDataProduct(dataProduct.page);
   }, []);
 
   return (
     <ManageLayout>
       <HeaderLayout
-        title="Quản lý bài viết"
+        title="Quản lý sản phẩm"
         onCreateNew={() => setIsOpen(true)}
       />
-      <TablePost
-        postData={dataPost}
+      <TableProduct
+        productData={dataProduct}
         onEdit={(data) => {
           setData(data);
           setIsOpen(true);
@@ -186,33 +179,33 @@ const Post = () => {
         }}
       />
       <Pagination
-        page={dataPost.page}
-        count={parseInt((dataPost.total - 1) / 10) + 1}
+        page={dataProduct.page}
+        count={parseInt((dataProduct.total - 1) / 10) + 1}
         onChange={(_, page) => onChangePage(page)}
         color="primary"
         variant="outlined"
         shape="rounded"
       />
       {isOpen && (
-        <DialogPost
-          topics={topics.data}
+        <DialogProduct
+          shops={shops?.data}
           isShow={isOpen}
           data={data}
           onClose={() => {
             setIsOpen(false);
             setData();
           }}
-          onSubmit={(data) => submitPost(data)}
+          onSubmit={(data) => submitProduct(data)}
           loading={loading}
         />
       )}
       {deleteDialog.isOpen && (
         <ConfirmDialog
           isShow={deleteDialog.isOpen}
-          title={`Xóa bài viết "${deleteDialog.data.title}"`}
+          title={`Xóa sản phẩm "${deleteDialog.data.title}"`}
           message={`Bạn có chắc chắn muốn xóa "${deleteDialog.data.title}" không?`}
           onClose={() => setDeleteDialog({ isOpen: false, data: null })}
-          onSubmit={deletePost}
+          onSubmit={deleteProduct}
         />
       )}
       {!!messageData?.message && (
@@ -233,4 +226,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default Product;

@@ -1,11 +1,8 @@
 import { Pagination } from "@material-ui/lab";
 import { fetchData } from "api";
-import {
-  AppAlert,
-  ConfirmDialog,
-  DialogShop,
-  TableShop,
-} from "components/admin";
+import { AppAlert, ConfirmDialog } from "components/admin";
+import DialogShop from "components/admin/shop/DialogShop";
+import TableShop from "components/admin/shop/TableShop";
 import { ApiConstant, AppConstant } from "const";
 import { HeaderLayout, ManageLayout } from "layouts";
 import React, { useEffect, useState } from "react";

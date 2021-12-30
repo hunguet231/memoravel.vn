@@ -1,11 +1,8 @@
 import { Pagination } from "@material-ui/lab";
 import { fetchData } from "api";
-import {
-  AppAlert,
-  ConfirmDialog,
-  DialogPost,
-  TablePost,
-} from "components/admin";
+import { AppAlert, ConfirmDialog } from "components/admin";
+import DialogPost from "components/admin/post/DialogPost";
+import TablePost from "components/admin/post/TablePost";
 import { ApiConstant, AppConstant } from "const";
 import { HeaderLayout, ManageLayout } from "layouts";
 import React, { useEffect, useState } from "react";
