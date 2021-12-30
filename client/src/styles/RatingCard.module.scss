@@ -1,0 +1,35 @@
+@import "variables";
+
+.wrapCard {
+  margin: 25px 0;
+  .wrapInfo {
+    max-width: 75%;
+    margin-left: 20px;
+    .customerName {
+      font-size: 20px;
+      font-weight: 600;
+      font-family: $font-merriweather;
+      margin-bottom: 10px;
+    }
+    .wrapImg {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      .img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .dateRating {
+      color: $light-gray-color;
+    }
+    .comment {
+      margin-top: 10px;
+      color: $gray-color;
+    }
+  }
+}
