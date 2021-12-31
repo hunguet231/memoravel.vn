@@ -29,19 +29,9 @@ export const checkCreateProduct = async (req, res, next) => {
       }
     }
 
-    //Check if summary is empty
-    if (!req.body.summary) {
-      arrayError.push('Yêu cầu nhập tổng quan về sản phẩm');
-    }
-
     //Check if description is empty
     if (!req.body.description) {
       arrayError.push('Yêu cầu nhập mô tả sản phẩm');
-    }
-
-    //Check if story is empty
-    if (!req.body.story) {
-      arrayError.push('Yêu cầu nhập câu chuyện về sản phẩm');
     }
 
     //Check if have images and ok
@@ -65,10 +55,6 @@ export const checkCreateProduct = async (req, res, next) => {
     //Check if made_in is empty
     if (!req.body.made_in) {
       arrayError.push('Yêu cầu nhập nơi xuất xứ sản phẩm');
-    }
-    //Check if vectary_link is empty
-    if (!req.body.vectary_link) {
-      arrayError.push('Yêu cầu nhập link AR');
     }
     //Check if name is empty
     if (!req.body.in_stock) {
@@ -157,10 +143,7 @@ export const checkUpdateProduct = async (req, res, next) => {
       refactorProductData.name = req.body.name;
     }
 
-    //Check if summary is empty
-    if (req.body.summary === '') {
-      arrayError.push('Yêu cầu nhập tổng quan về sản phẩm');
-    } else if (req.body.summary) {
+    if (req.body.summary) {
       refactorProductData.summary = req.body.summary;
     }
 
@@ -171,10 +154,7 @@ export const checkUpdateProduct = async (req, res, next) => {
       refactorProductData.description = req.body.description;
     }
 
-    //Check if story is empty
-    if (req.body.story === '') {
-      arrayError.push('Yêu cầu nhập câu chuyện về sản phẩm');
-    } else if (req.body.story) {
+    if (req.body.story) {
       refactorProductData.story = req.body.story;
     }
 
@@ -188,6 +168,7 @@ export const checkUpdateProduct = async (req, res, next) => {
           if (item.image === '') arrayError.push('Ảnh không hợp lệ');
         });
       }
+      refactorProductData.images = req.body.images;
     }
 
     //Check if price is empty
@@ -211,10 +192,7 @@ export const checkUpdateProduct = async (req, res, next) => {
       refactorProductData.made_in = req.body.made_in;
     }
 
-    //Check if vectary_link is empty
-    if (req.body.vectary_link === '') {
-      arrayError.push('Yêu cầu nhập link AR');
-    } else if (req.body.vectary_link) {
+    if (req.body.vectary_link) {
       refactorProductData.vectary_link = req.body.vectary_link;
     }
 
@@ -233,6 +211,10 @@ export const checkUpdateProduct = async (req, res, next) => {
       arrayError.push('Status không tồn tại');
     } else if (req.body.status) {
       refactorProductData.status = req.body.status;
+    }
+
+    if (req.body.details) {
+      refactorProductData.details = JSON.stringify(req.body.details);
     }
 
     const StringResponseError = await mappingArrayErrorToString(arrayError);
