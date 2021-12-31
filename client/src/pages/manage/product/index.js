@@ -70,6 +70,7 @@ const Product = () => {
       description: data.description,
       story: data.story,
       images: images_url,
+      // images: data.images,
       price: data.price,
       type: data.type,
       made_in: data.made_in,
@@ -110,7 +111,9 @@ const Product = () => {
         message:
           response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!",
       });
+      setLoading(false);
     }
+    // console.log(requestBody);
   };
 
   const deleteProduct = async () => {

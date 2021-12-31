@@ -10,8 +10,7 @@ export const HEADER_DEFAULT = {
   location: LangConstant.DEFAULT_LANG,
 };
 export const HEADER_FORM_DATA = {
-  "Content-Type":
-    "multipart/form-data; boundary=<calculated when request is sent>",
+  "Content-Type": "multipart/form-data;",
 };
 export const TIMEOUT = 30000;
 

@@ -19,6 +19,7 @@ import {
 import { Close } from "@material-ui/icons";
 import AddAPhotoOutlinedIcon from "@material-ui/icons/AddAPhotoOutlined";
 import { Button, SelectItem } from "components/admin";
+import ClearIcon from "@material-ui/icons/Clear";
 import { AppConstant } from "const";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
@@ -52,8 +53,6 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
     status: AppConstant.STATUS.draft,
   });
 
-  const [imgFileList, setImgFileList] = useState([]);
-
   const onTypingData = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -80,38 +79,38 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
     if (e.target.files[0]) {
       const file = e.target.files[0];
       const size = file.size;
-      const indexImg = e.target.dataset.imgIndex;
+      const indexImg = parseInt(e.target.dataset.imgIndex);
 
       if (size > 1024 * 1024) {
         alert("File vượt quá 2MB");
       } else {
         const reader = new FileReader();
         reader.addEventListener("load", () => {
-          const cloneImgList = imgFileList.map(
-            ({ fileName, file, preview }) => ({
-              fileName,
-              file: new File([file], file.name),
-              preview,
-            })
-          );
+          const cloneImgList =
+            JSON.parse(JSON.stringify(dataInput.images)) || [];
 
           cloneImgList[indexImg] = {
-            fileName: file.name,
-            file,
-            preview: reader.result,
+            image: reader.result,
           };
 
-          setImgFileList(cloneImgList);
           setDataInput({
             ...dataInput,
-            images: cloneImgList.map(({ preview }) => ({
-              image: preview,
-            })),
+            images: cloneImgList,
           });
         });
         reader.readAsDataURL(file);
       }
     }
+  };
+
+  // useEffect(() => {
+  //   console.log("dataInput:", dataInput);
+  // }, [dataInput]);
+
+  const handleDeleteImg = (index) => {
+    const cloneImgList = JSON.parse(JSON.stringify(dataInput.images));
+    cloneImgList.splice(parseInt(index), 1);
+    setDataInput({ ...dataInput, images: cloneImgList });
   };
 
   return (
@@ -153,6 +152,9 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
                           accept="image/*"
                           data-img-index="0"
                           onChange={handleImgFileChange}
+                          onClick={(e) => {
+                            e.target.value = null;
+                          }}
                           title=" "
                           name=""
                         />
@@ -160,14 +162,21 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
                           <AddAPhotoOutlinedIcon />
                         </div>
                         <div className={classes.previewContainer}>
-                          <img
-                            className={classes.previewImg}
-                            src={
-                              imgFileList[0]?.preview ||
-                              dataInput.images[0]?.image
-                            }
-                            alt=""
-                          />
+                          {dataInput.images?.[0] && (
+                            <div
+                              className={classes.deleteIcon}
+                              onClick={() => handleDeleteImg(0)}
+                            >
+                              <ClearIcon fontSize="small" />
+                            </div>
+                          )}
+                          {dataInput.images?.[0]?.image && (
+                            <img
+                              className={classes.previewImg}
+                              src={dataInput.images?.[0]?.image}
+                              alt=""
+                            />
+                          )}
                         </div>
                       </div>
                       <div className={classes.caption}>* Ảnh bìa</div>
@@ -181,6 +190,9 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
                             accept="image/*"
                             data-img-index={index + 1}
                             onChange={handleImgFileChange}
+                            onClick={(e) => {
+                              e.target.value = null;
+                            }}
                             title=" "
                             name=""
                           />
@@ -188,14 +200,21 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
                             <AddAPhotoOutlinedIcon />
                           </div>
                           <div className={classes.previewContainer}>
-                            <img
-                              className={classes.previewImg}
-                              src={
-                                imgFileList[index + 1]?.preview ||
-                                dataInput.images[index + 1]?.image
-                              }
-                              alt=""
-                            />
+                            {dataInput.images?.[index + 1] && (
+                              <div
+                                className={classes.deleteIcon}
+                                onClick={() => handleDeleteImg(index + 1)}
+                              >
+                                <ClearIcon fontSize="small" />
+                              </div>
+                            )}
+                            {dataInput.images?.[index + 1]?.image && (
+                              <img
+                                className={classes.previewImg}
+                                src={dataInput.images?.[index + 1]?.image}
+                                alt=""
+                              />
+                            )}
                           </div>
                         </div>
                         <div className={classes.caption}>
@@ -614,6 +633,23 @@ DialogProduct.defaultProps = {};
 export default DialogProduct;
 
 const useStyles = makeStyles((theme) => ({
+  deleteIcon: {
+    position: "absolute",
+    top: "-5px",
+    right: "-5px",
+    width: 16,
+    height: 16,
+    background: "#f2f2f2",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 3,
+    transition: "all 0.2s ease-in-out",
+    "&:hover": {
+      background: "#a2a2a2",
+    },
+  },
   flex: {
     display: "flex",
     flexWrap: "wrap",
@@ -662,6 +698,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     width: 90,
     height: 90,
+    border: "1px dashed #5f1e03",
   },
   previewImg: {
     width: "100%",

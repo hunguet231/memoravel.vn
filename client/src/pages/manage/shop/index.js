@@ -85,6 +85,7 @@ const Shop = () => {
         message:
           response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!",
       });
+      setLoading(false);
     }
   };
 
