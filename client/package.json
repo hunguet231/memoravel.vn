@@ -36,6 +36,7 @@
     "react-multi-carousel": "2.6.3",
     "react-multi-select-component": "^4.1.14",
     "react-redux": "^7.2.6",
+    "react-responsive-carousel": "^3.2.22",
     "sass": "1.26.10"
   },
   "devDependencies": {

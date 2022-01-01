@@ -1,5 +1,4 @@
-import { SearchOutlined } from "@ant-design/icons";
-import { Col, Input, Row } from "antd";
+import { Col, Row } from "antd";
 import { fetchData } from "api";
 import { ApiConstant, AppConstant } from "const";
 import React from "react";
@@ -45,11 +44,11 @@ export default function Blogs() {
               </Col>
 
               <Col sm={24} md={10}>
-                <Input
+                {/* <Input
                   className={styles.input}
                   placeholder="Tìm kiểm chủ đề"
                   suffix={<SearchOutlined />}
-                />
+                /> */}
               </Col>
             </Row>
           </div>

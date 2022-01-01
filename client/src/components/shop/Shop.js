@@ -78,7 +78,7 @@ export default function Shop() {
             </Drawer>
 
             <Row gutter={10}>
-              {new Array(9).fill(1).map((product) => (
+              {products.map((product) => (
                 <Col xs={12} sm={12} md={8} key={product.id}>
                   <ProductCard product={product} />
                 </Col>

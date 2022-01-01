@@ -106,12 +106,12 @@ const Product = () => {
       setLoading(false);
       setIsOpen(false);
     } else {
+      setLoading(false);
       setMessageData({
         type: "error",
         message:
           response?.message !== "OK" ? response?.message : "Có lỗi xảy ra!",
       });
-      setLoading(false);
     }
     // console.log(requestBody);
   };

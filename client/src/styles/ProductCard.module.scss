@@ -33,6 +33,7 @@
 }
 
 .productName {
+  height: 55px;
   color: $primary-color;
   font-family: $font-merriweather;
   font-weight: 600;
@@ -45,14 +46,22 @@
   -webkit-box-orient: vertical;
   @include media(mobile) {
     font-size: 13px;
+    height: 45px;
   }
 }
 
 .description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // default 1 line
+  -webkit-box-orient: vertical;
+  height: 50px;
   font-size: 14px;
   margin-bottom: 5px;
   @include media(mobile) {
     font-size: 12px;
+    height: 40px;
   }
 }
 

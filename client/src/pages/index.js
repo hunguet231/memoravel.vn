@@ -1,6 +1,6 @@
+import { fetchData } from "api";
 import ContactForm from "components/common/ContactForm";
 import Footer from "components/common/Footer";
-import React, { useEffect, useState } from "react";
 import Header from "components/common/Header";
 import Achievements from "components/home/Achievements";
 import CarouselHeader from "components/home/CarouselHeader";
@@ -8,10 +8,9 @@ import Feedback from "components/home/Feedback";
 import MemoStory from "components/home/MemoStory";
 import News from "components/home/News";
 import ShowcaseProduct from "components/home/ShowcaseProduct";
-import TopProduct from "components/home/TopProduct";
-import { MainLayout } from "layouts";
 import { ApiConstant, AppConstant } from "const";
-import { fetchData } from "api";
+import { MainLayout } from "layouts";
+import React, { useEffect, useState } from "react";
 
 const Home = () => {
   const [news, setNews] = useState([]);
@@ -47,7 +46,7 @@ const Home = () => {
       <Header />
       <CarouselHeader />
       <ShowcaseProduct />
-      <TopProduct />
+      {/* <TopProduct /> */}
       <MemoStory />
       <Achievements />
       <Feedback />

@@ -10,7 +10,7 @@ export default function Cart() {
     <div className="wrapper">
       <div className="container">
         <div className={styles.container}>
-          <h1 className="heading heading-section">Giỏ hàng</h1>
+          <h1 className="heading heading-section heading-primary">Giỏ hàng</h1>
           <Row gutter={12}>
             <Col xs={24} lg={17}>
               <div className={styles.wrapperCheckbox}>

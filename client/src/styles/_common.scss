@@ -272,6 +272,19 @@ input[type=file]::-webkit-file-upload-button {
   cursor: pointer;
 }
 
+.carousel .thumbs-wrapper {
+  margin: 0 !important;
+  margin-top: 5px !important;
+}
+
+.ant-image-mask-info {
+  display: none;
+}
+
+.ant-image-mask {
+  border-radius: 10px;
+}
+
 @media (max-width: 480px) {
   .ant-card-body {
     padding: 0px 5px !important;

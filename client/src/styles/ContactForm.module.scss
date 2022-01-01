@@ -1,89 +1,86 @@
 @import "variables";
 @import "mixins";
 .contact {
-    padding: 30px 15px;
-    height: auto;
-    background: #F6F4ED;
-    color: #fff;
-    .subHeading {
-        font-family: $font-dm-sans;
-        font-size: 15px;
-        text-align: center;
-        letter-spacing: 0.005em;
-        color: $light-gray-color;
-        @include media(mobile) {
-            font-size: 13px;
-        }
+  padding: 30px 15px;
+  height: auto;
+  background: #f6f4ed;
+  color: #fff;
+  .subHeading {
+    font-family: $font-dm-sans;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0.005em;
+    color: $light-gray-color;
+    @include media(mobile) {
+      font-size: 14px;
     }
-    .inputContainer {
-        width: 100%;
-        max-width: 800px;
-        height: 64px;
-        margin: 20px auto;
-        @include media(mobile) {
-            height: 42px;
-            margin: 20px auto 5px;
-        }
-        position: relative;
-        input {
-            display: block;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            color: #000;
-            font-family: $font-be;
-            font-size: 14px;
-            letter-spacing: 00.005em;
-            padding: 10px 20px;
-            border: 0;
-            outline: 0;
-            border-radius: 6px;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            position: absolute;
-            &::placeholder {
-                font-family: $font-be;
-                font-size: 14px;
-                letter-spacing: 00.005em;
-                @include media(mobile) {
-                    font-size: 12px;
-                }
-            }
-        }
-        .iconBtn {
-            position: absolute;
-            display: grid;
-            place-items: center;
-            right: 10px;
-            top: 10px;
-            width: 44px;
-            height: 44px;
-            padding: 6px;
-            @include media(mobile) {
-                right: 7px;
-                top: 7px;
-                width: 28px;
-                height: 28px;
-                padding: 3px;
-            }
-            background-color: $button-light-color;
-            color: #fff;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.2s all ease-in-out;
-            &:hover {
-                background-color: $button-light-hover-color;
-            }
-            .circle {
-                width: 17px;
-                height: 17px;
-                border: 1px solid #fff;
-                border-radius: 50%;
-                display: grid;
-                place-items: center;
-                svg {
-                    font-size: 11px;
-                }
-            }
-        }
+  }
+  .inputContainer {
+    width: 100%;
+    max-width: 800px;
+    height: 64px;
+    margin: 20px auto;
+    @include media(mobile) {
+      height: 42px;
+      margin: 20px auto 5px;
     }
+    position: relative;
+    input {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      color: #000;
+      font-family: $font-be;
+      font-size: 14px;
+      letter-spacing: 00.005em;
+      padding: 10px 20px;
+      border: 0;
+      outline: 0;
+      border-radius: 6px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      position: absolute;
+      &::placeholder {
+        font-family: $font-be;
+        font-size: 14px;
+        letter-spacing: 00.005em;
+      }
+    }
+    .iconBtn {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      right: 10px;
+      top: 10px;
+      width: 44px;
+      height: 44px;
+      padding: 6px;
+      @include media(mobile) {
+        right: 7px;
+        top: 7px;
+        width: 28px;
+        height: 28px;
+        padding: 3px;
+      }
+      background-color: $button-light-color;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s all ease-in-out;
+      &:hover {
+        background-color: $button-light-hover-color;
+      }
+      .circle {
+        width: 17px;
+        height: 17px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        svg {
+          font-size: 11px;
+        }
+      }
+    }
+  }
 }

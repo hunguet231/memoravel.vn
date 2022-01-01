@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles, Button as MuiButton } from "@material-ui/core";
 
-const Button = ({ children, type, ...otherProps }) => {
+const Button = ({ children, type, className, ...otherProps }) => {
   const classes = useStyles();
 
   return (
     <MuiButton
       size="medium"
       variant="contained"
-      className={`${classes.root} ${classes[type]} `}
+      className={`${className} ${classes.root} ${classes[type]} `}
       {...otherProps}
     >
       {children}
@@ -20,6 +20,7 @@ const Button = ({ children, type, ...otherProps }) => {
 Button.propTypes = {
   children: PropTypes.any,
   type: PropTypes.string,
+  className: PropTypes.any,
 };
 Button.defaultProps = {};
 

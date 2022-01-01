@@ -23,6 +23,7 @@ import React from "react";
 import useWindowSize from "utils/useWindowSize";
 import styles from "../../styles/Header.module.scss";
 import Button from "./Button";
+import { useEffect } from "react";
 
 const useStyles = makeStyles({
   list: {
@@ -35,6 +36,11 @@ const Header = () => {
   const router = useRouter();
   const size = useWindowSize();
   const [open, setOpen] = React.useState(false);
+  const [cartItems, setCartItems] = React.useState([]);
+
+  useEffect(() => {
+    setCartItems([]);
+  }, []);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -123,7 +129,7 @@ const Header = () => {
               <div className="flex items-center">
                 <Link href="/cart">
                   <IconButton aria-label="cart">
-                    <Badge badgeContent={5} color="primary">
+                    <Badge badgeContent={cartItems.length} color="primary">
                       <ShoppingCartOutlinedIcon style={{ color: "#000" }} />
                     </Badge>
                   </IconButton>

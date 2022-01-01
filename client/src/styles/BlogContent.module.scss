@@ -50,6 +50,10 @@
   img {
     height: auto !important;
     width: 100% !important;
+    max-width: 800px !important;
+    @include media(mobile) {
+      max-width: 100% !important;
+    }
   }
 }
 

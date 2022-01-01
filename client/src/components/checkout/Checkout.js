@@ -36,7 +36,9 @@ export default function Order() {
     <div className="wrapper">
       <div className="container">
         <div className={styles.container}>
-          <h1 className="heading heading-section">Thanh toán & đặt hàng</h1>
+          <h1 className="heading heading-section heading-primary">
+            Thanh toán & đặt hàng
+          </h1>
           <Row gutter={10}>
             <Col xs={24} lg={17}>
               <Dropdown overlay={menu} trigger={["click"]}>

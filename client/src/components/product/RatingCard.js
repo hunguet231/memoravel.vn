@@ -1,5 +1,6 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Rate } from "antd";
+import { Rating } from "@material-ui/lab";
+import { Avatar } from "antd";
 import React from "react";
 import styles from "styles/RatingCard.module.scss";
 
@@ -14,26 +15,40 @@ export default function RatingCard() {
           <div className={styles.wrapInfo}>
             <div className="flex justify-between">
               <span className={styles.customerName}>Trần Thị Bích Phượng</span>
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={4.5}
+              <Rating
                 style={{ color: "#F3692E" }}
+                readOnly
+                precision={0.5}
+                value={5}
+                defaultValue={0}
+                size="small"
               />
             </div>
             <p className={styles.dateRating}>2 tháng 10 năm 2021 at 06.30 pm</p>
             <div className={styles.wrapImg}>
               <div>
-                <img src="images/binh-hoa-tai-loc.png" className={styles.img} />
+                <img
+                  src="/images/binh-hoa-tai-loc.png"
+                  className={styles.img}
+                />
               </div>
               <div>
-                <img src="images/binh-hoa-tai-loc.png" className={styles.img} />
+                <img
+                  src="/images/binh-hoa-tai-loc.png"
+                  className={styles.img}
+                />
               </div>
               <div>
-                <img src="images/binh-hoa-tai-loc.png" className={styles.img} />
+                <img
+                  src="/images/binh-hoa-tai-loc.png"
+                  className={styles.img}
+                />
               </div>
               <div>
-                <img src="images/binh-hoa-tai-loc.png" className={styles.img} />
+                <img
+                  src="/images/binh-hoa-tai-loc.png"
+                  className={styles.img}
+                />
               </div>
             </div>
             <p className={styles.comment}>
