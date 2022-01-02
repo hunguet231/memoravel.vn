@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Cookies from "js-cookie";
 import { AppConstant, LangConstant } from "const";
+import { DataProvider } from "../../store/GlobalState";
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -27,18 +28,20 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <NextNprogress
-        color="#d35400"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={3}
-        showOnShallow={true}
-      />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <DataProvider>
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <NextNprogress
+          color="#d35400"
+          startPosition={0.3}
+          stopDelayMs={200}
+          height={3}
+          showOnShallow={true}
+        />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </DataProvider>
   );
 };
 

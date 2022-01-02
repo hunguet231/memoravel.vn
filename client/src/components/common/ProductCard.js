@@ -2,12 +2,25 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { IconButton, Tooltip } from "@material-ui/core";
 import { Card, Image, Rate } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import styles from "../../styles/ProductCard.module.scss";
+import { DataContext } from "../../../store/GlobalState";
+import { addToCart } from "../../../store/Actions";
 
 export default function ProductCard({ product }) {
-  const { alias, images, name, price, sold, summary, vectary_link } = product;
+  const { alias, images, name, price, sold, summary, vectary_link, in_stock } =
+    product;
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
+
+  const handleAddCart = (e) => {
+    e.stopPropagation();
+
+    // add to cart
+    dispatch(addToCart(product, 1, cart));
+  };
+
   return (
     <Link href={`/product/${alias}`}>
       <Card
@@ -35,9 +48,9 @@ export default function ProductCard({ product }) {
         <div
           className={`flex justify-between items-center ${styles.cardFooter}`}
         >
-          <div className={styles.cartButton}>
+          <div className={styles.cartButton} onClick={handleAddCart}>
             <Tooltip title="Thêm vào giỏ hàng">
-              <IconButton aria-label="add-to-cart">
+              <IconButton aria-label="add-to-cart" disabled={in_stock === 0}>
                 <ShoppingCartOutlined className={styles.cartIcon} />
               </IconButton>
             </Tooltip>

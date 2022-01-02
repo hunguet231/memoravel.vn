@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { FilterOutlined } from "@ant-design/icons";
-import { Col, Row, Drawer } from "antd";
+import { Col, Drawer, Row } from "antd";
 import { fetchData } from "api";
 import ProductCard from "components/common/ProductCard";
 import { ApiConstant, AppConstant } from "const";
+import { useRouter } from "next/router";
 import React from "react";
 import styles from "../../styles/Blogs.module.scss";
 import Filter from "./Filter";
@@ -11,6 +12,7 @@ import Filter from "./Filter";
 export default function Shop() {
   const [products, setProducts] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
+  const router = useRouter();
 
   const fetchProducts = async () => {
     const url = ApiConstant.GET_PRODUCT;
@@ -30,6 +32,13 @@ export default function Shop() {
 
   const onClose = () => {
     setVisible(false);
+  };
+
+  const onChangePage = (page, pageSize) => {
+    router.push({
+      pathname: "/shop",
+      query: { p: page },
+    });
   };
 
   return (

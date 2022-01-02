@@ -2,10 +2,15 @@ import Button from "components/common/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import styles from "styles/TotalItemCard.module.scss";
+import numberWithDots from "utils/addDotsNumber";
+import removeNonNumeric from "utils/removeNonNumeric";
+import { DataContext } from "../../../store/GlobalState";
 export default function TotalItemCard({ onCheckoutButtonClick }) {
   const router = useRouter();
+  const { state } = useContext(DataContext);
+  const { cart } = state;
 
   const onButtonClick = () => {
     if (router.pathname === "/cart") {
@@ -17,54 +22,48 @@ export default function TotalItemCard({ onCheckoutButtonClick }) {
     }
   };
 
+  const totalPaid = numberWithDots(
+    cart.reduce((acc, curr) => {
+      return acc + curr.quantity * parseInt(removeNonNumeric(curr.price));
+    }, 0)
+  );
+
   return (
     <div className="wrapper">
       <div className={styles.card}>
         <h2 className={styles.title}>Tổng số sản phẩm </h2>
-        <div className="flex justify-between">
-          <p className={styles.itemCheck}>
-            <span className={styles.label}>X2 &nbsp; &nbsp;</span>
-            Bình sứ Vạn Phúc
-          </p>
-        </div>
-        <div className="flex justify-between">
-          <p className={styles.itemCheck}>
-            <span className={styles.label}>X2 &nbsp; &nbsp;</span>
-            Nón lá
-          </p>
-        </div>
-        <div className="flex justify-between">
-          <p className={styles.itemCheck}>
-            <span className={styles.label}>X2 &nbsp; &nbsp;</span>
-            Vải
-          </p>
-        </div>
-        <div className="flex justify-between">
-          <p className={styles.itemCheck}>
-            <span className={styles.label}>X2 &nbsp; &nbsp;</span>
-            Chén
-          </p>
-        </div>
+        {cart.map((item, index) => (
+          <div key={index} className="flex justify-between">
+            <p className={styles.itemCheck}>
+              <span className={styles.label}>
+                x{item.quantity} &nbsp; &nbsp;
+              </span>
+              {item.name}
+            </p>
+          </div>
+        ))}
+
         <br />
         <div className={styles.hr} />
         <div className="flex justify-between">
           <p className={styles.label}>Tạm tính:</p>
-          <p>9.000.000.000 vnđ</p>
+          <p>{totalPaid} vnđ</p>
         </div>
         <div className="flex justify-between">
           <p className={styles.label}>Phí ship:</p>
-          <p>Miễn phí</p>
+          <p>{router.pathname === "/cart" ? "Chưa bao gồm" : `30.000 vnđ`}</p>
         </div>
         <div className="flex justify-between">
           <p className={styles.label}>Giảm giá:</p>
-          <p>1.000.000 vnđ</p>
+          <p>- 0 vnđ</p>
         </div>
         <div className={styles.hr} />
         <div className="flex justify-between">
           <p className={styles.label}>Tổng:</p>
-          <p className={styles.label}>8.999.000.000 vnđ</p>
+          <p className={styles.label}>{totalPaid} vnđ</p>
         </div>
         <Button
+          disabled={cart.length === 0}
           type="primary"
           onClick={onButtonClick}
           style={{ width: "100%" }}

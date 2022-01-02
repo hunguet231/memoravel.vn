@@ -36,4 +36,5 @@ module.exports = withAntdLess({
     return [];
   },
   target: "serverless",
+  generateBuildId: () => "memoravel.vn",
 });

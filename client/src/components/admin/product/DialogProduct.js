@@ -47,6 +47,7 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
       len: "",
       width: "",
       height: "",
+      sku: "",
     },
     in_stock: 0,
     shop_id: "",
@@ -550,6 +551,30 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
                     }}
                     value={dataInput?.story || ""}
                     onChange={onTypingData}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={2}>
+                  <div className={classes.label}>SKU sản phẩm</div>
+                </Grid>
+                <Grid item xs={12} sm={10}>
+                  <OutlinedInput
+                    classes={{
+                      root: classes.contentLineEdit,
+                      input: classes.inputEdit,
+                      disabled: classes.disabled,
+                    }}
+                    value={dataInput?.details?.sku || ""}
+                    onChange={(e) =>
+                      setDataInput({
+                        ...dataInput,
+                        details: {
+                          ...dataInput.details,
+                          sku: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </Grid>
               </Grid>

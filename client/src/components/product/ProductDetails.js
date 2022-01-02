@@ -1,19 +1,22 @@
 /* eslint-disable react/prop-types */
 import { RightCircleFilled, ShoppingCartOutlined } from "@ant-design/icons";
 import { Rating } from "@material-ui/lab";
-import { Col, Modal, Row, Image } from "antd";
+import { Col, Image, message, Modal, Row } from "antd";
+import { fetchData } from "api";
 import Button from "components/common/Button";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { ApiConstant, AppConstant } from "const";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import styles from "styles/ProductDetails.module.scss";
+import isInt from "utils/isInterger";
+import { addToCart } from "../../../store/Actions";
+import { DataContext } from "../../../store/GlobalState";
 import ProductDesc from "./ProductDesc";
 import ProductRating from "./ProductRating";
-import ProductStory from "./ProductStory";
-import { ApiConstant, AppConstant } from "const";
-import { fetchData } from "api";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import ProductRelated from "./ProductRelated";
+import ProductStory from "./ProductStory";
 
 export default function ProductDetails({ product }) {
   const {
@@ -22,7 +25,7 @@ export default function ProductDetails({ product }) {
     description,
     details,
     images,
-    // in_stock,
+    in_stock,
     made_in,
     name,
     price,
@@ -38,6 +41,10 @@ export default function ProductDetails({ product }) {
   const [visible, setVisible] = useState(false);
   const [currentImg, setCurrentImg] = useState(1);
   const [products, setProducts] = useState([]);
+  const [amount, setAmount] = useState(1);
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
+  const router = useRouter();
 
   const fetchProducts = async () => {
     const url = ApiConstant.GET_PRODUCT;
@@ -67,6 +74,48 @@ export default function ProductDetails({ product }) {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const decreaseAmount = () => {
+    const newAmount = amount - 1;
+    if (newAmount <= 0) {
+      // dispatch(changeQty(cart, id, 1));
+      setAmount(1);
+    } else {
+      // dispatch(changeQty(cart, id, newAmount));
+      setAmount(newAmount);
+    }
+  };
+
+  const increaseAmount = () => {
+    const newAmount = amount + 1;
+    if (newAmount > in_stock) {
+      return message.error("Số lượng đặt vượt quá số lượng sản phẩm có sẵn!");
+    } else {
+      // dispatch(changeQty(cart, id, newAmount));
+      setAmount(newAmount);
+    }
+  };
+
+  const handleAmountChange = (e) => {
+    const newAmount = e.target.value;
+    if (isInt(newAmount)) {
+      // dispatch(changeQty(cart, id, parseInt(newAmount)));
+      setAmount(parseInt(newAmount));
+    }
+    if (newAmount === "") {
+      // dispatch(changeQty(cart, id, amount));
+      setAmount("");
+    }
+  };
+
+  const handleAddCart = () => {
+    dispatch(addToCart(product, amount, cart));
+  };
+
+  const handleBuyNow = () => {
+    dispatch(addToCart(product, amount, cart));
+    router.push("/cart");
   };
 
   const Details = () => (
@@ -212,17 +261,27 @@ export default function ProductDetails({ product }) {
                 </h1>
                 <Details />
                 <div className={styles.amountContainer}>
-                  <span className={styles.label}>Số lượng:</span>
-                  <button className={styles.btnAmount}>-</button>
-                  <input type="text" className={styles.inputAmount} />
-                  <button className={styles.btnAmount}>+</button>
-                  {/* <p className={styles.inStock}>Còn lại {in_stock} sản phẩm</p> */}
+                  <span className={styles.label}>Số lượng:</span>{" "}
+                  <button className={styles.btnAmount} onClick={decreaseAmount}>
+                    -
+                  </button>
+                  <input
+                    onChange={handleAmountChange}
+                    type="text"
+                    value={amount}
+                    className={styles.inputAmount}
+                  />
+                  <button className={styles.btnAmount} onClick={increaseAmount}>
+                    +
+                  </button>
+                  <p className={styles.inStock}>Còn lại {in_stock} sản phẩm</p>
                 </div>
                 <div
                   className="flex justify-between gap-1"
                   style={{ marginTop: "10px" }}
                 >
                   <Button
+                    onClick={handleAddCart}
                     type="outline"
                     style={{ width: "100%" }}
                     className={styles.addCartButton}
@@ -230,7 +289,11 @@ export default function ProductDetails({ product }) {
                     <span className={styles.textBtn}>Thêm vào giỏ</span>{" "}
                     <ShoppingCartOutlined className={styles.cartIcon} />
                   </Button>
-                  <Button type="primary" style={{ width: "100%" }}>
+                  <Button
+                    onClick={handleBuyNow}
+                    type="primary"
+                    style={{ width: "100%" }}
+                  >
                     <span className={styles.textBtn}> Mua Ngay</span>
                   </Button>
                 </div>
