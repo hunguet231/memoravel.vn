@@ -168,7 +168,7 @@ export const checkUpdateProduct = async (req, res, next) => {
           if (item.image === '') arrayError.push('Ảnh không hợp lệ');
         });
       }
-      refactorProductData.images = req.body.images;
+      refactorProductData.images = JSON.stringify(req.body.images);
     }
 
     //Check if price is empty

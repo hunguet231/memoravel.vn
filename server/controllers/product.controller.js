@@ -24,7 +24,7 @@ const formatProductData = (data) => {
     sold: data.sold,
     in_stock: data.in_stock,
     status: data.status,
-    details: JSON.parse(data.details),
+    details: data.details ? JSON.parse(data.details) : '',
     shop_id: data.shop_id,
     number_view: 0,
     created: data.createdAt,
