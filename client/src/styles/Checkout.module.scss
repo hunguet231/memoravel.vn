@@ -2,6 +2,14 @@
 @import "mixins";
 
 .container {
+  .addAdressBtn {
+    margin-top: 10px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    font-family: $font-be;
+    cursor: pointer;
+  }
   margin: 160px 0;
   .section {
     display: flex;

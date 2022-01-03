@@ -9,7 +9,7 @@ export default function ProductRelated({ products }) {
       <h1 className="heading heading-section">Sản phẩm tương tự</h1>
       <Row gutter={10}>
         {products.map((product) => (
-          <Col xs={12} sm={12} md={8} key={product.id}>
+          <Col xs={12} sm={12} md={6} key={product.id}>
             <ProductCard product={product} />
           </Col>
         ))}

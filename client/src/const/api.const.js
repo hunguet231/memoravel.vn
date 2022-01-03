@@ -49,6 +49,7 @@ export const GET_SHOP = "/shop";
 // product
 export const MN_PRODUCT = "/manage/product";
 export const GET_PRODUCT = "/product";
+export const GET_PRODUCT_HOT = "/product-hot";
 
 // user
 export const ADMIN_USER = "/admin/user";

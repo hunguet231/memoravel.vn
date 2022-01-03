@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Button from "components/common/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,7 +8,7 @@ import styles from "styles/TotalItemCard.module.scss";
 import numberWithDots from "utils/addDotsNumber";
 import removeNonNumeric from "utils/removeNonNumeric";
 import { DataContext } from "../../../store/GlobalState";
-export default function TotalItemCard({ onCheckoutButtonClick }) {
+export default function TotalItemCard({ onCheckoutButtonClick, disabled }) {
   const router = useRouter();
   const { state } = useContext(DataContext);
   const { cart } = state;
@@ -51,19 +52,24 @@ export default function TotalItemCard({ onCheckoutButtonClick }) {
         </div>
         <div className="flex justify-between">
           <p className={styles.label}>Phí ship:</p>
-          <p>{router.pathname === "/cart" ? "Chưa bao gồm" : `30.000 vnđ`}</p>
+          <p>{router.pathname === "/cart" ? "Chưa bao gồm" : " vnđ"}</p>
         </div>
         <div className="flex justify-between">
           <p className={styles.label}>Giảm giá:</p>
-          <p>- 0 vnđ</p>
+          <p>0 vnđ</p>
         </div>
         <div className={styles.hr} />
-        <div className="flex justify-between">
-          <p className={styles.label}>Tổng:</p>
-          <p className={styles.label}>{totalPaid} vnđ</p>
-        </div>
+        {router.pathname === "/checkout" ? (
+          <div className="flex justify-between">
+            <p className={styles.label}>Tổng:</p>
+            <p className={styles.label}>{totalPaid} vnđ</p>
+          </div>
+        ) : (
+          ""
+        )}
+
         <Button
-          disabled={cart.length === 0}
+          disabled={disabled}
           type="primary"
           onClick={onButtonClick}
           style={{ width: "100%" }}

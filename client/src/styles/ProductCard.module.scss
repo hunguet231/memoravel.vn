@@ -54,9 +54,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2; // default 1 line
+  -webkit-line-clamp: 1; // default 1 line
   -webkit-box-orient: vertical;
-  height: 50px;
   font-size: 14px;
   margin-bottom: 5px;
   @include media(mobile) {

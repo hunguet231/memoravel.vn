@@ -1,8 +1,10 @@
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
-import { AutoComplete, Checkbox, Col, Input, Row } from "antd";
+import { AutoComplete, Col, Input, Row } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "styles/CheckoutForm.module.scss";
+import { shippingAddress } from "../../../store/Actions";
+import { DataContext } from "../../../store/GlobalState";
 
 export default function OrderForm() {
   const [formData, setFormData] = useState({
@@ -12,7 +14,6 @@ export default function OrderForm() {
     district: "",
     ward: "",
     address_details: "",
-    isSaveAddress: false,
   });
   const [dataAddress, setDataAddress] = useState([]);
   const [address, setAddress] = useState({
@@ -21,6 +22,11 @@ export default function OrderForm() {
     district: {},
     wards: [],
   });
+  const { dispatch } = useContext(DataContext);
+
+  useEffect(() => {
+    dispatch(shippingAddress(formData));
+  }, [formData]);
 
   const fetchAddress = async () => {
     const url = "https://provinces.open-api.vn/api/?depth=3";
@@ -186,16 +192,6 @@ export default function OrderForm() {
             className={styles.inputTextarea}
           />
         </div>
-        <Checkbox
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              isSaveAddress: e.target.checked,
-            })
-          }
-        >
-          Lưu địa chỉ giao hàng
-        </Checkbox>
       </div>
     </div>
   );

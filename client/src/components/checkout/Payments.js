@@ -4,6 +4,7 @@ import styles from "styles/Payments.module.scss";
 
 const Payments = () => {
   const [value, setValue] = useState("cash");
+
   const onChange = (e) => {
     setValue(e.target.value);
   };
@@ -14,24 +15,23 @@ const Payments = () => {
         <Space direction="vertical">
           <Radio value={"cash"} defaultChecked>
             <p className={styles.labelCheckbox}>Thanh toán khi nhận hàng</p>
-            <div className="flex items-center justify-between">
-              <div className={styles.shippingPartner}>Giao hàng tiết kiệm</div>
-              <div className={styles.shippingPrice}>30.000 vnđ</div>
+            <div className="flex items-center">
+              <div className={styles.shippingPartner}>Giao hàng tiết kiệm </div>
+              {/* <div className={styles.shippingPrice}>30.000 vnđ</div> */}
             </div>
-            <div className={styles.shippingTime}>
+
+            {/* <div className={styles.shippingTime}>
               Nhận hàng vào 15 Th12 - 25 Th12
-            </div>
+            </div> */}
           </Radio>
-          <Radio value={"momo"} disabled>
-            <p className={styles.labelCheckbox}>
-              Thanh toán bằng ví điện tử (chưa hỗ trợ)
-            </p>
+          {/* <Radio value={"momo"} disabled>
+            <p className={styles.labelCheckbox}>Thanh toán bằng ví điện tử</p>
           </Radio>
           <Radio value={"credit"} disabled>
             <p className={styles.labelCheckbox}>
-              Thanh toán bằng thẻ tín dụng/ghi nợ (chưa hỗ trợ)
+              Thanh toán bằng thẻ tín dụng/ghi nợ
             </p>
-          </Radio>
+          </Radio> */}
         </Space>
       </Radio.Group>
     </>

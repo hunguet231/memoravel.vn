@@ -8,6 +8,7 @@ import Feedback from "components/home/Feedback";
 import MemoStory from "components/home/MemoStory";
 import News from "components/home/News";
 import ShowcaseProduct from "components/home/ShowcaseProduct";
+import TopProduct from "components/home/TopProduct";
 import { ApiConstant, AppConstant } from "const";
 import { MainLayout } from "layouts";
 import React, { useEffect, useState } from "react";
@@ -46,7 +47,7 @@ const Home = () => {
       <Header />
       <CarouselHeader />
       <ShowcaseProduct />
-      {/* <TopProduct /> */}
+      <TopProduct />
       <MemoStory />
       <Achievements />
       <Feedback />
