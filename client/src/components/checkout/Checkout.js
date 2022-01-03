@@ -136,7 +136,7 @@ export default function Order() {
               </Dropdown>
 
               {currAddress && (
-                <p className={styles.addAdressBtn}>
+                <p className={styles.addAdressBtn} style={{ width: "100%" }}>
                   {`${currAddress.full_name}, ${currAddress.phone}`}
                   <br />
                   {`${currAddress.address_details}, ${currAddress.ward}, ${currAddress.district}, ${currAddress.city}`}
@@ -161,9 +161,7 @@ export default function Order() {
               >
                 <CheckoutForm />
               </Modal>
-              <div className={styles.section}>
-                2. Chọn phương thức thanh toán
-              </div>
+              <div className={styles.section}>2. Phương thức thanh toán</div>
               <br />
               <Payments />
               <div style={{ marginTop: "20px" }}>

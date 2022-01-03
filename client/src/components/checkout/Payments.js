@@ -16,7 +16,7 @@ const Payments = () => {
           <Radio value={"cash"} defaultChecked>
             <p className={styles.labelCheckbox}>Thanh toán khi nhận hàng</p>
             <div className="flex items-center">
-              <div className={styles.shippingPartner}>Giao hàng tiết kiệm </div>
+              {/* <div className={styles.shippingPartner}>Giao hàng tiết kiệm </div> */}
               {/* <div className={styles.shippingPrice}>30.000 vnđ</div> */}
             </div>
 

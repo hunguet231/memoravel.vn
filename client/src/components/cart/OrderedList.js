@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
-import { Avatar, Checkbox, Radio } from "antd";
+import { Avatar, Checkbox } from "antd";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import styles from "styles/Cart.module.scss";
-import { changeDelivers, deleteItem } from "../../../store/Actions";
+import { deleteItem } from "../../../store/Actions";
 import { DataContext } from "../../../store/GlobalState";
 import CartItem from "./CartItem";
 
@@ -17,7 +17,7 @@ const OrderedList = ({ showCheckbox }) => {
   const [checkedList, setCheckedList] = useState([]);
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
-  const [deliver, setDeliver] = useState([]);
+  // const [deliver, setDeliver] = useState([]);
 
   const onChange = (list) => {
     setCheckedList(list);
@@ -36,12 +36,12 @@ const OrderedList = ({ showCheckbox }) => {
     setCheckedList([]);
   };
 
-  const onChangeDeliverOpt = (index, deliverVal) => {
-    const cloneDeliver = [...deliver];
-    cloneDeliver[index] = deliverVal;
-    setDeliver(cloneDeliver);
-    dispatch(changeDelivers(cloneDeliver));
-  };
+  // const onChangeDeliverOpt = (index, deliverVal) => {
+  //   const cloneDeliver = [...deliver];
+  //   cloneDeliver[index] = deliverVal;
+  //   setDeliver(cloneDeliver);
+  //   dispatch(changeDelivers(cloneDeliver));
+  // };
 
   const structedCart = cart.reduce((acc, cartItem) => {
     acc[cartItem.shop.name] = acc[cartItem.shop.name] || [];
@@ -90,7 +90,7 @@ const OrderedList = ({ showCheckbox }) => {
                 <CartItem item={item} />
               </div>
             ))}
-            <div className={styles.shipingInfo}>
+            {/* <div className={styles.shipingInfo}>
               <div className={styles.shipingDeliver}>
                 <div className="flex items-center ">
                   Phương thức vận chuyển:{" "}
@@ -104,6 +104,32 @@ const OrderedList = ({ showCheckbox }) => {
                     </Radio>
                     <Radio value={"xteam"}>Nhanh</Radio>
                   </Radio.Group>
+                </div>
+              </div>
+              <div className={styles.shipingFee}>{shipments?.[index]?.fee}</div>
+            </div> */}
+            <div className={styles.shipingInfo}>
+              <div className={styles.shipingDeliver}>
+                <div className="flex items-center ">
+                  Đơn bị vận chuyển:{" "}
+                  <span className={styles.shipingPartner}>
+                    Giao hàng tiết kiệm (Tiêu chuẩn)
+                  </span>
+                  {/* <Radio.Group
+                    onChange={(e) => onChangeDeliverOpt(index, e.target.value)}
+                    value={deliver[index] || "none"}
+                    style={{ marginLeft: "10px" }}
+                  >
+                    <Radio value={"none"} defaultChecked>
+                      Tiêu chuẩn
+                    </Radio>
+                    <Radio value={"xteam"}>Nhanh</Radio>
+                  </Radio.Group> */}
+                </div>
+                <div className="flex items-center ">
+                  <span className={styles.shipingTime}>
+                    Dự kiến nhận hàng sau 3 - 5 ngày
+                  </span>
                 </div>
               </div>
               <div className={styles.shipingFee}>{shipments?.[index]?.fee}</div>
