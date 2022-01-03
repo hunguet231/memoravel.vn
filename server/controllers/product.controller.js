@@ -194,7 +194,7 @@ export const getProductByAlias = async (req, res) => {
       include: [
         {
           model: Shop,
-          attributes: ['id', 'name', 'alias', 'avatar'],
+          attributes: ['id', 'name', 'alias', 'avatar', 'city', 'district'],
         },
         {
           model: ProductRating,
@@ -252,7 +252,7 @@ export const getListProduct = async (req, res) => {
       include: [
         {
           model: Shop,
-          attributes: ['id', 'name', 'alias', 'avatar'],
+          attributes: ['id', 'name', 'alias', 'avatar', 'city', 'district'],
         },
         {
           model: ProductRating,
@@ -310,7 +310,7 @@ export const getListProductHot = async (req, res) => {
       include: [
         {
           model: Shop,
-          attributes: ['id', 'name', 'alias', 'avatar'],
+          attributes: ['id', 'name', 'alias', 'avatar', 'city', 'district'],
         },
         {
           model: ProductRating,

@@ -43,3 +43,8 @@ export const SHOP_RATING = '/api/shop/rating';
 export const ORDER = '/api/order';
 export const MANAGE_ORDER = '/api/manage/order';
 export const MANAGE_ORDER_ID = '/api/manage/order/:order_id';
+
+// GHTK api
+export const SHIPMENT_GET_FEE = '/api/shipment/fee';
+export const SHIPMENT_CREATE_ORDER = '/api/shipment/order';
+export const SHIPMENT_GET_ORDER = '/api/shipment/order/:order_id';

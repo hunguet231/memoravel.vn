@@ -13,6 +13,7 @@ import {
   ProductRoute,
   ShopRoute,
   OrderRoute,
+  deliverRoute,
 } from './routes';
 
 dotenv.config({ path: path.resolve('./.env') });
@@ -29,6 +30,7 @@ app.use(ApiConst.ROOT, PostRoute);
 app.use(ApiConst.ROOT, ProductRoute);
 app.use(ApiConst.ROOT, ShopRoute);
 app.use(ApiConst.ROOT, OrderRoute);
+app.use(ApiConst.ROOT, deliverRoute);
 
 const runSequelize = async () => {
   try {
