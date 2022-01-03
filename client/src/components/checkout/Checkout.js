@@ -1,4 +1,8 @@
-import { CaretDownFilled, PlusCircleOutlined } from "@ant-design/icons";
+import {
+  CaretDownFilled,
+  PlusCircleOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import { Col, Dropdown, Menu, message, Modal, Row } from "antd";
 import OrderedList from "components/cart/OrderedList";
 import TotalItemCart from "components/cart/TotalItemCard";
@@ -78,15 +82,31 @@ export default function Order() {
     setCurrAddress(JSON.parse(item.key));
   };
 
+  const handleDeleteAdd = (e, indexVal) => {
+    e.stopPropagation();
+    const newAddress = savedAddress.filter(
+      (address, index) => index !== indexVal
+    );
+    setSavedAddress(newAddress);
+    localStorage.setItem("memoravel_saved_address", JSON.stringify(newAddress));
+  };
+
   const menu = (
     <Menu onClick={handleMenuClick}>
       {savedAddress.length > 0 ? (
-        savedAddress.map((address) => (
+        savedAddress.map((address, index) => (
           <Menu.Item key={JSON.stringify(address)}>
             <p className={styles.addAdressBtn}>
               {`${address.full_name}, ${address.phone}`}
               <br />
               {`${address.address_details}, ${address.ward}, ${address.district}, ${address.city}`}
+            </p>
+            <p
+              className={styles.addAdressBtn}
+              style={{ color: "red" }}
+              onClick={(e) => handleDeleteAdd(e, index)}
+            >
+              <DeleteOutlined /> Xoá địa chỉ
             </p>
           </Menu.Item>
         ))
