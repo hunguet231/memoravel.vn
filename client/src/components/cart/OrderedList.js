@@ -79,7 +79,7 @@ const OrderedList = ({ showCheckbox }) => {
         {Object.entries(structedCart).map(([key, value], index) => (
           <div key={key} className={styles.cartWrap}>
             <Link href={`/shop/${value[0].shop.alias}`}>
-              <div className={styles.shopInfo}>
+              <div className={styles.shopInfo} style={{ width: "100%" }}>
                 <Avatar src={value[0].shop.avatar} />
                 <span className={styles.shopName}>{key}</span>
               </div>

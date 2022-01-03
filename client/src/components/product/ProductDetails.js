@@ -39,7 +39,7 @@ export default function ProductDetails({ product }) {
   } = product;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [currentImg, setCurrentImg] = useState(1);
+  const [currentImg, setCurrentImg] = useState(0);
   const [products, setProducts] = useState([]);
   const [amount, setAmount] = useState(1);
   const { state, dispatch } = useContext(DataContext);
@@ -51,11 +51,13 @@ export default function ProductDetails({ product }) {
     const response = await fetchData(url, ApiConstant.METHOD.get);
     if (response?.status === AppConstant.STATUS_OK) {
       setProducts(
-        response.data.filter(
-          (product) =>
-            (product.type === type || product.made_in === made_in) &&
-            product.id !== id
-        )
+        response.data
+          .filter(
+            (product) =>
+              (product.type === type || product.made_in === made_in) &&
+              product.id !== id
+          )
+          .slice(0, 13)
       );
     }
   };
