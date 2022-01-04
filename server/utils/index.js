@@ -86,3 +86,17 @@ export const mappingArrayErrorToString = (arrayError) =>
       )
     );
   });
+
+export const isValidPhoneFormat = (number) => {
+  if (
+    !number.match(/^((09|03|07|08|05)+([0-9]{8}))$/) &&
+    !number.match(/^(\+(84)+(09|03|07|08|05)+([0-9]{8}))$/) &&
+    !number.match(/^(\+(84)+(9|3|7|8|5)+([0-9]{8}))$/) &&
+    !number.match(/^((84)+(09|03|07|08|05)+([0-9]{8}))$/) &&
+    !number.match(/^((84)+(9|3|7|8|5)+([0-9]{8}))$/)
+  ) {
+    return false;
+  }
+
+  return true;
+};

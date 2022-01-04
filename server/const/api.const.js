@@ -27,6 +27,10 @@ export const GET_TOPIC_BY_ALIAS = '/api/topic/:alias';
 // product api
 export const MANAGE_PRODUCT = '/api/manage/product';
 export const MANAGE_PRODUCT_ID = '/api/manage/product/:product_id';
+export const PRODUCT_ALIAS = '/api/product/:alias';
+export const PRODUCT = '/api/product';
+export const PRODUCT_HOT = '/api/product-hot';
+export const PRODUCT_RATING = '/api/product/rating';
 
 // shop api
 export const ADMIN_SHOP = '/api/admin/shop';
@@ -34,3 +38,13 @@ export const ADMIN_SHOP_ID = '/api/admin/shop/:shop_id';
 export const SHOP_ALIAS = '/api/shop/:alias';
 export const SHOP_HOT = '/api/shop-hot';
 export const SHOP_RATING = '/api/shop/rating';
+
+// order api
+export const ORDER = '/api/order';
+export const MANAGE_ORDER = '/api/manage/order';
+export const MANAGE_ORDER_ID = '/api/manage/order/:order_id';
+
+// GHTK api
+export const SHIPMENT_GET_FEE = '/api/shipment/fee';
+export const SHIPMENT_CREATE_ORDER = '/api/shipment/order';
+export const SHIPMENT_GET_ORDER = '/api/shipment/order/:order_id';

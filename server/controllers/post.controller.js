@@ -7,6 +7,7 @@ import {
 } from '../utils';
 
 const Post = database.Model.postModel;
+const Topic = database.Model.topicModel;
 const Op = database.Sequelize.Op;
 
 const formatResponseData = (data) => ({
