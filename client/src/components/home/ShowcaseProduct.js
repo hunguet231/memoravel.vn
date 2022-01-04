@@ -2,6 +2,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import BoxImage from "components/common/BoxImage";
 import Button from "components/common/Button";
 import React from "react";
+import Link from "next/link";
 import styles from "../../styles/ShowcaseProduct.module.scss";
 
 const ShowcaseProduct = () => {
@@ -64,9 +65,11 @@ const ShowcaseProduct = () => {
               iconMore={<ArrowForwardIcon />}
             />
           </div>
-          <div className={styles.button}>
-            <Button type="secondary">Xem tất cả</Button>
-          </div>
+          <Link href={`/shop`}>
+            <div className={styles.button}>
+              <Button type="secondary">Xem tất cả</Button>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

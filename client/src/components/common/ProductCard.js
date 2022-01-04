@@ -2,15 +2,14 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { IconButton, Tooltip } from "@material-ui/core";
 import { Card, Image, Rate } from "antd";
-import React, { useContext } from "react";
 import Link from "next/link";
-import styles from "../../styles/ProductCard.module.scss";
-import { DataContext } from "../../../store/GlobalState";
+import React, { useContext } from "react";
 import { addToCart } from "../../../store/Actions";
+import { DataContext } from "../../../store/GlobalState";
+import styles from "../../styles/ProductCard.module.scss";
 
 export default function ProductCard({ product }) {
-  const { alias, images, name, price, sold, summary, vectary_link, in_stock } =
-    product;
+  const { alias, images, name, price, sold, vectary_link, in_stock } = product;
   const { state, dispatch } = useContext(DataContext);
   const { cart } = state;
 
@@ -40,7 +39,7 @@ export default function ProductCard({ product }) {
           </div>
         </div>
         <h2 className={styles.productName}>{name}</h2>
-        <p className={styles.description}>{summary}</p>
+        {/* <p className={styles.description}>{summary}</p> */}
         <div className="flex justify-between">
           <Rate disabled value={5} className={styles.rate} />
           <p className={styles.sold}>{sold} đã bán</p>

@@ -10,7 +10,7 @@
     @include media(tablet) {
       grid-template-columns: repeat(1, 1fr);
     }
-    gap: 10px;
+    gap: 16px;
   }
   .img img {
     width: 100%;
@@ -36,6 +36,7 @@
     color: $gray-color;
     @include media(mobile) {
       font-size: 14px;
+      text-align: justify;
     }
   }
 }

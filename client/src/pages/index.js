@@ -2,7 +2,7 @@ import { fetchData } from "api";
 import ContactForm from "components/common/ContactForm";
 import Footer from "components/common/Footer";
 import Header from "components/common/Header";
-import Achievements from "components/home/Achievements";
+import Achievements from "components/home/_Achievements";
 import CarouselHeader from "components/home/CarouselHeader";
 import Feedback from "components/home/Feedback";
 import MemoStory from "components/home/MemoStory";

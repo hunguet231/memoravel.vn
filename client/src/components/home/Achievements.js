@@ -1,51 +1,50 @@
-import { Card, Image } from "antd";
 import React from "react";
-import styles from "../../styles/Achievements.module.scss";
+import styles from "../../styles/MemoStory.module.scss";
 
 export default function Achievements() {
   return (
     <div className="wrapper">
       <div className="container">
-        <div className={styles.achieveWrapper}>
-          <div className="heading heading-section text-center">
-            Thành tựu của chúng tôi
-          </div>
-          <div className="flex justify-center text-center ">
-            <p className={styles.subHeading}>
-              Develop a website by finding a product identity that has value and
-              branding to become a characteristic of a company. We will also
-              facilitate the business marketing of these products with our SEO
-              experts so that they become a ready-to-use website and help sell a
-              product from the company.
-            </p>
-          </div>
-          <div className={styles.cards}>
-            <Card className={styles.achieveCard}>
-              <Image
-                src="/images/achieve1.png"
-                preview={false}
-                className={styles.achieveImg}
-              />
-              <div className={styles.achieveName}>Brand of The Year - 2019</div>
-            </Card>
-            <Card className={styles.achieveCard}>
-              <Image
-                src="/images/achieve2.png"
-                preview={false}
-                className={styles.achieveImg}
-              />
-              <div className={styles.achieveName}>
-                Most Valuable Brand - 2020
+        <div className={styles.storyWrapper}>
+          <div className={styles.row}>
+            <div className={styles.col}>
+              <div className={`${styles.img} flex justify-center`}>
+                <img src="/images/memoravel-bg.jpg" />
               </div>
-            </Card>
-            <Card className={styles.achieveCard}>
-              <Image
-                src="/images/achieve3.png"
-                preview={false}
-                className={styles.achieveImg}
-              />
-              <div className={styles.achieveName}>Top of Brand - 2020</div>
-            </Card>
+            </div>
+            <div className={styles.col}>
+              <div className="heading heading-section">
+                Thành tựu của chúng tôi
+              </div>
+              <div className={styles.storyDescription}>
+                <ul>
+                  <li>
+                    <p>
+                      - Giải nhất của cuộc thi Long- life Creative Learners
+                      Bootcamp do trường Đại học Bách khoa Hà Nội và Global
+                      Wales, Công ty Trách nhiệm hữu hạn Đầu tư và Phát triển
+                      Công nghệ Bách khoa Hà Nội ( BK Holdings ) cùng với trường
+                      Đại học Bangor, Vương Quốc Anh đồng tổ chức.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      - Top 6 cuộc thi ươm tạo khởi nghiệp Neuron do trường Đại
+                      học Kinh tế Quốc dân tổ chức.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      - Top 2 đội đại diện Trường Đại học Kinh tế quốc dân tham
+                      gia cuộc thi SV – Startup do Bộ GD&ĐT tổ chức.
+                    </p>
+                  </li>
+                  <li>
+                    <p>- Top 30 cuộc thi khởi nghiệp cùng Kawai.</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>

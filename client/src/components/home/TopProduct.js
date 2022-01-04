@@ -36,8 +36,8 @@ const TopProduct = () => {
         <div className="container-fluid">
           <h1 className="heading heading-section text-center">Top bán chạy</h1>
           <div className={styles.subHeading}>
-            Những sản phẩm ở memoravel luôn được đảm bảo <br /> chất lượng, giá
-            cả, hình thức tốt nhất
+            Những sản phẩm ở memoravel luôn được đảm bảo chất lượng, giá cả,
+            hình thức tốt nhất
           </div>
           <div className="top-product">
             <Flickity options={flickityOptions}>

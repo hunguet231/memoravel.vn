@@ -15,9 +15,8 @@ const ContactForm = () => {
             Nhận tin tức mỗi ngày
           </h1>
           <div className={styles.subHeading}>
-            Leverage agile frameworks to provide a robust synopsis for high
-            level overviews. <br /> Iterative approaches to corporate strategy
-            foster
+            Cập nhật thông tin về sản phẩm, khuyến mãi và các thông tin hữu ích
+            khác tại Memoravel
           </div>
           <form onSubmit={onSubmit}>
             <div className={styles.inputContainer}>

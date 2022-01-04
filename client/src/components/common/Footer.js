@@ -5,6 +5,7 @@ import {
   TwitterOutlined,
   InstagramOutlined,
 } from "@ant-design/icons";
+import Link from "next/link";
 import styles from "../../styles/Footer.module.scss";
 
 const Footer = () => {
@@ -17,10 +18,28 @@ const Footer = () => {
               <img src="/images/logo-light.svg" alt="Logo Memoravel" />
             </div>
             <div className={styles.socail}>
-              <YoutubeOutlined />
-              <FacebookOutlined />
-              <TwitterOutlined />
-              <InstagramOutlined />
+              <a
+                style={{ color: "#fff" }}
+                href="https://www.youtube.com/channel/UC8Tl2Owjeap9XWiHHq5ssHA"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <YoutubeOutlined />
+              </a>
+              <a
+                style={{ color: "#fff" }}
+                href="https://www.facebook.com/memoravel.vn"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FacebookOutlined />
+              </a>
+              <a href="#" style={{ color: "#fff" }}>
+                <TwitterOutlined />
+              </a>
+              <a href="#" style={{ color: "#fff" }}>
+                <InstagramOutlined />
+              </a>
             </div>
           </div>
           <div className="container">
@@ -30,8 +49,12 @@ const Footer = () => {
                 &copy;2021 Memoravel. Đã đăng kí bản quyền.
               </div>
               <ul className={styles.links}>
-                <li>Chính sách bảo mật</li>
-                <li>Điều khoản và điều kiện</li>
+                <li>
+                  <Link href="/policies/1">Chính sách bảo mật</Link>
+                </li>
+                <li>
+                  <Link href="/policies">Điều khoản và điều kiện</Link>
+                </li>
               </ul>
             </div>
           </div>

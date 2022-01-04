@@ -14,5 +14,9 @@
     color: $gray-color;
     text-align: center;
     margin: 15px 0 30px;
+    @include media(mobile) {
+      margin: 10px 15px;
+      font-size: 14px;
+    }
   }
 }

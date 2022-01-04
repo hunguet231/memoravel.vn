@@ -46,7 +46,7 @@
   -webkit-box-orient: vertical;
   @include media(mobile) {
     font-size: 13px;
-    height: 45px;
+    height: 40px;
   }
 }
 
@@ -71,6 +71,7 @@
 .rate {
   color: $secondary-color;
   font-size: 90%;
+  margin-top: 3px;
   @include media(mobile) {
     font-size: 60%;
   }

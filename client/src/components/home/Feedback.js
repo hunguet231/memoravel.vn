@@ -28,7 +28,7 @@ const Feedback = () => {
                 <div key={index} className={styles.card}>
                   <div
                     className={styles.img}
-                    // style={{ backgroundImage: `url(${feedback.img})` }}
+                    style={{ backgroundImage: `url(${feedback.img})` }}
                   ></div>
                   <div className={styles.text}>
                     <Rate
@@ -53,7 +53,7 @@ const Feedback = () => {
                   <div className={styles.userBox}>
                     <div
                       className={styles.img}
-                      // style={{ backgroundImage: `url(${feedback.img})` }}
+                      style={{ backgroundImage: `url(${feedback.img})` }}
                     ></div>
                     <div className="">
                       <div className={styles.author}>{feedback.author}</div>

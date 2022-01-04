@@ -12,7 +12,7 @@ module.exports = withAntdLess({
 
   // Other Config Here...
 
-  webpack: (config) => {
+  webpack: (config, options) => {
     // Fixes npm packages that depend on `fs` module
     config.resolve.fallback = {
       ...config.resolve.fallback,
@@ -21,6 +21,16 @@ module.exports = withAntdLess({
       net: false,
       crypto: false,
     };
+
+    config.module.rules.push({
+      test: /\.(html)$/,
+      use: [
+        options.defaultLoaders.babel,
+        {
+          loader: "html-loader",
+        },
+      ],
+    });
 
     return config;
   },
