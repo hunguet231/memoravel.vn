@@ -19,19 +19,6 @@ const reducers = (state, action) => {
         ...state,
         shipping_address: action.payload,
       };
-
-    case ACTIONS.SHIPMENTS:
-      return {
-        ...state,
-        shipments: action.payload,
-      };
-
-    case ACTIONS.DELIVERS:
-      return {
-        ...state,
-        delivers: action.payload,
-      };
-
     default:
       return state;
   }

@@ -18,7 +18,7 @@ export default function Order() {
   const [savedAddress, setSavedAddress] = useState([]);
   const { state } = useContext(DataContext);
   const [currAddress, setCurrAddress] = useState("");
-  const { shipping_address, cart, shipments } = state;
+  const { shipping_address, cart } = state;
   const [visible, setVisible] = useState(false);
 
   const [structedCart, setStructedCart] = useState(() => {
@@ -33,7 +33,7 @@ export default function Order() {
   const fetchShipment = async (dataBody) => {
     const url = ApiConstant.BASE_URL + ApiConstant.SHIPMENT_FEE;
     const { data } = await axios.post(url, dataBody);
-    return data?.fee?.fee || null;
+    return data?.fee?.fee;
   };
 
   useEffect(() => {
@@ -41,14 +41,16 @@ export default function Order() {
     if (savedAdd) {
       setSavedAddress(JSON.parse(savedAdd));
     }
-    // change shipments
+
     if (currAddress) {
+      // cart maybe changes
       const structed = cart.reduce((acc, cartItem) => {
         acc[cartItem.shop.name] = acc[cartItem.shop.name] || [];
         acc[cartItem.shop.name].push(cartItem);
         return acc;
       }, {});
 
+      // calculate ship fee
       Promise.allSettled(
         Object.entries(structed).map(async ([key, val]) => {
           const totalWeight = val.reduce((acc, product) => {
@@ -57,12 +59,13 @@ export default function Order() {
             return acc + weight;
           }, 0);
 
-          const totalValue = val.reduce((acc, product) => {
-            const value =
-              parseInt(product.price.replaceAll(".", "")) * product.quantity;
-            return acc + value;
-          }, 0);
+          // const totalValue = val.reduce((acc, product) => {
+          //   const value =
+          //     parseInt(product.price.replaceAll(".", "")) * product.quantity;
+          //   return acc + value;
+          // }, 0);
 
+          // for fragile product
           const hasTags = val.some((product) => product?.fragile === true);
 
           const dataBody = {
@@ -71,7 +74,7 @@ export default function Order() {
             province: currAddress.city,
             district: currAddress.district,
             weight: totalWeight,
-            value: totalValue,
+            // value: totalValue,
             deliver_option: "none",
             tags: hasTags ? [1] : "",
           };
@@ -89,8 +92,7 @@ export default function Order() {
   const onCheckoutButtonClick = (isClick) => {
     if (isClick) {
       // const orders = Object.entries(structedCart).map(([key, value]) => ({
-      // }))
-      alert("OK");
+      // }));
     }
   };
 
@@ -213,9 +215,7 @@ export default function Order() {
             <Col xs={24} lg={7}>
               <TotalItemCart
                 structedCart={structedCart}
-                disabled={
-                  !currAddress || cart.length === 0 || shipments.length === 0
-                }
+                disabled={!currAddress || cart.length === 0}
                 onCheckoutButtonClick={onCheckoutButtonClick}
               />
             </Col>

@@ -3,8 +3,6 @@ export const ACTIONS = {
   AUTH: "AUTH",
   ADD_CART: "ADD_CART",
   SHIPPING_ADDRESS: "SHIPPING_ADDRESS",
-  SHIPMENTS: "SHIPMENTS",
-  DELIVERS: "DELIVERS",
 };
 
 export const addToCart = (product, quantity, cart) => {
@@ -48,12 +46,4 @@ export const deleteItem = (data, ids, type) => {
 
 export const shippingAddress = (address) => {
   return { type: "SHIPPING_ADDRESS", payload: address };
-};
-
-export const changeShipments = (shipments) => {
-  return { type: "SHIPMENTS", payload: shipments };
-};
-
-export const changeDelivers = (delivers) => {
-  return { type: "DELIVERS", payload: delivers };
 };

@@ -9,8 +9,6 @@ export const DataProvider = ({ children }) => {
     auth: {},
     cart: [],
     shipping_address: {},
-    shipments: [],
-    delivers: [],
   };
   const [state, dispatch] = useReducer(reducers, initialState);
   const { cart } = state;

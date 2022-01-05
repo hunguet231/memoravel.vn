@@ -66,7 +66,7 @@ export default function TotalItemCard({
           <p>{totalPaid} vnđ</p>
         </div>
         <div className="flex justify-between">
-          <p className={styles.label}>Phí ship:</p>
+          <p className={styles.label}>Phí ship (Đã gồm VAT và phụ phí):</p>
           <p>
             {router.pathname === "/cart"
               ? "Chưa bao gồm"
