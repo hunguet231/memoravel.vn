@@ -1,11 +1,13 @@
 import {
   CaretDownFilled,
-  PlusCircleOutlined,
   DeleteOutlined,
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 import { Col, Dropdown, Menu, message, Modal, Row } from "antd";
+import axios from "axios";
 import OrderedList from "components/cart/OrderedList";
 import TotalItemCart from "components/cart/TotalItemCard";
+import { ApiConstant } from "const";
 import React, { useContext, useEffect, useState } from "react";
 import styles from "styles/Checkout.module.scss";
 import { DataContext } from "../../../store/GlobalState";
@@ -19,11 +21,20 @@ export default function Order() {
   const { shipping_address, cart, shipments } = state;
   const [visible, setVisible] = useState(false);
 
-  // const structedCart = cart.reduce((acc, cartItem) => {
-  //   acc[cartItem.shop.name] = acc[cartItem.shop.name] || [];
-  //   acc[cartItem.shop.name].push(cartItem);
-  //   return acc;
-  // }, {});
+  const [structedCart, setStructedCart] = useState(() => {
+    const structed = cart.reduce((acc, cartItem) => {
+      acc[cartItem.shop.name] = acc[cartItem.shop.name] || [];
+      acc[cartItem.shop.name].push(cartItem);
+      return acc;
+    }, {});
+    return structed;
+  });
+
+  const fetchShipment = async (dataBody) => {
+    const url = ApiConstant.BASE_URL + ApiConstant.SHIPMENT_FEE;
+    const { data } = await axios.post(url, dataBody);
+    return data?.fee?.fee || null;
+  };
 
   useEffect(() => {
     const savedAdd = localStorage.getItem("memoravel_saved_address");
@@ -31,24 +42,49 @@ export default function Order() {
       setSavedAddress(JSON.parse(savedAdd));
     }
     // change shipments
-    // Object.entries(structedCart).map(([key, value]) => {
-    //   const pick_province = value[0].shop.city;
-    //   const pick_district = value[0].shop.district;
-    //   const weight = 1000;
-    //   const deliver_option = "none";
-    //   const fee =
-    //     currAddress &&
-    //     fetchShipment(
-    //       "Hà Nội",
-    //       "Quận Cầu Giấy",
-    //       currAddress.city,
-    //       currAddress.district,
-    //       weight,
-    //       deliver_option
-    //     );
-    //   console.log(shipments, fee, delivers);
-    // });
-  }, [currAddress]);
+    if (currAddress) {
+      const structed = cart.reduce((acc, cartItem) => {
+        acc[cartItem.shop.name] = acc[cartItem.shop.name] || [];
+        acc[cartItem.shop.name].push(cartItem);
+        return acc;
+      }, {});
+
+      Promise.allSettled(
+        Object.entries(structed).map(async ([key, val]) => {
+          const totalWeight = val.reduce((acc, product) => {
+            const weight =
+              parseInt(JSON.parse(product.details).weight) * product.quantity;
+            return acc + weight;
+          }, 0);
+
+          const totalValue = val.reduce((acc, product) => {
+            const value =
+              parseInt(product.price.replaceAll(".", "")) * product.quantity;
+            return acc + value;
+          }, 0);
+
+          const hasTags = val.some((product) => product?.fragile === true);
+
+          const dataBody = {
+            pick_province: val[0].shop.city,
+            pick_district: val[0].shop.district,
+            province: currAddress.city,
+            district: currAddress.district,
+            weight: totalWeight,
+            value: totalValue,
+            deliver_option: "none",
+            tags: hasTags ? [1] : "",
+          };
+
+          const fee = await fetchShipment(dataBody);
+          structed[key].fee = fee;
+          return structed;
+        })
+      ).then(([result]) => {
+        setStructedCart(result.value);
+      });
+    }
+  }, [currAddress, cart]);
 
   const onCheckoutButtonClick = (isClick) => {
     if (isClick) {
@@ -102,8 +138,14 @@ export default function Order() {
               {`${address.address_details}, ${address.ward}, ${address.district}, ${address.city}`}
             </p>
             <p
-              className={styles.addAdressBtn}
-              style={{ color: "red" }}
+              className={styles.deleteAdressBtn}
+              style={{
+                color: "red",
+                background: "#f2f2f2",
+                padding: "3px",
+                borderRadius: "5px",
+                width: "max-content",
+              }}
               onClick={(e) => handleDeleteAdd(e, index)}
             >
               <DeleteOutlined /> Xoá địa chỉ
@@ -165,11 +207,12 @@ export default function Order() {
               <br />
               <Payments />
               <div style={{ marginTop: "20px" }}>
-                <OrderedList />
+                <OrderedList structedCart={structedCart} />
               </div>
             </Col>
             <Col xs={24} lg={7}>
               <TotalItemCart
+                structedCart={structedCart}
                 disabled={
                   !currAddress || cart.length === 0 || shipments.length === 0
                 }

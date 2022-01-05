@@ -5,23 +5,14 @@ import axios from 'axios';
 // Giao hang tiet kiem
 export const getShipment = async (req, res) => {
   try {
-    const shipmentUrl = `${process.env.GHTK_API_URL}/services/shipment/fee?`;
-    const params = new URLSearchParams({
-      pick_province: req.body.pick_province,
-      pick_district: req.body.pick_district,
-      province: req.body.province,
-      district: req.body.district,
-      weight: req.body.weight,
-      value: req.body.value || '',
-      deliver_option: 'none',
-      tags: req.body.tags || '',
-    });
+    const shipmentUrl = `${process.env.GHTK_API_URL}/services/shipment/fee`;
 
-    const { data } = await axios.get(shipmentUrl + params, {
+    const { data } = await axios.get(shipmentUrl, {
       headers: {
         'Content-Type': 'application/json',
         Token: process.env.GHTK_API_TOKEN,
       },
+      params: req.body,
     });
 
     res.status(AppConst.STATUS_OK).json(data);

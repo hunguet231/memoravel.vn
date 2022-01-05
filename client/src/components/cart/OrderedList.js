@@ -1,23 +1,29 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
+import { ShopOutlined } from "@ant-design/icons";
 import { Avatar, Checkbox } from "antd";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "styles/Cart.module.scss";
+import numberWithDots from "utils/addDotsNumber";
 import { deleteItem } from "../../../store/Actions";
 import { DataContext } from "../../../store/GlobalState";
 import CartItem from "./CartItem";
 
 const CheckboxGroup = Checkbox.Group;
 
-const OrderedList = ({ showCheckbox }) => {
+const OrderedList = ({ showCheckbox, structedCart }) => {
   const { state, dispatch } = useContext(DataContext);
-  const { cart, shipments } = state;
+  const { cart } = state;
   const options = cart.map(({ id }) => id);
   const [checkedList, setCheckedList] = useState([]);
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
-  // const [deliver, setDeliver] = useState([]);
+  const [list, setList] = useState(structedCart);
+
+  useEffect(() => {
+    setList(structedCart);
+  }, [structedCart]);
 
   const onChange = (list) => {
     setCheckedList(list);
@@ -35,19 +41,6 @@ const OrderedList = ({ showCheckbox }) => {
     dispatch(deleteItem(cart, checkedList, "ADD_CART"));
     setCheckedList([]);
   };
-
-  // const onChangeDeliverOpt = (index, deliverVal) => {
-  //   const cloneDeliver = [...deliver];
-  //   cloneDeliver[index] = deliverVal;
-  //   setDeliver(cloneDeliver);
-  //   dispatch(changeDelivers(cloneDeliver));
-  // };
-
-  const structedCart = cart.reduce((acc, cartItem) => {
-    acc[cartItem.shop.name] = acc[cartItem.shop.name] || [];
-    acc[cartItem.shop.name].push(cartItem);
-    return acc;
-  }, {});
 
   return (
     <div>
@@ -76,12 +69,23 @@ const OrderedList = ({ showCheckbox }) => {
         onChange={onChange}
         style={{ width: "100%" }}
       >
-        {Object.entries(structedCart).map(([key, value], index) => (
+        {Object.entries(list).map(([key, value]) => (
           <div key={key} className={styles.cartWrap}>
             <Link href={`/shop/${value[0].shop.alias}`}>
               <div className={styles.shopInfo} style={{ width: "100%" }}>
-                <Avatar src={value[0].shop.avatar} />
-                <span className={styles.shopName}>{key}</span>
+                <div>
+                  <Avatar
+                    className={styles.shopAvatar}
+                    src={value[0].shop.avatar}
+                  />
+                </div>
+                <div className={styles.shopName}>{key}</div>
+                <div className={styles.viewShopBtn}>
+                  <div>
+                    <ShopOutlined style={{ marginRight: "5px" }} />
+                  </div>
+                  <div>Xem shop</div>
+                </div>
               </div>
             </Link>
             {value.map((item) => (
@@ -90,24 +94,6 @@ const OrderedList = ({ showCheckbox }) => {
                 <CartItem item={item} />
               </div>
             ))}
-            {/* <div className={styles.shipingInfo}>
-              <div className={styles.shipingDeliver}>
-                <div className="flex items-center ">
-                  Phương thức vận chuyển:{" "}
-                  <Radio.Group
-                    onChange={(e) => onChangeDeliverOpt(index, e.target.value)}
-                    value={deliver[index] || "none"}
-                    style={{ marginLeft: "10px" }}
-                  >
-                    <Radio value={"none"} defaultChecked>
-                      Tiêu chuẩn
-                    </Radio>
-                    <Radio value={"xteam"}>Nhanh</Radio>
-                  </Radio.Group>
-                </div>
-              </div>
-              <div className={styles.shipingFee}>{shipments?.[index]?.fee}</div>
-            </div> */}
             <div className={styles.shipingInfo}>
               <div className={styles.shipingDeliver}>
                 <div className="flex items-center ">
@@ -115,16 +101,9 @@ const OrderedList = ({ showCheckbox }) => {
                   <span className={styles.shipingPartner}>
                     Giao hàng tiết kiệm (Tiêu chuẩn)
                   </span>
-                  {/* <Radio.Group
-                    onChange={(e) => onChangeDeliverOpt(index, e.target.value)}
-                    value={deliver[index] || "none"}
-                    style={{ marginLeft: "10px" }}
-                  >
-                    <Radio value={"none"} defaultChecked>
-                      Tiêu chuẩn
-                    </Radio>
-                    <Radio value={"xteam"}>Nhanh</Radio>
-                  </Radio.Group> */}
+                  <span className={styles.fee}>
+                    Phí ship: {value.fee ? numberWithDots(value.fee) : ""} vnđ
+                  </span>
                 </div>
                 <div className="flex items-center ">
                   <span className={styles.shipingTime}>
@@ -132,7 +111,6 @@ const OrderedList = ({ showCheckbox }) => {
                   </span>
                 </div>
               </div>
-              <div className={styles.shipingFee}>{shipments?.[index]?.fee}</div>
             </div>
           </div>
         ))}

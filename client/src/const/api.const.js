@@ -1,8 +1,8 @@
 import { LangConstant } from "const";
 
 // Base Api
-// export const BASE_URL = "http://localhost:5000/api";
-export const BASE_URL = "https://memoravel.online/api";
+export const BASE_URL = "http://localhost:5000/api";
+// export const BASE_URL = "https://memoravel.online/api";
 
 export const HEADER_DEFAULT = {
   Accept: "application/json",
@@ -56,3 +56,8 @@ export const ADMIN_USER = "/admin/user";
 
 // upload
 export const UPLOAD = "/upload";
+
+// shiment
+export const SHIPMENT_FEE = "/shipment/fee";
+export const SHIPMENT_ORDER = "/shipment/order";
+export const SHIPMENT = "/shipment";

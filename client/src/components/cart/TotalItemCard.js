@@ -1,17 +1,32 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import Button from "components/common/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useState } from "react";
 import styles from "styles/TotalItemCard.module.scss";
 import numberWithDots from "utils/addDotsNumber";
 import removeNonNumeric from "utils/removeNonNumeric";
 import { DataContext } from "../../../store/GlobalState";
-export default function TotalItemCard({ onCheckoutButtonClick, disabled }) {
+export default function TotalItemCard({
+  onCheckoutButtonClick,
+  disabled,
+  structedCart,
+}) {
   const router = useRouter();
   const { state } = useContext(DataContext);
   const { cart } = state;
+  const [totalShip, setTotalShip] = useState("");
+
+  useEffect(() => {
+    let total = 0;
+    Object.entries(structedCart).map(([key, val]) => {
+      total += val.fee;
+    });
+    setTotalShip(total);
+  }, [structedCart]);
 
   const onButtonClick = () => {
     if (router.pathname === "/cart") {
@@ -52,17 +67,26 @@ export default function TotalItemCard({ onCheckoutButtonClick, disabled }) {
         </div>
         <div className="flex justify-between">
           <p className={styles.label}>Phí ship:</p>
-          <p>{router.pathname === "/cart" ? "Chưa bao gồm" : " vnđ"}</p>
+          <p>
+            {router.pathname === "/cart"
+              ? "Chưa bao gồm"
+              : `+ ${numberWithDots(totalShip)} vnđ`}
+          </p>
         </div>
         <div className="flex justify-between">
           <p className={styles.label}>Giảm giá:</p>
-          <p>0 vnđ</p>
+          <p>- 0 vnđ</p>
         </div>
         <div className={styles.hr} />
         {router.pathname === "/checkout" ? (
           <div className="flex justify-between">
             <p className={styles.label}>Tổng:</p>
-            <p className={styles.label}>{totalPaid} vnđ</p>
+            <p className={styles.label}>
+              {numberWithDots(
+                parseInt(totalPaid.replaceAll(".", "")) + totalShip
+              )}{" "}
+              vnđ
+            </p>
           </div>
         ) : (
           ""

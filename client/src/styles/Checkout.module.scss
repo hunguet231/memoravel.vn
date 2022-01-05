@@ -2,8 +2,9 @@
 @import "mixins";
 
 .container {
-  .addAdressBtn {
-    width: 100%;
+  .addAdressBtn,
+  .deleteAdressBtn {
+    width: max-content;
     margin-top: 10px;
     width: max-content;
     display: flex;
