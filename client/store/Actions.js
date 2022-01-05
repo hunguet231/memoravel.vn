@@ -12,7 +12,7 @@ export const addToCart = (product, quantity, cart) => {
     return item.id !== product.id;
   });
 
-  if (!checkInCart) return message.error("Sản phẩm đã có trong giỏ hàng!");
+  if (!checkInCart) return message.warning("Sản phẩm đã có trong giỏ hàng!");
 
   if (quantity < 1) return message.error("Số lượng đặt không hợp lệ!");
 

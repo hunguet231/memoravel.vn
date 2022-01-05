@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   CaretDownFilled,
   DeleteOutlined,
@@ -30,6 +31,18 @@ export default function Order() {
     return structed;
   });
 
+  // create order code
+  const getOrderCode = () => {
+    const now = new Date(Date.now());
+    return (
+      "M" +
+      now.getFullYear().toString() +
+      (now.getMonth() + 1).toString() +
+      now.getDate().toString() +
+      now.getMilliseconds().toString()
+    );
+  };
+
   const fetchShipment = async (dataBody) => {
     const url = ApiConstant.BASE_URL + ApiConstant.SHIPMENT_FEE;
     const { data } = await axios.post(url, dataBody);
@@ -59,12 +72,6 @@ export default function Order() {
             return acc + weight;
           }, 0);
 
-          // const totalValue = val.reduce((acc, product) => {
-          //   const value =
-          //     parseInt(product.price.replaceAll(".", "")) * product.quantity;
-          //   return acc + value;
-          // }, 0);
-
           // for fragile product
           const hasTags = val.some((product) => product?.fragile === true);
 
@@ -74,13 +81,17 @@ export default function Order() {
             province: currAddress.city,
             district: currAddress.district,
             weight: totalWeight,
-            // value: totalValue,
             deliver_option: "none",
             tags: hasTags ? [1] : "",
           };
 
           const fee = await fetchShipment(dataBody);
-          structed[key].fee = fee;
+          if (fee) {
+            structed[key].fee = fee;
+            structed[key].delivery = true;
+          } else {
+            structed[key].delivery = true;
+          }
           return structed;
         })
       ).then(([result]) => {
@@ -89,10 +100,67 @@ export default function Order() {
     }
   }, [currAddress, cart]);
 
+  const createOrder = async (dataBody) => {
+    const url = ApiConstant.BASE_URL + ApiConstant.SHIPMENT_ORDER;
+    const { data } = await axios.post(url, dataBody);
+    if (data.success) {
+      return { order: data.order };
+    } else return data.message;
+  };
+
+  // create orders
   const onCheckoutButtonClick = (isClick) => {
     if (isClick) {
-      // const orders = Object.entries(structedCart).map(([key, value]) => ({
-      // }));
+      Promise.allSettled(
+        Object.entries(structedCart).map(async ([key, val]) => {
+          if (val.delivery) {
+            // for fragile product
+            const hasTags = val.some((product) => product?.fragile === true);
+
+            const totalValue = val.reduce((acc, product) => {
+              const value =
+                parseInt(product.price.replaceAll(".", "")) * product.quantity;
+              return acc + value;
+            }, 0);
+
+            const dataBody = {
+              products: val.map((product) => ({
+                name: product.name,
+                weight: parseFloat(
+                  Math.round(
+                    (parseInt(JSON.parse(product.details).weight) / 1000) * 10
+                  ) / 10
+                ),
+                product_code: "",
+              })),
+              order: {
+                id: getOrderCode(),
+                pick_name: JSON.parse(val[0].shop.details).owner,
+                pick_money: totalValue,
+                pick_address: val[0].shop.address_details,
+                pick_province: val[0].shop.city,
+                pick_district: val[0].shop.district,
+                pick_ward: val[0].shop.ward,
+                pick_tel: JSON.parse(val[0].shop.details).phone,
+                name: currAddress.full_name,
+                address: currAddress.address_details,
+                province: currAddress.city,
+                district: currAddress.district,
+                ward: currAddress.ward,
+                hamlet: "Khác",
+                tel: currAddress.phone,
+                value: "",
+                tags: hasTags ? [1] : "",
+              },
+            };
+
+            const orderResponse = await createOrder(dataBody);
+            return orderResponse;
+          }
+        })
+      ).then(([result]) => {
+        console.log(result);
+      });
     }
   };
 

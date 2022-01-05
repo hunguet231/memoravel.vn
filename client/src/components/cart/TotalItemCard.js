@@ -66,11 +66,11 @@ export default function TotalItemCard({
           <p>{totalPaid} vnđ</p>
         </div>
         <div className="flex justify-between">
-          <p className={styles.label}>Phí ship (Đã gồm VAT và phụ phí):</p>
+          <p className={styles.label}>Phí ship:</p>
           <p>
             {router.pathname === "/cart"
               ? "Chưa bao gồm"
-              : `+ ${numberWithDots(totalShip)} vnđ`}
+              : `+ ${numberWithDots(totalShip || "0")} vnđ`}
           </p>
         </div>
         <div className="flex justify-between">
@@ -83,7 +83,7 @@ export default function TotalItemCard({
             <p className={styles.label}>Tổng:</p>
             <p className={styles.label}>
               {numberWithDots(
-                parseInt(totalPaid.replaceAll(".", "")) + totalShip
+                parseInt(totalPaid.replaceAll(".", "")) + (totalShip || 0)
               )}{" "}
               vnđ
             </p>

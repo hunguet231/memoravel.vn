@@ -101,9 +101,15 @@ const OrderedList = ({ showCheckbox, structedCart }) => {
                   <span className={styles.shipingPartner}>
                     Giao hàng tiết kiệm (Tiêu chuẩn)
                   </span>
-                  <span className={styles.fee}>
-                    Phí ship: {value.fee ? numberWithDots(value.fee) : ""} vnđ
-                  </span>
+                  {value.fee ? (
+                    <span className={styles.fee}>
+                      {value.delivery
+                        ? `Phí ship: ${numberWithDots(value.fee)} vnđ`
+                        : `Chưa hỗ trợ giao`}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="flex items-center ">
                   <span className={styles.shipingTime}>
