@@ -54,6 +54,7 @@ const Shop = () => {
       status: parseInt(data.status),
       avatar: avatar_url,
       cover: cover_url,
+      details: data.details,
     };
 
     if (data.id) {

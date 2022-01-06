@@ -35,6 +35,8 @@ const TableShop = (props) => {
             </TableCell>
             <TableCell className={classes.header}>Hình đại diện</TableCell>
             <TableCell className={classes.header}>Tên shop</TableCell>
+            <TableCell className={classes.header}>Người đại diện</TableCell>
+            <TableCell className={classes.header}>Số điện thoại</TableCell>
             <TableCell className={classes.header} align="center">
               Địa chỉ
             </TableCell>
@@ -73,6 +75,8 @@ const TableShop = (props) => {
                   {row.name || ""}
                 </a>
               </TableCell>
+              <TableCell>{JSON.parse(row.details).owner || ""}</TableCell>
+              <TableCell>{JSON.parse(row.details).phone || ""}</TableCell>
               <TableCell>
                 {`${row.address.address_details}, ${row.address.ward}, ${row.address.district}, ${row.address.city}` ||
                   ""}

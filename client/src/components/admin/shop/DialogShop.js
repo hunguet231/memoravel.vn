@@ -30,6 +30,10 @@ const DialogShop = ({ isShow, onClose, onSubmit, data, loading }) => {
     avatar: "",
     cover: "",
     desciption: "",
+    details: {
+      owner: "",
+      phone: "",
+    },
     address: {
       country: "Việt Nam",
       city: "",
@@ -187,6 +191,50 @@ const DialogShop = ({ isShow, onClose, onSubmit, data, loading }) => {
           }}
           value={dataInput?.name || ""}
           onChange={onTypingData}
+        />
+        <Typography className={classes.typographyContent}>
+          Tên chủ shop
+        </Typography>
+        <OutlinedInput
+          placeholder="Nhập tên người đại diện"
+          classes={{
+            root: classes.contentLineEdit,
+            input: classes.inputEdit,
+            disabled: classes.disabled,
+          }}
+          required
+          value={dataInput?.details?.owner || ""}
+          onChange={(e) =>
+            setDataInput({
+              ...dataInput,
+              details: {
+                ...dataInput.details,
+                owner: e.target.value,
+              },
+            })
+          }
+        />
+        <Typography className={classes.typographyContent}>
+          Số điện thoại
+        </Typography>
+        <OutlinedInput
+          placeholder="Nhập số điện thoại"
+          classes={{
+            root: classes.contentLineEdit,
+            input: classes.inputEdit,
+            disabled: classes.disabled,
+          }}
+          required
+          value={dataInput?.details?.phone || ""}
+          onChange={(e) =>
+            setDataInput({
+              ...dataInput,
+              details: {
+                ...dataInput.details,
+                phone: e.target.value,
+              },
+            })
+          }
         />
         <Typography className={classes.typographyContent}>
           Mô tả shop

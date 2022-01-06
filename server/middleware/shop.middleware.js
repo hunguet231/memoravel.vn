@@ -60,6 +60,7 @@ export const checkCreateShop = async (req, res, next) => {
           ward: reqData.address.ward || '',
           address_details: reqData.address.address_details || '',
         },
+        details: req.body.details ? JSON.stringify(req.body.details) : '',
       };
       next();
     }
@@ -100,6 +101,10 @@ export const checkUpdateShop = async (req, res, next) => {
       } else {
         req.body.alias = alias;
       }
+    }
+
+    if (reqData.details) {
+      reqData.details = JSON.stringify(req.body.details);
     }
 
     if (
