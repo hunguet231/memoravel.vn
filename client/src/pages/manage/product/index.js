@@ -15,8 +15,8 @@ const Product = () => {
     page: 1,
     total: 0,
   });
-  const [data, setData] = useState();
-  const [shops, setShops] = useState();
+  const [data, setData] = useState("");
+  const [shops, setShops] = useState([]);
   const [messageData, setMessageData] = useState({
     type: "error",
     message: "",

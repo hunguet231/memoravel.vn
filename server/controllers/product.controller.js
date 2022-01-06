@@ -4,6 +4,7 @@ import { responseFormat, convertPaging } from '../utils';
 
 const Product = database.Model.productModel;
 const Shop = database.Model.shopModel;
+const ShopAddress = database.Model.shopAddressModel;
 const ProductRating = database.Model.productRatingModel;
 const User = database.Model.userModel;
 const Op = database.Sequelize.Op;
@@ -194,7 +195,19 @@ export const getProductByAlias = async (req, res) => {
       include: [
         {
           model: Shop,
-          attributes: ['id', 'name', 'alias', 'avatar', 'city', 'district'],
+          attributes: ['id', 'name', 'alias', 'avatar'],
+          include: [
+            {
+              model: ShopAddress,
+              attributes: [
+                'country',
+                'city',
+                'district',
+                'ward',
+                'address_details',
+              ],
+            },
+          ],
         },
         {
           model: ProductRating,
@@ -252,7 +265,19 @@ export const getListProduct = async (req, res) => {
       include: [
         {
           model: Shop,
-          attributes: ['id', 'name', 'alias', 'avatar', 'city', 'district'],
+          attributes: ['id', 'name', 'alias', 'avatar'],
+          include: [
+            {
+              model: ShopAddress,
+              attributes: [
+                'country',
+                'city',
+                'district',
+                'ward',
+                'address_details',
+              ],
+            },
+          ],
         },
         {
           model: ProductRating,
@@ -310,7 +335,19 @@ export const getListProductHot = async (req, res) => {
       include: [
         {
           model: Shop,
-          attributes: ['id', 'name', 'alias', 'avatar', 'city', 'district'],
+          attributes: ['id', 'name', 'alias', 'avatar'],
+          include: [
+            {
+              model: ShopAddress,
+              attributes: [
+                'country',
+                'city',
+                'district',
+                'ward',
+                'address_details',
+              ],
+            },
+          ],
         },
         {
           model: ProductRating,

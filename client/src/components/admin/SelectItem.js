@@ -40,7 +40,7 @@ const SelectedItem = (props) => {
           classes: { paper: defaultClasses.dropdownStyle },
         }}
       >
-        {data.map((dataMap, index) => (
+        {data?.map((dataMap, index) => (
           <MenuItem
             key={index}
             value={dataMap.value}
