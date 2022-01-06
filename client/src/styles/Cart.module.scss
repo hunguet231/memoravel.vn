@@ -24,20 +24,37 @@
   color: #088a4b;
 }
 
-.shopInfo {
+.shopInfo,
+.orderInfo {
   display: flex;
   align-items: center;
   cursor: pointer;
   width: max-content;
 }
 
-.shopName {
+.shopName,
+.orderName {
   margin-left: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.orderCode {
+  border-bottom: 1px solid #555;
+  margin-bottom: 20px;
+}
+
+.orderValue {
+  color: #000;
+  font-weight: 600;
+}
+
+.orderName {
+  color: #000;
+  font-weight: 600;
 }
 
 .fee {

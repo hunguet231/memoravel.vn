@@ -13,7 +13,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import clsx from "clsx";
 import HomeFilter from "components/home/HomeFilter";
 import { PathConstant } from "const";
@@ -62,6 +62,7 @@ const Header = () => {
     { id: "2", text: "Cửa hàng", path: "/shop", icon: "store" },
     { id: "3", text: "Tin tức", path: "/blogs", icon: "description" },
     { id: "4", text: "Liên hệ", path: "/contact", icon: "contact_support" },
+    { id: "5", text: "Đơn mua", path: "/order", icon: "border_inner" },
   ];
 
   const list = () => (
@@ -73,8 +74,15 @@ const Header = () => {
     >
       <List>
         <div className="flex items-center justify-center flex-col">
-          <Button type="outline" size="small" startIcon={<UserOutlined />}>
-            Đăng ký
+          <Button
+            onClick={() =>
+              message.warning("Hiện tại MEMORAVEL chưa hỗ trợ chức năng này!")
+            }
+            type="outline"
+            size="small"
+            startIcon={<UserOutlined />}
+          >
+            Bán hàng
           </Button>
           <Button
             type="primary"
@@ -133,8 +141,16 @@ const Header = () => {
                     </Badge>
                   </IconButton>
                 </Link>
-                <Button type="outline" startIcon={<UserOutlined />}>
-                  Đăng ký
+                <Button
+                  type="outline"
+                  startIcon={<UserOutlined />}
+                  onClick={() =>
+                    message.warning(
+                      "Hiện tại MEMORAVEL chưa hỗ trợ chức năng này!"
+                    )
+                  }
+                >
+                  Bán hàng
                 </Button>
                 <Button
                   type="primary"
@@ -200,6 +216,16 @@ const Header = () => {
                     >
                       {" "}
                       Liên hệ
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/order">
+                    <span
+                      className={active("/order") ? styles.currentMenu : ""}
+                    >
+                      {" "}
+                      Đơn mua
                     </span>
                   </Link>
                 </li>

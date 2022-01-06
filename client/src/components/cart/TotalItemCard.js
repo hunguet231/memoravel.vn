@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { CircularProgress } from "@material-ui/core";
 import Button from "components/common/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,6 +15,7 @@ export default function TotalItemCard({
   onCheckoutButtonClick,
   disabled,
   structedCart,
+  loading,
 }) {
   const router = useRouter();
   const { state } = useContext(DataContext);
@@ -93,12 +95,33 @@ export default function TotalItemCard({
           ""
         )}
 
+        {router.pathname === "/checkout" && (
+          <div className={styles.noteText}>
+            Bấm vào ĐẶT HÀNG là bạn đã đồng ý với <br />
+            <a
+              className={styles.linkText}
+              href="https://memoravel.vn/policies"
+              target="_blank"
+              rel="noreferrer"
+            >
+              điều khoản & chính sách
+            </a>{" "}
+            của MEMORAVEL
+          </div>
+        )}
+
         <Button
           disabled={disabled}
           type="primary"
           onClick={onButtonClick}
           style={{ width: "100%" }}
         >
+          {loading && (
+            <CircularProgress
+              size={20}
+              style={{ color: "#fff", marginRight: 5 }}
+            />
+          )}
           {router.pathname === "/cart" ? "KIỂM TRA THÔNG TIN" : "ĐẶT HÀNG"}
         </Button>
         <div style={{ textAlign: "center" }}>

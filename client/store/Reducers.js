@@ -19,6 +19,12 @@ const reducers = (state, action) => {
         ...state,
         shipping_address: action.payload,
       };
+
+    case ACTIONS.EMPTY_CART:
+      return {
+        ...state,
+        cart: action.payload,
+      };
     default:
       return state;
   }

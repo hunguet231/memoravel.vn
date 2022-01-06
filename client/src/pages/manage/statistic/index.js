@@ -15,11 +15,6 @@ const StatisticMn = () => {
         >
           TẠI ĐÂY
         </a>
-        <p>
-          <small>
-            * Chú ý: Do mới cài đặt nên cần ít nhất 24h sau số liệu mới hiển thị
-          </small>
-        </p>
       </div>
     </ManageLayout>
   );

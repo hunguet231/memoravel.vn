@@ -3,6 +3,7 @@ export const ACTIONS = {
   AUTH: "AUTH",
   ADD_CART: "ADD_CART",
   SHIPPING_ADDRESS: "SHIPPING_ADDRESS",
+  EMPTY_CART: "EMPTY_CART",
 };
 
 export const addToCart = (product, quantity, cart) => {
@@ -46,4 +47,8 @@ export const deleteItem = (data, ids, type) => {
 
 export const shippingAddress = (address) => {
   return { type: "SHIPPING_ADDRESS", payload: address };
+};
+
+export const emptyCart = () => {
+  return { type: "EMPTY_CART", payload: [] };
 };
