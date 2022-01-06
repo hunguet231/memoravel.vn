@@ -6,6 +6,12 @@
   padding-bottom: 30px;
 }
 
+.blogContent {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .img {
   height: 75vh;
   width: 100%;
@@ -48,9 +54,11 @@
     font-size: 14px;
   }
   img {
+    display: block;
     height: auto !important;
     width: 100% !important;
     max-width: 800px !important;
+    margin: 0 auto;
     @include media(mobile) {
       max-width: 100% !important;
     }
