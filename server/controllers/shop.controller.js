@@ -17,7 +17,7 @@ const createDataFormat = (newShop, newAddress) => ({
   description: newShop.description,
   alias: newShop.alias,
   status: newShop.status,
-  details: newShop.details,
+  details: newShop.details ? JSON.parse(newShop.details) : '',
   created: newShop.createdAt,
   modified: newShop.updatedAt,
   address: {
@@ -232,7 +232,7 @@ const formatResposeShopUserCall = (data) => ({
     Math.round((data.total_star / data.total_amount + Number.EPSILON) * 100) /
     100,
   status: data.status,
-  details: data.details,
+  details: data.details ? JSON.parse(data.details) : '',
   created: data.createdAt,
   address: data.shop_address,
   rating: data.shop_ratings,
