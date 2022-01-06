@@ -187,9 +187,7 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
         <Alert severity="warning">
           <AlertTitle>Chú ý</AlertTitle>
           Chèn link ảnh từ <mark>Google Drive:</mark>
-          <br /> Copy link ảnh đơn từ Google Drive
-          &quot;https://drive.google.com/file/d/1DYHYl8mPcA_C_EONLG3sAXBOUJhM-xyg/...&quot;
-          dán vào
+          <br /> Copy link ảnh đơn từ Google Drive dán vào
           <a
             href="https://memoravel-get-link-drive.surge.sh/"
             target="_blank"
@@ -199,8 +197,7 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
             {" "}
             ĐÂY
           </a>
-          , sau đó chọn &quot;Create Direct Link&quot; và lấy link output mà
-          dùng thoả thích.
+          , lấy link output và sử dụng.
         </Alert>
         <CKEditorComponent
           name="content"

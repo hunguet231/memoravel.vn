@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import {
+  Checkbox,
   CircularProgress,
   Dialog,
   DialogActions,
@@ -48,6 +49,7 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
       width: "",
       height: "",
       sku: "",
+      fragile: false,
     },
     in_stock: 0,
     shop_id: "",
@@ -430,6 +432,27 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
                             },
                           })
                         }
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                      <div className={classes.label}>Hàng dễ vỡ</div>
+                    </Grid>
+                    <Grid item xs={12} sm={8}>
+                      <Checkbox
+                        style={{ marginTop: "-10px" }}
+                        checked={dataInput?.details?.fragile}
+                        onChange={(e) =>
+                          setDataInput({
+                            ...dataInput,
+                            details: {
+                              ...dataInput.details,
+                              fragile: e.target.checked,
+                            },
+                          })
+                        }
+                        inputProps={{ "aria-label": "primary checkbox" }}
                       />
                     </Grid>
                   </Grid>
