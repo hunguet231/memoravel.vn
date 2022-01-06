@@ -175,8 +175,8 @@ const Shop = () => {
       {deleteDialog.isOpen && (
         <ConfirmDialog
           isShow={deleteDialog.isOpen}
-          title={`Xóa shop "${deleteDialog.data.title}"`}
-          message={`Bạn có chắc chắn muốn xóa "${deleteDialog.data.title}" không?`}
+          title={`Xóa shop "${deleteDialog.data.name}"`}
+          message={`Bạn có chắc chắn muốn xóa "${deleteDialog.data.name}" không?`}
           onClose={() => setDeleteDialog({ isOpen: false, data: null })}
           onSubmit={deleteShop}
         />

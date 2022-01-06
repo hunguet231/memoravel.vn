@@ -12,6 +12,12 @@ export default function Cart() {
   const { state } = useContext(DataContext);
   const { cart } = state;
 
+  const structedCart = cart.reduce((acc, cartItem) => {
+    acc[cartItem.shop.name] = acc[cartItem.shop.name] || [];
+    acc[cartItem.shop.name].push(cartItem);
+    return acc;
+  }, {});
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -22,7 +28,7 @@ export default function Cart() {
             </h1>
             <Row gutter={12}>
               <Col xs={24} lg={17}>
-                <OrderedList showCheckbox />
+                <OrderedList showCheckbox structedCart={structedCart} />
               </Col>
               <Col xs={24} lg={7}>
                 <CardCode />

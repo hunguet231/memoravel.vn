@@ -75,8 +75,8 @@ const TableShop = (props) => {
                   {row.name || ""}
                 </a>
               </TableCell>
-              <TableCell>{JSON.parse(row.details).owner || ""}</TableCell>
-              <TableCell>{JSON.parse(row.details).phone || ""}</TableCell>
+              <TableCell>{JSON.parse(row.details)?.owner || ""}</TableCell>
+              <TableCell>{JSON.parse(row.details)?.phone || ""}</TableCell>
               <TableCell>
                 {`${row.address.address_details}, ${row.address.ward}, ${row.address.district}, ${row.address.city}` ||
                   ""}
