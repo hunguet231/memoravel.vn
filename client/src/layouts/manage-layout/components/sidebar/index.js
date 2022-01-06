@@ -7,6 +7,7 @@ import {
   AccountCircleOutlined,
   Menu,
 } from "@material-ui/icons";
+import EqualizerIcon from "@material-ui/icons/Equalizer";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import BallotIcon from "@material-ui/icons/Ballot";
 import ReceiptIcon from "@material-ui/icons/Receipt";
@@ -67,13 +68,19 @@ const SIDEBAR_DATA = [
     role: AppConstant.ROLE.manage,
   },
   {
-    text: "Đơn hàng (!)",
+    text: "Đơn hàng",
     icon: <ReceiptIcon color="inherit" />,
     path: PathConstant.MANAGE_ORDER,
     role: AppConstant.ROLE.manage,
   },
   {
-    text: "Quản lý User (!)",
+    text: "Thống kê",
+    icon: <EqualizerIcon color="inherit" />,
+    path: PathConstant.MANAGE_STATISTIC,
+    role: AppConstant.ROLE.manage,
+  },
+  {
+    text: "Quản lý User",
     icon: <AccountCircleOutlined color="inherit" />,
     path: PathConstant.MANAGE_USER,
     role: AppConstant.ROLE.admin,

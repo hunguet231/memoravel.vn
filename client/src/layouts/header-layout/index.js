@@ -5,15 +5,17 @@ import PostAddIcon from "@material-ui/icons/PostAdd";
 import { Button } from "components/admin";
 import { useStyles } from "./styles";
 
-const HeaderLayout = ({ title, onCreateNew }) => {
+const HeaderLayout = ({ title, onCreateNew, hideCreateBtn }) => {
   const defaultClasses = useStyles();
 
   return (
     <Box className={defaultClasses.root}>
       <Typography className={defaultClasses.title}>{title || ""}</Typography>
-      <Button startIcon={<PostAddIcon />} onClick={onCreateNew}>
-        Tạo mới
-      </Button>
+      {!hideCreateBtn && (
+        <Button startIcon={<PostAddIcon />} onClick={onCreateNew}>
+          Tạo mới
+        </Button>
+      )}
     </Box>
   );
 };
@@ -21,6 +23,7 @@ const HeaderLayout = ({ title, onCreateNew }) => {
 HeaderLayout.propTypes = {
   title: PropTypes.string,
   onCreateNew: PropTypes.func,
+  hideCreateBtn: PropTypes.bool,
 };
 
 HeaderLayout.defaultProps = {

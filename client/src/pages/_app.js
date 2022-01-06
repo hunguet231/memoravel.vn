@@ -18,6 +18,19 @@ const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
   const { i18n } = useTranslation();
 
+  const handleRouteChange = (url) => {
+    window.gtag("config", "G-62EGTF7EBX", {
+      page_path: url,
+    });
+  };
+
+  useEffect(() => {
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   useEffect(() => {
     let selectedLang =
       router.query.lang ||

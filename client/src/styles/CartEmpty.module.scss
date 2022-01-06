@@ -1,0 +1,26 @@
+@import "variables";
+@import "mixins";
+
+.container {
+  margin: 160px 0;
+  font-family: $font-be;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .cartEmptyImg {
+    margin-bottom: 20px;
+  }
+  .content {
+    font-family: $font-be;
+    color: #666;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 830px) {
+  .container {
+    margin: 80px 0;
+  }
+}

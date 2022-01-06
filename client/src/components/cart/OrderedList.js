@@ -69,57 +69,58 @@ const OrderedList = ({ showCheckbox, structedCart }) => {
         onChange={onChange}
         style={{ width: "100%" }}
       >
-        {Object.entries(list).map(([key, value]) => (
-          <div key={key} className={styles.cartWrap}>
-            <Link href={`/shop/${value[0].shop.alias}`}>
-              <div className={styles.shopInfo} style={{ width: "100%" }}>
-                <div>
-                  <Avatar
-                    className={styles.shopAvatar}
-                    src={value[0].shop.avatar}
-                  />
-                </div>
-                <div className={styles.shopName}>{key}</div>
-                <div className={styles.viewShopBtn}>
+        {list &&
+          Object.entries(list).map(([key, value]) => (
+            <div key={key} className={styles.cartWrap}>
+              <Link href={`/shop/${value[0].shop.alias}`}>
+                <div className={styles.shopInfo} style={{ width: "100%" }}>
                   <div>
-                    <ShopOutlined style={{ marginRight: "5px" }} />
+                    <Avatar
+                      className={styles.shopAvatar}
+                      src={value[0].shop.avatar}
+                    />
                   </div>
-                  <div>Xem shop</div>
+                  <div className={styles.shopName}>{key}</div>
+                  <div className={styles.viewShopBtn}>
+                    <div>
+                      <ShopOutlined style={{ marginRight: "5px" }} />
+                    </div>
+                    <div>Xem shop</div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-            {value.map((item) => (
-              <div key={item.id} className={styles.cartItem}>
-                {showCheckbox && <Checkbox value={item.id} />}{" "}
-                <CartItem item={item} />
-              </div>
-            ))}
-            <div className={styles.shipingInfo}>
-              <div className={styles.shipingDeliver}>
-                <div className="flex items-center ">
-                  Đơn bị vận chuyển:{" "}
-                  <span className={styles.shipingPartner}>
-                    Giao hàng tiết kiệm (Tiêu chuẩn)
-                  </span>
-                  {value.fee ? (
-                    <span className={styles.fee}>
-                      {value.delivery
-                        ? `Phí ship: ${numberWithDots(value.fee)} vnđ`
-                        : `Chưa hỗ trợ giao`}
+              </Link>
+              {value.map((item) => (
+                <div key={item.id} className={styles.cartItem}>
+                  {showCheckbox && <Checkbox value={item.id} />}{" "}
+                  <CartItem item={item} />
+                </div>
+              ))}
+              <div className={styles.shipingInfo}>
+                <div className={styles.shipingDeliver}>
+                  <div className="flex items-center ">
+                    Đơn bị vận chuyển:{" "}
+                    <span className={styles.shipingPartner}>
+                      Giao hàng tiết kiệm (Tiêu chuẩn)
                     </span>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div className="flex items-center ">
-                  <span className={styles.shipingTime}>
-                    Dự kiến nhận hàng sau 3 - 5 ngày
-                  </span>
+                    {value.fee ? (
+                      <span className={styles.fee}>
+                        {value.delivery
+                          ? `Phí ship: ${numberWithDots(value.fee)} vnđ`
+                          : `Chưa hỗ trợ giao`}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="flex items-center ">
+                    <span className={styles.shipingTime}>
+                      Dự kiến nhận hàng sau 3 - 5 ngày
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </CheckboxGroup>
     </div>
   );

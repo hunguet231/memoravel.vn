@@ -22,9 +22,10 @@ export default function TotalItemCard({
 
   useEffect(() => {
     let total = 0;
-    Object.entries(structedCart).map(([key, val]) => {
-      total += val.fee;
-    });
+    structedCart &&
+      Object.entries(structedCart).map(([key, val]) => {
+        total += val.fee;
+      });
     setTotalShip(total);
   }, [structedCart]);
 
@@ -109,5 +110,5 @@ export default function TotalItemCard({
 }
 
 TotalItemCard.propTypes = {
-  onCheckoutButtonClick: PropTypes.func.isRequired,
+  onCheckoutButtonClick: PropTypes.func,
 };
