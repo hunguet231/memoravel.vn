@@ -3,6 +3,9 @@ export const KEY_LANG = "lang";
 export const APP_TOKEN = "token_memoravel";
 export const USER_DATA = "user_data";
 
+export const FACEBOOK_APP_ID = "505875190797989";
+export const FACEBOOK_PAGE_ID = "103447301918593";
+
 export const LANDING_URL = "https://memoravel.vn/";
 
 export const STATUS_OK = 200;

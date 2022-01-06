@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import Cookies from "js-cookie";
 import { AppConstant, LangConstant } from "const";
 import { DataProvider } from "../../store/GlobalState";
+import CustomChat from "components/common/CustomChat";
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -53,6 +54,7 @@ const MyApp = ({ Component, pageProps }) => {
           showOnShallow={true}
         />
         <Component {...pageProps} />
+        <CustomChat />
       </ThemeProvider>
     </DataProvider>
   );
