@@ -20,7 +20,7 @@ export default function OrderList() {
     const orderedList = JSON.parse(localStorage.getItem("ordered_list")) || [];
     let orders = [];
     Promise.all(
-      orderedList.map(async (orderId, index) => {
+      orderedList.map(async (orderId) => {
         const orderResponse = await fetchOrderData(orderId);
         orders.push(orderResponse);
         return orderResponse;
