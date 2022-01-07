@@ -18,12 +18,14 @@ export default function OrderList() {
 
   useEffect(() => {
     const orderedList = JSON.parse(localStorage.getItem("ordered_list")) || [];
-    Promise.allSettled(
+    let orders = [];
+    Promise.all(
       orderedList.map(async (orderId, index) => {
         const orderResponse = await fetchOrderData(orderId);
-        setOrders([...orders, { ...orderResponse, no: index + 1 }]);
+        orders.push(orderResponse);
+        return orderResponse;
       })
-    );
+    ).then(() => setOrders(orders));
   }, []);
 
   return (
