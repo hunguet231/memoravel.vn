@@ -135,7 +135,11 @@ export default function Order() {
                 name: product.name,
                 weight: parseFloat(
                   Math.round(
-                    (parseInt(JSON.parse(product.details).weight) / 1000) * 10
+                    (parseInt(
+                      JSON.parse(product.details).weight * product.quantity
+                    ) /
+                      1000) *
+                      10
                   ) / 10
                 ),
                 product_code: "",
