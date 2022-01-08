@@ -8,22 +8,32 @@ import { useRouter } from "next/router";
 import React from "react";
 import styles from "../../styles/Blogs.module.scss";
 import Filter from "./Filter";
+import { Pagination } from "@material-ui/lab";
 
 export default function Shop() {
   const [products, setProducts] = React.useState([]);
+  const [total, setTotal] = React.useState(0);
+  const [page, setPage] = React.useState(1);
   const [visible, setVisible] = React.useState(false);
-  const router = useRouter();
 
-  const fetchProducts = async () => {
-    const url = ApiConstant.GET_PRODUCT;
+  const fetchProducts = async (page, search = "", shop_id = null) => {
+    let url = ApiConstant.GET_PRODUCT + `?page=${page}&size=${10}&search=${search}`;
+
+    if (shop_id) {
+      url += `&shop_id=${shop_id}`;
+    }
+
     const response = await fetchData(url, ApiConstant.METHOD.get);
+
     if (response?.status === AppConstant.STATUS_OK) {
       setProducts(response.data);
+      setTotal(response.total);
     }
   };
 
   React.useEffect(() => {
-    fetchProducts();
+    const firstPage = 1;
+    fetchProducts(firstPage);
   }, []);
 
   const showDrawer = () => {
@@ -35,10 +45,8 @@ export default function Shop() {
   };
 
   const onChangePage = (page, pageSize) => {
-    router.push({
-      pathname: "/shop",
-      query: { p: page },
-    });
+    setPage(page);
+    fetchProducts(page);
   };
 
   return (
@@ -50,8 +58,8 @@ export default function Shop() {
             <Row justify="space-between">
               <Col sm={24} md={10}>
                 <p className={styles.subTitle}>
-                  Sản phẩm chất lượng cao, đa dạng, ứng dụng công nghệ AR cho
-                  trải nghiệm mua hàng tuyệt vời
+                  Sản phẩm chất lượng cao, đa dạng, ứng dụng công nghệ AR cho trải nghiệm mua hàng
+                  tuyệt vời
                 </p>
               </Col>
 
@@ -93,6 +101,15 @@ export default function Shop() {
                 </Col>
               ))}
             </Row>
+
+            <Pagination
+              page={page}
+              count={parseInt((total - 1) / 10) + 1}
+              onChange={(_, page) => onChangePage(page)}
+              color="primary"
+              variant="outlined"
+              shape="rounded"
+            />
           </Col>
         </Row>
       </div>
