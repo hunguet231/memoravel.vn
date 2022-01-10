@@ -8,10 +8,33 @@ import { useState } from "react";
 import { productTypes } from "utils/productTypes";
 import Image from "next/image";
 
-const Filter = () => {
+const Filter = ({ fetchProducts, setSearch, setPage }) => {
   const [value, setValue] = useState("");
 
-  const onDataChange = (e) => {};
+  const onDataChange = (e) => {
+    return setValue(e.target.value);
+  };
+
+  const onSearchText = () => {
+    setSearch(value);
+    setPage(1);
+    fetchProducts(1, value);
+  };
+
+  React.useEffect(() => {
+    const listener = (e) => {
+      if (e.code === "Enter" || e.code === "NumpadEnter") {
+        e.preventDefault();
+        setSearch(value);
+        setPage(1);
+        fetchProducts(1, value);
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  });
 
   return (
     <div className={styles.filter}>
@@ -23,6 +46,9 @@ const Filter = () => {
           placeholder="Tìm kiếm sản phẩm"
           suffix={<SearchOutlined />}
         />
+        <button className="button" style={{ width: "100%" }} onClick={onSearchText}>
+          Tìm kiếm
+        </button>
       </div>
 
       <div className={styles.section}>

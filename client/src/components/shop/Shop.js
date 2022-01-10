@@ -14,6 +14,7 @@ export default function Shop() {
   const [products, setProducts] = React.useState([]);
   const [total, setTotal] = React.useState(0);
   const [page, setPage] = React.useState(1);
+  const [search, setSearch] = React.useState("");
   const [visible, setVisible] = React.useState(false);
 
   const fetchProducts = async (page, search = "", shop_id = null) => {
@@ -32,8 +33,8 @@ export default function Shop() {
   };
 
   React.useEffect(() => {
-    const firstPage = 1;
-    fetchProducts(firstPage);
+    const initPage = 1;
+    fetchProducts(initPage);
   }, []);
 
   const showDrawer = () => {
@@ -46,7 +47,9 @@ export default function Shop() {
 
   const onChangePage = (page, pageSize) => {
     setPage(page);
-    fetchProducts(page);
+    fetchProducts(page, search);
+
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return (
@@ -74,7 +77,7 @@ export default function Shop() {
       <div className="container">
         <Row justify="space-between">
           <Col sm={24} md={24} lg={5} className={styles.filter}>
-            <Filter />
+            <Filter fetchProducts={fetchProducts} setSearch={setSearch} setPage={setPage} />
           </Col>
 
           <Col sm={24} md={24} lg={18}>
@@ -91,7 +94,7 @@ export default function Shop() {
               visible={visible}
               key="left"
             >
-              <Filter />
+              <Filter fetchProducts={fetchProducts} setSearch={setSearch} setPage={setPage} />
             </Drawer>
 
             <Row gutter={10}>
