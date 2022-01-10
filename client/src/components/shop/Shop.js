@@ -6,6 +6,7 @@ import { fetchData } from "api";
 import ProductCard from "components/common/ProductCard";
 import { ApiConstant, AppConstant } from "const";
 import React from "react";
+import { useState } from "react";
 import styles from "../../styles/Blogs.module.scss";
 import Filter from "./Filter";
 
@@ -15,10 +16,11 @@ export default function Shop() {
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = React.useState("");
   const [visible, setVisible] = React.useState(false);
+  const [productsHot, setProductsHot] = useState([]);
 
   const fetchProducts = async (page, search = "", shop_id = null) => {
     let url =
-      ApiConstant.GET_PRODUCT + `?page=${page}&size=${10}&search=${search}`;
+      ApiConstant.GET_PRODUCT + `?page=${page}&size=${12}&search=${search}`;
 
     if (shop_id) {
       url += `&shop_id=${shop_id}`;
@@ -32,9 +34,20 @@ export default function Shop() {
     }
   };
 
+  const fetchProductsHot = async () => {
+    let url = ApiConstant.GET_PRODUCT_HOT + `?size=${5}`;
+
+    const response = await fetchData(url, ApiConstant.METHOD.get);
+
+    if (response?.status === AppConstant.STATUS_OK) {
+      setProductsHot(response.data);
+    }
+  };
+
   React.useEffect(() => {
     const initPage = 1;
     fetchProducts(initPage);
+    fetchProductsHot();
   }, []);
 
   const showDrawer = () => {
@@ -50,6 +63,13 @@ export default function Shop() {
     fetchProducts(page, search);
 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
+  const onOriginChange = (value) => {
+    const newProducts = [...products].filter(
+      (product) => product.made_in === value
+    );
+    setProducts(newProducts);
   };
 
   return (
@@ -81,6 +101,8 @@ export default function Shop() {
               fetchProducts={fetchProducts}
               setSearch={setSearch}
               setPage={setPage}
+              productsHot={productsHot}
+              onOriginChange={onOriginChange}
             />
           </Col>
 
@@ -102,6 +124,8 @@ export default function Shop() {
                 fetchProducts={fetchProducts}
                 setSearch={setSearch}
                 setPage={setPage}
+                productsHot={productsHot}
+                onOriginChange={onOriginChange}
               />
             </Drawer>
 
@@ -114,8 +138,9 @@ export default function Shop() {
             </Row>
 
             <Pagination
+              style={{ marginBottom: "20px" }}
               page={page}
-              count={parseInt((total - 1) / 10) + 1}
+              count={parseInt((total - 1) / 12) + 1}
               onChange={(_, page) => onChangePage(page)}
               color="primary"
               variant="outlined"

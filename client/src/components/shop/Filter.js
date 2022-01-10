@@ -1,14 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { FilterOutlined, SearchOutlined } from "@ant-design/icons";
-import { Input, Radio, Slider, Space } from "antd";
-import Image from "next/image";
+import { AutoComplete, Input, Radio, Slider, Space } from "antd";
+import Link from "next/link";
 import React, { useState } from "react";
 import styles from "styles/ShopFilter.module.scss";
 import numberWithDots from "utils/addDotsNumber";
+import { productOrigins } from "utils/productOrigins";
 import { productTypes } from "utils/productTypes";
 
-const Filter = ({ fetchProducts, setSearch, setPage }) => {
+const Filter = ({
+  fetchProducts,
+  setSearch,
+  setPage,
+  productsHot,
+  onOriginChange,
+}) => {
   const [value, setValue] = useState("");
 
   const onDataChange = (e) => {
@@ -19,6 +26,10 @@ const Filter = ({ fetchProducts, setSearch, setPage }) => {
     setSearch(value);
     setPage(1);
     fetchProducts(1, value);
+  };
+
+  const handleOriginChange = (value) => {
+    onOriginChange(value);
   };
 
   React.useEffect(() => {
@@ -77,13 +88,22 @@ const Filter = ({ fetchProducts, setSearch, setPage }) => {
 
       <div className={styles.section}>
         <div className={styles.heading}>Nơi sản xuất</div>
-        <Input
-          className={styles.input}
-          name="made_in"
-          onChange={onDataChange}
-          placeholder="Tìm nơi sản xuất"
-          suffix={<SearchOutlined />}
-        />
+        <AutoComplete
+          style={{ width: "100%" }}
+          onSelect={handleOriginChange}
+          options={productOrigins}
+          filterOption={(inputValue, option) =>
+            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+          }
+        >
+          <Input
+            className={styles.input}
+            name="made_in"
+            onChange={onDataChange}
+            placeholder="Tìm nơi sản xuất"
+            suffix={<SearchOutlined />}
+          />
+        </AutoComplete>
       </div>
 
       <div className={styles.section}>
@@ -104,45 +124,20 @@ const Filter = ({ fetchProducts, setSearch, setPage }) => {
 
       <div className={styles.section}>
         <div className={styles.heading}>Sản phẩm nổi bật</div>
-        <div className={styles.productWrap}>
-          <Image
-            className={styles.img}
-            src="/images/gom-bat-trang.png"
-            width={80}
-            height={80}
-            alt=""
-          />
-          <div className={styles.info}>
-            <div className={styles.productName}>Bình sứ Vạn phúc</div>
-            <div className={styles.productPrice}>500.000đ</div>
-          </div>
-        </div>
-        <div className={styles.productWrap}>
-          <Image
-            className={styles.img}
-            src="/images/gom-bat-trang.png"
-            width={80}
-            height={80}
-            alt=""
-          />
-          <div className={styles.info}>
-            <div className={styles.productName}>Bình sứ Vạn phúc</div>
-            <div className={styles.productPrice}>500.000đ</div>
-          </div>
-        </div>
-        <div className={styles.productWrap}>
-          <Image
-            className={styles.img}
-            src="/images/gom-bat-trang.png"
-            width={80}
-            height={80}
-            alt=""
-          />
-          <div className={styles.info}>
-            <div className={styles.productName}>Bình sứ Vạn phúc</div>
-            <div className={styles.productPrice}>500.000đ</div>
-          </div>
-        </div>
+        {productsHot.map((product) => (
+          <Link href={`/product/${product.alias}`} key={product.id}>
+            <div className={styles.productWrap}>
+              <div className={styles.img}>
+                <img src={product.images[0].image} alt={product.name} />
+              </div>
+
+              <div className={styles.info}>
+                <div className={styles.productName}>{product.name}</div>
+                <div className={styles.productPrice}>{product.price}đ</div>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

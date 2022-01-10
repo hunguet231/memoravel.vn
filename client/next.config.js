@@ -47,4 +47,7 @@ module.exports = withAntdLess({
   },
   target: "serverless",
   generateBuildId: () => "memoravel.vn",
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
 });
