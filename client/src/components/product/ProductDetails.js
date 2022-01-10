@@ -164,7 +164,7 @@ export default function ProductDetails({ product }) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <a href="https://youtu.be/Ly9w_dh3gkA">
+        <a href="https://www.youtube.com/watch?v=OrBE4P1g6z0">
           <p>Xem hướng dẫn</p>
         </a>
         <iframe
