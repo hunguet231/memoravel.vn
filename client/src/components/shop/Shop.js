@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { FilterOutlined } from "@ant-design/icons";
+import { Pagination } from "@material-ui/lab";
 import { Col, Drawer, Row } from "antd";
 import { fetchData } from "api";
 import ProductCard from "components/common/ProductCard";
 import { ApiConstant, AppConstant } from "const";
-import { useRouter } from "next/router";
 import React from "react";
 import styles from "../../styles/Blogs.module.scss";
 import Filter from "./Filter";
-import { Pagination } from "@material-ui/lab";
 
 export default function Shop() {
   const [products, setProducts] = React.useState([]);
@@ -18,7 +17,8 @@ export default function Shop() {
   const [visible, setVisible] = React.useState(false);
 
   const fetchProducts = async (page, search = "", shop_id = null) => {
-    let url = ApiConstant.GET_PRODUCT + `?page=${page}&size=${10}&search=${search}`;
+    let url =
+      ApiConstant.GET_PRODUCT + `?page=${page}&size=${10}&search=${search}`;
 
     if (shop_id) {
       url += `&shop_id=${shop_id}`;
@@ -61,8 +61,8 @@ export default function Shop() {
             <Row justify="space-between">
               <Col sm={24} md={10}>
                 <p className={styles.subTitle}>
-                  Sản phẩm chất lượng cao, đa dạng, ứng dụng công nghệ AR cho trải nghiệm mua hàng
-                  tuyệt vời
+                  Sản phẩm chất lượng cao, đa dạng, ứng dụng công nghệ AR cho
+                  trải nghiệm mua hàng tuyệt vời
                 </p>
               </Col>
 
@@ -77,7 +77,11 @@ export default function Shop() {
       <div className="container">
         <Row justify="space-between">
           <Col sm={24} md={24} lg={5} className={styles.filter}>
-            <Filter fetchProducts={fetchProducts} setSearch={setSearch} setPage={setPage} />
+            <Filter
+              fetchProducts={fetchProducts}
+              setSearch={setSearch}
+              setPage={setPage}
+            />
           </Col>
 
           <Col sm={24} md={24} lg={18}>
@@ -94,7 +98,11 @@ export default function Shop() {
               visible={visible}
               key="left"
             >
-              <Filter fetchProducts={fetchProducts} setSearch={setSearch} setPage={setPage} />
+              <Filter
+                fetchProducts={fetchProducts}
+                setSearch={setSearch}
+                setPage={setPage}
+              />
             </Drawer>
 
             <Row gutter={10}>

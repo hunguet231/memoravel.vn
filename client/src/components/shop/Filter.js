@@ -1,12 +1,12 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from "react";
-import { Slider, Input, Radio, Space } from "antd";
-import { SearchOutlined, FilterOutlined } from "@ant-design/icons";
-import numberWithDots from "utils/addDotsNumber";
-import styles from "styles/ShopFilter.module.scss";
-import { useState } from "react";
-import { productTypes } from "utils/productTypes";
+import { FilterOutlined, SearchOutlined } from "@ant-design/icons";
+import { Input, Radio, Slider, Space } from "antd";
 import Image from "next/image";
+import React, { useState } from "react";
+import styles from "styles/ShopFilter.module.scss";
+import numberWithDots from "utils/addDotsNumber";
+import { productTypes } from "utils/productTypes";
 
 const Filter = ({ fetchProducts, setSearch, setPage }) => {
   const [value, setValue] = useState("");
@@ -46,7 +46,11 @@ const Filter = ({ fetchProducts, setSearch, setPage }) => {
           placeholder="Tìm kiếm sản phẩm"
           suffix={<SearchOutlined />}
         />
-        <button className="button" style={{ width: "100%" }} onClick={onSearchText}>
+        <button
+          className="button"
+          style={{ width: "100%" }}
+          onClick={onSearchText}
+        >
           Tìm kiếm
         </button>
       </div>
