@@ -8,6 +8,7 @@ const ShopAddress = database.Model.shopAddressModel;
 const ProductRating = database.Model.productRatingModel;
 const User = database.Model.userModel;
 const Op = database.Sequelize.Op;
+const sequelize = database.Sequelize;
 
 const formatProductData = (data) => {
   return {
@@ -258,14 +259,14 @@ export const getListProduct = async (req, res) => {
       queryDataProduct.shop_id = req.body.shop_id;
     }
 
-    if (dataPage.price) {
-      queryDataProduct.price = {
-        [Op.between]: [
-          parseInt(dataPage.price[0]),
-          parseInt(dataPage.price[2]),
-        ],
-      };
-    }
+    // if (dataPage.price) {
+    //   queryDataProduct.price = {
+    //     [Op.between]: [
+    //       parseInt(dataPage.price[0]),
+    //       parseInt(dataPage.price[2]),
+    //     ],
+    //   };
+    // }
 
     if (dataPage.made_in) {
       queryDataProduct.made_in = dataPage.made_in;
@@ -278,7 +279,15 @@ export const getListProduct = async (req, res) => {
     const { count, rows: data } = await Product.findAndCountAll({
       ...pagination,
       where: {
-        ...queryDataProduct,
+        [Op.and]: [
+          sequelize.where(sequelize.cast(sequelize.col('price'), 'INTEGER'), {
+            [Op.between]: [
+              parseInt(dataPage.price[0]),
+              parseInt(dataPage.price[2]),
+            ],
+          }),
+          { ...queryDataProduct },
+        ],
       },
       include: [
         {

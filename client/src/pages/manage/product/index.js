@@ -6,6 +6,7 @@ import TableProduct from "components/admin/product/TableProduct";
 import { ApiConstant, AppConstant } from "const";
 import { HeaderLayout, ManageLayout } from "layouts";
 import React, { useEffect, useState } from "react";
+import numberWithDots from "utils/addDotsNumber";
 import getImgUrl from "utils/getImgUrl";
 import removeNonNumeric from "utils/removeNonNumeric";
 
@@ -150,7 +151,10 @@ const Product = () => {
     if (response?.status === AppConstant.STATUS_OK) {
       setDataProduct({
         ...response,
-        data: response.data,
+        data: response.data.map((product) => ({
+          ...product,
+          price: numberWithDots(product.price),
+        })),
       });
     }
   };
