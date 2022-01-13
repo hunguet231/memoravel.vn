@@ -34,7 +34,7 @@ app.use(ApiConst.ROOT, deliverRoute);
 
 const runSequelize = async () => {
   try {
-    let run = await database.sequelize.sync({ alter: true });
+    let run = await database.sequelize.sync();
     if (run) {
       const userModel = database.Model.userModel;
       let user = await userModel.findOne({

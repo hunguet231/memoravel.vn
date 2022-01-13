@@ -4,6 +4,8 @@ export const ACTIONS = {
   ADD_CART: "ADD_CART",
   SHIPPING_ADDRESS: "SHIPPING_ADDRESS",
   EMPTY_CART: "EMPTY_CART",
+  SEARCH: "SEARCH",
+  FILTER: "FILTER",
 };
 
 export const addToCart = (product, quantity, cart) => {
@@ -51,4 +53,12 @@ export const shippingAddress = (address) => {
 
 export const emptyCart = () => {
   return { type: "EMPTY_CART", payload: [] };
+};
+
+export const search = (searchText) => {
+  return { type: "SEARCH", payload: searchText };
+};
+
+export const changeFilter = (filter) => {
+  return { type: "FILTER", payload: filter };
 };

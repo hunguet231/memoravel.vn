@@ -25,6 +25,18 @@ const reducers = (state, action) => {
         ...state,
         cart: action.payload,
       };
+
+    case ACTIONS.SEARCH:
+      return {
+        ...state,
+        searchText: action.payload,
+      };
+
+    case ACTIONS.FILTER:
+      return {
+        ...state,
+        filter: action.payload,
+      };
     default:
       return state;
   }

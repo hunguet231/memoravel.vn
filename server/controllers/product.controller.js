@@ -247,6 +247,7 @@ export const getListProduct = async (req, res) => {
     };
 
     const queryDataProduct = {};
+
     if (dataPage.search) {
       queryDataProduct.name = {
         [Op.like]: `%${dataPage.search}%`,
@@ -255,6 +256,20 @@ export const getListProduct = async (req, res) => {
 
     if (dataPage.shop_id) {
       queryDataProduct.shop_id = req.body.shop_id;
+    }
+
+    if (dataPage.price) {
+      queryDataProduct.price = {
+        [Op.between]: dataPage.price,
+      };
+    }
+
+    if (dataPage.made_in) {
+      queryDataProduct.made_in = dataPage.made_in;
+    }
+
+    if (dataPage.type) {
+      queryDataProduct.type = dataPage.type;
     }
 
     const { count, rows: data } = await Product.findAndCountAll({

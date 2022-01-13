@@ -1,5 +1,6 @@
 import { DownOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import {
+  Badge,
   Divider,
   Drawer,
   Icon,
@@ -8,23 +9,22 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Badge,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Menu as MenuIcon } from "@material-ui/icons";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Input, message } from "antd";
 import clsx from "clsx";
 import HomeFilter from "components/home/HomeFilter";
 import { PathConstant } from "const";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import useWindowSize from "utils/useWindowSize";
+import { changeFilter } from "../../../store/Actions";
+import { DataContext } from "../../../store/GlobalState";
 import styles from "../../styles/Header.module.scss";
 import Button from "./Button";
-import { useContext } from "react";
-import { DataContext } from "../../../store/GlobalState";
 
 const useStyles = makeStyles({
   list: {
@@ -37,9 +37,10 @@ const Header = () => {
   const router = useRouter();
   const size = useWindowSize();
   const [open, setOpen] = React.useState(false);
+  const [searchText, setSearchText] = React.useState("");
 
-  const { state } = useContext(DataContext);
-  const { cart } = state;
+  const { state, dispatch } = useContext(DataContext);
+  const { cart, filter } = state;
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -119,6 +120,17 @@ const Header = () => {
 
   const active = (path) => {
     return path === router.pathname;
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(changeFilter({ ...filter, search: searchText }));
+    router.push(`/shop`);
+  };
+
+  const handleSearchChange = (e) => {
+    const inputVal = e.target.value;
+    setSearchText(inputVal);
   };
 
   return (
@@ -230,11 +242,15 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Input
-                    className={styles.searchBox}
-                    placeholder="Tìm kiếm sản phẩm"
-                    suffix={<SearchOutlined />}
-                  />
+                  <form onSubmit={handleSearch}>
+                    <Input
+                      value={searchText}
+                      onChange={handleSearchChange}
+                      className={styles.searchBox}
+                      placeholder="Tìm kiếm sản phẩm"
+                      suffix={<SearchOutlined onClick={handleSearch} />}
+                    />
+                  </form>
                 </li>
               </ul>
             </div>

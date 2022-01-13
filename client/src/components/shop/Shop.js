@@ -1,30 +1,31 @@
 /* eslint-disable no-unused-vars */
-import { FilterOutlined } from "@ant-design/icons";
+import { FileSearchOutlined, FilterOutlined } from "@ant-design/icons";
 import { Pagination } from "@material-ui/lab";
 import { Col, Drawer, Row } from "antd";
 import { fetchData } from "api";
 import ProductCard from "components/common/ProductCard";
 import { ApiConstant, AppConstant } from "const";
-import React from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { DataContext } from "../../../store/GlobalState";
 import styles from "../../styles/Blogs.module.scss";
 import Filter from "./Filter";
 
 export default function Shop() {
+  const { state, dispatch } = useContext(DataContext);
+  const { filter } = state;
+
   const [products, setProducts] = React.useState([]);
   const [total, setTotal] = React.useState(0);
   const [page, setPage] = React.useState(1);
-  const [search, setSearch] = React.useState("");
   const [visible, setVisible] = React.useState(false);
   const [productsHot, setProductsHot] = useState([]);
 
-  const fetchProducts = async (page, search = "", shop_id = null) => {
+  const fetchProducts = async (page, filter) => {
     let url =
-      ApiConstant.GET_PRODUCT + `?page=${page}&size=${12}&search=${search}`;
-
-    if (shop_id) {
-      url += `&shop_id=${shop_id}`;
-    }
+      ApiConstant.GET_PRODUCT +
+      `?page=${page}&size=${12}&search=${filter.search}&price=${
+        filter.price
+      }&made_in=${filter.made_in}&type=${filter.type}`;
 
     const response = await fetchData(url, ApiConstant.METHOD.get);
 
@@ -45,10 +46,9 @@ export default function Shop() {
   };
 
   React.useEffect(() => {
-    const initPage = 1;
-    fetchProducts(initPage);
+    fetchProducts(page, filter);
     fetchProductsHot();
-  }, []);
+  }, [filter]);
 
   const showDrawer = () => {
     setVisible(true);
@@ -60,16 +60,9 @@ export default function Shop() {
 
   const onChangePage = (page, pageSize) => {
     setPage(page);
-    fetchProducts(page, search);
+    fetchProducts(page, filter);
 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  };
-
-  const onOriginChange = (value) => {
-    const newProducts = [...products].filter(
-      (product) => product.made_in === value
-    );
-    setProducts(newProducts);
   };
 
   return (
@@ -99,10 +92,8 @@ export default function Shop() {
           <Col sm={24} md={24} lg={5} className={styles.filter}>
             <Filter
               fetchProducts={fetchProducts}
-              setSearch={setSearch}
-              setPage={setPage}
               productsHot={productsHot}
-              onOriginChange={onOriginChange}
+              setVisible={setVisible}
             />
           </Col>
 
@@ -122,13 +113,19 @@ export default function Shop() {
             >
               <Filter
                 fetchProducts={fetchProducts}
-                setSearch={setSearch}
-                setPage={setPage}
                 productsHot={productsHot}
-                onOriginChange={onOriginChange}
+                setVisible={setVisible}
               />
             </Drawer>
 
+            {filter.search && (
+              <p style={{ wordBreak: "break-word" }}>
+                <FileSearchOutlined /> Có {products.length} kết quả tìm kiếm cho
+                từ khoá &ldquo;
+                {filter.search}
+                &rdquo;
+              </p>
+            )}
             <Row gutter={10}>
               {products.map((product) => (
                 <Col xs={12} sm={12} md={8} key={product.id}>

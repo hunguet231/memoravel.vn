@@ -3,67 +3,60 @@
 import { FilterOutlined, SearchOutlined } from "@ant-design/icons";
 import { AutoComplete, Input, Radio, Slider, Space } from "antd";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "styles/ShopFilter.module.scss";
 import numberWithDots from "utils/addDotsNumber";
 import { productOrigins } from "utils/productOrigins";
 import { productTypes } from "utils/productTypes";
+import { changeFilter, search } from "../../../store/Actions";
+import { DataContext } from "../../../store/GlobalState";
 
-const Filter = ({
-  fetchProducts,
-  setSearch,
-  setPage,
-  productsHot,
-  onOriginChange,
-}) => {
-  const [value, setValue] = useState("");
+const Filter = ({ productsHot, setVisible }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { filter } = state;
+  const [value, setValue] = useState({
+    search: "",
+    price: [0, 1000000],
+    made_in: "",
+    type: "",
+  });
 
-  const onDataChange = (e) => {
-    return setValue(e.target.value);
-  };
-
-  const onSearchText = () => {
-    setSearch(value);
-    setPage(1);
-    fetchProducts(1, value);
+  const onSearchText = (e) => {
+    e.preventDefault();
+    dispatch(changeFilter({ ...filter, search: value.search }));
+    setVisible(false);
   };
 
   const handleOriginChange = (value) => {
-    onOriginChange(value);
+    dispatch(changeFilter({ ...filter, made_in: value }));
+    setVisible(false);
   };
 
-  React.useEffect(() => {
-    const listener = (e) => {
-      if (e.code === "Enter" || e.code === "NumpadEnter") {
-        e.preventDefault();
-        setSearch(value);
-        setPage(1);
-        fetchProducts(1, value);
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  });
+  const onChangePrice = () => {
+    dispatch(changeFilter({ ...filter, price: value.price }));
+    setVisible(false);
+  };
 
   return (
     <div className={styles.filter}>
       <div className={styles.section}>
-        <Input
-          className={styles.input}
-          name="name"
-          onChange={onDataChange}
-          placeholder="Tìm kiếm sản phẩm"
-          suffix={<SearchOutlined />}
-        />
-        <button
-          className="button"
-          style={{ width: "100%" }}
-          onClick={onSearchText}
-        >
-          Tìm kiếm
-        </button>
+        <form onSubmit={onSearchText}>
+          <Input
+            className={styles.input}
+            name="search"
+            value={value.search}
+            onChange={(e) => setValue({ ...value, search: e.target.value })}
+            placeholder="Tìm kiếm sản phẩm"
+            suffix={<SearchOutlined />}
+          />
+          <button
+            className="button"
+            style={{ width: "100%" }}
+            onClick={onSearchText}
+          >
+            Tìm kiếm
+          </button>
+        </form>
       </div>
 
       <div className={styles.section}>
@@ -76,14 +69,27 @@ const Filter = ({
         <Slider
           tipFormatter={(value) => `${numberWithDots(value)}đ`}
           range
+          defaultValue={[0, 1000000]}
           min={0}
-          max={500000}
+          value={value.price}
+          onChange={(value) => setValue({ ...value, price: value })}
+          max={1000000}
           step={10000}
         />
         <div className="flex justify-between items-center">
           <p>Khoảng</p>
-          <p>100.000đ - 500.000đ</p>
+          <p>
+            {numberWithDots(value.price[0])}đ - {numberWithDots(value.price[1])}
+            đ
+          </p>
         </div>
+        <button
+          className="button"
+          style={{ width: "100%" }}
+          onClick={onChangePrice}
+        >
+          Áp dụng
+        </button>
       </div>
 
       <div className={styles.section}>
@@ -99,7 +105,7 @@ const Filter = ({
           <Input
             className={styles.input}
             name="made_in"
-            onChange={onDataChange}
+            onChange={(value) => setValue({ ...value, made_in: value })}
             placeholder="Tìm nơi sản xuất"
             suffix={<SearchOutlined />}
           />
@@ -108,7 +114,12 @@ const Filter = ({
 
       <div className={styles.section}>
         <div className={styles.heading}>Loại sản phẩm</div>
-        <Radio.Group onChange={onDataChange} defaultValue={value}>
+        <Radio.Group
+          onChange={(e) =>
+            dispatch(changeFilter({ ...filter, type: e.target.value }))
+          }
+          defaultValue={filter.type}
+        >
           <Space direction="vertical">
             <Radio value={""}>
               <p className={styles.labelRadio}>Tất cả</p>
