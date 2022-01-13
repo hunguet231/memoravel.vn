@@ -280,12 +280,15 @@ export const getListProduct = async (req, res) => {
       ...pagination,
       where: {
         [Op.and]: [
-          sequelize.where(sequelize.cast(sequelize.col('price'), 'INTEGER'), {
-            [Op.between]: [
-              parseInt(dataPage.price[0]),
-              parseInt(dataPage.price[2]),
-            ],
-          }),
+          sequelize.where(
+            sequelize.cast(sequelize.col('products.price'), 'INTEGER'),
+            {
+              [Op.between]: [
+                parseInt(dataPage.price[0]),
+                parseInt(dataPage.price[2]),
+              ],
+            }
+          ),
           { ...queryDataProduct },
         ],
       },
