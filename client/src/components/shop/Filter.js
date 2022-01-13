@@ -28,7 +28,9 @@ const Filter = ({ productsHot, setVisible }) => {
   };
 
   const handleOriginChange = (value) => {
-    dispatch(changeFilter({ ...filter, made_in: value }));
+    dispatch(
+      changeFilter({ ...filter, made_in: value === "Tất cả" ? "" : value })
+    );
     setVisible(false);
   };
 
@@ -114,9 +116,10 @@ const Filter = ({ productsHot, setVisible }) => {
       <div className={styles.section}>
         <div className={styles.heading}>Loại sản phẩm</div>
         <Radio.Group
-          onChange={(e) =>
-            dispatch(changeFilter({ ...filter, type: e.target.value }))
-          }
+          onChange={(e) => {
+            setVisible(false);
+            return dispatch(changeFilter({ ...filter, type: e.target.value }));
+          }}
           defaultValue={filter.type}
         >
           <Space direction="vertical">

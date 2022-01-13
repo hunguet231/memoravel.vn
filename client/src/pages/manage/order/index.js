@@ -13,7 +13,16 @@ const OrderMn = () => {
           target="_blank"
           rel="noreferrer"
         >
-          TẠI ĐÂY
+          [Mô trường thật]
+        </a>
+        {" | "}
+        <a
+          style={{ color: "dodgerblue" }}
+          href="https://khachhang.ghtklab.com/khach-hang"
+          target="_blank"
+          rel="noreferrer"
+        >
+          [Môi trường test]
         </a>
       </div>
     </ManageLayout>

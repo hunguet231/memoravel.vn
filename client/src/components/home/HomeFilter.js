@@ -1,10 +1,36 @@
-import { Checkbox, Form } from "antd";
-import React from "react";
+import { Form, Radio, Space } from "antd";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { useState } from "react";
+import { productOrigins } from "utils/productOrigins";
+import { productTypes } from "utils/productTypes";
+import { changeFilter } from "../../../store/Actions";
+import { DataContext } from "../../../store/GlobalState";
 import styles from "../../styles/HomeFilter.module.scss";
 
 const HomeFilter = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const { state, dispatch } = useContext(DataContext);
+  const { filter } = state;
+
+  const router = useRouter();
+
+  const [value, setValue] = useState({
+    price: "",
+    made_in: "",
+    type: "",
+  });
+
+  const onFinish = () => {
+    const price = value.price.split("-");
+    dispatch(
+      changeFilter({
+        ...filter,
+        type: value.type,
+        made_in: value.made_in,
+        price,
+      })
+    );
+    router.push(`/shop`);
   };
 
   return (
@@ -15,110 +41,78 @@ const HomeFilter = () => {
           <div className={styles.divider}></div>
           <div className={styles.col}>
             <div className={styles.heading}>Giá tiền</div>
+            <br />
             <Form.Item name="price">
-              <Checkbox.Group className={styles.listItems}>
-                <Checkbox className={styles.checkbox} value="Tất cả">
-                  Tất cả
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="0 - 100.000đ">
-                  0 - 100.000đ
-                </Checkbox>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="100.000đ - 500.000đ"
-                >
-                  100.000đ - 500.000đ
-                </Checkbox>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="500.000đ - 1.000.000đ"
-                >
-                  500.000đ - 1.000.000đ
-                </Checkbox>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="1.000.000đ - 2.000.000đ"
-                >
-                  1.000.000đ - 2.000.000đ
-                </Checkbox>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="2.000.000đ - 4.000.000đ"
-                >
-                  2.000.000đ - 4.000.000đ
-                </Checkbox>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="4.000.000đ - 10.000.000đ"
-                >
-                  4.000.000đ - 10.000.000đ
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="trên 10.000.000đ">
-                  Trên 10.000.000đ
-                </Checkbox>
-              </Checkbox.Group>
+              <Radio.Group
+                value={value.price}
+                onChange={(e) => {
+                  setValue({ ...value, price: e.target.value });
+                }}
+                defaultValue={value.price}
+              >
+                <Space direction="vertical">
+                  <Radio value={""}>
+                    <p className={styles.checkbox}>Tất cả</p>
+                  </Radio>
+                  <Radio value={"0-100000"}>
+                    <p className={styles.checkbox}>0 - 100.000đ</p>
+                  </Radio>
+                  <Radio value={"100000-500000"}>
+                    <p className={styles.checkbox}>100.000đ - 500.000đ</p>
+                  </Radio>
+                  <Radio value={"500000-1000000"}>
+                    <p className={styles.checkbox}>500.000đ - 1.000.000đ</p>
+                  </Radio>
+                </Space>
+              </Radio.Group>
             </Form.Item>
           </div>
           <div className={styles.col}>
             <div className={styles.heading}>Loại sản phẩm</div>
-            <Form.Item name="category">
-              <Checkbox.Group className={styles.listItems}>
-                <Checkbox className={styles.checkbox} value="Tất cả">
-                  Tất cả
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Bình">
-                  Bình
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Ấm chén">
-                  Ấm chén
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Đĩa">
-                  Đĩa
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Tranh">
-                  Tranh
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Quần áo">
-                  Quần áo
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Nội thất">
-                  Nội thất
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Trang trí">
-                  Trang trí
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Khác">
-                  Khác
-                </Checkbox>
-              </Checkbox.Group>
+            <br />
+            <Form.Item name="type">
+              <Radio.Group
+                value={value.type}
+                onChange={(e) => {
+                  setValue({ ...value, type: e.target.value });
+                }}
+                defaultValue={value.type}
+              >
+                <Space direction="vertical">
+                  <Radio value={""}>
+                    <p className={styles.checkbox}>Tất cả</p>
+                  </Radio>
+                  {productTypes.map((type) => (
+                    <Radio key={type.id} value={type.name}>
+                      <p className={styles.checkbox}>{type.name}</p>
+                    </Radio>
+                  ))}
+                </Space>
+              </Radio.Group>
             </Form.Item>
           </div>
           <div className={styles.col}>
             <div className={styles.heading}>Nơi sản xuất</div>
-            <Form.Item name="location">
-              <Checkbox.Group className={styles.listItems}>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="Làng gốm Bát Tràng"
-                >
-                  Làng gốm Bát Tràng
-                </Checkbox>
-                <Checkbox className={styles.checkbox} value="Làng lụa Vạn Phúc">
-                  Làng lụa Vạn Phúc
-                </Checkbox>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="Làng tranh Đông Hồ"
-                >
-                  Làng tranh Đông Hồ
-                </Checkbox>
-                <Checkbox
-                  className={styles.checkbox}
-                  value="Làng mây tre đan Phú Vinh"
-                >
-                  Làng mây tre đan Phú Vinh
-                </Checkbox>
-              </Checkbox.Group>
+            <br />
+            <Form.Item name="made_in">
+              <Radio.Group
+                value={value.made_in}
+                onChange={(e) => {
+                  setValue({
+                    ...value,
+                    made_in: e.target.value === "Tất cả" ? "" : e.target.value,
+                  });
+                }}
+                defaultValue={value.made_in}
+              >
+                <Space direction="vertical">
+                  {productOrigins.map((type) => (
+                    <Radio key={type.id} value={type.name}>
+                      <p className={styles.checkbox}>{type.name}</p>
+                    </Radio>
+                  ))}
+                </Space>
+              </Radio.Group>
             </Form.Item>
             <Form.Item>
               <button

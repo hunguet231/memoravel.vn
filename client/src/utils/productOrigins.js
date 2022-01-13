@@ -1,5 +1,10 @@
 const productOrigins = [
   {
+    id: 0,
+    name: "Tất cả",
+    value: "Tất cả",
+  },
+  {
     id: 1,
     name: "Làng mây tre đan Phú Vinh",
     value: "Làng mây tre đan Phú Vinh",

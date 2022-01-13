@@ -50,7 +50,6 @@ export default function Shop() {
   React.useEffect(() => {
     fetchProducts(page, filter);
     fetchProductsHot();
-    console.log(filter);
   }, [filter]);
 
   const showDrawer = () => {

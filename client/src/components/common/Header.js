@@ -96,13 +96,17 @@ const Header = () => {
         </div>
       </List>
       <Divider />
-      <Input
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => e.stopPropagation()}
-        className={styles.searchBox}
-        placeholder="Tìm kiếm sản phẩm"
-        suffix={<SearchOutlined />}
-      />
+      <form onSubmit={handleSearch}>
+        <Input
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
+          className={styles.searchBox}
+          placeholder="Tìm kiếm sản phẩm"
+          suffix={<SearchOutlined onClick={handleSearch} />}
+          value={searchText}
+          onChange={handleSearchChange}
+        />
+      </form>
       <List>
         {menuData.map(({ id, text, icon, path }) => (
           <Link href={path} key={id}>
@@ -125,6 +129,7 @@ const Header = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(changeFilter({ ...filter, search: searchText }));
+    setOpen(false);
     router.push(`/shop`);
   };
 

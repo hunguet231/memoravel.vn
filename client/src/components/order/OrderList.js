@@ -66,7 +66,7 @@ export default function OrderList() {
                 ))}
                 <br />
                 <div className={styles.orderValue}>
-                  TỔNG GIÁ TRỊ: {order.value}
+                  TỔNG GIÁ TRỊ: {`${numberWithDots(order.value)} vnđ`}
                 </div>
                 <div className={styles.shipingInfo}>
                   <div className={styles.shipingDeliver}>

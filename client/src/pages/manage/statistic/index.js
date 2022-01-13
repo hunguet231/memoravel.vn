@@ -6,7 +6,7 @@ const StatisticMn = () => {
     <ManageLayout>
       <HeaderLayout title="Thống kê website" hideCreateBtn />
       <div style={{ margin: "20px 15px 20px" }}>
-        Tuy cập Goole Analystics (Đăng nhập gmail Memoravel):{" "}
+        Tuy cập Google Analystics (Đăng nhập gmail Memoravel):{" "}
         <a
           style={{ color: "dodgerblue" }}
           href="https://analytics.google.com/analytics/web/provision/?authuser=6#/p298509343/reports/reportinghub"
