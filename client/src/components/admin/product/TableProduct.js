@@ -16,6 +16,7 @@ import { DeleteOutlined, EditOutlined } from "@material-ui/icons";
 import { AppConstant } from "const";
 import PropTypes from "prop-types";
 import React from "react";
+import numberWithDots from "utils/addDotsNumber";
 
 const TableProduct = (props) => {
   const { productData, onEdit, onDelete } = props;
@@ -87,7 +88,7 @@ const TableProduct = (props) => {
                   {row.name || ""}
                 </a>
               </TableCell>
-              <TableCell>{`${row.price} ₫` || ""}</TableCell>
+              <TableCell>{`${numberWithDots(row.price)} ₫` || ""}</TableCell>
               <TableCell>{row.sold || "0"}</TableCell>
               <TableCell>{row.in_stock || ""}</TableCell>
               <TableCell>{getDateTime(row.created) || ""}</TableCell>

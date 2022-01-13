@@ -4,6 +4,7 @@ import { IconButton, Tooltip } from "@material-ui/core";
 import { Card, Image, Rate } from "antd";
 import Link from "next/link";
 import React, { useContext } from "react";
+import numberWithDots from "utils/addDotsNumber";
 import { addToCart } from "../../../store/Actions";
 import { DataContext } from "../../../store/GlobalState";
 import styles from "../../styles/ProductCard.module.scss";
@@ -54,7 +55,7 @@ export default function ProductCard({ product }) {
               </IconButton>
             </Tooltip>
           </div>
-          <h1 className={styles.price}>{price}đ</h1>
+          <h1 className={styles.price}>{numberWithDots(price)}đ</h1>
         </div>
       </Card>
     </Link>

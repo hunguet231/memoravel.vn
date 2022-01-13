@@ -7,6 +7,7 @@ import { ApiConstant, AppConstant } from "const";
 import { HeaderLayout, ManageLayout } from "layouts";
 import React, { useEffect, useState } from "react";
 import getImgUrl from "utils/getImgUrl";
+import removeNonNumeric from "utils/removeNonNumeric";
 
 const Product = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +72,7 @@ const Product = () => {
       story: data.story,
       images: images_url,
       // images: data.images,
-      price: data.price,
+      price: parseInt(removeNonNumeric(data.price)),
       type: data.type,
       made_in: data.made_in,
       details: data.details,

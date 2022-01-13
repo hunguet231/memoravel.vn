@@ -12,7 +12,7 @@ const Products = (sequelize, Sequelize) => {
     story: Sequelize.TEXT + ' CHARSET utf8 COLLATE utf8_general_ci',
     images: Sequelize.TEXT,
     alias: Sequelize.STRING,
-    price: Sequelize.STRING,
+    price: Sequelize.INTEGER,
     type: Sequelize.STRING,
     made_in: Sequelize.STRING,
     vectary_link: Sequelize.STRING,

@@ -10,6 +10,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import styles from "styles/ProductDetails.module.scss";
+import numberWithDots from "utils/addDotsNumber";
 import isInt from "utils/isInterger";
 import { addToCart } from "../../../store/Actions";
 import { DataContext } from "../../../store/GlobalState";
@@ -259,7 +260,7 @@ export default function ProductDetails({ product }) {
                   <span className={styles.info}>{sold} Đã bán</span>
                 </div>
                 <h1 className="heading heading-section heading-primary">
-                  {price} vnđ
+                  {numberWithDots(price)} vnđ
                 </h1>
                 <Details />
                 <div className={styles.amountContainer}>

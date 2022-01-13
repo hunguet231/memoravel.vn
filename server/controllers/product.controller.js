@@ -260,7 +260,10 @@ export const getListProduct = async (req, res) => {
 
     if (dataPage.price) {
       queryDataProduct.price = {
-        [Op.between]: [dataPage.price],
+        [Op.between]: [
+          parseInt(dataPage.price[0]),
+          parseInt(dataPage.price[2]),
+        ],
       };
     }
 
