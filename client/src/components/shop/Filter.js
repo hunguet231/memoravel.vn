@@ -16,10 +16,10 @@ const Filter = ({ productsHot, setVisible }) => {
   const { filter } = state;
   const [value, setValue] = useState({
     search: "",
-    price: [0, 1000000],
     made_in: "",
     type: "",
   });
+  const [price, setPrice] = useState([0, 1000000]);
 
   const onSearchText = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const Filter = ({ productsHot, setVisible }) => {
   };
 
   const onChangePrice = () => {
-    dispatch(changeFilter({ ...filter, price: value.price }));
+    dispatch(changeFilter({ ...filter, price }));
     setVisible(false);
   };
 
@@ -71,16 +71,15 @@ const Filter = ({ productsHot, setVisible }) => {
           range
           defaultValue={[0, 1000000]}
           min={0}
-          value={value.price}
-          onChange={(value) => setValue({ ...value, price: value })}
+          value={price}
+          onChange={(value) => setPrice(value)}
           max={1000000}
           step={10000}
         />
         <div className="flex justify-between items-center">
           <p>Khoảng</p>
           <p>
-            {numberWithDots(value.price[0])}đ - {numberWithDots(value.price[1])}
-            đ
+            {numberWithDots(price[0])}đ - {numberWithDots(price[1])}đ
           </p>
         </div>
         <button
