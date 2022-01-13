@@ -284,8 +284,8 @@ export const getListProduct = async (req, res) => {
             sequelize.cast(sequelize.col('products.price'), 'INTEGER'),
             {
               [Op.between]: [
-                parseInt(dataPage.price[0]),
-                parseInt(dataPage.price[2]),
+                parseInt(dataPage.price_min) || 0,
+                parseInt(dataPage.price_max) || 1000000,
               ],
             }
           ),

@@ -12,7 +12,7 @@ export const DataProvider = ({ children }) => {
     searchText: "",
     filter: {
       search: "",
-      price: "",
+      price: [0, 1000000],
       made_in: "",
       type: "",
     },

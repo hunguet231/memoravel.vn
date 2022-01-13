@@ -23,9 +23,11 @@ export default function Shop() {
   const fetchProducts = async (page, filter) => {
     let url =
       ApiConstant.GET_PRODUCT +
-      `?page=${page}&size=${12}&search=${filter.search}&price=${
-        filter.price
-      }&made_in=${filter.made_in}&type=${filter.type}`;
+      `?page=${page}&size=${12}&search=${filter.search}&price_min=${
+        filter.price[0]
+      }&price_max=${filter.price[1]}&made_in=${filter.made_in}&type=${
+        filter.type
+      }`;
 
     const response = await fetchData(url, ApiConstant.METHOD.get);
 
@@ -48,6 +50,7 @@ export default function Shop() {
   React.useEffect(() => {
     fetchProducts(page, filter);
     fetchProductsHot();
+    console.log(filter);
   }, [filter]);
 
   const showDrawer = () => {
