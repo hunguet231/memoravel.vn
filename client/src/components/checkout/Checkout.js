@@ -125,8 +125,7 @@ export default function Order() {
             const hasTags = val.some((product) => product?.fragile === true);
 
             const totalValue = val.reduce((acc, product) => {
-              const value =
-                parseInt(product.price.replaceAll(".", "")) * product.quantity;
+              const value = parseInt(product.price) * product.quantity;
               return acc + value;
             }, 0);
 
@@ -144,7 +143,7 @@ export default function Order() {
                 ),
                 product_code: "",
                 quantity: product.quantity,
-                price: parseInt(product.price.replaceAll(".", "")),
+                price: parseInt(product.price),
               })),
               order: {
                 id: getOrderCode(),
