@@ -143,22 +143,24 @@ export default function ProductDetails({ product }) {
         <p className={styles.label}>Nơi sản xuất:</p>
         <p>{made_in}</p>
       </div>
-      <div className={styles.detailsItem} onClick={showModal}>
-        <Button type="primary" style={{ width: "100%" }}>
-          <div
-            className="flex justify-between items-center"
-            style={{ width: "100%" }}
-          >
-            <div className={styles.textAR}>
-              Trải nghiệm hình ảnh <br /> sản phẩm thực tế với AR
-            </div>
+      {vectary_link && (
+        <div className={styles.detailsItem} onClick={showModal}>
+          <Button type="primary" style={{ width: "100%" }}>
+            <div
+              className="flex justify-between items-center"
+              style={{ width: "100%" }}
+            >
+              <div className={styles.textAR}>
+                Trải nghiệm hình ảnh <br /> sản phẩm thực tế với AR
+              </div>
 
-            <div>
-              <RightCircleFilled className={styles.circleRightIcon} />
+              <div>
+                <RightCircleFilled className={styles.circleRightIcon} />
+              </div>
             </div>
-          </div>
-        </Button>
-      </div>
+          </Button>
+        </div>
+      )}
       <Modal
         title={name}
         visible={isModalVisible}

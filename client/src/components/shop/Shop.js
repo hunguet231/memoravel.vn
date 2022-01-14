@@ -4,6 +4,7 @@ import { Pagination } from "@material-ui/lab";
 import { Col, Drawer, Row } from "antd";
 import { fetchData } from "api";
 import ProductCard from "components/common/ProductCard";
+import SkeletonProductCard from "components/common/SkeletonProductCard";
 import { ApiConstant, AppConstant } from "const";
 import React, { useContext, useState } from "react";
 import { DataContext } from "../../../store/GlobalState";
@@ -18,9 +19,11 @@ export default function Shop() {
   const [total, setTotal] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [visible, setVisible] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [productsHot, setProductsHot] = useState([]);
 
   const fetchProducts = async (page, filter) => {
+    setLoading(true);
     let url =
       ApiConstant.GET_PRODUCT +
       `?page=${page}&size=${12}&search=${filter.search}&price_min=${
@@ -34,6 +37,7 @@ export default function Shop() {
     if (response?.status === AppConstant.STATUS_OK) {
       setProducts(response.data);
       setTotal(response.total);
+      setLoading(false);
     }
   };
 
@@ -129,11 +133,17 @@ export default function Shop() {
               </p>
             )}
             <Row gutter={10}>
-              {products.map((product) => (
-                <Col xs={12} sm={12} md={8} key={product.id}>
-                  <ProductCard product={product} />
-                </Col>
-              ))}
+              {products.length > 0 && !loading
+                ? products.map((product) => (
+                    <Col xs={12} sm={12} md={8} key={product.id}>
+                      <ProductCard product={product} />
+                    </Col>
+                  ))
+                : new Array(12).fill(1).map((item, index) => (
+                    <Col xs={12} sm={12} md={8} key={index}>
+                      <SkeletonProductCard />
+                    </Col>
+                  ))}
             </Row>
 
             <Pagination
