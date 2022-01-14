@@ -11,27 +11,48 @@ const BoxImage = ({
   iconMore,
   textMore,
   link,
+  goShop,
+  handleSearch,
+  made_in,
 }) => {
   return (
-    <Link href={`/blogs/${link}`}>
-      <div
-        className={`${className} ${styles.image}`}
-        style={{ backgroundImage: `url(${imgUrl})` }}
-      >
-        <div className={styles.overlay}>
-          <div className={styles.text}>
-            <div className={styles.subHeading}>{subHeading}</div>
-            <h2 className="heading heading-white">{heading}</h2>
-            {iconMore && <div className={styles.iconMore}>{iconMore}</div>}
-            {textMore && (
-              <div className={styles.textMore}>
-                <Link href={`/blogs/${link}`}>{textMore}</Link>
-              </div>
-            )}
+    <>
+      {goShop ? (
+        <div
+          onClick={() => handleSearch("made_in", made_in)}
+          className={`${className} ${styles.image}`}
+          style={{ backgroundImage: `url(${imgUrl})` }}
+        >
+          <div className={styles.overlay}>
+            <div className={styles.text}>
+              <div className={styles.subHeading}>{subHeading}</div>
+              <h2 className="heading heading-white">{heading}</h2>
+              {iconMore && <div className={styles.iconMore}>{iconMore}</div>}
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+      ) : (
+        <Link href={`/blogs/${link}`}>
+          <div
+            className={`${className} ${styles.image}`}
+            style={{ backgroundImage: `url(${imgUrl})` }}
+          >
+            <div className={styles.overlay}>
+              <div className={styles.text}>
+                <div className={styles.subHeading}>{subHeading}</div>
+                <h2 className="heading heading-white">{heading}</h2>
+                {iconMore && <div className={styles.iconMore}>{iconMore}</div>}
+                {textMore && (
+                  <div className={styles.textMore}>
+                    <Link href={`/blogs/${link}`}>{textMore}</Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </Link>
+      )}
+    </>
   );
 };
 
