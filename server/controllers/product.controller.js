@@ -293,22 +293,8 @@ export const getListProduct = async (req, res) => {
         ],
       },
       order: [
-        [
-          'name',
-          dataPage.name_sort === '1'
-            ? 'ASC'
-            : dataPage.name_sort === '0'
-            ? 'DESC'
-            : '',
-        ],
-        [
-          'price',
-          dataPage.price_sort === '1'
-            ? 'ASC'
-            : dataPage.price_sort === '0'
-            ? 'DESC'
-            : '',
-        ],
+        ['name', dataPage.name_sort === '1' ? 'ASC' : 'DESC'],
+        ['price', dataPage.price_sort === '1' ? 'ASC' : 'DESC'],
       ],
       include: [
         {

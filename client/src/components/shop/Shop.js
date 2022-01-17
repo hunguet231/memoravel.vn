@@ -35,7 +35,15 @@ export default function Shop() {
         filter.price[0]
       }&price_max=${filter.price[1]}&made_in=${filter.made_in}&type=${
         filter.type
-      }&name_sort_asc=${filter.name_sort}&price_sort_asc=${filter.price_sort}`;
+      }`;
+
+    if (filter.name_sort) {
+      url += `&name_sort_asc=${filter.name_sort}`;
+    }
+
+    if (filter.price_sort) {
+      url += `&price_sort_asc=${filter.price_sort}`;
+    }
 
     const response = await fetchData(url, ApiConstant.METHOD.get);
 
