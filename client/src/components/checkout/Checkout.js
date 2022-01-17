@@ -118,6 +118,7 @@ export default function Order() {
     if (isClick) {
       setLoading(true);
       let orderLabels = [];
+
       Promise.allSettled(
         Object.entries(structedCart).map(async ([key, val]) => {
           if (val.delivery) {
@@ -168,7 +169,11 @@ export default function Order() {
             };
 
             const orderResponse = await createOrder(dataBody);
-            orderLabels.push(orderResponse.order.label);
+            orderLabels.unshift({
+              label: orderResponse.order.label,
+              products: val,
+            });
+            // console.log(orderResponse);
             return orderResponse;
           }
         })
@@ -176,7 +181,6 @@ export default function Order() {
         setLoading(false);
         console.log([result]);
         router.push("/order/thank-you");
-
         // save orders to localStorage
         const ordersFromLocalStorage =
           JSON.parse(localStorage.getItem("ordered_list")) || [];
@@ -184,7 +188,6 @@ export default function Order() {
           "ordered_list",
           JSON.stringify([...ordersFromLocalStorage, ...orderLabels])
         );
-
         // empty cart
         dispatch(emptyCart());
         localStorage.removeItem("cart_item");
