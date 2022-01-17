@@ -15,6 +15,8 @@ export const DataProvider = ({ children }) => {
       price: [0, 1000000],
       made_in: "",
       type: "",
+      name_sort: "",
+      price_sort: "",
     },
   };
   const [state, dispatch] = useReducer(reducers, initialState);

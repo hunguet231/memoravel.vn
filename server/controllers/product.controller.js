@@ -292,6 +292,24 @@ export const getListProduct = async (req, res) => {
           { ...queryDataProduct },
         ],
       },
+      order: [
+        [
+          'name',
+          dataPage.name_sort === '1'
+            ? 'ASC'
+            : dataPage.name_sort === '0'
+            ? 'DESC'
+            : '',
+        ],
+        [
+          'price',
+          dataPage.price_sort === '1'
+            ? 'ASC'
+            : dataPage.price_sort === '0'
+            ? 'DESC'
+            : '',
+        ],
+      ],
       include: [
         {
           model: Shop,
@@ -336,6 +354,7 @@ export const getListProduct = async (req, res) => {
             total: count,
             page: dataPage.page,
           };
+
     res.status(AppConst.STATUS_OK).json(responseFormat(response));
   } catch (error) {
     res

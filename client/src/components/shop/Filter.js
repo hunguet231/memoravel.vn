@@ -146,7 +146,9 @@ const Filter = ({ productsHot, setVisible }) => {
 
               <div className={styles.info}>
                 <div className={styles.productName}>{product.name}</div>
-                <div className={styles.productPrice}>{product.price}đ</div>
+                <div className={styles.productPrice}>
+                  {numberWithDots(product.price)}đ
+                </div>
               </div>
             </div>
           </Link>
