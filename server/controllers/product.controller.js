@@ -294,7 +294,10 @@ export const getListProduct = async (req, res) => {
       },
       order: [
         ['name', dataPage.name_sort === '1' ? 'ASC' : 'DESC'],
-        ['price', dataPage.price_sort === '1' ? 'ASC' : 'DESC'],
+        [
+          sequelize.cast(sequelize.col('products.price'), 'INTEGER'),
+          dataPage.price_sort === '1' ? 'ASC' : 'DESC',
+        ],
       ],
       include: [
         {
