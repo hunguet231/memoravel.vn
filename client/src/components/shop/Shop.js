@@ -104,16 +104,16 @@ export default function Shop() {
 
   const menuSort = (
     <Menu>
-      <Menu.Item onClick={onChangeSort("price-asc")} key="3">
+      <Menu.Item onClick={() => onChangeSort("price-asc")} key="3">
         Giá thấp đến cao
       </Menu.Item>
-      <Menu.Item onClick={onChangeSort("price-desc")} key="4">
+      <Menu.Item onClick={() => onChangeSort("price-desc")} key="4">
         Giá cao xuống thấp
       </Menu.Item>
-      <Menu.Item onClick={onChangeSort("a-z")} key="2">
+      <Menu.Item onClick={() => onChangeSort("a-z")} key="2">
         Từ A đến Z
       </Menu.Item>
-      <Menu.Item onClick={onChangeSort("z-a")} key="1">
+      <Menu.Item onClick={() => onChangeSort("z-a")} key="1">
         Từ Z đến A
       </Menu.Item>
     </Menu>
