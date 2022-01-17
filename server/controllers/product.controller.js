@@ -300,7 +300,7 @@ export const getListProduct = async (req, res) => {
         ],
         [
           { model: Product, as: 'Product' },
-          sequelize.cast(sequelize.col('products.price'), 'INTEGER'),
+          'price',
           dataPage.price_sort === '1' ? 'ASC' : 'DESC',
         ],
       ],
