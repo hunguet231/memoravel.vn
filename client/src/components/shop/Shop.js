@@ -38,11 +38,11 @@ export default function Shop() {
       }`;
 
     if (filter.name_sort) {
-      url += `&name_sort_asc=${filter.name_sort}`;
+      url += `&name_sort=${filter.name_sort}`;
     }
 
     if (filter.price_sort) {
-      url += `&price_sort_asc=${filter.price_sort}`;
+      url += `&price_sort=${filter.price_sort}`;
     }
 
     const response = await fetchData(url, ApiConstant.METHOD.get);
