@@ -24,7 +24,8 @@ export default function OrderList() {
   };
 
   useEffect(() => {
-    const orderedList = JSON.parse(localStorage.getItem("ordered_list")) || [];
+    const orderedList =
+      JSON.parse(localStorage.getItem("memoravel_ordered_list")) || [];
     let orders = [];
     Promise.all(
       orderedList.map(async (order) => {
@@ -102,14 +103,18 @@ export default function OrderList() {
                   </p>
                   <p>
                     Trạng thái đơn:{" "}
-                    <b>{order.order.status_text || order?.status_text}</b>
+                    <b>
+                      {order.order?.status_text ||
+                        order?.status_text ||
+                        "Không có dữ liệu"}
+                    </b>
                   </p>
                 </div>
-                {order.order.message && (
+                {order.order?.message && (
                   <p style={{ margin: "0px 0px 5px" }}>
                     Tin nhắn:{" "}
                     <span style={{ color: "dodgerblue" }}>
-                      {order.order.message}
+                      {order.order?.message || ""}
                     </span>
                   </p>
                 )}
@@ -166,7 +171,7 @@ export default function OrderList() {
                         </Link>
                       </div>
                     ))
-                  : order.order.products.map((item, index) => (
+                  : order.order?.products.map((item, index) => (
                       <div
                         key={index}
                         className={styles.orderInfo}

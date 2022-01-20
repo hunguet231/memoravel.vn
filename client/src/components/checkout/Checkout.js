@@ -183,9 +183,9 @@ export default function Order() {
         router.push("/order/thank-you");
         // save orders to localStorage
         const ordersFromLocalStorage =
-          JSON.parse(localStorage.getItem("ordered_list")) || [];
+          JSON.parse(localStorage.getItem("memoravel_ordered_list")) || [];
         localStorage.setItem(
-          "ordered_list",
+          "memoravel_ordered_list",
           JSON.stringify([...ordersFromLocalStorage, ...orderLabels])
         );
         // empty cart

@@ -68,7 +68,6 @@ export const checkMnCreatePost = async (req, res, next) => {
       content: requestObjectMultiLang(req.body.content),
       alias: handleAliasResult(JSON.parse(title)),
       background: req.body.background,
-      number_view: 0,
       status: req.body.status
         ? parseInt(req.body.status)
         : AppConst.STATUS.draft,
@@ -153,7 +152,6 @@ export const checkMnEditPost = async (req, res, next) => {
       content: requestObjectMultiLang(req.body.content),
       alias: handleAliasResult(JSON.parse(title)),
       background: req.body.background,
-      number_view: 0,
       status: req.body.status
         ? parseInt(req.body.status)
         : AppConst.STATUS.draft,

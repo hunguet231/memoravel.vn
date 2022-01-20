@@ -18,6 +18,7 @@ const formatResponseData = (data) => ({
   alias: responseObjectMultiLang(data.alias, AppConst.DEFAULT_LANG),
   number_view: data.number_view,
   background: data.background,
+  details: data.details ? JSON.parse(data.details) : '',
   created: data.createdAt,
   topics: data.topics.map((topic) => ({
     id: topic.id,

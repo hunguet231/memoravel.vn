@@ -33,11 +33,11 @@ const BlogDetails = ({ post }) => {
         additionalMetaTags={[
           {
             name: "keywords",
-            content: `${JSON.parse(details).meta_keywords || ""}`,
+            content: `${details ? JSON.parse(details).meta_keywords : ""}`,
           },
           {
             name: "description",
-            content: `${JSON.parse(details).meta_description || ""}`,
+            content: `${details ? JSON.parse(details).meta_description : ""}`,
           },
         ]}
         additionalLinkTags={[
