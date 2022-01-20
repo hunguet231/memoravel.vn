@@ -3,12 +3,9 @@ import { Pagination } from "@material-ui/lab";
 import { fetchData } from "api";
 import { ApiConstant, AppConstant } from "const";
 import { ManageLayout, HeaderLayout } from "layouts";
-import {
-  DialogUser,
-  AppAlert,
-  TableUser,
-  ConfirmDialog,
-} from "components/admin";
+import { AppAlert, ConfirmDialog } from "components/admin";
+import DialogUser from "components/admin/user/DialogUser";
+import TableUser from "components/admin/user/TableUser";
 
 const User = () => {
   const [isOpen, setIsOpen] = useState(false);

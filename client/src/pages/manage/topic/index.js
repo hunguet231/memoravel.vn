@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@material-ui/lab";
 import { ManageLayout, HeaderLayout } from "layouts";
-import {
-  DialogTopic,
-  TableTopic,
-  AppAlert,
-  ConfirmDialog,
-} from "components/admin";
+import { AppAlert, ConfirmDialog } from "components/admin";
 import { fetchData } from "api";
 import { ApiConstant, AppConstant } from "const";
+import DialogTopic from "components/admin/topic/DialogTopic";
+import TableTopic from "components/admin/topic/TableTopic";
 
 const Topic = () => {
   const [isOpen, setIsOpen] = useState(false);

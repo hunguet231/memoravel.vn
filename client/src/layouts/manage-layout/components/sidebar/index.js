@@ -6,8 +6,8 @@ import {
   ListAltOutlined,
   AccountCircleOutlined,
   Menu,
-  ToolOutlined,
 } from "@material-ui/icons";
+import CastConnectedIcon from "@material-ui/icons/CastConnected";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import BallotIcon from "@material-ui/icons/Ballot";
@@ -87,8 +87,8 @@ const SIDEBAR_DATA = [
     role: AppConstant.ROLE.admin,
   },
   {
-    text: "SEO",
-    icon: <ToolOutlined color="inherit" />,
+    text: "Tối ưu SEO",
+    icon: <CastConnectedIcon color="inherit" />,
     path: PathConstant.MANAGE_SEO,
     role: AppConstant.ROLE.admin,
   },

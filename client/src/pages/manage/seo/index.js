@@ -1,10 +1,10 @@
 import { HeaderLayout, ManageLayout } from "layouts";
 import React from "react";
 
-const SeoMn = () => {
+const Seo = () => {
   return (
     <ManageLayout>
-      <HeaderLayout title="Công cụ SEO" hideCreateBtn />
+      <HeaderLayout title="Tối ưu SEO" hideCreateBtn />
       <div style={{ margin: "20px 15px 20px" }}>
         Truy cập Google Search Console (Đăng nhập gmail Memoravel):{" "}
         <a
@@ -20,4 +20,4 @@ const SeoMn = () => {
   );
 };
 
-export default SeoMn;
+export default Seo;
