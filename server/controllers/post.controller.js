@@ -33,19 +33,25 @@ const formatResponseData = (data) => ({
 
 export const getPost = async (req, res) => {
   try {
-    const dataPage = convertPaging(req);
-    dataPage.size =
-      dataPage.size > AppConst.LIMIT_PAGE_SIZE
-        ? AppConst.LIMIT_PAGE_SIZE
-        : dataPage.size;
+    // const dataPage = convertPaging(req);
+    // dataPage.size =
+    //   dataPage.size > AppConst.LIMIT_PAGE_SIZE
+    //     ? AppConst.LIMIT_PAGE_SIZE
+    //     : dataPage.size;
 
-    const pagination =
-      dataPage.paging === 0
-        ? {}
-        : {
-            limit: dataPage.size,
-            offset: (dataPage.page - 1) * dataPage.size,
-          };
+    // const pagination =
+    //   dataPage.paging === 0
+    //     ? {}
+    //     : {
+    //         limit: dataPage.size,
+    //         offset: (dataPage.page - 1) * dataPage.size,
+    //       };
+
+    const dataPage = convertPaging(req);
+    const pagination = {
+      limit: dataPage.size,
+      offset: (dataPage.page - 1) * dataPage.size,
+    };
 
     const queryDataPost = {
       status: AppConst.STATUS.publish,

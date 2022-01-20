@@ -11,6 +11,7 @@ import React from "react";
 
 const BlogDetails = ({ post }) => {
   const { title, description, background, alias, details } = post;
+
   return (
     <div>
       <NextSeo
@@ -19,7 +20,7 @@ const BlogDetails = ({ post }) => {
         openGraph={{
           url: `https://memoravel.vn/blogs/${alias}`,
           title: `${title} - Memoravel.vn`,
-          description: `${description}`,
+          description: `${details.meta_description || ""}`,
           images: [
             {
               url: `${background}`,
@@ -33,11 +34,11 @@ const BlogDetails = ({ post }) => {
         additionalMetaTags={[
           {
             name: "keywords",
-            content: `${details ? JSON.parse(details).meta_keywords : ""}`,
+            content: `${details.meta_keywords || ""}`,
           },
           {
             name: "description",
-            content: `${details ? JSON.parse(details).meta_description : ""}`,
+            content: `${details.meta_description || ""}`,
           },
         ]}
         additionalLinkTags={[
