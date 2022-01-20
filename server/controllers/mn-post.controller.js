@@ -20,6 +20,7 @@ const formatPostData = (data) => {
     number_view: data.number_view,
     background: data.background,
     status: data.status,
+    details: data.details ? JSON.parse(data.details) : '',
     created: data.createdAt,
     modified: data.updatedAt,
     topics:

@@ -7,7 +7,7 @@ import React from "react";
 
 export default function shop() {
   return (
-    <MainLayout>
+    <MainLayout title="Điều khoản | Memoravel">
       <Header />
       <Policies />
       <ContactForm />

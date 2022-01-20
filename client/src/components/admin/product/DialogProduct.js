@@ -601,6 +601,27 @@ const DialogProduct = ({ isShow, onClose, onSubmit, data, loading, shops }) => {
                   />
                 </Grid>
               </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={2}>
+                  <div className={classes.label}>Đã bán</div>
+                </Grid>
+                <Grid item xs={12} sm={10}>
+                  <OutlinedInput
+                    classes={{
+                      root: classes.contentLineEdit,
+                      input: classes.inputEdit,
+                      disabled: classes.disabled,
+                    }}
+                    value={dataInput.sold || ""}
+                    onChange={(e) =>
+                      setDataInput({
+                        ...dataInput,
+                        sold: e.target.value,
+                      })
+                    }
+                  />
+                </Grid>
+              </Grid>
             </Paper>
             <Paper className={classes.paper}>
               <Typography className={classes.typographyContent}>

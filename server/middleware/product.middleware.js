@@ -85,7 +85,7 @@ export const checkCreateProduct = async (req, res, next) => {
       type: req.body.type,
       made_in: req.body.made_in,
       vectary_link: req.body.vectary_link,
-      sold: 0,
+      sold: req.body.sold,
       in_stock: req.body.in_stock,
       total_star: 0,
       total_amount: 0,
@@ -194,6 +194,10 @@ export const checkUpdateProduct = async (req, res, next) => {
 
     if (req.body.vectary_link) {
       refactorProductData.vectary_link = req.body.vectary_link;
+    }
+
+    if (req.body.sold) {
+      refactorProductData.sold = req.body.sold;
     }
 
     //Check if name is empty

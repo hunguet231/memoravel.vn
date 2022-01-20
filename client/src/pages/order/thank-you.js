@@ -9,7 +9,7 @@ import ContactForm from "components/common/ContactForm";
 
 export default function Thanks() {
   return (
-    <MainLayout>
+    <MainLayout title="Đặt hàng thành công">
       <Header />
       <div className={styles.container}>
         <div className={styles.cartEmptyImg}>

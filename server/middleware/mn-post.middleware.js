@@ -74,6 +74,7 @@ export const checkMnCreatePost = async (req, res, next) => {
         : AppConst.STATUS.draft,
       topic_ids: topicIds,
       topics: topics,
+      details: req.body.details ? JSON.stringify(req.body.details) : '',
     };
 
     const checkMessageValidate = Object.values(messagePost).find(
@@ -158,6 +159,7 @@ export const checkMnEditPost = async (req, res, next) => {
         : AppConst.STATUS.draft,
       topic_ids: topicIds,
       topics: topics,
+      details: req.body.details ? JSON.stringify(req.body.details) : '',
     };
 
     const checkMessageValidate = Object.values(messagePost).find(

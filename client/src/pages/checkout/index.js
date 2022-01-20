@@ -7,7 +7,7 @@ import ContactForm from "components/common/ContactForm";
 
 export default function order() {
   return (
-    <MainLayout>
+    <MainLayout title="Đặt hàng">
       <Header />
       <Checkout />
       <ContactForm />

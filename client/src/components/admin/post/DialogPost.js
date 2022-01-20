@@ -14,6 +14,7 @@ import {
   RadioGroup,
   Typography,
 } from "@material-ui/core";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Close, CloudUpload as CloudUploadIcon } from "@material-ui/icons";
 import { CKEditorComponent } from "components";
@@ -42,6 +43,10 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
     status: AppConstant.STATUS.draft,
     background: "",
     topic_ids: [],
+    details: {
+      meta_keywords: "",
+      meta_description: "",
+    },
   });
   const [selected, setSelected] = useState([]);
   const [img, setImg] = useState("");
@@ -216,6 +221,72 @@ const DialogPost = ({ isShow, onClose, onSubmit, data, topics, loading }) => {
           overrideStrings={overrideStrings}
         />
         <br />
+        <Typography className={classes.typographyContent}>
+          Meta keywords (SEO)
+          <a
+            style={{ marginLeft: "10px", marginBottom: "-5px" }}
+            href="https://gobranding.com.vn/nhung-dieu-can-biet-ve-the-meta-keywords-trong-seo/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <QuestionCircleOutlined />
+          </a>
+        </Typography>
+        <OutlinedInput
+          placeholder="Nhập meta keywords"
+          classes={{
+            root: classes.contentLineEdit,
+            input: classes.inputEdit,
+            disabled: classes.disabled,
+          }}
+          required
+          inputProps={{
+            name: "meta_keywords",
+          }}
+          value={dataInput?.details?.meta_keywords || ""}
+          onChange={(e) =>
+            setDataInput({
+              ...dataInput,
+              details: {
+                ...dataInput.details,
+                meta_keywords: e.target.value,
+              },
+            })
+          }
+        />
+        <Typography className={classes.typographyContent}>
+          Meta description (SEO)
+          <a
+            style={{ marginLeft: "10px", marginBottom: "-5px" }}
+            href="https://gtvseo.com/meta-description/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <QuestionCircleOutlined />
+          </a>
+        </Typography>
+        <OutlinedInput
+          placeholder="Nhập meta description"
+          classes={{
+            root: classes.contentLineEdit,
+            input: classes.inputEdit,
+            disabled: classes.disabled,
+          }}
+          required
+          inputProps={{
+            name: "meta_description",
+          }}
+          value={dataInput?.details?.meta_description || ""}
+          onChange={(e) =>
+            setDataInput({
+              ...dataInput,
+              details: {
+                ...dataInput.details,
+                meta_description: e.target.value,
+              },
+            })
+          }
+        />
         <Typography className={classes.typographyContent}>
           Trạng thái
         </Typography>

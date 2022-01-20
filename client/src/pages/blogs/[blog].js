@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const BlogDetails = ({ post }) => {
-  const { title, description, background, alias } = post;
+  const { title, description, background, alias, details } = post;
   return (
     <div>
       <NextSeo
@@ -30,6 +30,16 @@ const BlogDetails = ({ post }) => {
           ],
           site_name: `${title} - Memoravel.vn`,
         }}
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content: `${JSON.parse(details).meta_keywords || ""}`,
+          },
+          {
+            name: "description",
+            content: `${JSON.parse(details).meta_description || ""}`,
+          },
+        ]}
         additionalLinkTags={[
           {
             rel: "icon",

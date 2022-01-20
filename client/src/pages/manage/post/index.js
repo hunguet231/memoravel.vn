@@ -77,6 +77,7 @@ const Post = () => {
       status: parseInt(data.status),
       background: background_url,
       topic_ids: data.topic_ids,
+      details: data.details,
     };
 
     if (data.id) {

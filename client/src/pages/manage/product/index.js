@@ -78,7 +78,7 @@ const Product = () => {
       made_in: data.made_in,
       details: data.details,
       vectary_link: data.vectary_link,
-      sold: data.sold,
+      sold: parseInt(data.sold),
       in_stock: data.in_stock,
       status: parseInt(data.status),
       shop_id: data.shop_id,
