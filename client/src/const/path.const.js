@@ -11,3 +11,4 @@ export const MANAGE_SHOP = "/manage/shop";
 export const MANAGE_PRODUCT = "/manage/product";
 export const MANAGE_ORDER = "/manage/order";
 export const MANAGE_STATISTIC = "/manage/statistic";
+export const MANAGE_SEO = "/manage/seo";

@@ -6,6 +6,7 @@ import {
   ListAltOutlined,
   AccountCircleOutlined,
   Menu,
+  ToolOutlined,
 } from "@material-ui/icons";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import StorefrontIcon from "@material-ui/icons/Storefront";
@@ -83,6 +84,12 @@ const SIDEBAR_DATA = [
     text: "Quản lý User",
     icon: <AccountCircleOutlined color="inherit" />,
     path: PathConstant.MANAGE_USER,
+    role: AppConstant.ROLE.admin,
+  },
+  {
+    text: "SEO",
+    icon: <ToolOutlined color="inherit" />,
+    path: PathConstant.MANAGE_SEO,
     role: AppConstant.ROLE.admin,
   },
 ];
