@@ -1,0 +1,34 @@
+@import "variables.scss";
+@import "mixins";
+
+.catWrapper {
+  margin: 10px auto 30px;
+  .catItem {
+    margin: auto 15px;
+    @include media(tablet) {
+      margin: auto 5px;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .catImg {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 5px;
+      @include media(tablet) {
+        width: 60px;
+        height: 60px;
+      }
+      background-color: #ccc;
+      border-radius: 50%;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+    }
+  }
+}

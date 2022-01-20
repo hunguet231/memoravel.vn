@@ -1,0 +1,22 @@
+@import "variables";
+@import "mixins";
+.top {
+  margin-top: 10px;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  height: auto;
+  background: #f6f4ed;
+  .subHeading {
+    font-family: $font-be;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.005rem;
+    color: $gray-color;
+    text-align: center;
+    margin: 15px 0 30px;
+    @include media(mobile) {
+      margin: 10px 15px;
+      font-size: 14px;
+    }
+  }
+}

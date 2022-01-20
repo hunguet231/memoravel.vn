@@ -1,0 +1,32 @@
+@import "variables";
+@import "mixins";
+
+.labelCheckbox {
+  font-family: $font-be;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 10px;
+  @include media(mobile) {
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+.shippingPartner,
+.shippingPrice,
+.shippingTime {
+  font-family: $font-be;
+  font-weight: 400;
+  color: #222;
+  @include media(mobile) {
+    font-size: 13px;
+  }
+}
+
+.shippingPrice {
+  margin-left: 10px;
+}
+
+.shippingTime {
+  color: #888;
+}

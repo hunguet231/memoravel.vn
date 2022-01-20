@@ -1,0 +1,77 @@
+@import "variables";
+@import "mixins";
+.filter {
+  width: 100%;
+  p {
+    @include media(mobile) {
+      font-size: 12px;
+    }
+  }
+  .heading {
+    font-family: $font-merriweather;
+    font-weight: 600;
+    font-size: 18px;
+    color: #5f1e03;
+    margin-bottom: 10px;
+    @include media(mobile) {
+      font-size: 14px;
+    }
+  }
+  .icon {
+    color: #5f1e03;
+  }
+  .input {
+    padding: 12px 10px;
+    @include media(mobile) {
+      padding: 8px 10px;
+    }
+    border: 1px solid #5f1e03;
+    border-radius: 4px;
+  }
+  .section {
+    margin-bottom: 30px;
+  }
+  .productWrap {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    .img {
+      background: #e2e2ea;
+      box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.1);
+      width: 80px;
+      height: 80px;
+      img {
+        object-fit: cover;
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+      }
+    }
+    .info {
+      margin-left: 15px;
+      .productName {
+        font-family: $font-merriweather;
+        font-weight: 600;
+        color: #333;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          color: #5f1e03;
+        }
+        @include media(mobile) {
+          font-size: 13px;
+        }
+      }
+      .productPrice {
+        font-family: $font-be;
+        font-weight: 600;
+        color: #5f1e03;
+        font-size: 14px;
+        @include media(mobile) {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

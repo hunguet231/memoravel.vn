@@ -1,0 +1,77 @@
+// Customer ckeditor css start
+.cke_top {
+  position: sticky !important;
+  top: 60px;
+}
+
+.cke_bottom {
+  padding: 12px 18px !important;
+  background: #d4d5d8 !important;
+  border-top: none !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.cke_resizer_ltr {
+  cursor: n-resize !important;
+  margin-right: 0px !important;
+}
+
+.cke_resizer {
+  width: 16px !important;
+  height: 2px !important;
+  border-width: 2px 0px 2px 0px !important;
+  border-color: #6c7078 !important;
+  border-style: solid !important;
+  margin-top: unset !important;
+  margin-bottom: unset !important;
+}
+
+.cke_path {
+  display: none;
+}
+// Customer ckeditor css end
+
+.center-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #a5a5a5;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a5a5a5;
+}
+
+.no-style-link {
+  &,
+  &:hover {
+    text-decoration: unset;
+  }
+}

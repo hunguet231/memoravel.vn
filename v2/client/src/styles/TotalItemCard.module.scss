@@ -1,0 +1,47 @@
+@import "variables";
+@import "mixins";
+.card {
+  border-radius: 10px;
+  background-color: $darken-white-color;
+  padding: 15px;
+  margin-top: 15px;
+  color: $primary-color;
+  font-family: $font-be;
+  .title {
+    color: $primary-color;
+    font-family: $font-merriweather;
+    font-weight: 700;
+    margin-bottom: 20px;
+    @include media(tablet) {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+  .label {
+    font-weight: 700;
+  }
+  .hr {
+    height: 2px;
+    width: 100%;
+    background-color: $primary-color;
+    margin-bottom: 10px;
+  }
+  .customCheckbox {
+    background: $primary-color;
+  }
+  .itemCheck {
+    margin-bottom: 10px;
+    @include media(tablet) {
+      font-size: 13px;
+    }
+  }
+}
+
+.noteText {
+  font-size: 12px;
+  text-align: center;
+}
+
+.linkText {
+  font-weight: 700;
+}

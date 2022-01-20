@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Roboto:wght@300;400;500;700;900&family=Basic&family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* @import '~antd/dist/antd.css'; */
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: #0e1212;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* a:hover {
+    color: #fff !important;
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* Mem Box */
+
+.mem-box {
+    background-color: #0e1212;
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    padding: 20px 15px;
+}
+
+.mem-box.details {
+    background-color: transparent;
+}
+
+.mem-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mem-inner.memdraw iframe {
+    height: 80vh;
+}
+
+
+/* Over lay */
+
+.overlay.home-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(335.21deg, rgba(48, 40, 14, 0) 27.36%, #36210a 111.76%);
+    z-index: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient( 304.89deg, rgba(2, 4, 5, 0) -23.67%, rgba(9, 24, 32, 0.795338) 104.02%, #0b1d26 111.02%);
+    z-index: 0;
+}
+
+.overlay-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(48, 40, 14, 0) 27.36%, #0e1212 85.14%);
+    z-index: 0;
+}
+
+.ant-drawer-body {
+    padding: 0 !important;
+}
+
+.ant-drawer-header {
+    padding-left: 15px !important;
+}
+
+.ant-spin-dot-item {
+    background-color: #fff;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 5px;
+    font-size: 38px;
+    color: #fff;
+    text-align: center !important;
+}
+
+.sub-title {
+    color: #bebebe;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+
+/* Image Uploading */
+
+.upload__image-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.drop-zone {
+    border: 1px dashed gray;
+    border-radius: 5px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    color: #74b9ff;
+}
+
+.remove {
+    position: absolute;
+    top: -8px;
+    left: 94px;
+    background-color: #fff;
+    border-radius: 50%;
+    color: rgb(85, 85, 85);
+    width: 15px;
+    height: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+}
+
+.update {
+    position: absolute;
+    top: 50%;
+    left: 38px;
+    transform: translateY(-50%);
+    background-color: rgba(235, 235, 235, 0.644);
+    border-radius: 50%;
+    cursor: pointer;
+    color: rgb(85, 85, 85);
+    padding: 3px;
+}
+
+.remove-all {
+    cursor: pointer;
+    color: #fb7878;
+    padding: 3px;
+    margin-bottom: 5px;
+    width: fit-content;
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-item {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.image-item .img {
+    position: relative;
+}
+
+.ck-content {
+    color: #000;
+}
+
+.ant-carousel .slick-dots li button {
+    position: relative;
+    top: 15px;
+    padding-top: 4px;
+    opacity: 0.5;
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+    margin-left: -10px;
+    font-size: 30px;
+    color: #e0bf74;
+}
+
+ul {
+    padding-left: 5px !important;
+    list-style-position: inside !important;
+}
+
+@media (max-width: 730px) {
+    .mem-inner {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 65px;
+    }
+    .mem-inner.memdraw {
+        flex-direction: column-reverse;
+    }
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+    border-right: 0 !important;
+}
+
+.ant-menu-item:hover {
+    background-color: #fff !important;
+    color: #e0bf74 !important;
+}
+
+.table {
+    margin: 0 auto;
+    width: 100vw !important;
+    max-width: 100% !important;
+    white-space: nowrap;
+}
+
+@media (max-width: 510px) {
+    .mem-inner.memdraw iframe {
+        height: 70vh;
+    }
+}
+
+@media (max-width: 380px) {
+    .title {
+        font-size: 30px;
+    }
+}

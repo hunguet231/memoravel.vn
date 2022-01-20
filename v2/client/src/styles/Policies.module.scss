@@ -1,0 +1,30 @@
+@import "variables";
+@import "mixins";
+
+.container {
+  margin: 160px 0;
+  font-family: $font-be;
+  .content {
+    h2 {
+      @include media(mobile) {
+        font-size: 15px;
+      }
+    }
+    li {
+      margin-bottom: 10px;
+      list-style: inside;
+      a {
+        color: dodgerblue;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 830px) {
+  .container {
+    margin: 80px 0;
+  }
+}

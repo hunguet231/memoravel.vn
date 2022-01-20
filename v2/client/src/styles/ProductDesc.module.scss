@@ -1,0 +1,25 @@
+@import "variables";
+@import "mixins";
+
+.container {
+  margin-top: 20px;
+}
+
+.heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: #11142d;
+  text-align: left;
+  font-family: $font-merriweather;
+}
+
+.content {
+  white-space: pre-wrap;
+  font-family: $font-be;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 14px !important;
+  }
+}

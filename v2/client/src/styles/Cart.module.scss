@@ -1,0 +1,134 @@
+@import "variables";
+@import "mixins";
+
+.container {
+  padding: 160px 0;
+  font-family: $font-be;
+  .wrapperCheckbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #d5d5d5;
+    font-family: $font-be;
+    font-weight: 600;
+    color: #11142d;
+    border-radius: 8px;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+.shipingPartner {
+  margin-left: 5px;
+  color: #088a4b;
+}
+
+.shopInfo,
+.orderInfo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: max-content;
+}
+
+.shopName,
+.orderName {
+  margin-left: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.orderCode {
+  border-bottom: 1px solid #555;
+  margin-bottom: 20px;
+}
+
+.orderValue {
+  color: #000;
+  font-weight: 600;
+}
+
+.orderName {
+  color: #000;
+}
+
+.fee {
+  margin-left: 10px;
+}
+
+.shopAvatar {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.viewShopBtn {
+  color: #555;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  margin-left: 10px;
+  padding: 0 3px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  @include media(tablet) {
+    width: 180px;
+  }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.09);
+  }
+}
+
+.cartWrap {
+  padding: 10px 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 10px;
+  @include media(mobile) {
+    padding: 5px 10px;
+  }
+}
+
+.cartItem {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.img {
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  background-color: #f2f2f2;
+
+  margin-left: 15px;
+  margin-top: 5px;
+  @include media(mobile) {
+    margin-left: 10px;
+  }
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+
+.itemInfo {
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+@media (max-width: 830px) {
+  .container {
+    padding: 80px 0;
+  }
+}

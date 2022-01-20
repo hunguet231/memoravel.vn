@@ -1,0 +1,49 @@
+@import "variables";
+@import "mixins";
+
+.wrapCard {
+  margin-bottom: 20px;
+  @include media(mobile) {
+    margin-bottom: 15px;
+  }
+  .wrapInfo {
+    margin-left: 20px;
+    .customerName {
+      font-size: 20px;
+      font-weight: 600;
+      font-family: $font-merriweather;
+      margin-bottom: 10px;
+      @include media(mobile) {
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+    }
+    .wrapImg {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      .img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .dateRating {
+      color: $light-gray-color;
+      font-family: $font-dm-sans;
+      @include media(mobile) {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+    }
+    .comment {
+      margin-top: 10px;
+      color: $gray-color;
+      font-family: $font-be;
+      color: #515151;
+    }
+  }
+}
