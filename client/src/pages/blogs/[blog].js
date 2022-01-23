@@ -10,13 +10,13 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const BlogDetails = ({ post }) => {
-  const { title, description, background, alias, details } = post;
+  const { title, background, alias, details } = post;
 
   return (
     <div>
       <NextSeo
         title={`${title} - Memoravel.vn`}
-        description={`${description}`}
+        description={`${details.meta_description}`}
         openGraph={{
           url: `https://memoravel.vn/blogs/${alias}`,
           title: `${title} - Memoravel.vn`,

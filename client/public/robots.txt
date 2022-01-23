@@ -14,5 +14,5 @@ Disallow: /order
 Host: https://memoravel.vn
 
 # Sitemaps
-Sitemap: https://memoravel.vn/server-sitemap.xml
 Sitemap: https://memoravel.vn/sitemap.xml
+Sitemap: https://memoravel.vn/server-sitemap.xml

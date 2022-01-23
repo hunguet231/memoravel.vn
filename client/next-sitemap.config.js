@@ -4,7 +4,14 @@ module.exports = {
   siteUrl,
   generateRobotsTxt: true,
   sitemapSize: 7000,
-  exclude: ["/manage/*", "/checkout", "/cart", "/order/*", "/order"],
+  exclude: [
+    "/manage/*",
+    "/checkout",
+    "/cart",
+    "/order/*",
+    "/order",
+    "/server-sitemap.xml",
+  ],
   robotsTxtOptions: {
     policies: [
       {
