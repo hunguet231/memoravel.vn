@@ -18,9 +18,9 @@ Memoravel.vn is an e-commerce website promoting Vietnamese traditional craft vil
 - Website: https://memoravel.vn
     > Note: The link above shows the version using the production environment of Giaohangtietkiem (GHTK). Therefore, every order created is real!
 
-- Admin: [Demo]([https://link](https://drive.google.com/file/d/1TXZDm4LDOc7iJlEB9TcmALdyHWgNay2N/view?usp=sharing))
+- Admin: [Demo](https://drive.google.com/file/d/1TXZDm4LDOc7iJlEB9TcmALdyHWgNay2N/view?usp=sharing)
 
-- Order: [Demo]([https://link](https://drive.google.com/uc?id=1jCg3I5UQIAbTYQfaelTzMM8yVh0k9Q0G))
+- Order: [Demo](https://drive.google.com/uc?id=1jCg3I5UQIAbTYQfaelTzMM8yVh0k9Q0G)
 
 ## Run Locally 
 
