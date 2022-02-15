@@ -1,0 +1,18 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /manage/*
+Disallow: /checkout
+Disallow: /cart
+Disallow: /order/*
+Disallow: /order
+
+# Host
+Host: https://memoravel.vn
+
+# Sitemaps
+Sitemap: https://memoravel.vn/sitemap.xml
+Sitemap: https://memoravel.vn/server-sitemap.xml
